@@ -1,20 +1,22 @@
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Middleware para interpretar JSON
 app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Conectado ao MongoDB'))
-    .catch((err) => console.log('Erro ao conectar ao MongoDB', err));
+// Conectar ao MongoDB
+mongoose.connect('mongodb://localhost:27017/softsolutions')
+  .then(() => console.log('Conectado ao MongoDB'))
+  .catch((err) => console.error('Erro ao conectar ao MongoDB', err));
 
-app.get('/', (req, res) => {
-    res.send('API SoftSolutions funcionando!');
-});
+// Importar rotas de usuário
+const usuarioRoutes = require('./routes/usuarioRoutes');
+app.use('/api/usuarios', usuarioRoutes);
 
+// Iniciar o servidor
 app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}. Acesse: http://localhost:${PORT}`);
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
