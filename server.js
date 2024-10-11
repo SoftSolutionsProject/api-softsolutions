@@ -8,9 +8,13 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // Conectar ao MongoDB
-mongoose.connect('mongodb://localhost:27017/softsolutions')
-  .then(() => console.log('Conectado ao MongoDB'))
-  .catch((err) => console.error('Erro ao conectar ao MongoDB', err));
+mongoose.connect('mongodb://localhost:27017/softsolutions', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Conectado ao MongoDB'))
+    .catch((err) => console.error('Erro ao conectar ao MongoDB', err));
+
+// Importar rotas de inscrição
+const inscricaoRoutes = require('./routes/inscricaoRoutes');
+app.use('/api/inscricoes', inscricaoRoutes);
 
 // Importar rotas de usuário
 const usuarioRoutes = require('./routes/usuarioRoutes');
@@ -18,5 +22,5 @@ app.use('/api/usuarios', usuarioRoutes);
 
 // Iniciar o servidor
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+    console.log(`Servidor rodando na porta ${PORT}`);
 });
