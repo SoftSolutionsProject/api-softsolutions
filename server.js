@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');  // Importar o pacote CORS
@@ -10,13 +11,14 @@ app.use(express.json());
 
 // Middleware para habilitar CORS
 app.use(cors({
-  origin: 'http://localhost:4200',  // Permitir o frontend Angular
+  origin: ['http://localhost:4200', 'https://meu-frontend.vercel.app'],  // Permitir o frontend Angular
   methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Métodos permitidos
    // Permitir o envio de cookies e cabeçalhos de autenticação, se necessário
 }));
 
 // Conectar ao MongoDB
-mongoose.connect('mongodb://localhost:27017/softsolutions', { useNewUrlParser: true, useUnifiedTopology: true })
+const mongoURI = process.env.MONGO_URI;
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Conectado ao MongoDB'))
     .catch((err) => console.error('Erro ao conectar ao MongoDB', err));
 
