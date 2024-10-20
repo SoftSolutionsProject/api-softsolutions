@@ -11,7 +11,7 @@ app.use(express.json());
 
 // Middleware para habilitar CORS
 app.use(cors({
-  origin: ['http://localhost:4200', 'https://meu-frontend.vercel.app'],  // Permitir o frontend Angular
+  origin: ['http://localhost:4200', 'https://softsol-softsolutions-projects.vercel.app'],  // Permitir o frontend Angular
   methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Métodos permitidos
    // Permitir o envio de cookies e cabeçalhos de autenticação, se necessário
 }));
