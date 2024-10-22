@@ -16,7 +16,7 @@ Esta API fornece endpoints para gerenciar inscrições em cursos e perfis de usu
 
 ## URL Base
 - Desenvolvimento: `http://localhost:3000/api`
-- Produção: `https://softsol.vercel.app/api`
+- Produção: `https://softsolutions.onrender.com/api/`
 
 ## CORS
 A API está configurada para aceitar requisições das seguintes origens:
