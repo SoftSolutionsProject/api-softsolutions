@@ -48,3 +48,5 @@ Base path: `/usuarios`
 - `dataInscricao`: Date (automático)
 
 **Observação:** Existe um índice único para `_idUser` e `_idModulo` na coleção de inscrições para prevenir duplicatas.
+
+
