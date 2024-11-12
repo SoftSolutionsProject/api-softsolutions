@@ -1,9 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const inscricaoController = require('../controllers/inscricaoController');
+import { Router } from 'express';
+import * as inscricaoController from '../controllers/inscricaoController';
+
+const router: Router = Router();
 
 router.post('/', inscricaoController.inscreverCurso);
 router.get('/:idUser', inscricaoController.obterInscricoes);
 router.delete('/:idUser/cursos/:idModulo', inscricaoController.cancelarInscricao);
 
-module.exports = router;
+export default router;
