@@ -8,6 +8,18 @@ export interface IUsuario extends Document {
   senha: string;
   email: string;
   telefone?: string;
+  endereco?: {
+    rua?: string;
+    numero?: string;
+    bairro?: string;
+    cidade?: string;
+    estado?: string;
+    pais?: string;
+  };
+  localizacao?: {
+    type: 'Point';
+    coordinates: [number, number];
+  };
 }
 
 const UsuarioSchema: Schema = new mongoose.Schema({
@@ -17,7 +29,24 @@ const UsuarioSchema: Schema = new mongoose.Schema({
   cpfUsuario: { type: Number, required: true, unique: true },
   senha: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  telefone: String,
+  telefone: { type: String },
+  endereco: {
+    rua: { type: String },
+    numero: { type: String },
+    bairro: { type: String },
+    cidade: { type: String },
+    estado: { type: String },
+    pais: { type: String },
+  },
+  localizacao: {
+    type: {
+      type: String,
+      enum: ['Point'],
+    },
+    coordinates: {
+      type: [Number],
+    },
+  },
 });
 
 export default mongoose.model<IUsuario>('Usuario', UsuarioSchema);
