@@ -1,62 +1,29 @@
-const Inscricao = require('../models/Inscricao');
+const inscricaoService = require('../services/inscricaoService');
 
-// Inscrever-se em um curso (POST)
-const inscreverCurso = async (req, res) => {
-    const { _idModulo, _idUser } = req.body;
-
+const inscreverCurso = async (req, res, next) => {
     try {
-        // Verifica se já existe uma inscrição com o mesmo idUser e idModulo
-        const inscricaoExistente = await Inscricao.findOne({ _idUser, _idModulo });
-        if (inscricaoExistente) {
-            return res.status(400).json({ message: 'Usuário já está inscrito neste módulo.' });
-        }
-
-        const novaInscricao = new Inscricao({
-            statusInscricao: 0,
-            _idModulo,
-            _idUser
-        });
-
-        // Salva a nova inscrição no banco
-        await novaInscricao.save();
-        res.status(201).json(novaInscricao);
+        const inscricao = await inscricaoService.inscreverCurso(req.body);
+        res.status(201).json(inscricao);
     } catch (error) {
-        console.error('Erro ao se inscrever no curso:', error);
-        res.status(500).json({ message: 'Erro ao se inscrever no curso', error });
+        next(error);
     }
 };
 
-// Obter inscrições de um usuário (GET)
-const obterInscricoes = async (req, res) => {
-    const idUser = req.params.idUser; // Obtém o ID do usuário
-
+const obterInscricoes = async (req, res, next) => {
     try {
-        const inscricoes = await Inscricao.find({ _idUser: idUser });
-        if (inscricoes.length === 0) {
-            return res.status(404).json({ message: 'Nenhuma inscrição encontrada para este usuário.' });
-        }
+        const inscricoes = await inscricaoService.obterInscricoes(req.params.idUser);
         res.json(inscricoes);
     } catch (error) {
-        console.error('Erro ao obter inscrições:', error);
-        res.status(500).json({ message: 'Erro ao obter inscrições', error });
+        next(error);
     }
 };
 
-// Cancelar inscrição em um curso (DELETE)
-const cancelarInscricao = async (req, res) => {
-    const { idUser, idModulo } = req.params; // Obtém os IDs
-
+const cancelarInscricao = async (req, res, next) => {
     try {
-        const resultado = await Inscricao.findOneAndDelete({ _idUser: idUser, _idModulo: idModulo });
-
-        if (!resultado) {
-            return res.status(404).json({ message: 'Inscrição não encontrada' });
-        }
-
+        await inscricaoService.cancelarInscricao(req.params.idUser, req.params.idModulo);
         res.json({ message: 'Inscrição cancelada com sucesso' });
     } catch (error) {
-        console.error('Erro ao cancelar a inscrição:', error);
-        res.status(500).json({ message: 'Erro ao cancelar a inscrição', error });
+        next(error);
     }
 };
 

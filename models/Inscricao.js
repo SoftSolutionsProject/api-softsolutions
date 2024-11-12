@@ -4,7 +4,7 @@ const InscricaoSchema = new mongoose.Schema({
     statusInscricao: {
         type: Number,
         required: true,
-        default: 0 // Começa como 0 para indicar que está iniciado
+        default: 0
     },
     _idModulo: {
         type: Number,
@@ -23,5 +23,4 @@ const InscricaoSchema = new mongoose.Schema({
 // Índice único para evitar inscrições duplicadas
 InscricaoSchema.index({ _idUser: 1, _idModulo: 1 }, { unique: true });
 
-const Inscricao = mongoose.model('Inscricao', InscricaoSchema);
-module.exports = Inscricao;
+module.exports = mongoose.model('Inscricao', InscricaoSchema);

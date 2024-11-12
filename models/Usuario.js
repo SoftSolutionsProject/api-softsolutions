@@ -29,9 +29,7 @@ const UsuarioSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  telefone: {
-    type: String,
-  },
+  telefone: String,
   endereco: {
     rua: String,
     numero: String,
