@@ -12,7 +12,7 @@ const inscreverCurso = async (req, res, next) => {
 const obterInscricoes = async (req, res, next) => {
     try {
         const inscricoes = await inscricaoService.obterInscricoes(req.params.idUser);
-        res.json(inscricoes);
+        res.status(200).json(inscricoes);
     } catch (error) {
         next(error);
     }
@@ -21,7 +21,7 @@ const obterInscricoes = async (req, res, next) => {
 const cancelarInscricao = async (req, res, next) => {
     try {
         await inscricaoService.cancelarInscricao(req.params.idUser, req.params.idModulo);
-        res.json({ message: 'Inscrição cancelada com sucesso' });
+        res.status(200).json({ message: 'Inscrição cancelada com sucesso' }); // Status 200 OK para ação bem-sucedida
     } catch (error) {
         next(error);
     }
