@@ -11,11 +11,15 @@ export const inscreverCurso = async ({ _idModulo, _idUser }: { _idModulo: number
   return await novaInscricao.save();
 };
 
-export const obterInscricoes = async (idUser: number): Promise<IInscricao[]> => {
-  const inscricoes = await Inscricao.find({ _idUser: idUser });
+export const obterInscricoes = async (idUser: number, page: number, limit: number): Promise<IInscricao[]> => {
+  const skip = (page - 1) * limit; // Calcula quantos registros pular para a paginação
+  
+  const inscricoes = await Inscricao.find({ _idUser: idUser }).limit(limit).skip(skip);
+
   if (inscricoes.length === 0) {
     throw new AppError('Nenhuma inscrição encontrada para este usuário.', 404);
   }
+
   return inscricoes;
 };
 

@@ -12,13 +12,15 @@ export const inscreverCurso = async (req: Request, res: Response, next: NextFunc
 
 export const obterInscricoes = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const inscricoes = await inscricaoService.obterInscricoes(parseInt(req.params.idUser));
+    const page = parseInt(req.query.page as string) || 1; // Página atual (padrão: 1)
+    const limit = parseInt(req.query.limit as string) || 10; // Limite de resultados por página (padrão: 10)
+
+    const inscricoes = await inscricaoService.obterInscricoes(parseInt(req.params.idUser), page, limit);
     res.status(200).json(inscricoes);
   } catch (error) {
     next(error);
   }
 };
-
 export const cancelarInscricao = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     await inscricaoService.cancelarInscricao(parseInt(req.params.idUser), parseInt(req.params.idModulo));
