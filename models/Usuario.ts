@@ -25,7 +25,7 @@ export interface IUsuario extends Document {
 const UsuarioSchema: Schema = new mongoose.Schema({
   _idUser: { type: Number, required: true, unique: true },
   tipo: { type: String, enum: ['administrador', 'aluno'], required: true },
-  nomeUsuario: { type: String, required: true },
+  nomeUsuario: { type: String, required: true, index: true },
   cpfUsuario: { type: Number, required: true, unique: true },
   senha: { type: String, required: true },
   email: { type: String, required: true, unique: true },
