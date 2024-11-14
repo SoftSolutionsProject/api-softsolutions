@@ -5,7 +5,7 @@ import { AppError } from '../utils/AppError';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'sua_chave_secreta';
 
-// Função para gerar token JWT
+// gerar token JWT
 const generateToken = (user: { _idUser: number; tipo: string }) => {
   return jwt.sign(
     { _idUser: user._idUser, tipo: user.tipo },
@@ -15,24 +15,38 @@ const generateToken = (user: { _idUser: number; tipo: string }) => {
 };
 
 export const cadastrarUsuario = async (userData: Partial<IUsuario>): Promise<{ user: IUsuario; token: string }> => {
-  // Gerar ID único (você pode implementar sua própria lógica)
-  const lastUser = await Usuario.findOne().sort({ _idUser: -1 });
-  const _idUser = (lastUser?._idUser || 0) + 1;
+  // Validação de CPF
+  if (!validarCPF(String(userData.cpfUsuario))) {
+    throw new AppError('CPF inválido. Por favor, insira um CPF válido no formato ###.###.###-##', 400);
+  }
 
-  // Hash da senha
-  const hashedPassword = await bcrypt.hash(userData.senha!, 10);
+  try {
+    // Gerar ID único (você pode implementar sua própria lógica)
+    const lastUser = await Usuario.findOne().sort({ _idUser: -1 });
+    const _idUser = (lastUser?._idUser || 0) + 1;
 
-  const novoUsuario = new Usuario({
-    ...userData,
-    _idUser,
-    tipo: 'aluno', // Força o tipo como aluno para novos cadastros
-    senha: hashedPassword
-  });
+    // Hash da senha
+    const hashedPassword = await bcrypt.hash(userData.senha!, 10);
 
-  const user = await novoUsuario.save();
-  const token = generateToken({ _idUser: user._idUser, tipo: user.tipo });
+    const novoUsuario = new Usuario({
+      ...userData,
+      _idUser,
+      tipo: 'aluno', // Força o tipo como aluno para novos cadastros
+      senha: hashedPassword
+    });
 
-  return { user, token };
+    const user = await novoUsuario.save();
+    const token = generateToken({ _idUser: user._idUser, tipo: user.tipo });
+
+    return { user, token };
+  } catch (error: any) {
+    // Verificar se o erro é de chave duplicada no campo `cpfUsuario`
+    if (error.code === 11000 && error.keyPattern?.cpfUsuario) {
+      throw new AppError('CPF já cadastrado. Por favor, use outro CPF.', 400);
+    }
+    // Outros erros
+    throw error;
+  }
 };
 
 export const login = async (email: string, senha: string): Promise<{ user: IUsuario; token: string }> => {
@@ -85,4 +99,20 @@ export const atualizarUsuario = async (idUser: number, data: Partial<IUsuario>):
   );
 
   return usuarioAtualizado;
+};
+
+
+const validarCPF = (cpf: string): boolean => {
+  cpf = cpf.replace(/[^\d]+/g, '');
+  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+  let soma = 0;
+  for (let i = 0; i < 9; i++) soma += parseInt(cpf.charAt(i)) * (10 - i);
+  let resto = (soma * 10) % 11;
+  if (resto === 10 || resto === 11) resto = 0;
+  if (resto !== parseInt(cpf.charAt(9))) return false;
+  soma = 0;
+  for (let i = 0; i < 10; i++) soma += parseInt(cpf.charAt(i)) * (11 - i);
+  resto = (soma * 10) % 11;
+  if (resto === 10 || resto === 11) resto = 0;
+  return resto === parseInt(cpf.charAt(10));
 };
