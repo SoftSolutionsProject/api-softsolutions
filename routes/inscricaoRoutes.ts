@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import * as inscricaoController from '../controllers/inscricaoController';
 
 const router: Router = Router();
