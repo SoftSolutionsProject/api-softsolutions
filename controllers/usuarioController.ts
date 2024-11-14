@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import * as usuarioService from '../services/usuarioService';
+import { AppError } from '../utils/AppError';
+
 
 export const cadastrar = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
@@ -22,7 +24,14 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
 
 export const obterUsuario = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const usuario = await usuarioService.obterUsuario(parseInt(req.params.idUser));
+    const idUser = parseInt(req.params.idUser);
+
+    // Verificar se o usuário autenticado está tentando acessar seu próprio perfil
+    if (req.user?._idUser !== idUser) {
+      throw new AppError('Acesso não autorizado', 403);
+    }
+
+    const usuario = await usuarioService.obterUsuario(idUser);
     res.status(200).json(usuario);
   } catch (error) {
     next(error);
@@ -31,7 +40,14 @@ export const obterUsuario = async (req: Request, res: Response, next: NextFuncti
 
 export const atualizarUsuario = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const usuarioAtualizado = await usuarioService.atualizarUsuario(parseInt(req.params.idUser), req.body);
+    const idUser = parseInt(req.params.idUser);
+
+    // Verificar se o usuário autenticado está tentando editar seu próprio perfil
+    if (req.user?._idUser !== idUser) {
+      throw new AppError('Acesso não autorizado', 403);
+    }
+
+    const usuarioAtualizado = await usuarioService.atualizarUsuario(idUser, req.body);
     res.status(200).json(usuarioAtualizado);
   } catch (error) {
     next(error);
