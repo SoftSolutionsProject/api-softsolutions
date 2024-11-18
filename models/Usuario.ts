@@ -52,3 +52,57 @@ const UsuarioSchema: Schema = new mongoose.Schema({
 });
 
 export default mongoose.model<IUsuario>('Usuario', UsuarioSchema);
+
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Usuario:
+ *       type: object
+ *       properties:
+ *         _idUser:
+ *           type: number
+ *         tipo:
+ *           type: string
+ *           enum: [administrador, aluno]
+ *         nomeUsuario:
+ *           type: string
+ *         cpfUsuario:
+ *           type: string
+ *         senha:
+ *           type: string
+ *           format: password
+ *         email:
+ *           type: string
+ *           format: email
+ *         telefone:
+ *           type: string
+ *         endereco:
+ *           type: object
+ *           properties:
+ *             rua:
+ *               type: string
+ *             numero:
+ *               type: string
+ *             bairro:
+ *               type: string
+ *             cidade:
+ *               type: string
+ *             estado:
+ *               type: string
+ *             pais:
+ *               type: string
+ *     Inscricao:
+ *       type: object
+ *       properties:
+ *         statusInscricao:
+ *           type: number
+ *         _idModulo:
+ *           type: number
+ *         _idUser:
+ *           type: number
+ *         dataInscricao:
+ *           type: string
+ *           format: date-time
+ */
