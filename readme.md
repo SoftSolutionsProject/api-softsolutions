@@ -24,212 +24,56 @@ A API está configurada para aceitar requisições das seguintes origens:
 - `https://softsol-softsolutions-projects.vercel.app`
 - `https://softsol.vercel.app`
 
-## Endpoints
 
-### Rotas de Inscrição
-Base: `/inscricoes`
+## Pré-requisitos
 
-#### Criar Inscrição
-```
-POST /inscricoes
-```
-Cria uma nova inscrição em um curso.
+1. **Node.js** - Certifique-se de ter o Node.js instalado.  
+2. **MongoDB** - Certifique-se de que o MongoDB está rodando localmente ou use uma URI de conexão remota.  
+3. **Dependências** - Assegure-se de ter instalado todas as dependências do projeto.
 
-**Corpo da Requisição:**
-```json
-{
-  "_idModulo": Number,
-  "_idUser": Number
-}
-```
+## Instalação
 
-**Respostas:**
-- Sucesso (201):
-```json
-{
-  "statusInscricao": 0,
-  "_idModulo": Number,
-  "_idUser": Number,
-  "dataInscricao": Date
-}
-```
-- Erro (400): `{ "message": "Usuário já está inscrito neste módulo." }`
-- Erro (500): `{ "message": "Erro ao se inscrever no curso", "error": Error }`
+1. Clone o repositório:  
+   ``` git clone https://github.com/SoftSolutionsProject/SoftSolutions.git   ```
 
-#### Obter Inscrições do Usuário
-```
-GET /inscricoes/:idUser
-```
-Recupera todas as inscrições de um usuário específico.
+2. Navegue até o diretório `backend`:  
+   ``` cd SoftSolutions/backend   ```
 
-**Parâmetros:**
-- `idUser`: ID do usuário (Number)
+3. Instale as dependências do projeto:  
+   ``` npm install   ```
 
-**Respostas:**
-- Sucesso (200): Array de objetos de inscrição
-- Erro (404): `{ "message": "Nenhuma inscrição encontrada para este usuário." }`
-- Erro (500): `{ "message": "Erro ao obter inscrições", "error": Error }`
+## Configuração
 
-#### Cancelar Inscrição
-```
-DELETE /inscricoes/:idUser/cursos/:idModulo
-```
-Cancela uma inscrição específica em um curso.
+1. Configure as variáveis de ambiente no arquivo `.env`:
 
-**Parâmetros:**
-- `idUser`: ID do usuário (Number)
-- `idModulo`: ID do curso/módulo (Number)
+   ```
+   MONGO_URI=<sua-uri-mongo>  
+   MONGO_TEST_URI=<uri-para-teste>  
+   JWT_SECRET=<sua-chave-secreta>  
+   PORT=3000 
+    ```
 
-**Respostas:**
-- Sucesso (200): `{ "message": "Inscrição cancelada com sucesso" }`
-- Erro (404): `{ "message": "Inscrição não encontrada" }`
-- Erro (500): `{ "message": "Erro ao cancelar a inscrição", "error": Error }`
+2. Verifique se o arquivo `tsconfig.json` está configurado corretamente para o compilador TypeScript.  
 
-### Rotas de Usuário
-Base: `/usuarios`
+## Executando o Projeto
 
-#### Obter Perfil do Usuário
-```
-GET /usuarios/:idUser
-```
-Recupera informações do perfil do usuário.
+1. Para rodar o servidor em modo de desenvolvimento:  
+   ``` npm run dev   ```
 
-**Parâmetros:**
-- `idUser`: ID do usuário (Number)
+2. Para rodar os testes:  
+   ``` npm test   ```
 
-**Respostas:**
-- Sucesso (200): Objeto do usuário
-- Erro (404): `{ "message": "Usuário não encontrado" }`
-- Erro (500): `{ "message": "Erro ao obter o usuário", "error": Error }`
+3. Para compilar o TypeScript:  
+   ``` npm run build   ```
 
-#### Atualizar Perfil do Usuário
-```
-PUT /usuarios/:idUser
-```
-Atualiza informações do perfil do usuário.
+4. Para rodar o servidor com código compilado:  
+   ``` npm start   ```
 
-**Parâmetros:**
-- `idUser`: ID do usuário (Number)
+## Acesso à Documentação
 
-**Corpo da Requisição:** Campos do usuário a serem atualizados
+A documentação da API está disponível via Swagger em:  
+``` http://localhost:3000/api-docs   ```
 
-**Respostas:**
-- Sucesso (200): Objeto do usuário atualizado
-- Erro (404): `{ "message": "Usuário não encontrado" }`
-- Erro (400): `{ "message": "Erro ao atualizar o usuário", "error": Error }`
-
-## Modelos de Dados
-
-### Esquema do Usuário
-```javascript
-{
-  _idUser: {
-    type: Number,
-    required: true,
-    unique: true
-  },
-  tipo: {
-    type: String,
-    enum: ['administrador', 'aluno'],
-    required: true
-  },
-  nomeUsuario: {
-    type: String,
-    required: true
-  },
-  cpfUsuario: {
-    type: Number,
-    required: true,
-    unique: true
-  },
-  senha: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  telefone: String,
-  endereco: {
-    rua: String,
-    numero: String,
-    bairro: String,
-    cidade: String,
-    estado: String,
-    pais: String
-  },
-  localizacao: {
-    type: {
-      type: String,
-      enum: ['Point']
-    },
-    coordinates: [Number]
-  }
-}
-```
-
-### Esquema de Inscrição
-```javascript
-{
-  statusInscricao: {
-    type: Number,
-    required: true,
-    default: 0
-  },
-  _idModulo: {
-    type: Number,
-    required: true
-  },
-  _idUser: {
-    type: Number,
-    required: true
-  },
-  dataInscricao: {
-    type: Date,
-    default: Date.now
-  }
-}
-```
-
-**Observação:** A coleção de inscrições possui um índice único composto em `{_idUser: 1, _idModulo: 1}` para prevenir inscrições duplicadas.
-
-## Tratamento de Erros
-Todos os endpoints seguem um formato consistente de resposta de erro:
-```javascript
-{
-  message: String,  // Mensagem de erro legível
-  error: Error      // Informações detalhadas do erro (apenas em desenvolvimento)
-}
-```
-
-## Entregas do Projeto
-
-### 1ª Entrega de Desenvolvimento Web - 15 de Outubro
-
-**Objetivo**: Desenvolvimento de uma API REST na arquitetura MVC, utilizando MongoDB e integração com o frontend.
-
-**Requisitos**:
-1. A aplicação deverá ser hospedada no GitHub e ter sua documentação descrita no arquivo README. Não esqueça de incluir o nome dos integrantes do grupo.
-2. Desenvolvimento de uma API RESTful completa que permita a realização das operações básicas: GET, POST, PUT e DELETE. Cada operação deve ser mapeada para as rotas apropriadas no servidor.
-3. Utilização da arquitetura MVC para o desenvolvimento da aplicação.
-4. A aplicação deverá conter obrigatoriamente um microsserviço.
-5. A aplicação deverá ser hospedada em uma plataforma de nuvem, por exemplo: Vercel.
-
-### 2ª Entrega de Desenvolvimento Web - 19 de Novembro
-
-**Objetivo**: Expansão da API REST, utilizando a arquitetura MVC e integração com o frontend.
-
-**Requisitos**:
-1. A aplicação deverá ser hospedada no GitHub e ter sua documentação descrita no arquivo README. Não esqueça de incluir o nome dos integrantes do grupo.
-2. Desenvolvimento de uma API RESTful completa que permita a realização das operações básicas: GET, POST, PUT e DELETE. Cada operação deve ser mapeada para as rotas apropriadas no servidor.
-3. Utilização da arquitetura MVC para o desenvolvimento da aplicação.
-4. A aplicação deverá conter obrigatoriamente um microsserviço.
-5. A aplicação deverá ser hospedada em uma plataforma de nuvem, por exemplo: Vercel.
-6. API documentada utilizando uma das ferramentas de documentação apresentadas em aula, como Postman ou Swagger.
-7. Implementação de um sistema de login com autenticação de usuários.
-8. Implementação de um sistema de proteção das rotas, utilizando autenticação através de token, API key ou outros métodos.
-9. Desenvolvimento da interface do usuário utilizando o conceito de SPA (Single Page Application), podendo ser utilizado o framework de preferência do grupo (Angular, React, etc.).
-10. Realização de testes unitários, através do framework Jest.
-11. A entrega deverá ser feita através da tarefa disponibilizada na plataforma TEAMS. Certifique-se de incluir o nome de todos os integrantes do grupo no README do projeto e o link da aplicação para facilitar a identificação dos colaboradores, assim como o link da API pública, se houver.
+## Estrutura dos Testes
+- **Testes de Controladores**: Localizados em `__tests__/controllers`.  
+- **Testes de Serviços**: Localizados em `__tests__/services`.  
