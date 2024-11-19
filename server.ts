@@ -8,7 +8,7 @@ import errorHandler from './middlewares/errorHandler';
 import { setupSwagger } from './config/swagger';
 
 const app: Application = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 setupSwagger(app);
 
@@ -27,7 +27,8 @@ app.use('/api/usuarios', usuarioRoutes);
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`Servidor rodando na porta ${PORT}. Acesse a API em: http://localhost:${PORT}`);
+
 });
 
 export default app;

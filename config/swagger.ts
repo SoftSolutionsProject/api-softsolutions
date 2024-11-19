@@ -42,5 +42,6 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 export const setupSwagger = (app: Application): void => {
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-  console.log('Documentação Swagger disponível em /api-docs');
+  console.log(`Documentação Swagger disponível em http://localhost:${process.env.PORT}/api-docs`);
+
 };
