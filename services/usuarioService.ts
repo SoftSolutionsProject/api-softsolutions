@@ -20,8 +20,24 @@ export const cadastrarUsuario = async (userData: Partial<IUsuario>): Promise<{ u
     throw new AppError('CPF inválido. Por favor, insira um CPF válido no formato ###.###.###-##', 400);
   }
 
+  // Validação de formato do e-mail
+  if (!validarEmail(String(userData.email))) {
+    throw new AppError('Formato de email inválido. Por favor, insira um email válido.', 400);
+  }
+
+  // Validação de formato de telefone
+  if (userData.telefone && !validarTelefone(userData.telefone)) {
+    throw new AppError('Formato de telefone inválido. Insira no formato (XX) XXXXX-XXXX.', 400);
+  }
+
   try {
-    // Gerar ID único (você pode implementar sua própria lógica)
+    // Verificar se o e-mail já está cadastrado
+    const emailExistente = await Usuario.findOne({ email: userData.email });
+    if (emailExistente) {
+      throw new AppError('Email já cadastrado. Por favor, use outro email.', 400);
+    }
+
+    // Gerar ID único
     const lastUser = await Usuario.findOne().sort({ _idUser: -1 });
     const _idUser = (lastUser?._idUser || 0) + 1;
 
@@ -31,8 +47,8 @@ export const cadastrarUsuario = async (userData: Partial<IUsuario>): Promise<{ u
     const novoUsuario = new Usuario({
       ...userData,
       _idUser,
-      tipo: 'aluno', // Força o tipo como aluno para novos cadastros
-      senha: hashedPassword
+      tipo: 'aluno',
+      senha: hashedPassword,
     });
 
     const user = await novoUsuario.save();
@@ -40,23 +56,20 @@ export const cadastrarUsuario = async (userData: Partial<IUsuario>): Promise<{ u
 
     return { user, token };
   } catch (error: any) {
-    // Verificar se o erro é de chave duplicada no campo `cpfUsuario`
     if (error.code === 11000 && error.keyPattern?.cpfUsuario) {
       throw new AppError('CPF já cadastrado. Por favor, use outro CPF.', 400);
     }
-    // Outros erros
     throw error;
   }
 };
+
+
 
 export const login = async (email: string, senha: string): Promise<{ user: IUsuario; token: string }> => {
   const user = await Usuario.findOne({ email });
   if (!user) {
     throw new AppError('Email ou senha inválidos', 401);
   }
-
-  console.log('Senha armazenada:', user.senha);
-  console.log('Senha enviada:', senha);
 
   const senhaValida = await bcrypt.compare(senha, user.senha);
   if (!senhaValida) {
@@ -81,15 +94,19 @@ export const atualizarUsuario = async (idUser: number, data: Partial<IUsuario>):
     throw new AppError('Usuário não encontrado', 404);
   }
 
+  // Bloquear alteração de CPF
   if ('cpfUsuario' in data && data.cpfUsuario !== usuarioAtual.cpfUsuario) {
     throw new AppError('Não é permitido alterar o CPF', 400);
   }
 
-  if (data.email) {
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailRegex.test(data.email)) {
-      throw new AppError('Formato de email inválido', 400);
-    }
+  // Validação de e-mail
+  if (data.email && !validarEmail(data.email)) {
+    throw new AppError('Formato de email inválido', 400);
+  }
+
+  // Validação de telefone
+  if (data.telefone && !validarTelefone(data.telefone)) {
+    throw new AppError('Formato de telefone inválido. Insira no formato (XX) XXXXX-XXXX.', 400);
   }
 
   const usuarioAtualizado = await Usuario.findOneAndUpdate(
@@ -102,6 +119,9 @@ export const atualizarUsuario = async (idUser: number, data: Partial<IUsuario>):
 };
 
 
+
+
+// Validação de CPF
 const validarCPF = (cpf: string): boolean => {
   cpf = cpf.replace(/[^\d]+/g, '');
   if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
@@ -115,4 +135,16 @@ const validarCPF = (cpf: string): boolean => {
   resto = (soma * 10) % 11;
   if (resto === 10 || resto === 11) resto = 0;
   return resto === parseInt(cpf.charAt(10));
+};
+
+// Validação de E-mail
+const validarEmail = (email: string): boolean => {
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  return emailRegex.test(email);
+};
+
+// Validação de Telefone
+const validarTelefone = (telefone: string): boolean => {
+  const telefoneRegex = /^\(\d{2}\) \d{4,5}-\d{4}$/; // Exemplo: (11) 91234-5678 ou (11) 1234-5678
+  return telefoneRegex.test(telefone);
 };
