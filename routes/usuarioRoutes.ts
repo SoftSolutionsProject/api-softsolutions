@@ -43,6 +43,42 @@ export default router;
 
 /**
  * @swagger
+ * /api/usuarios/login:
+ *   post:
+ *     tags: [Usuários]
+ *     summary: Realizar login
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: "joao@email.com"
+ *               senha:
+ *                 type: string
+ *                 format: password
+ *                 example: "senha123"
+ *     responses:
+ *       200:
+ *         description: Login realizado com sucesso
+ *         content:
+ *           application/json:
+ *             example:
+ *               user:
+ *                 _idUser: 1
+ *                 nomeUsuario: "João Silva"
+ *                 email: "joao@email.com"
+ *               token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+ *       401:
+ *         description: Credenciais inválidas
+ */
+
+/**
+ * @swagger
  * /api/usuarios/{idUser}:
  *   get:
  *     tags: [Usuários]
@@ -123,3 +159,7 @@ export default router;
  *       404:
  *         description: Usuário não encontrado
  */
+
+
+
+
