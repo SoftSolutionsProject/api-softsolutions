@@ -26,8 +26,12 @@ export const cadastrarUsuario = async (userData: Partial<IUsuario>): Promise<{ u
   }
 
   // Validação de formato de telefone
-  if (userData.telefone && !validarTelefone(userData.telefone)) {
-    throw new AppError('Formato de telefone inválido. Insira no formato (XX) XXXXX-XXXX.', 400);
+  if (userData.telefone) {
+    if (!validarTelefone(userData.telefone)) {
+      throw new AppError('Formato de telefone inválido. Insira um número com 10 ou 11 dígitos.', 400);
+    }
+    // Substitui o telefone pelo valor formatado
+    userData.telefone = formatarTelefone(userData.telefone);
   }
 
   try {
@@ -104,9 +108,13 @@ export const atualizarUsuario = async (idUser: number, data: Partial<IUsuario>):
     throw new AppError('Formato de email inválido', 400);
   }
 
-  // Validação de telefone
-  if (data.telefone && !validarTelefone(data.telefone)) {
-    throw new AppError('Formato de telefone inválido. Insira no formato (XX) XXXXX-XXXX.', 400);
+  // Validação e formatação do telefone
+  if (data.telefone) {
+    if (!validarTelefone(data.telefone)) {
+      throw new AppError('Formato de telefone inválido. Insira um número com 10 ou 11 dígitos.', 400);
+    }
+    // Substitui o telefone pelo valor formatado
+    data.telefone = formatarTelefone(data.telefone);
   }
 
   const usuarioAtualizado = await Usuario.findOneAndUpdate(
@@ -143,8 +151,27 @@ const validarEmail = (email: string): boolean => {
   return emailRegex.test(email);
 };
 
-// Validação de Telefone
+
 const validarTelefone = (telefone: string): boolean => {
-  const telefoneRegex = /^\(\d{2}\) \d{4,5}-\d{4}$/; // Exemplo: (11) 91234-5678 ou (11) 1234-5678
-  return telefoneRegex.test(telefone);
+  // Remove caracteres não numéricos
+  const somenteNumeros = telefone.replace(/\D/g, '');
+
+  // Verifica se o número tem 10 ou 11 dígitos
+  return somenteNumeros.length === 10 || somenteNumeros.length === 11;
+};
+
+const formatarTelefone = (telefone: string): string => {
+  // Remove caracteres não numéricos
+  const somenteNumeros = telefone.replace(/\D/g, '');
+
+  if (somenteNumeros.length === 11) {
+    // Formata celular com DDD: (11) 91234-5678
+    return somenteNumeros.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+  } else if (somenteNumeros.length === 10) {
+    // Formata fixo com DDD: (11) 1234-5678
+    return somenteNumeros.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+  }
+
+  // Retorna o telefone sem formatação se inválido
+  return telefone;
 };
