@@ -24,7 +24,7 @@ export interface IUsuario extends Document {
 
 const UsuarioSchema: Schema = new mongoose.Schema({
   _idUser: { type: Number, required: true, unique: true },
-  tipo: { type: String, enum: ['administrador', 'aluno'], required: true },
+  tipo: { type: String, enum: ['administrador', 'aluno'], required: true, default: 'aluno' },
   nomeUsuario: { type: String, required: true, index: true },
   cpfUsuario: { type: String, required: true, unique: true },
   senha: { type: String, required: true },
@@ -42,14 +42,15 @@ const UsuarioSchema: Schema = new mongoose.Schema({
     type: {
       type: String,
       enum: ['Point'],
-      default: 'Point'
+      default: 'Point',
     },
     coordinates: {
       type: [Number],
-      default: [0, 0]
+      default: [0, 0],
     },
   },
 });
+
 
 export default mongoose.model<IUsuario>('Usuario', UsuarioSchema);
 

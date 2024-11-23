@@ -5,7 +5,10 @@ import { AppError } from '../utils/AppError';
 
 export const cadastrar = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const { user, token } = await usuarioService.cadastrarUsuario(req.body);
+    // Garante que o tipo seja ignorado se enviado no corpo da requisição
+    const { tipo, ...userData } = req.body;
+
+    const { user, token } = await usuarioService.cadastrarUsuario(userData);
     res.status(201).json({ user, token });
   } catch (error) {
     next(error);

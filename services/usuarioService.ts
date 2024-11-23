@@ -30,8 +30,7 @@ export const cadastrarUsuario = async (userData: Partial<IUsuario>): Promise<{ u
     if (!validarTelefone(userData.telefone)) {
       throw new AppError('Formato de telefone inválido. Insira um número com 10 ou 11 dígitos.', 400);
     }
-    // Substitui o telefone pelo valor formatado
-    userData.telefone = formatarTelefone(userData.telefone);
+    userData.telefone = formatarTelefone(userData.telefone); // Formata o telefone
   }
 
   try {
@@ -48,10 +47,11 @@ export const cadastrarUsuario = async (userData: Partial<IUsuario>): Promise<{ u
     // Hash da senha
     const hashedPassword = await bcrypt.hash(userData.senha!, 10);
 
+    // Força o tipo como aluno
     const novoUsuario = new Usuario({
       ...userData,
       _idUser,
-      tipo: 'aluno',
+      tipo: 'aluno', // Garante que o tipo seja sempre aluno
       senha: hashedPassword,
     });
 
