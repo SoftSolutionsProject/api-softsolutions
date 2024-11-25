@@ -1,3 +1,4 @@
+// routes/inscricaoRoutes.ts
 import { Router } from 'express';
 import * as inscricaoController from '../controllers/inscricaoController';
 import { authMiddleware } from '../middlewares/authMiddleware';
@@ -7,7 +8,7 @@ const router: Router = Router();
 // Rotas protegidas para inscrições
 router.post('/', authMiddleware, inscricaoController.inscreverCurso);
 router.get('/:idUser', authMiddleware, inscricaoController.obterInscricoes);
-router.delete('/:idUser/cursos/:idModulo', authMiddleware, inscricaoController.cancelarInscricao);
+router.delete('/:idUser/cursos/:idCurso', authMiddleware, inscricaoController.cancelarInscricao);
 
 export default router;
 
@@ -16,7 +17,7 @@ export default router;
  * @swagger
  * tags:
  *   name: Inscrições
- *   description: Gerenciamento de inscrições em cursos
+ *   description: Gerenciamento de inscrições em cursos na plataforma
  */
 
 /**
@@ -34,12 +35,15 @@ export default router;
  *           schema:
  *             type: object
  *             properties:
- *               _idModulo:
+ *               _idCurso:
  *                 type: number
- *                 description: ID do módulo
+ *                 description: ID do curso
  *               _idUser:
  *                 type: number
  *                 description: ID do usuário
+ *           example:
+ *             _idCurso: 1
+ *             _idUser: 123
  *     responses:
  *       201:
  *         description: Inscrição realizada com sucesso
@@ -48,9 +52,13 @@ export default router;
  *             schema:
  *               $ref: '#/components/schemas/Inscricao'
  *       400:
- *         description: Usuário já está inscrito neste módulo
+ *         description: Usuário já está inscrito neste curso
  *       403:
  *         description: Acesso não autorizado
+ *       404:
+ *         description: Curso não encontrado
+ *       500:
+ *         description: Erro interno no servidor
  */
 
 /**
@@ -58,7 +66,9 @@ export default router;
  * /api/inscricoes/{idUser}:
  *   get:
  *     tags: [Inscrições]
- *     summary: Listar inscrições do usuário
+ *     summary: Obter todas as inscrições de um usuário
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: idUser
@@ -70,7 +80,7 @@ export default router;
  *         name: page
  *         schema:
  *           type: number
- *         description: Página para paginação
+ *         description: Página da listagem
  *       - in: query
  *         name: limit
  *         schema:
@@ -78,7 +88,7 @@ export default router;
  *         description: Limite de itens por página
  *     responses:
  *       200:
- *         description: Lista de inscrições
+ *         description: Lista de inscrições retornada com sucesso
  *         content:
  *           application/json:
  *             schema:
@@ -87,14 +97,20 @@ export default router;
  *                 $ref: '#/components/schemas/Inscricao'
  *       403:
  *         description: Acesso não autorizado
+ *       404:
+ *         description: Nenhuma inscrição encontrada para o usuário
+ *       500:
+ *         description: Erro interno no servidor
  */
 
 /**
  * @swagger
- * /api/inscricoes/{idUser}/cursos/{idModulo}:
+ * /api/inscricoes/{idUser}/cursos/{idCurso}:
  *   delete:
  *     tags: [Inscrições]
  *     summary: Cancelar inscrição em um curso
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: idUser
@@ -103,16 +119,26 @@ export default router;
  *           type: number
  *         description: ID do usuário
  *       - in: path
- *         name: idModulo
+ *         name: idCurso
  *         required: true
  *         schema:
  *           type: number
- *         description: ID do módulo
+ *         description: ID do curso
  *     responses:
  *       200:
  *         description: Inscrição cancelada com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Inscrição cancelada com sucesso
  *       403:
  *         description: Acesso não autorizado
  *       404:
  *         description: Inscrição não encontrada
+ *       500:
+ *         description: Erro interno no servidor
  */

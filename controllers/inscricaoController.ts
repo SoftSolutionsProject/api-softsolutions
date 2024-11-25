@@ -1,3 +1,4 @@
+// controllers/inscricaoController.ts
 import { Request, Response, NextFunction } from 'express';
 import * as inscricaoService from '../services/inscricaoService';
 import { AppError } from '../utils/AppError';
@@ -22,13 +23,12 @@ export const obterInscricoes = async (req: Request, res: Response, next: NextFun
   try {
     const idUser = req.user?._idUser;
 
-    // Verificar se o usuário está tentando acessar seu próprio perfil de inscrição
     if (parseInt(req.params.idUser) !== idUser) {
       throw new AppError('Acesso não autorizado', 403);
     }
 
-    const page = parseInt(req.query.page as string) || 1; // Página atual (padrão: 1)
-    const limit = parseInt(req.query.limit as string) || 10; // Limite de resultados por página (padrão: 10)
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
 
     const inscricoes = await inscricaoService.obterInscricoes(idUser, page, limit);
     res.status(200).json(inscricoes);
@@ -41,12 +41,11 @@ export const cancelarInscricao = async (req: Request, res: Response, next: NextF
   try {
     const idUser = req.user?._idUser;
 
-    // Verificar se o usuário está tentando cancelar inscrição em seu próprio perfil
     if (parseInt(req.params.idUser) !== idUser) {
       throw new AppError('Acesso não autorizado', 403);
     }
 
-    await inscricaoService.cancelarInscricao(idUser, parseInt(req.params.idModulo));
+    await inscricaoService.cancelarInscricao(idUser, parseInt(req.params.idCurso));
     res.status(200).json({ message: 'Inscrição cancelada com sucesso' });
   } catch (error) {
     next(error);

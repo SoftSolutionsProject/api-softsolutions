@@ -1,19 +1,39 @@
 import Inscricao, { IInscricao } from '../models/Inscricao';
 import { AppError } from '../utils/AppError';
+import mongoose from 'mongoose';
 
-export const inscreverCurso = async ({ _idModulo, _idUser }: { _idModulo: number; _idUser: number }): Promise<IInscricao> => {
-  const inscricaoExistente = await Inscricao.findOne({ _idUser, _idModulo });
+
+export const inscreverCurso = async ({ _idCurso, _idUser }: { _idCurso: number; _idUser: number }): Promise<IInscricao> => {
+  const inscricaoExistente = await Inscricao.findOne({ _idUser, _idCurso });
   if (inscricaoExistente) {
-    throw new AppError('Usuário já está inscrito neste módulo.', 400);
+    throw new AppError('Usuário já está inscrito neste curso.', 400);
   }
 
-  const novaInscricao = new Inscricao({ statusInscricao: 0, _idModulo, _idUser });
+  // Pegar módulos do curso para criar progresso inicial
+  const curso = await mongoose.model('Curso').findOne({ _idCurso });
+  if (!curso) {
+    throw new AppError('Curso não encontrado.', 404);
+  }
+
+  const progresso = curso.modulos.map((modulo: any) => ({
+    _idModulo: modulo._idModulo,
+    status: 0, // Não iniciado
+    aulasConcluidas: [],
+  }));
+
+  const novaInscricao = new Inscricao({
+    _idCurso,
+    _idUser,
+    progresso,
+  });
+
   return await novaInscricao.save();
 };
 
+
 export const obterInscricoes = async (idUser: number, page: number, limit: number): Promise<IInscricao[]> => {
-  const skip = (page - 1) * limit; // Calcula quantos registros pular para a paginação
-  
+  const skip = (page - 1) * limit; // Paginação
+
   const inscricoes = await Inscricao.find({ _idUser: idUser }).limit(limit).skip(skip);
 
   if (inscricoes.length === 0) {
@@ -23,9 +43,11 @@ export const obterInscricoes = async (idUser: number, page: number, limit: numbe
   return inscricoes;
 };
 
-export const cancelarInscricao = async (idUser: number, idModulo: number): Promise<void> => {
-  const resultado = await Inscricao.findOneAndDelete({ _idUser: idUser, _idModulo: idModulo });
+
+export const cancelarInscricao = async (idUser: number, idCurso: number): Promise<void> => {
+  const resultado = await Inscricao.findOneAndDelete({ _idUser: idUser, _idCurso: idCurso });
   if (!resultado) {
     throw new AppError('Inscrição não encontrada', 404);
   }
 };
+
