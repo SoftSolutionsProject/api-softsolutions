@@ -7,6 +7,7 @@ import usuarioRoutes from './routes/usuarioRoutes';
 import errorHandler from './middlewares/errorHandler';
 import { setupSwagger } from './config/swagger';
 import emailRoutes from './routes/emailRoutes';
+import cursoRoutes from './routes/cursoRoutes';
 
 const app: Application = express();
 const PORT = process.env.PORT;
@@ -24,6 +25,7 @@ connectDatabase();
 app.use('/api/inscricoes', inscricaoRoutes);
 app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/email', emailRoutes);
+app.use('/api/cursos', cursoRoutes);
 
 // Middleware de erro (mantenha por último)
 app.use(errorHandler);
