@@ -42,11 +42,12 @@ export default router;
  *             nomeCurso: "Python para Análise de Dados"
  *             tempoCurso: 60
  *             descricaoCurta: "Aprenda a usar Python."
- *             descricaoDetalhada: "Ideal para quem deseja se destacar na a´rea de dados."
+ *             descricaoDetalhada: "Ideal para quem deseja se destacar na área de dados."
  *             professor: "Ana Costa"
  *             categoria: "Data Science"
  *             status: "ativo"
  *             avaliacao: 4.9
+ *             imagemCurso: "https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/1.png"
  *             modulos:
  *               - nomeModulo: "Módulo 1: Fundamentos de Análise de Dados"
  *                 tempoModulo: 15
@@ -72,6 +73,7 @@ export default router;
  */
 
 
+
 /**
  * @swagger
  * /api/cursos:
@@ -91,6 +93,7 @@ export default router;
  *       500:
  *         description: Erro interno do servidor.
  */
+
 
 /**
  * @swagger

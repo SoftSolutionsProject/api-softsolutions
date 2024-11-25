@@ -26,6 +26,7 @@ export interface ICurso extends Document {
   categoria: string;
   status: 'ativo' | 'inativo';
   avaliacao: number;
+  imagemCurso:string;
   modulos: IModulo[];
 }
 
@@ -55,6 +56,7 @@ const CursoSchema = new Schema<ICurso>({
   categoria: { type: String, required: true },
   status: { type: String, enum: ['ativo', 'inativo'], default: 'ativo' },
   avaliacao: { type: Number, default: 0 },
+  imagemCurso: { type: String, required: true },
   modulos: { type: [ModuloSchema], required: true },
 });
 
@@ -95,6 +97,9 @@ export default mongoose.model<ICurso>('Curso', CursoSchema);
  *         avaliacao:
  *           type: number
  *           description: Avaliação do curso
+ *         imagemCurso:
+ *           type: string
+ *           description: URL da imagem representando o curso
  *         modulos:
  *           type: array
  *           description: Lista de módulos do curso
