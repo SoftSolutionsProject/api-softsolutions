@@ -26,3 +26,13 @@ export const adicionarCurso = async (cursoData: any): Promise<any> => {
 
   return await novoCurso.save();
 };
+
+//Obter um curso por ID
+export const obterCursoPorId = async (idCurso: number) => {
+    return await Curso.findOne({ _idCurso: idCurso });
+  };
+  
+  //Obter todos os cursos
+  export const obterTodosCursos = async () => {
+    return await Curso.find();
+  };

@@ -1,14 +1,28 @@
 import { Router } from 'express';
-import * as courseController from '../controllers/cursoController';
+import * as cursoController from '../controllers/cursoController';
 import { authMiddleware } from '../middlewares/authMiddleware';
 import { checkRole } from '../middlewares/roleMiddleware';
 
 const router = Router();
 
 // Adicionar curso (somente administradores)
-router.post('/', authMiddleware, checkRole(['administrador']), courseController.adicionarCurso);
+router.post('/', authMiddleware, checkRole(['administrador']), cursoController.adicionarCurso);
+
+
+// Obter todos os cursos (rota pública)
+router.get('/', cursoController.obterCursos);
+
+//Obter um curso específico (rota pública)
+router.get('/:idCurso', cursoController.obterCursos);
 
 export default router;
+
+/**
+ * @swagger
+ * tags:
+ *   name: Cursos
+ *   description: Gerenciamento de cursos na plataforma
+ */
 
 /**
  * @swagger
@@ -55,4 +69,60 @@ export default router;
  *         description: Acesso não autorizado
  *       500:
  *         description: Erro no servidor
+ */
+
+
+/**
+ * @swagger
+ * /api/cursos:
+ *   get:
+ *     tags: [Cursos]
+ *     summary: Obter todos os cursos
+ *     description: Retorna uma lista de todos os cursos cadastrados na plataforma.
+ *     responses:
+ *       200:
+ *         description: Lista de cursos retornada com sucesso.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Curso'
+ *       500:
+ *         description: Erro interno do servidor.
+ */
+
+/**
+ * @swagger
+ * /api/cursos/{idCurso}:
+ *   get:
+ *     tags: [Cursos]
+ *     summary: Obter um curso específico
+ *     description: Retorna os detalhes de um curso com base no ID fornecido.
+ *     parameters:
+ *       - in: path
+ *         name: idCurso
+ *         required: true
+ *         schema:
+ *           type: number
+ *         description: ID único do curso a ser obtido.
+ *     responses:
+ *       200:
+ *         description: Detalhes do curso retornados com sucesso.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Curso'
+ *       404:
+ *         description: Curso não encontrado.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Curso não encontrado
+ *       500:
+ *         description: Erro interno do servidor.
  */
