@@ -4,7 +4,8 @@
   "description": "Este é o backend da aplicação **SoftSolutions**, uma plataforma de cursos online.",
   "main": "server.js",
   "scripts": {
-    "build": "tsc",
+    "install": "npm install",
+    "build": "npm install && tsc",
     "start": "node dist/server.js",
     "dev": "nodemon --exec ts-node ./server.ts",
     "test": "jest",
