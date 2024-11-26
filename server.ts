@@ -10,7 +10,7 @@ import emailRoutes from './routes/emailRoutes';
 import cursoRoutes from './routes/cursoRoutes';
 
 const app: Application = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;;
 
 setupSwagger(app);
 
