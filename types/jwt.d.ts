@@ -6,3 +6,10 @@ declare namespace Express {
       }
     }
   }
+
+
+declare module 'bcrypt';
+declare module 'jsonwebtoken';
+declare module 'nodemailer';
+declare module 'swagger-jsdoc';
+declare module 'swagger-ui-express';
