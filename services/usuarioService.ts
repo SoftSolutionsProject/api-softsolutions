@@ -127,8 +127,6 @@ export const atualizarUsuario = async (idUser: number, data: Partial<IUsuario>):
 };
 
 
-
-
 // Validação de CPF
 const validarCPF = (cpf: string): boolean => {
   cpf = cpf.replace(/[^\d]+/g, '');
