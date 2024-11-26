@@ -10,16 +10,9 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "sourceMap": false,
-    "types": [
-      "node",
-      "bcrypt",
-      "jsonwebtoken",
-      "nodemailer",
-      "swagger-jsdoc",
-      "swagger-ui-express"
-    ],
+    "types": ["node"],
     "incremental": true
   },
   "include": ["**/*.ts", "types/**/*.d.ts"],
-  "exclude": ["node_modules", "__tests__", "dist"],
+  "exclude": ["node_modules", "__tests__", "dist"]
 }
