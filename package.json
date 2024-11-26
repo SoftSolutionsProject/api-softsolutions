@@ -5,11 +5,10 @@
   "main": "server.js",
   "scripts": {
     "install": "npm install",
-    "build": "npm install && tsc",
+    "build": "npm install && tsc --incremental",
     "start": "node dist/server.js",
     "dev": "nodemon --exec ts-node ./server.ts",
-    "test": "jest",
-    "verify": "dir node_modules"
+    "test": "jest"
   },
   "dependencies": {
   "bcrypt": "^5.1.1",

@@ -9,7 +9,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "types": [
       "node",
       "bcrypt",
@@ -17,8 +17,9 @@
       "nodemailer",
       "swagger-jsdoc",
       "swagger-ui-express"
-    ]
+    ],
+    "incremental": true
   },
   "include": ["**/*.ts", "types/**/*.d.ts"],
-  "exclude": ["node_modules", "__tests__"],
+  "exclude": ["node_modules", "__tests__", "dist"],
 }
