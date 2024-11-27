@@ -16,7 +16,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:3000',
+        url: 'https://softbackend.vercel.app/',
         description: 'Servidor local',
       },
     ],
@@ -35,7 +35,7 @@ const swaggerOptions = {
       },
     ],
   },
-  apis: ['./routes/*.ts', './models/*.ts'], // Inclua o caminho correto para as rotas e modelos
+  apis: ['./dist/routes/*.js', './dist/models/*.js'],
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
