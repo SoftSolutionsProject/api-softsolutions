@@ -16,8 +16,8 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'https://softbackend.vercel.app/',
-        description: 'Servidor local',
+        url: 'https://soft-solutions-chi.vercel.app/',
+        description: 'Servidor',
       },
     ],
     components: {
@@ -35,7 +35,7 @@ const swaggerOptions = {
       },
     ],
   },
-  apis: ['./dist/routes/*.js', './dist/models/*.js'],
+  apis: ['./routes/*.ts', './models/*.ts'],
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
