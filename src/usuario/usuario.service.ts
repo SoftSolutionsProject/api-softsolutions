@@ -16,7 +16,16 @@ export class UsuarioService {
     return await this.usuarioRepository.save(novoUsuario);
   }
 
-  async findAll(): Promise<Usuario[]> {
-    return await this.usuarioRepository.find();
+  async findById(id: number): Promise<Usuario> {
+    const usuario = await this.usuarioRepository.findOneBy({ id });
+    if (!usuario) {
+      throw new Error('Usuário não encontrado');
+    }
+    return usuario;
+  }
+
+  async update(id: number, data: Partial<CreateUsuarioDto>): Promise<Usuario> {
+    await this.usuarioRepository.update(id, data);
+    return this.findById(id);
   }
 }
