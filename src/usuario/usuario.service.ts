@@ -114,4 +114,10 @@ export class UsuarioService {
       ? t.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')
       : t.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
   }
+
+  async findAll(): Promise<Usuario[]> {
+    const usuarios = await this.usuarioRepository.find();
+    return usuarios.map(this.omitirSenha);
+  }
+  
 }

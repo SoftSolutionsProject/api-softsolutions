@@ -50,4 +50,14 @@ async update(
   if (+id !== user.sub) throw new ForbiddenException('Acesso negado');
   return this.usuarioService.update(id, dto);
 }
+
+@UseGuards(AuthGuard)
+@Get()
+async findAll(@User() user: any): Promise<Usuario[]> {
+  if (user.tipo !== 'administrador') {
+    throw new ForbiddenException('Apenas administradores podem listar usuários');
+  }
+  return this.usuarioService.findAll();
+}
+
 }
