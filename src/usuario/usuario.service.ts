@@ -48,23 +48,29 @@ export class UsuarioService {
   async update(id: number, data: Partial<CreateUsuarioDto>): Promise<Usuario> {
     const usuarioAtual = await this.usuarioRepository.findOneBy({ id });
     if (!usuarioAtual) throw new NotFoundException('Usuário não encontrado');
-
+  
     if (data.cpfUsuario && data.cpfUsuario !== usuarioAtual.cpfUsuario)
       throw new BadRequestException('Não é permitido alterar o CPF');
-
+  
     if (data.email && !this.validarEmail(data.email))
       throw new BadRequestException('Email inválido');
-
+  
     if (data.telefone && !this.validarTelefone(data.telefone))
       throw new BadRequestException('Telefone inválido');
-
+  
     if (data.telefone) data.telefone = this.formatarTelefone(data.telefone);
-
+  
+    if (data.senha) {
+      data.senha = await bcrypt.hash(data.senha, 10);
+    }
+  
     await this.usuarioRepository.update(id, data);
     const atualizado = await this.usuarioRepository.findOneBy({ id });
     if (!atualizado) throw new NotFoundException('Erro ao atualizar');
+  
     return this.omitirSenha(atualizado);
   }
+  
 
   async login(email: string, senha: string): Promise<{ usuario: Usuario; token: string }> {
     const usuario = await this.usuarioRepository.findOneBy({ email });
