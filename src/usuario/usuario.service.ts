@@ -49,6 +49,8 @@ export class UsuarioService {
     const usuarioAtual = await this.usuarioRepository.findOneBy({ id });
     if (!usuarioAtual) throw new NotFoundException('Usuário não encontrado');
   
+    // Proteções contra alterações indevidas
+    delete (data as any).id;
     if (data.cpfUsuario && data.cpfUsuario !== usuarioAtual.cpfUsuario)
       throw new BadRequestException('Não é permitido alterar o CPF');
   
