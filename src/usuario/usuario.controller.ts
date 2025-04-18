@@ -36,18 +36,18 @@ export class UsuarioController {
   @UseGuards(AuthGuard)
   @Get(':id')
   async findOne(@Param('id') id: number, @User() user: any): Promise<Usuario> {
-    if (id !== user.sub) throw new ForbiddenException('Acesso negado');
+    if (+id !== user.sub) throw new ForbiddenException('Acesso negado');
     return this.usuarioService.findById(id);
   }
 
   @UseGuards(AuthGuard)
-  @Put(':id')
-  async update(
-    @Param('id') id: number,
-    @Body() dto: Partial<CreateUsuarioDto>,
-    @User() user: any,
-  ): Promise<Usuario> {
-    if (id !== user.sub) throw new ForbiddenException('Acesso negado');
-    return this.usuarioService.update(id, dto);
-  }
+@Put(':id')
+async update(
+  @Param('id') id: number,
+  @Body() dto: Partial<CreateUsuarioDto>,
+  @User() user: any,
+): Promise<Usuario> {
+  if (+id !== user.sub) throw new ForbiddenException('Acesso negado');
+  return this.usuarioService.update(id, dto);
+}
 }
