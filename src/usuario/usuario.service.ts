@@ -84,9 +84,11 @@ export class UsuarioService {
     return { usuario: this.omitirSenha(usuario), token };
   }
 
-  async remove(id: number): Promise<void> {
-    const result = await this.usuarioRepository.delete(id);
-    if (result.affected === 0) throw new NotFoundException('Usuário não encontrado');
+  async remove(id: number): Promise<{ message: string }> {
+    const usuario = await this.usuarioRepository.findOneBy({ id });
+    if (!usuario) throw new NotFoundException('Usuário não encontrado');
+    await this.usuarioRepository.remove(usuario);
+    return { message: 'Usuário removido com sucesso' };
   }
 
   private omitirSenha(usuario: Usuario): Usuario {

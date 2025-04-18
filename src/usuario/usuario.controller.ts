@@ -56,11 +56,9 @@ export class UsuarioController {
 
   @UseGuards(AuthGuard)
   @Delete(':id')
-  @HttpCode(HttpStatus.NO_CONTENT)
-  async remove(@Param('id') id: number, @User() user: any): Promise<void> {
-    if (+id !== user.sub) throw new ForbiddenException('Acesso negado');
-    return this.usuarioService.remove(id);
-  }
+  async remove(@Param('id') id: number, @User() user: any): Promise<{ message: string }> {
+    if (user.tipo !== 'administrador') throw new ForbiddenException('Apenas administradores podem remover usuários');
+    return this.usuarioService.remove(id);}
 
   @UseGuards(AuthGuard)
   @Get()
@@ -70,4 +68,6 @@ export class UsuarioController {
     }
     return this.usuarioService.findAll();
   }
+
+
 }
