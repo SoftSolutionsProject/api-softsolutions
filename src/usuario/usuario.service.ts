@@ -20,21 +20,21 @@ export class UsuarioService {
     if (!this.validarEmail(data.email)) throw new BadRequestException('Email inválido.');
     if (data.telefone && !this.validarTelefone(data.telefone))
       throw new BadRequestException('Telefone inválido. Use 10 ou 11 dígitos.');
-
+  
     const emailExistente = await this.usuarioRepository.findOneBy({ email: data.email });
     if (emailExistente) throw new BadRequestException('Email já cadastrado.');
-
+  
     const cpfExistente = await this.usuarioRepository.findOneBy({ cpfUsuario: data.cpfUsuario });
     if (cpfExistente) throw new BadRequestException('CPF já cadastrado.');
-
+  
     const hashedPassword = await bcrypt.hash(data.senha, 10);
     const novoUsuario = this.usuarioRepository.create({
       ...data,
-      tipo: 'aluno',
+      tipo: 'aluno', // força como aluno
       telefone: data.telefone ? this.formatarTelefone(data.telefone) : undefined,
       senha: hashedPassword,
     });
-
+  
     const salvo = await this.usuarioRepository.save(novoUsuario);
     return this.omitirSenha(salvo);
   }
@@ -52,6 +52,9 @@ export class UsuarioService {
     if (data.cpfUsuario && data.cpfUsuario !== usuarioAtual.cpfUsuario)
       throw new BadRequestException('Não é permitido alterar o CPF');
   
+    if (data.tipo && data.tipo !== usuarioAtual.tipo)
+      delete data.tipo; // bloqueia alteração de tipo
+  
     if (data.email && !this.validarEmail(data.email))
       throw new BadRequestException('Email inválido');
   
@@ -59,10 +62,7 @@ export class UsuarioService {
       throw new BadRequestException('Telefone inválido');
   
     if (data.telefone) data.telefone = this.formatarTelefone(data.telefone);
-  
-    if (data.senha) {
-      data.senha = await bcrypt.hash(data.senha, 10);
-    }
+    if (data.senha) data.senha = await bcrypt.hash(data.senha, 10);
   
     await this.usuarioRepository.update(id, data);
     const atualizado = await this.usuarioRepository.findOneBy({ id });
@@ -71,7 +71,6 @@ export class UsuarioService {
     return this.omitirSenha(atualizado);
   }
   
-
   async login(email: string, senha: string): Promise<{ usuario: Usuario; token: string }> {
     const usuario = await this.usuarioRepository.findOneBy({ email });
     if (!usuario) throw new UnauthorizedException('Email ou senha inválidos');
@@ -83,6 +82,11 @@ export class UsuarioService {
     const token = jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '24h' });
 
     return { usuario: this.omitirSenha(usuario), token };
+  }
+
+  async remove(id: number): Promise<void> {
+    const result = await this.usuarioRepository.delete(id);
+    if (result.affected === 0) throw new NotFoundException('Usuário não encontrado');
   }
 
   private omitirSenha(usuario: Usuario): Usuario {

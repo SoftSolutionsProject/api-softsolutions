@@ -5,10 +5,11 @@ import {
   Get,
   Param,
   Put,
+  Delete,
   HttpCode,
   HttpStatus,
   UseGuards,
-  ForbiddenException
+  ForbiddenException,
 } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
@@ -36,28 +37,37 @@ export class UsuarioController {
   @UseGuards(AuthGuard)
   @Get(':id')
   async findOne(@Param('id') id: number, @User() user: any): Promise<Usuario> {
-    if (+id !== user.sub) throw new ForbiddenException('Acesso negado');
+    if (+id !== user.sub && user.tipo !== 'administrador') {
+      throw new ForbiddenException('Acesso negado');
+    }
     return this.usuarioService.findById(id);
   }
 
   @UseGuards(AuthGuard)
-@Put(':id')
-async update(
-  @Param('id') id: number,
-  @Body() dto: Partial<CreateUsuarioDto>,
-  @User() user: any,
-): Promise<Usuario> {
-  if (+id !== user.sub) throw new ForbiddenException('Acesso negado');
-  return this.usuarioService.update(id, dto);
-}
-
-@UseGuards(AuthGuard)
-@Get()
-async findAll(@User() user: any): Promise<Usuario[]> {
-  if (user.tipo !== 'administrador') {
-    throw new ForbiddenException('Apenas administradores podem listar usuários');
+  @Put(':id')
+  async update(
+    @Param('id') id: number,
+    @Body() dto: Partial<CreateUsuarioDto>,
+    @User() user: any,
+  ): Promise<Usuario> {
+    if (+id !== user.sub) throw new ForbiddenException('Acesso negado');
+    return this.usuarioService.update(id, dto);
   }
-  return this.usuarioService.findAll();
-}
 
+  @UseGuards(AuthGuard)
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async remove(@Param('id') id: number, @User() user: any): Promise<void> {
+    if (+id !== user.sub) throw new ForbiddenException('Acesso negado');
+    return this.usuarioService.remove(id);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get()
+  async findAll(@User() user: any): Promise<Usuario[]> {
+    if (user.tipo !== 'administrador') {
+      throw new ForbiddenException('Apenas administradores podem listar usuários');
+    }
+    return this.usuarioService.findAll();
+  }
 }
