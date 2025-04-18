@@ -14,7 +14,7 @@ import { UsuarioModule } from './usuario/usuario.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    UsuarioModule, // Adiciona o módulo de usuário aqui
+    UsuarioModule,
   ],
   controllers: [AppController],
   providers: [AppService],
