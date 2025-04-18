@@ -21,4 +21,9 @@ export class UsuarioController {
   async update(@Param('id') id: number, @Body() dto: Partial<CreateUsuarioDto>): Promise<Usuario> {
     return this.usuarioService.update(id, dto);
   }
+  
+  @Post('login')
+  async login(@Body() data: { email: string; senha: string }) {
+    return this.usuarioService.login(data.email, data.senha);
+}
 }
