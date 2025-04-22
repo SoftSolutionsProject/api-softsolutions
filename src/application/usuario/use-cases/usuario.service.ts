@@ -1,10 +1,13 @@
 import {
-  Injectable, UnauthorizedException, BadRequestException, NotFoundException
+  Injectable,
+  UnauthorizedException,
+  BadRequestException,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Usuario } from './usuario.entity';
-import { CreateUsuarioDto } from './dto/create-usuario.dto';
+import { Usuario } from '../../../domain/usuario/usuario.entity';
+import { CreateUsuarioDto } from '../dtos/create-usuario.dto';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 

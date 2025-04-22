@@ -1,12 +1,14 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getRoot(): any {
+    return {
+      status: '🟢 API SoftSolutions está no ar',
+      versao: '1.0.0',
+      ambiente: process.env.NODE_ENV || 'desenvolvimento',
+      hora: new Date().toISOString(),
+    };
   }
 }
