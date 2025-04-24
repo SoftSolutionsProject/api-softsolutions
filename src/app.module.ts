@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuarioModule } from './interfaces/http/usuario/usuario.module';
+import { InscricaoModule } from './interfaces/http/inscricao/inscricao.module';
 import { AppController } from './app.controller';
 
 @Module({
@@ -16,6 +17,7 @@ import { AppController } from './app.controller';
       migrationsRun: true,
     }),
     UsuarioModule,
+    InscricaoModule,
   ],
   controllers: [AppController],
 })
