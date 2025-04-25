@@ -36,8 +36,8 @@ import {
   
     @UseGuards(AuthGuard)
     @Get(':id')
-    async findOne(@Param('id') id: number, @User() user: any): Promise<Usuario> {
-      if (+id !== user.sub && user.tipo !== 'administrador') {
+    async findOne(@Param('id') id: number, @User('sub') userId: number, @User('tipo') tipo: string): Promise<Usuario> {
+      if (+id !== userId && tipo !== 'administrador') {
         throw new ForbiddenException('Acesso negado');
       }
       return this.usuarioService.findById(id);
@@ -48,9 +48,10 @@ import {
     async update(
       @Param('id') id: number,
       @Body() dto: Partial<CreateUsuarioDto>,
-      @User() user: any,
+      @User('sub') userId: number,
+      @User('tipo') tipo: string,
     ): Promise<Usuario> {
-      if (+id !== user.sub && user.tipo !== 'administrador') {
+      if (+id !== userId && tipo !== 'administrador') {
         throw new ForbiddenException('Acesso negado');
       }
       return this.usuarioService.update(id, dto);
@@ -58,8 +59,8 @@ import {
   
     @UseGuards(AuthGuard)
     @Delete(':id')
-    async remove(@Param('id') id: number, @User() user: any): Promise<{ message: string }> {
-      if (user.tipo !== 'administrador') {
+    async remove(@Param('id') id: number, @User('tipo') tipo: string): Promise<{ message: string }> {
+      if (tipo !== 'administrador') {
         throw new ForbiddenException('Apenas administradores podem remover usuários');
       }
       return this.usuarioService.remove(id);
@@ -67,8 +68,8 @@ import {
   
     @UseGuards(AuthGuard)
     @Get()
-    async findAll(@User() user: any): Promise<Usuario[]> {
-      if (user.tipo !== 'administrador') {
+    async findAll(@User('tipo') tipo: string): Promise<Usuario[]> {
+      if (tipo !== 'administrador') {
         throw new ForbiddenException('Apenas administradores podem listar usuários');
       }
       return this.usuarioService.findAll();
