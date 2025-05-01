@@ -8,4 +8,7 @@ export class Modulo {
   @Column()
   nomeModulo: string;
 
+  @Column()
+  tempoModulo: number;
+
 }
