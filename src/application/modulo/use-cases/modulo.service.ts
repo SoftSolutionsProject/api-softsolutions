@@ -25,4 +25,14 @@ export class ModuloService {
     });
     return this.moduloRepo.save(modulo);
   }
+
+async findAll(): Promise<Modulo[]> {
+    return this.moduloRepo.find({ relations: ['curso'] });
+  }
+
+  async findOne(id: number): Promise<Modulo> {
+    const modulo = await this.moduloRepo.findOne({ where: { id }, relations: ['curso'] });
+    if (!modulo) throw new NotFoundException('Módulo não encontrado');
+    return modulo;
+  }
 }
