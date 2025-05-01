@@ -1,4 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Curso } from '../../../domain/curso/curso.entity';
 
 @Entity('modulos')
 export class Modulo {
@@ -11,4 +12,6 @@ export class Modulo {
   @Column()
   tempoModulo: number;
 
+  @ManyToOne(() => Curso, curso => curso.modulos, { onDelete: 'CASCADE' })
+  curso: Curso;
 }
