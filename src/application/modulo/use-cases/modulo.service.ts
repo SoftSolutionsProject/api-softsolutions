@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Modulo } from '../../../domain/modulo/modulo.entity';
 import { Curso } from '../../../domain/curso/curso.entity';
 import { CreateModuloDto } from '../dtos/create-modulo.dto';
+import { UpdateModuloDto } from '../dtos/update-modulo.dto';
 
 @Injectable()
 export class ModuloService {
@@ -26,7 +27,7 @@ export class ModuloService {
     return this.moduloRepo.save(modulo);
   }
 
-async findAll(): Promise<Modulo[]> {
+  async findAll(): Promise<Modulo[]> {
     return this.moduloRepo.find({ relations: ['curso'] });
   }
 
@@ -34,5 +35,17 @@ async findAll(): Promise<Modulo[]> {
     const modulo = await this.moduloRepo.findOne({ where: { id }, relations: ['curso'] });
     if (!modulo) throw new NotFoundException('Módulo não encontrado');
     return modulo;
+  }
+
+  async update(id: number, dto: UpdateModuloDto): Promise<Modulo> {
+    const modulo = await this.findOne(id);
+    Object.assign(modulo, dto);
+    return this.moduloRepo.save(modulo);
+  }
+
+  async remove(id: number): Promise<{ message: string }> {
+    const resultado = await this.moduloRepo.delete(id);
+    if (!resultado.affected) throw new NotFoundException('Módulo não encontrado');
+    return { message: 'Módulo removido com sucesso' };
   }
 }
