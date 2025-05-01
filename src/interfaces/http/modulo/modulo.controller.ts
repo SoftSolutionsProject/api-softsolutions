@@ -1,26 +1,22 @@
-import { Controller, UseGuards } from '@nestjs/common';
+import { Controller, Post, Get, Put, Delete, Param, Body, UseGuards } from '@nestjs/common';
 import { ModuloService } from '../../../application/modulo/use-cases/modulo.service';
-import { AuthGuard } from '../guards/auth.guard';
-import { Post, Body } from '@nestjs/common';
 import { CreateModuloDto } from '../../../application/modulo/dtos/create-modulo.dto';
-import { User } from '../usuario/decorators/user.decorator';
-import { Get, Param } from '@nestjs/common';
-import { Put, Delete, } from '@nestjs/common';
 import { UpdateModuloDto } from '../../../application/modulo/dtos/update-modulo.dto';
-
+import { AuthGuard } from '../guards/auth.guard';
+import { User } from '../usuario/decorators/user.decorator';
 
 @Controller('modulos')
 @UseGuards(AuthGuard)
 export class ModuloController {
-    constructor(private readonly moduloService: ModuloService) { }
+  constructor(private readonly moduloService: ModuloService) {}
 
-@Post()
-async create(@Body() dto: CreateModuloDto, @User('tipo') tipo: string) {
+  @Post()
+  async create(@Body() dto: CreateModuloDto, @User('tipo') tipo: string) {
     if (tipo !== 'administrador') throw new Error('Apenas administradores podem criar módulos');
     return this.moduloService.create(dto);
-}
+  }
 
-@Get()
+  @Get()
   async findAll() {
     return this.moduloService.findAll();
   }
