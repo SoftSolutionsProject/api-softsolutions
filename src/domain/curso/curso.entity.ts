@@ -31,4 +31,5 @@ export class Curso {
 
   @Column()
   imagemCurso: string;
+    modulos: any;
 }
