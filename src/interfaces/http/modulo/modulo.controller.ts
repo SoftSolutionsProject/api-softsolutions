@@ -5,6 +5,8 @@ import { Post, Body } from '@nestjs/common';
 import { CreateModuloDto } from '../../../application/modulo/dtos/create-modulo.dto';
 import { User } from '../usuario/decorators/user.decorator';
 import { Get, Param } from '@nestjs/common';
+import { Put, Delete, } from '@nestjs/common';
+import { UpdateModuloDto } from '../../../application/modulo/dtos/update-modulo.dto';
 
 
 @Controller('modulos')
@@ -28,4 +30,15 @@ async create(@Body() dto: CreateModuloDto, @User('tipo') tipo: string) {
     return this.moduloService.findOne(id);
   }
 
+  @Put(':id')
+  async update(@Param('id') id: number, @Body() dto: UpdateModuloDto, @User('tipo') tipo: string) {
+    if (tipo !== 'administrador') throw new Error('Apenas administradores podem atualizar módulos');
+    return this.moduloService.update(id, dto);
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: number, @User('tipo') tipo: string) {
+    if (tipo !== 'administrador') throw new Error('Apenas administradores podem remover módulos');
+    return this.moduloService.remove(id);
+  }
 }
