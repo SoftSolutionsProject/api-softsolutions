@@ -1,6 +1,5 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
-
-export class CreateModuloXXXXXX implements MigrationInterface {
+export class CreateModulo1746065584581 implements MigrationInterface {
   name = 'CreateModulo1746065584581'
 
   public async up(queryRunner: QueryRunner): Promise<void> {
