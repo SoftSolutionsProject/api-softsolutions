@@ -1,5 +1,6 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Modulo } from '../modulo/modulo.entity';
+import { ProgressoAula } from '../inscricao/progresso-aula.entity';
 
 @Entity('aulas')
 export class Aula {
@@ -23,4 +24,7 @@ export class Aula {
 
   @ManyToOne(() => Modulo, modulo => modulo.aulas, { onDelete: 'CASCADE' })
   modulo: Modulo;
+
+  @OneToMany(() => ProgressoAula, progresso => progresso.aula)
+  progressos: ProgressoAula[];
 }

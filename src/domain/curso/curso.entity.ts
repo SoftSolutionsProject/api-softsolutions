@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Modulo } from '../modulo/modulo.entity';
+import { Inscricao } from '../inscricao/inscricao.entity';
 
 @Entity('cursos')
 export class Curso {
@@ -10,7 +11,7 @@ export class Curso {
   nomeCurso: string;
 
   @Column()
-  tempoCurso: number; // Em horas
+  tempoCurso: number;
 
   @Column()
   descricaoCurta: string;
@@ -35,4 +36,7 @@ export class Curso {
 
   @OneToMany(() => Modulo, modulo => modulo.curso)
   modulos: Modulo[];
+
+  @OneToMany(() => Inscricao, inscricao => inscricao.curso)
+  inscricoes: Inscricao[];
 }

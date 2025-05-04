@@ -1,8 +1,8 @@
 import { Controller, Post, Get, Put, Delete, Param, Body, UseGuards } from '@nestjs/common';
 import { AulaService } from '../../../application/aula/use-cases/aula.service';
-import { CreateAulaDto } from '../../../application/aula/dtos/crate-aula.dto';
+import { CreateAulaDto } from '../../../application/aula/dtos/create-aula.dto';
 import { UpdateAulaDto } from '../../../application/aula/dtos/update-aula.dto';
-import { AuthGuard } from '../guards/auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { User } from '../usuario/decorators/user.decorator';
 
 @Controller('aulas')
@@ -37,4 +37,14 @@ export class AulaController {
     if (tipo !== 'administrador') throw new Error('Apenas administradores podem remover aulas');
     return this.aulaService.remove(id);
   }
+
+  @Get('modulo/:idModulo')
+async listarPorModulo(@Param('idModulo') idModulo: number) {
+  return this.aulaService.findByModulo(idModulo);
+}
+
+@Get('curso/:idCurso')
+async listarPorCurso(@Param('idCurso') idCurso: number) {
+  return this.aulaService.findByCurso(idCurso);
+}
 }
