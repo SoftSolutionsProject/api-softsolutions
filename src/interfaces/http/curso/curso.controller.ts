@@ -51,7 +51,6 @@ import {
       return this.cursoService.remove(id);
     }
 
-    // No CursoController
 @Get(':id/aulas')
 async listarAulasDoCurso(@Param('id') idCurso: number) {
   return this.aulaService.findByCurso(idCurso);

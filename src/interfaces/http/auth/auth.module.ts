@@ -12,7 +12,7 @@ import { AuthGuard } from './auth.guard';
   ],
   exports: [
     AuthGuard,
-    TypeOrmModule.forFeature([Usuario]), // Adicione esta linha
+    TypeOrmModule.forFeature([Usuario]),
   ],
 })
 export class AuthModule {}

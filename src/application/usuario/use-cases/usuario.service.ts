@@ -86,7 +86,7 @@ export class UsuarioService {
     if (!senhaValida) throw new UnauthorizedException('Email ou senha inválidos');
   
     const payload = { 
-      sub: usuario.id,       // Isso deve ser o ID numérico
+      sub: usuario.id,
       email: usuario.email,
       tipo: usuario.tipo 
     };

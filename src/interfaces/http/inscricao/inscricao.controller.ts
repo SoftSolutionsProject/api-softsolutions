@@ -33,21 +33,18 @@ export class InscricaoController {
     }
   }
 
-
-  
-
   @Get('usuario')
   async listarInscricoes(@User('id') idUsuario: number) {
     return this.service.listarInscricoesUsuario(idUsuario);
   }
- 
-@Get(':idInscricao/progresso')
-async verProgresso(
-  @Param('idInscricao') idInscricao: number,
-  @User('id') idUsuario: number
-) {
-  return this.service.getProgressoValidado(idInscricao, idUsuario);
-}
+
+  @Get(':idInscricao/progresso')
+  async verProgresso(
+    @Param('idInscricao') idInscricao: number,
+    @User('id') idUsuario: number
+  ) {
+    return this.service.getProgressoValidado(idInscricao, idUsuario);
+  }
 
   @Delete(':idInscricao/cancelar')
   async cancelarInscricao(
@@ -58,12 +55,11 @@ async verProgresso(
   }
 
   @Post(':idInscricao/concluir-aula/:idAula')
-async marcarAulaConcluida(
-  @Param('idInscricao') idInscricao: number,
-  @Param('idAula') idAula: number,
-  @User('id') idUsuario: number
-) {
-  return this.service.marcarAulaConcluida(idInscricao, idAula, idUsuario);
-}
-
+  async marcarAulaConcluida(
+    @Param('idInscricao') idInscricao: number,
+    @Param('idAula') idAula: number,
+    @User('id') idUsuario: number
+  ) {
+    return this.service.marcarAulaConcluida(idInscricao, idAula, idUsuario);
+  }
 }

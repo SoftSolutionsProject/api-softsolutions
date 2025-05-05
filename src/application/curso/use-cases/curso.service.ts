@@ -22,10 +22,14 @@ export class CursoService {
   }
 
   async findOne(id: number): Promise<Curso> {
-    const curso = await this.cursoRepository.findOneBy({ id });
+    const curso = await this.cursoRepository.findOne({
+      where: { id },
+      relations: ['modulos', 'modulos.aulas'],
+    });
+  
     if (!curso) throw new NotFoundException('Curso não encontrado');
     return curso;
-  }
+  } 
 
   async update(id: number, data: UpdateCursoDto): Promise<Curso> {
     const curso = await this.findOne(id);

@@ -14,7 +14,7 @@ import { Inscricao } from 'src/domain/inscricao/inscricao.entity';
   imports: [
     TypeOrmModule.forFeature([Curso, Modulo, Inscricao]),
     AuthModule,
-    AulaModule // Adicione esta linha
+    AulaModule
   ],
   controllers: [CursoController],
   providers: [CursoService],

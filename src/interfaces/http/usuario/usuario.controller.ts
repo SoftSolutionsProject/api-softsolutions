@@ -36,54 +36,55 @@ export class UsuarioController {
   }
 
   @UseGuards(AuthGuard)
-@Get(':id')
-async findOne(
-  @Param('id') id: string,
-  @User('id') userId: number,  // Mude de 'sub' para 'id'
-  @User('tipo') tipo: string
-): Promise<Usuario> {
-  const idNumber = parseInt(id, 10);
-  if (isNaN(idNumber)) {
-    throw new BadRequestException('ID inválido');
+  @Get(':id')
+  async findOne(
+    @Param('id') id: string,
+    @User('id') userId: number,
+    @User('tipo') tipo: string
+  ): Promise<Usuario> {
+    const idNumber = parseInt(id, 10);
+    if (isNaN(idNumber)) {
+      throw new BadRequestException('ID inválido');
+    }
+
+    // Permite acesso apenas ao próprio perfil ou a administradores
+    if (idNumber !== userId && tipo !== 'administrador') {
+      throw new ForbiddenException('Acesso negado');
+    }
+
+    return this.usuarioService.findById(idNumber);
   }
 
-  if (idNumber !== userId && tipo !== 'administrador') {
-    throw new ForbiddenException('Acesso negado');
-  }
-  
-  return this.usuarioService.findById(idNumber);
-}
+  @UseGuards(AuthGuard)
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() dto: Partial<CreateUsuarioDto>,
+    @User('id') userId: number,
+    @User('tipo') tipo: string
+  ): Promise<Usuario> {
+    const idNumber = parseInt(id, 10);
+    if (isNaN(idNumber)) {
+      throw new BadRequestException('ID inválido');
+    }
 
-@UseGuards(AuthGuard)
-@Put(':id')
-async update(
-  @Param('id') id: string,
-  @Body() dto: Partial<CreateUsuarioDto>,
-  @User('id') userId: number,  // Certifique-se de usar 'id' aqui também
-  @User('tipo') tipo: string
-): Promise<Usuario> {
-  const idNumber = parseInt(id, 10);
-  if (isNaN(idNumber)) {
-    throw new BadRequestException('ID inválido');
-  }
+    // Permite atualização apenas do próprio perfil ou por administradores
+    if (idNumber !== userId && tipo !== 'administrador') {
+      throw new ForbiddenException('Acesso negado');
+    }
 
-  // Verificação de permissão
-  if (idNumber !== userId && tipo !== 'administrador') {
-    throw new ForbiddenException('Acesso negado');
-  }
+    // Bloqueia alteração de tipo caso não seja administrador
+    if (dto.tipo && tipo !== 'administrador') {
+      delete dto.tipo;
+    }
 
-  // Bloqueia alteração de tipo se não for administrador
-  if (dto.tipo && tipo !== 'administrador') {
-    delete dto.tipo;
+    return this.usuarioService.update(idNumber, dto);
   }
-
-  return this.usuarioService.update(idNumber, dto);
-}
 
   @UseGuards(AuthGuard)
   @Delete(':id')
   async remove(
-    @Param('id') id: string, // Mudamos para string
+    @Param('id') id: string,
     @User('sub') userId: number,
     @User('tipo') tipo: string
   ): Promise<{ message: string }> {
@@ -92,20 +93,22 @@ async update(
       throw new ForbiddenException('ID inválido');
     }
 
+    // Apenas o próprio usuário ou um administrador pode remover
     if (tipo !== 'administrador' && idNumber !== userId) {
       throw new ForbiddenException('Acesso negado');
     }
+
     return this.usuarioService.remove(idNumber);
   }
 
   @UseGuards(AuthGuard)
   @Get()
   async findAll(@User('tipo') tipo: string): Promise<Usuario[]> {
+    // Apenas administradores podem listar todos os usuários
     if (tipo !== 'administrador') {
       throw new ForbiddenException('Apenas administradores podem listar usuários');
     }
+
     return this.usuarioService.findAll();
   }
-
-
 }

@@ -22,53 +22,56 @@ export class InscricaoService {
     private readonly usuarioRepo: Repository<Usuario>,
   ) {}
 
-  
-
   async inscrever(idUsuario: number, idCurso: number): Promise<Inscricao> {
     const [usuario, curso] = await Promise.all([
       this.usuarioRepo.findOneBy({ id: idUsuario }),
-      this.cursoRepo.findOne({ 
+      this.cursoRepo.findOne({
         where: { id: idCurso },
         relations: ['modulos', 'modulos.aulas']
       })
     ]);
-
+  
     if (!usuario) throw new NotFoundException('Usuário não encontrado');
     if (!curso) throw new NotFoundException('Curso não encontrado');
-
-    const inscricaoExistente = await this.inscricaoRepo.findOne({ 
-      where: { usuario: { id: idUsuario }, curso: { id: idCurso } }
+  
+    let inscricaoExistente = await this.inscricaoRepo.findOne({
+      where: { usuario: { id: idUsuario }, curso: { id: idCurso } },
+      relations: ['usuario', 'curso']
     });
-
+  
     if (inscricaoExistente) {
-      throw new BadRequestException('Usuário já inscrito neste curso');
+      if (inscricaoExistente.status === 'cancelado') {
+        inscricaoExistente.status = 'ativo';
+        inscricaoExistente.dataInscricao = new Date();
+        return await this.inscricaoRepo.save(inscricaoExistente);
+      } else {
+        throw new BadRequestException('Usuário já inscrito neste curso');
+      }
     }
-
+  
     const inscricao = this.inscricaoRepo.create({
       usuario,
       curso,
       status: 'ativo'
     });
-
+  
     const savedInscricao = await this.inscricaoRepo.save(inscricao);
-
+  
     // Inicializa o progresso para todas as aulas do curso
     const aulas = curso.modulos.flatMap(modulo => modulo.aulas);
-    const progressos = aulas.map(aula => 
+    const progressos = aulas.map(aula =>
       this.progressoRepo.create({
         inscricao: savedInscricao,
         aula,
         concluida: false
       })
     );
-
+  
     await this.progressoRepo.save(progressos);
-
+  
     return savedInscricao;
   }
-
   
-
   async marcarAulaConcluida(idInscricao: number, idAula: number, idUsuario: number): Promise<ProgressoAula> {
     // Primeiro verifica se a inscrição pertence ao usuário
     await this.verificarInscricaoDoUsuario(idInscricao, idUsuario);
@@ -183,7 +186,6 @@ async verificarInscricaoDoUsuario(idInscricao: number, idUsuario: number): Promi
   }
 }
 
-
 async getProgressoValidado(idInscricao: number, idUsuario: number) {
   // Verifica se a inscrição pertence ao usuário
   const existe = await this.inscricaoRepo.exists({
@@ -197,7 +199,6 @@ async getProgressoValidado(idInscricao: number, idUsuario: number) {
     throw new NotFoundException('Inscrição não encontrada');
   }
 
-  // Retorna o progresso normalmente
   return this.getProgressoCurso(idInscricao);
 }
 }

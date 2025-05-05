@@ -40,7 +40,6 @@ export class Usuario {
   @Column({ default: 'aluno' })
   tipo: 'aluno' | 'administrador';
 
-  // Adicione esta relação
   @OneToMany(() => Inscricao, inscricao => inscricao.usuario)
   inscricoes: Inscricao[];
 }

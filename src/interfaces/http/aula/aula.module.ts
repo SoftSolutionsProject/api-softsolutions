@@ -16,6 +16,6 @@ import { ProgressoAula } from 'src/domain/inscricao/progresso-aula.entity';
   ],
   controllers: [AulaController],
   providers: [AulaService],
-  exports: [AulaService], // Adicione esta linha
+  exports: [AulaService],
 })
 export class AulaModule {}
