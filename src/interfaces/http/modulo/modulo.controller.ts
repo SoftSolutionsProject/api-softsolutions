@@ -2,7 +2,7 @@ import { Controller, Post, Get, Put, Delete, Param, Body, UseGuards } from '@nes
 import { ModuloService } from '../../../application/modulo/use-cases/modulo.service';
 import { CreateModuloDto } from '../../../application/modulo/dtos/create-modulo.dto';
 import { UpdateModuloDto } from '../../../application/modulo/dtos/update-modulo.dto';
-import { AuthGuard } from '../guards/auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { User } from '../usuario/decorators/user.decorator';
 
 @Controller('modulos')

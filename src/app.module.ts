@@ -9,6 +9,7 @@ import { ModuloModule } from './interfaces/http/modulo/modulo.module';
 import { AulaModule } from './interfaces/http/aula/aula.module';
 import { InscricaoModule } from './interfaces/http/inscricao/inscricao.module';
 import { EmailModule } from './interfaces/http/email/email.module';
+import { AuthModule } from './interfaces/http/auth/auth.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { EmailModule } from './interfaces/http/email/email.module';
       migrations: ['dist/infrastructure/database/migrations/*.js'],
       migrationsRun: true,
     }),
+    AuthModule,
     UsuarioModule,
     CursoModule,
     ModuloModule,

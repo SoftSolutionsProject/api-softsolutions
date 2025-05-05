@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Aula } from '../../../domain/aula/aula.entity';
 import { Modulo } from '../../../domain/modulo/modulo.entity';
-import { CreateAulaDto } from '../dtos/crate-aula.dto';
+import { CreateAulaDto } from '../dtos/create-aula.dto';
 import { UpdateAulaDto } from '../dtos/update-aula.dto';
 
 @Injectable()
@@ -50,5 +50,19 @@ export class AulaService {
     const resultado = await this.aulaRepo.delete(id);
     if (!resultado.affected) throw new NotFoundException('Aula não encontrada');
     return { message: 'Aula removida com sucesso' };
+  }
+
+  async findByModulo(idModulo: number): Promise<Aula[]> {
+    return this.aulaRepo.find({ 
+      where: { modulo: { id: idModulo } },
+      relations: ['modulo']
+    });
+  }
+  
+  async findByCurso(idCurso: number): Promise<Aula[]> {
+    return this.aulaRepo.find({
+      where: { modulo: { curso: { id: idCurso } } },
+      relations: ['modulo', 'modulo.curso']
+    });
   }
 }

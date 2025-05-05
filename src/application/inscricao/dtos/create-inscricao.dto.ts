@@ -1,4 +1,4 @@
 export class CreateInscricaoDto {
-    idUser: number;
-    idModulo: number;
-  }
+  idUser: number;
+  idCurso: number; // Mudou de idModulo para idCurso
+}

@@ -1,19 +1,28 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+// src/domain/inscricao/inscricao.entity.ts
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
+import { Usuario } from '../usuario/usuario.entity';
+import { Curso } from '../curso/curso.entity';
+import { ProgressoAula } from './progresso-aula.entity';
 
 @Entity('inscricoes')
 export class Inscricao {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  idUser: number;
+  @ManyToOne(() => Usuario, usuario => usuario.inscricoes)
+  @JoinColumn({ name: 'usuarioId' })
+  usuario: Usuario;
 
-  @Column()
-  idModulo: number;
-
-  @Column({ default: 0 })
-  statusInscricao: number;
+  @ManyToOne(() => Curso, curso => curso.inscricoes)
+  @JoinColumn({ name: 'cursoId' })
+  curso: Curso;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   dataInscricao: Date;
+
+  @Column({ default: 'ativo' })
+  status: 'ativo' | 'concluido' | 'cancelado';
+
+  @OneToMany(() => ProgressoAula, progresso => progresso.inscricao)
+  progressoAulas: ProgressoAula[];
 }

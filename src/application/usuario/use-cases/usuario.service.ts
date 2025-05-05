@@ -67,7 +67,9 @@ export class UsuarioService {
       throw new BadRequestException('Telefone inválido');
   
     if (data.telefone) data.telefone = this.formatarTelefone(data.telefone);
-    if (data.senha) data.senha = await bcrypt.hash(data.senha, 10);
+    if (data.senha && !(await bcrypt.compare(data.senha, usuarioAtual.senha))) {
+      data.senha = await bcrypt.hash(data.senha, 10);
+    }
   
     await this.usuarioRepository.update(id, data);
     const atualizado = await this.usuarioRepository.findOneBy({ id });
@@ -79,13 +81,18 @@ export class UsuarioService {
   async login(email: string, senha: string): Promise<{ usuario: Usuario; token: string }> {
     const usuario = await this.usuarioRepository.findOneBy({ email });
     if (!usuario) throw new UnauthorizedException('Email ou senha inválidos');
-
+  
     const senhaValida = await bcrypt.compare(senha, usuario.senha);
     if (!senhaValida) throw new UnauthorizedException('Email ou senha inválidos');
-
-    const payload = { sub: usuario.id, email: usuario.email, tipo: usuario.tipo };
+  
+    const payload = { 
+      sub: usuario.id,
+      email: usuario.email,
+      tipo: usuario.tipo 
+    };
+  
     const token = jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '24h' });
-
+  
     return { usuario: this.omitirSenha(usuario), token };
   }
 

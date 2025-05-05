@@ -11,13 +11,14 @@ import {
   import { CursoService } from '../../../application/curso/use-cases/curso.service';
   import { CreateCursoDto } from '../../../application/curso/dtos/create-curso.dto';
   import { UpdateCursoDto } from '../../../application/curso/dtos/update-curso.dto';
-  import { AuthGuard } from '../guards/auth.guard';
+  import { AuthGuard } from '../auth/auth.guard';
   import { User } from '../usuario/decorators/user.decorator';
   import { ForbiddenException } from '@nestjs/common';
+  import { AulaService } from 'src/application/aula/use-cases/aula.service';
   
   @Controller('cursos')
   export class CursoController {
-    constructor(private readonly cursoService: CursoService) {}
+    constructor(private readonly cursoService: CursoService, private readonly aulaService: AulaService) {}
   
     @UseGuards(AuthGuard)
     @Post()
@@ -49,4 +50,9 @@ import {
       if (tipo !== 'administrador') throw new ForbiddenException('Apenas administradores podem remover cursos');
       return this.cursoService.remove(id);
     }
+
+@Get(':id/aulas')
+async listarAulasDoCurso(@Param('id') idCurso: number) {
+  return this.aulaService.findByCurso(idCurso);
+}
   }

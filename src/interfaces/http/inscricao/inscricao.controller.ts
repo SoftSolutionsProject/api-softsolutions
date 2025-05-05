@@ -1,7 +1,16 @@
-import { Controller, Get, Post, Delete, Param, Body, UseGuards, ForbiddenException } from '@nestjs/common';
-import { AuthGuard } from '../guards/auth.guard';
+import { 
+  Controller, 
+  Post, 
+  Get, 
+  Delete, 
+  Param, 
+  Body, 
+  UseGuards,
+  NotFoundException,
+  BadRequestException
+} from '@nestjs/common';
+import { AuthGuard } from '../auth/auth.guard';
 import { InscricaoService } from '../../../application/inscricao/use-cases/inscricao.service';
-import { CreateInscricaoDto } from '../../../application/inscricao/dtos/create-inscricao.dto';
 import { User } from '../usuario/decorators/user.decorator';
 
 @Controller('inscricoes')
@@ -9,30 +18,48 @@ import { User } from '../usuario/decorators/user.decorator';
 export class InscricaoController {
   constructor(private readonly service: InscricaoService) {}
 
-  @Post()
-  async inscrever(@Body() dto: CreateInscricaoDto, @User('sub') userId: number) {
-    if (dto.idUser !== userId) throw new ForbiddenException('Acesso negado');
-    return this.service.inscrever(dto);
+  @Post('cursos/:idCurso')
+  async inscrever(
+    @Param('idCurso') idCurso: number,
+    @User('id') idUsuario: number
+  ) {
+    try {
+      return await this.service.inscrever(idUsuario, idCurso);
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw new NotFoundException(error.message);
+      }
+      throw new BadRequestException(error.message);
+    }
   }
 
-  @Get(':idUser')
-async listar(@Param('idUser') id: string, @User('sub') userId: number) {
-  const idNumber = Number(id);
-  if (idNumber !== userId) throw new ForbiddenException('Acesso negado');
-  return this.service.listarPorUsuario(idNumber);
-}
+  @Get('usuario')
+  async listarInscricoes(@User('id') idUsuario: number) {
+    return this.service.listarInscricoesUsuario(idUsuario);
+  }
 
-@Delete(':idUser/cursos/:idModulo')
-async cancelar(
-  @Param('idUser') id: string,
-  @Param('idModulo') idModulo: string,
-  @User('sub') userId: number,
-) {
-  const idNum = Number(id);
-  const idModuloNum = Number(idModulo);
+  @Get(':idInscricao/progresso')
+  async verProgresso(
+    @Param('idInscricao') idInscricao: number,
+    @User('id') idUsuario: number
+  ) {
+    return this.service.getProgressoValidado(idInscricao, idUsuario);
+  }
 
-  if (idNum !== userId) throw new ForbiddenException('Acesso negado');
-  return this.service.cancelar(idNum, idModuloNum);
-}
+  @Delete(':idInscricao/cancelar')
+  async cancelarInscricao(
+    @Param('idInscricao') idInscricao: number,
+    @User('id') idUsuario: number
+  ) {
+    return this.service.cancelarInscricao(idUsuario, idInscricao);
+  }
 
+  @Post(':idInscricao/concluir-aula/:idAula')
+  async marcarAulaConcluida(
+    @Param('idInscricao') idInscricao: number,
+    @Param('idAula') idAula: number,
+    @User('id') idUsuario: number
+  ) {
+    return this.service.marcarAulaConcluida(idInscricao, idAula, idUsuario);
+  }
 }
