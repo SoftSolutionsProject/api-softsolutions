@@ -207,7 +207,7 @@ Content-Type: application/json
 {
   "nomeModulo": "Módulo 1",
   "tempoModulo": 120,
-  "idCurso": 9
+  "idCurso": 11
 }
 
 
@@ -249,7 +249,7 @@ Content-Type: application/json
   "tempoAula": 30,
   "videoUrl": "https://youtube.com/aula1",
   "descricaoConteudo": "Introdução à plataforma",
-  "idModulo": 8
+  "idModulo": 10
 }
 
 
