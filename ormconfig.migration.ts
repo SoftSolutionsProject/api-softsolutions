@@ -9,15 +9,9 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-const isProd = process.env.NODE_ENV === 'production';
-
 export default new DataSource({
   type: 'postgres',
   url: process.env.DATABASE_URL,
   entities: [Usuario, Curso, Modulo, Aula, Inscricao, ProgressoAula],
-  migrations: [
-    isProd
-      ? 'dist/infrastructure/database/migrations/*.js'
-      : 'src/infrastructure/database/migrations/*.ts'
-  ],
+  migrations: ['src/infrastructure/database/migrations/*.ts'],
 });

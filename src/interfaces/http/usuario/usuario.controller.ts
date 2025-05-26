@@ -1,114 +1,58 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  ForbiddenException,
-  Get,
-  HttpCode,
-  HttpStatus,
-  Param,
-  Post,
-  Put,
-  UseGuards,
-  BadRequestException,
-} from '@nestjs/common';
-import { UsuarioService } from '../../../application/usuario/use-cases/usuario.service';
-import { CreateUsuarioDto } from '../../../application/usuario/dtos/create-usuario.dto';
-import { LoginUsuarioDto } from '../../../application/usuario/dtos/login-usuario.dto';
-import { Usuario } from '../../../domain/usuario/usuario.entity';
+import { Controller, Post, Get, Put, Delete, Param, Body, UseGuards } from '@nestjs/common';
+import { ModuloService } from '../../../application/modulo/use-cases/modulo.service';
+import { CreateModuloDto } from '../../../application/modulo/dtos/create-modulo.dto';
+import { UpdateModuloDto } from '../../../application/modulo/dtos/update-modulo.dto';
 import { AuthGuard } from '../auth/auth.guard';
-import { User } from './decorators/user.decorator';
+import { User } from '../usuario/decorators/user.decorator';
+import { ApiTags, ApiBearerAuth, ApiOperation, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 
-@Controller('usuarios')
+@ApiTags('Módulos')
+@ApiBearerAuth()
+@Controller('modulos')
+@UseGuards(AuthGuard)
 export class UsuarioController {
-  constructor(private readonly usuarioService: UsuarioService) {}
+  constructor(private readonly moduloService: ModuloService) { }
 
-  @Post('cadastro')
-  @HttpCode(HttpStatus.CREATED)
-  async create(@Body() dto: CreateUsuarioDto): Promise<Usuario> {
-    return this.usuarioService.create(dto);
+  @Post()
+  @ApiOperation({ summary: 'Criar um novo módulo' })
+  @ApiBody({ type: CreateModuloDto })
+  @ApiResponse({ status: 201, description: 'Módulo criado com sucesso' })
+  async create(@Body() dto: CreateModuloDto, @User('tipo') tipo: string) {
+    if (tipo !== 'administrador') throw new Error('Apenas administradores podem criar módulos');
+    return this.moduloService.create(dto);
   }
 
-  @Post('login')
-  @HttpCode(HttpStatus.OK)
-  async login(@Body() data: LoginUsuarioDto) {
-    return this.usuarioService.login(data.email, data.senha);
-  }
-
-  @UseGuards(AuthGuard)
-  @Get(':id')
-  async findOne(
-    @Param('id') id: string,
-    @User('id') userId: number,
-    @User('tipo') tipo: string
-  ): Promise<Usuario> {
-    const idNumber = parseInt(id, 10);
-    if (isNaN(idNumber)) {
-      throw new BadRequestException('ID inválido');
-    }
-
-    // Permite acesso apenas ao próprio perfil ou a administradores
-    if (idNumber !== userId && tipo !== 'administrador') {
-      throw new ForbiddenException('Acesso negado');
-    }
-
-    return this.usuarioService.findById(idNumber);
-  }
-
-  @UseGuards(AuthGuard)
-  @Put(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() dto: Partial<CreateUsuarioDto>,
-    @User('id') userId: number,
-    @User('tipo') tipo: string
-  ): Promise<Usuario> {
-    const idNumber = parseInt(id, 10);
-    if (isNaN(idNumber)) {
-      throw new BadRequestException('ID inválido');
-    }
-
-    // Permite atualização apenas do próprio perfil ou por administradores
-    if (idNumber !== userId && tipo !== 'administrador') {
-      throw new ForbiddenException('Acesso negado');
-    }
-
-    // Bloqueia alteração de tipo caso não seja administrador
-    if (dto.tipo && tipo !== 'administrador') {
-      delete dto.tipo;
-    }
-
-    return this.usuarioService.update(idNumber, dto);
-  }
-
-  @UseGuards(AuthGuard)
-  @Delete(':id')
-  async remove(
-    @Param('id') id: string,
-    @User('sub') userId: number,
-    @User('tipo') tipo: string
-  ): Promise<{ message: string }> {
-    const idNumber = parseInt(id, 10);
-    if (isNaN(idNumber)) {
-      throw new ForbiddenException('ID inválido');
-    }
-
-    // Apenas o próprio usuário ou um administrador pode remover
-    if (tipo !== 'administrador' && idNumber !== userId) {
-      throw new ForbiddenException('Acesso negado');
-    }
-
-    return this.usuarioService.remove(idNumber);
-  }
-
-  @UseGuards(AuthGuard)
   @Get()
-  async findAll(@User('tipo') tipo: string): Promise<Usuario[]> {
-    // Apenas administradores podem listar todos os usuários
-    if (tipo !== 'administrador') {
-      throw new ForbiddenException('Apenas administradores podem listar usuários');
-    }
+  @ApiOperation({ summary: 'Listar todos os módulos' })
+  @ApiResponse({ status: 200, description: 'Lista de módulos' })
+  async findAll() {
+    return this.moduloService.findAll();
+  }
 
-    return this.usuarioService.findAll();
+  @Get(':id')
+  @ApiOperation({ summary: 'Buscar um módulo pelo ID' })
+  @ApiParam({ name: 'id', type: Number })
+  @ApiResponse({ status: 200, description: 'Módulo encontrado' })
+  async findOne(@Param('id') id: number) {
+    return this.moduloService.findOne(id);
+  }
+
+  @Put(':id')
+  @ApiOperation({ summary: 'Atualizar um módulo pelo ID' })
+  @ApiParam({ name: 'id', type: Number })
+  @ApiBody({ type: UpdateModuloDto })
+  @ApiResponse({ status: 200, description: 'Módulo atualizado com sucesso' })
+  async update(@Param('id') id: number, @Body() dto: UpdateModuloDto, @User('tipo') tipo: string) {
+    if (tipo !== 'administrador') throw new Error('Apenas administradores podem atualizar módulos');
+    return this.moduloService.update(id, dto);
+  }
+
+  @Delete(':id')
+  @ApiOperation({ summary: 'Remover um módulo pelo ID' })
+  @ApiParam({ name: 'id', type: Number })
+  @ApiResponse({ status: 200, description: 'Módulo removido com sucesso' })
+  async remove(@Param('id') id: number, @User('tipo') tipo: string) {
+    if (tipo !== 'administrador') throw new Error('Apenas administradores podem remover módulos');
+    return this.moduloService.remove(id);
   }
 }
