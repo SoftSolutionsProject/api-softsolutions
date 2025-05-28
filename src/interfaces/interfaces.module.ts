@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { UsuarioController } from './http/controllers/usuario.controller';
-import { ApplicationModule } from '../application/application.module'; // 👈 Importa a camada application
+import { CursoController } from './http/controllers/curso.controller';
+import { ApplicationModule } from '../application/application.module';
 
 @Module({
   imports: [ApplicationModule],
-  controllers: [UsuarioController],
+  controllers: [UsuarioController, CursoController],
 })
 export class InterfacesModule {}

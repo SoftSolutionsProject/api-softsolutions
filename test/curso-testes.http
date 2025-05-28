@@ -1,0 +1,84 @@
+###########################################################
+#################### 🔐 VARIÁVEIS #########################
+###########################################################
+
+@baseUrl = http://localhost:4000
+@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIxLCJlbWFpbCI6IjVANS5jb20iLCJ0aXBvIjoiYWx1bm8iLCJpYXQiOjE3NDg0NjY1ODIsImV4cCI6MTc0ODU1Mjk4Mn0.tr4eEWHoP8U5z18wM79TJZymDZmigtkJdQ8XJDWW-tQ
+@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIwLCJlbWFpbCI6ImFkbWluQHRlc3RlLmNvbSIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzQ4NDY2NjIwLCJleHAiOjE3NDg1NTMwMjB9.QHyalKdAopRog_K0WHLFtAeXx9JyujE5x0J-rek1hbA
+
+###########################################################
+############## 🚀 CRIAÇÃO DE CURSO - ADMIN ✅ ##############
+###########################################################
+
+POST {{baseUrl}}/cursos
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "nomeCurso": "Curso Avançado",
+  "tempoCurso": 120,
+  "descricaoCurta": "Curso avançado de backend",
+  "descricaoDetalhada": "Aprofundamento em NestJS e arquitetura limpa",
+  "professor": "Carlos Oliveira",
+  "categoria": "Backend",
+  "imagemCurso": "curso-avancado.png"
+}
+
+###########################################################
+###### 🚫 TENTATIVA DE CRIAR CURSO COM ALUNO ❌ (403) ######
+###########################################################
+
+POST {{baseUrl}}/cursos
+Authorization: Bearer {{tokenAluno}}
+Content-Type: application/json
+
+{
+  "nomeCurso": "Curso Restrito",
+  "tempoCurso": 100,
+  "descricaoCurta": "Teste restrito",
+  "descricaoDetalhada": "Conteúdo apenas para administradores",
+  "professor": "Zé da Silva",
+  "categoria": "Frontend",
+  "imagemCurso": "restrito.png"
+}
+
+###########################################################
+############## 📋 LISTAR TODOS OS CURSOS ✅ ################
+###########################################################
+
+GET {{baseUrl}}/cursos
+Authorization: Bearer {{tokenAluno}}
+
+###########################################################
+########### 🔍 BUSCAR CURSO POR ID - ADMIN ✅ ##############
+###########################################################
+
+GET {{baseUrl}}/cursos/7
+Authorization: Bearer {{tokenAdmin}}
+
+###########################################################
+##### ✏️ ATUALIZAR CURSO POR ID - ADMIN ✅ #################
+###########################################################
+
+PUT {{baseUrl}}/cursos/7
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "descricaoCurta": "Curso atualizado",
+  "tempoCurso": 150
+}
+
+###########################################################
+##### 🗑️ DELETAR CURSO POR ID - ADMIN ✅ ###################
+###########################################################
+
+DELETE {{baseUrl}}/cursos/7
+Authorization: Bearer {{tokenAdmin}}
+
+###########################################################
+############### BUSCAR CURSOS SEM TOKEN - ✅  ############
+###########################################################
+
+GET {{baseUrl}}/cursos
+
