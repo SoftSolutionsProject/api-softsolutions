@@ -22,6 +22,7 @@ import { GetUsuarioByIdUseCase } from '../../../application/use-cases/usuario/ge
 import { ListUsuarioUseCase } from '../../../application/use-cases/usuario/list-usuario.use-case';
 import { LoginUsuarioUseCase } from '../../../application/use-cases/usuario/login-usuario.use-case';
 import { UpdateUsuarioUseCase } from '../../../application/use-cases/usuario/update-usuario.use-case';
+import { UsuarioResponseDto } from '../dtos/responses/usuario.response.dto';
 
 @Controller('usuarios')
 export class UsuarioController {
@@ -36,8 +37,9 @@ export class UsuarioController {
 
   @Post('cadastro')
   @HttpCode(HttpStatus.CREATED)
-  create(@Body() dto: CreateUsuarioDto) {
-    return this.createUsuario.execute(dto);
+  async create(@Body() dto: CreateUsuarioDto) {
+    const usuario = await this.createUsuario.execute(dto);
+    return new UsuarioResponseDto(usuario);
   }
 
   @Post('login')
@@ -48,15 +50,17 @@ export class UsuarioController {
 
   @UseGuards(AuthGuard)
   @Get()
-  list(@User('tipo') tipo: string) {
+  async list(@User('tipo') tipo: string) {
     if (tipo !== 'administrador')
       throw new ForbiddenException('Apenas administradores podem listar usuários');
-    return this.listUsuario.execute();
+
+    const usuarios = await this.listUsuario.execute();
+    return usuarios.map((u) => new UsuarioResponseDto(u));
   }
 
   @UseGuards(AuthGuard)
   @Get(':id')
-  getById(
+  async getById(
     @Param('id') id: string,
     @User('sub') userId: number,
     @User('tipo') tipo: string,
@@ -65,12 +69,14 @@ export class UsuarioController {
     if (isNaN(idNumber)) throw new ForbiddenException('ID inválido');
     if (idNumber !== userId && tipo !== 'administrador')
       throw new ForbiddenException('Acesso negado');
-    return this.getUsuarioById.execute(idNumber);
+
+    const usuario = await this.getUsuarioById.execute(idNumber);
+    return new UsuarioResponseDto(usuario);
   }
 
   @UseGuards(AuthGuard)
   @Put(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() dto: UpdateUsuarioDto,
     @User('sub') userId: number,
@@ -80,7 +86,9 @@ export class UsuarioController {
     if (isNaN(idNumber)) throw new ForbiddenException('ID inválido');
     if (idNumber !== userId && tipo !== 'administrador')
       throw new ForbiddenException('Acesso negado');
-    return this.updateUsuario.execute(idNumber, dto);
+
+    const usuario = await this.updateUsuario.execute(idNumber, dto);
+    return new UsuarioResponseDto(usuario);
   }
 
   @UseGuards(AuthGuard)

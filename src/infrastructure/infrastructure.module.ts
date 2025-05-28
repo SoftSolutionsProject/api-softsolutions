@@ -1,23 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Usuario } from '../domain/models/usuario.model';
-import { Curso } from '../domain/models/curso.model';
-import { Modulo as ModuloEntity } from '../domain/models/modulo.model';
-import { Aula } from '../domain/models/aula.model';
-import { Inscricao } from '../domain/models/inscricao.model';
-import { ProgressoAula } from '../domain/models/progresso-aula.model';
+import { UsuarioEntity } from './database/entities/usuario.entity';
+import { UsuarioRepository } from './database/repositories/usuario.repository';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([
-      Usuario,
-      Curso,
-      ModuloEntity,
-      Aula,
-      Inscricao,
-      ProgressoAula,
-    ]),
-  ],
-  exports: [TypeOrmModule],
+  imports: [TypeOrmModule.forFeature([UsuarioEntity])],
+  providers: [UsuarioRepository],
+  exports: [UsuarioRepository],
 })
 export class InfrastructureModule {}

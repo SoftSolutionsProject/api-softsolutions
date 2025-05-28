@@ -1,29 +1,21 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Usuario } from '../../../domain/models/usuario.model';
 import * as bcrypt from 'bcrypt';
+import { UsuarioRepository } from '../../../infrastructure/database/repositories/usuario.repository';
 
 @Injectable()
 export class UpdateUsuarioUseCase {
-  constructor(
-    @InjectRepository(Usuario)
-    private readonly usuarioRepo: Repository<Usuario>,
-  ) {}
+  constructor(private readonly usuarioRepo: UsuarioRepository) {}
 
-  async execute(id: number, data: Partial<Usuario>): Promise<Usuario> {
-    const usuario = await this.usuarioRepo.findOneBy({ id });
+  async execute(id: number, data: any) {
+    const usuario = await this.usuarioRepo.findById(id);
     if (!usuario) throw new NotFoundException('Usuário não encontrado');
 
     if (data.cpfUsuario && data.cpfUsuario !== usuario.cpfUsuario)
       throw new BadRequestException('Não é permitido alterar o CPF');
 
-    if (data.tipo && data.tipo !== usuario.tipo)
-      delete data.tipo; // bloqueia alteração de tipo
-
+    if (data.tipo && data.tipo !== usuario.tipo) delete data.tipo;
     if (data.email && !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(data.email))
       throw new BadRequestException('Email inválido');
-
     if (data.telefone && !this.validarTelefone(data.telefone))
       throw new BadRequestException('Telefone inválido');
 
@@ -33,12 +25,9 @@ export class UpdateUsuarioUseCase {
       data.senha = await bcrypt.hash(data.senha, 10);
     }
 
-    await this.usuarioRepo.update(id, data);
-    const atualizado = await this.usuarioRepo.findOneBy({ id });
-    if (!atualizado) throw new NotFoundException('Erro ao atualizar');
-
+    const atualizado = await this.usuarioRepo.update(id, data);
     const { senha, ...result } = atualizado;
-    return result as Usuario;
+    return result;
   }
 
   private validarTelefone(tel: string): boolean {

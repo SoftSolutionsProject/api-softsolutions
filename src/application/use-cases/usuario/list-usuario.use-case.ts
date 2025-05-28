@@ -1,17 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Usuario } from '../../../domain/models/usuario.model';
+import { UsuarioRepository } from '../../../infrastructure/database/repositories/usuario.repository';
 
 @Injectable()
 export class ListUsuarioUseCase {
-  constructor(
-    @InjectRepository(Usuario)
-    private readonly usuarioRepo: Repository<Usuario>,
-  ) {}
+  constructor(private readonly usuarioRepo: UsuarioRepository) {}
 
-  async execute(): Promise<Usuario[]> {
-    const usuarios = await this.usuarioRepo.find();
-    return usuarios.map(({ senha, ...rest }) => rest as Usuario);
+  async execute() {
+    const usuarios = await this.usuarioRepo.findAll();
+    return usuarios.map(({ senha, ...rest }) => rest);
   }
 }

@@ -3,7 +3,7 @@
 ###########################################################
 
 @baseUrl = http://localhost:4000
-@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI0LCJlbWFpbCI6IjEwQDEwLmNvbSIsInRpcG8iOiJhbHVubyIsImlhdCI6MTc0ODQ1NTIyMSwiZXhwIjoxNzQ4NTQxNjIxfQ.7G7UgFZb33ksy0CDn413EBYRK14GuIlA59JOiJ2cjBE
+@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI2LCJlbWFpbCI6IjExQDExLmNvbSIsInRpcG8iOiJhbHVubyIsImlhdCI6MTc0ODQ2MTYyNywiZXhwIjoxNzQ4NTQ4MDI3fQ.ytCgQyi4p37xI4bDzp1TZuQDczliMvojTDrKDTDA2KM
 @tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIwLCJlbWFpbCI6ImFkbWluQHRlc3RlLmNvbSIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzQ4NDU1MjQyLCJleHAiOjE3NDg1NDE2NDJ9.eU-3cTjGCfWAaq-HXdtkbP4RKAnnMVQewSlJiaWYSrM
 
 ###########################################################
@@ -15,7 +15,7 @@ Content-Type: application/json
 
 {
   "nomeUsuario": "Aluno Teste",
-  "cpfUsuario": "42109179074",
+  "cpfUsuario": "34677826048",
   "email": "aluno@teste5.com",
   "senha": "12345678"
 }
@@ -29,8 +29,8 @@ Content-Type: application/json
 
 {
   "nomeUsuario": "Admin Teste",
-  "cpfUsuario": "75518945000",
-  "email": "admin5@teste.com",
+  "cpfUsuario": "24617305041",
+  "email": "admin58@teste8.com",
   "senha": "admin123",
   "tipo": "administrador"
 }
@@ -43,7 +43,7 @@ POST {{baseUrl}}/usuarios/login
 Content-Type: application/json
 
 {
-  "email": "10@10.com",
+  "email": "11@11.com",
   "senha": "123456"
 }
 
@@ -91,20 +91,20 @@ Authorization: Bearer {{tokenAdmin}}
 #### ✏️ ATUALIZAR PRÓPRIO PERFIL - ALUNO ✅ ################
 ###########################################################
 
-PUT {{baseUrl}}/usuarios/24
+PUT {{baseUrl}}/usuarios/26
 Authorization: Bearer {{tokenAluno}}
 Content-Type: application/json
 
 {
   "nomeUsuario": "Aluno Atualizado",
-  "telefone": "(11) 91234-5678"
+  "telefone": "(11) 92234-5678"
 }
 
 ###########################################################
 ########## 🚫 TENTATIVA DE ALTERAR CPF - NEGADO ###########
 ###########################################################
 
-PUT {{baseUrl}}/usuarios/24
+PUT {{baseUrl}}/usuarios/26
 Authorization: Bearer {{tokenAluno}}
 Content-Type: application/json
 
@@ -116,7 +116,7 @@ Content-Type: application/json
 ########## 🚫 TENTATIVA DE ALTERAR TIPO - NEGADO ##########
 ###########################################################
 
-PUT {{baseUrl}}/usuarios/24
+PUT {{baseUrl}}/usuarios/26
 Authorization: Bearer {{tokenAluno}}
 Content-Type: application/json
 
@@ -128,14 +128,14 @@ Content-Type: application/json
 ######## 🗑️ DELETAR PRÓPRIO USUÁRIO - ALUNO ✅ #############
 ###########################################################
 
-DELETE {{baseUrl}}/usuarios/24
+DELETE {{baseUrl}}/usuarios/26
 Authorization: Bearer {{tokenAluno}}
 
 ###########################################################
 ###### 🗑️ DELETAR QUALQUER USUÁRIO - ADMIN ✅ ##############
 ###########################################################
 
-DELETE {{baseUrl}}/usuarios/25
+DELETE {{baseUrl}}/usuarios/16
 Authorization: Bearer {{tokenAdmin}}
 
 ###########################################################
