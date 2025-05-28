@@ -42,8 +42,8 @@ POST {{baseUrl}}/usuarios/login
 Content-Type: application/json
 
 {
-  "email": "aluno@teste.com",
-  "senha": "12345678"
+  "email": "10@10.com",
+  "senha": "123456"
 }
 
 
