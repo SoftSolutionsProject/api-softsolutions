@@ -16,13 +16,15 @@ export class CursoRepository {
     return this.repo.save(curso);
   }
 
-  async findById(id: number): Promise<CursoModel | null> {
+ async findById(id: number): Promise<CursoModel | null> {
   return await this.repo.findOne({
     where: { id },
-    relations: ['modulos'],
+    relations: [
+      'modulos',  
+      'modulos.aulas',
+    ],
   });
 }
-
   async findAll(): Promise<CursoModel[]> {
     return await this.repo.find();
   }

@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuarioEntity } from 'src/infrastructure/database/entities/usuario.entity';
 import { CursoEntity } from 'src/infrastructure/database/entities/curso.entity';
 import { ModuloEntity } from '../infrastructure/database/entities/modulo.entity';
+import { AulaEntity } from 'src/infrastructure/database/entities/aula.entity';
 
 import { InfrastructureModule } from 'src/infrastructure/infrastructure.module';
 
@@ -28,9 +29,18 @@ import { GetModuloByIdUseCase } from './use-cases/modulo/get-modulo-by-id.use-ca
 import { ListModuloUseCase } from './use-cases/modulo/list-modulo.use-case';
 import { UpdateModuloUseCase } from './use-cases/modulo/update-modulo.use-case';
 
+// Aula use cases
+import { CreateAulaUseCase } from './use-cases/aula/create-aula.use-case';
+import { DeleteAulaUseCase } from './use-cases/aula/delete-aula.use-case';
+import { GetAulaByIdUseCase } from './use-cases/aula/get-aula-by-id.use-case';
+import { ListAulaUseCase } from './use-cases/aula/list-aula.use-case';
+import { UpdateAulaUseCase } from './use-cases/aula/update-aula.use-case';
+import { ListAulaByModuloUseCase } from './use-cases/aula/list-aula-by-modulo.use-case';
+import { ListAulaByCursoUseCase } from './use-cases/aula/list-aula-by-curso.use-case';
+
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UsuarioEntity, CursoEntity, ModuloEntity]),
+    TypeOrmModule.forFeature([UsuarioEntity, CursoEntity, ModuloEntity, AulaEntity]),
     InfrastructureModule,
   ],
   providers: [
@@ -53,6 +63,15 @@ import { UpdateModuloUseCase } from './use-cases/modulo/update-modulo.use-case';
     GetModuloByIdUseCase,
     ListModuloUseCase,
     UpdateModuloUseCase,
+
+     // Aula
+    CreateAulaUseCase,
+    DeleteAulaUseCase,
+    GetAulaByIdUseCase,
+    ListAulaUseCase,
+    UpdateAulaUseCase,
+    ListAulaByModuloUseCase,
+    ListAulaByCursoUseCase,
   ],
   exports: [
     // Usuario
@@ -69,11 +88,21 @@ import { UpdateModuloUseCase } from './use-cases/modulo/update-modulo.use-case';
     ListCursoUseCase,
     UpdateCursoUseCase,
 
+    // Modulo
     CreateModuloUseCase,
     DeleteModuloUseCase,
     GetModuloByIdUseCase,
     ListModuloUseCase,
-    UpdateModuloUseCase, 
+    UpdateModuloUseCase,
+
+    // Aula
+    CreateAulaUseCase,
+    DeleteAulaUseCase,
+    GetAulaByIdUseCase,
+    ListAulaUseCase,
+    UpdateAulaUseCase,
+    ListAulaByModuloUseCase,
+    ListAulaByCursoUseCase,
   ],
 })
 export class ApplicationModule {}

@@ -1,5 +1,6 @@
 import { CursoModel } from 'src/domain/models/curso.model';
 import { ModuloModel } from 'src/domain/models/modulo.model';
+import { AulaModel } from 'src/domain/models/aula.model';
 
 export class CursoResponseDto {
   id: number;
@@ -11,10 +12,15 @@ export class CursoResponseDto {
   status: string;
   avaliacao: number;
   imagemCurso: string;
-  modulos?: { // 🔥 Adiciona a lista de módulos resumida
+  modulos?: {
     id: number;
     nomeModulo: string;
     tempoModulo: number;
+    aulas?: {
+      id: number;
+      nomeAula: string;
+      tempoAula: number;
+    }[];
   }[];
 
   constructor(curso: CursoModel) {
@@ -28,11 +34,15 @@ export class CursoResponseDto {
     this.avaliacao = curso.avaliacao;
     this.imagemCurso = curso.imagemCurso;
 
-    // 🔥 Adiciona a lista de módulos (apenas dados básicos)
     this.modulos = curso.modulos?.map((modulo: ModuloModel) => ({
       id: modulo.id!,
       nomeModulo: modulo.nomeModulo,
       tempoModulo: modulo.tempoModulo,
+      aulas: modulo.aulas?.map((aula: AulaModel) => ({
+        id: aula.id!,
+        nomeAula: aula.nomeAula,
+        tempoAula: aula.tempoAula,
+      })),
     }));
   }
 }
