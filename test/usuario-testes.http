@@ -3,8 +3,8 @@
 ###########################################################
 
 @baseUrl = http://localhost:4000
-@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI2LCJlbWFpbCI6IjExQDExLmNvbSIsInRpcG8iOiJhbHVubyIsImlhdCI6MTc0ODQ2MTYyNywiZXhwIjoxNzQ4NTQ4MDI3fQ.ytCgQyi4p37xI4bDzp1TZuQDczliMvojTDrKDTDA2KM
-@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIwLCJlbWFpbCI6ImFkbWluQHRlc3RlLmNvbSIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzQ4NDU1MjQyLCJleHAiOjE3NDg1NDE2NDJ9.eU-3cTjGCfWAaq-HXdtkbP4RKAnnMVQewSlJiaWYSrM
+@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIxLCJlbWFpbCI6IjVANS5jb20iLCJ0aXBvIjoiYWx1bm8iLCJpYXQiOjE3NDg2MjA0MjAsImV4cCI6MTc0ODcwNjgyMH0.z0hEv1ibQ4qft2iLHe8Iont40cBoH4wMK16UA02GH3k
+@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIwLCJlbWFpbCI6ImFkbWluQHRlc3RlLmNvbSIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzQ4NjIwMzI0LCJleHAiOjE3NDg3MDY3MjR9.JR6nizANyeaBOItFIdCbQpc-gwVghZdDVpqorP-3H8c
 
 ###########################################################
 ############## 🚀 CADASTRO DE ALUNO #######################
@@ -15,13 +15,13 @@ Content-Type: application/json
 
 {
   "nomeUsuario": "Aluno Teste",
-  "cpfUsuario": "34677826048",
-  "email": "aluno@teste5.com",
+  "cpfUsuario": "25540611063",
+  "email": "aluno@teste5988.com",
   "senha": "12345678"
 }
 
 ###########################################################
-############## 🚀 CADASTRO DE ADMINISTRADOR ###############
+## 🚀 CADASTRO DE ADMINISTRADOR - força tipo aluno ########
 ###########################################################
 
 POST {{baseUrl}}/usuarios/cadastro
@@ -29,8 +29,8 @@ Content-Type: application/json
 
 {
   "nomeUsuario": "Admin Teste",
-  "cpfUsuario": "24617305041",
-  "email": "admin58@teste8.com",
+  "cpfUsuario": "70251393003",
+  "email": "admin58@teste898.com",
   "senha": "admin123",
   "tipo": "administrador"
 }
@@ -77,21 +77,21 @@ Authorization: Bearer {{tokenAluno}}
 ########### 👤 BUSCAR PRÓPRIO PERFIL - ALUNO ✅ ############
 ###########################################################
 
-GET {{baseUrl}}/usuarios/23
+GET {{baseUrl}}/usuarios/21
 Authorization: Bearer {{tokenAluno}}
 
 ###########################################################
 ########### 👤 BUSCAR QUALQUER USUÁRIO - ADMIN ✅ ##########
 ###########################################################
 
-GET {{baseUrl}}/usuarios/21
+GET {{baseUrl}}/usuarios/22
 Authorization: Bearer {{tokenAdmin}}
 
 ###########################################################
 #### ✏️ ATUALIZAR PRÓPRIO PERFIL - ALUNO ✅ ################
 ###########################################################
 
-PUT {{baseUrl}}/usuarios/26
+PUT {{baseUrl}}/usuarios/21
 Authorization: Bearer {{tokenAluno}}
 Content-Type: application/json
 
@@ -104,7 +104,7 @@ Content-Type: application/json
 ########## 🚫 TENTATIVA DE ALTERAR CPF - NEGADO ###########
 ###########################################################
 
-PUT {{baseUrl}}/usuarios/26
+PUT {{baseUrl}}/usuarios/21
 Authorization: Bearer {{tokenAluno}}
 Content-Type: application/json
 
@@ -116,7 +116,7 @@ Content-Type: application/json
 ########## 🚫 TENTATIVA DE ALTERAR TIPO - NEGADO ##########
 ###########################################################
 
-PUT {{baseUrl}}/usuarios/26
+PUT {{baseUrl}}/usuarios/21
 Authorization: Bearer {{tokenAluno}}
 Content-Type: application/json
 

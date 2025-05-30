@@ -18,7 +18,11 @@ export class LoginUsuarioUseCase {
     const payload = { sub: usuario.id, email: usuario.email, tipo: usuario.tipo };
     const token = jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '24h' });
 
-    const { senha: _, ...usuarioSemSenha } = usuario;
-    return new LoginUsuarioResponseDto(token);
+    return new LoginUsuarioResponseDto(token, {
+      id: usuario.id!,
+      nome: usuario.nomeUsuario,
+      email: usuario.email,
+      tipo: usuario.tipo
+    });
   }
 }
