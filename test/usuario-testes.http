@@ -3,7 +3,7 @@
 ###########################################################
 
 @baseUrl = http://localhost:4000
-@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIxLCJlbWFpbCI6IjVANS5jb20iLCJ0aXBvIjoiYWx1bm8iLCJpYXQiOjE3NDg2MjA0MjAsImV4cCI6MTc0ODcwNjgyMH0.z0hEv1ibQ4qft2iLHe8Iont40cBoH4wMK16UA02GH3k
+@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIxLCJlbWFpbCI6IjVANS5jb20iLCJ0aXBvIjoiYWx1bm8iLCJpYXQiOjE3NDg2Mzc2ODEsImV4cCI6MTc0ODcyNDA4MX0.UVRkmSRBSm-whdEAb21w9V5q-bTu5IT6xOBEVuYFjXk
 @tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIwLCJlbWFpbCI6ImFkbWluQHRlc3RlLmNvbSIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzQ4NjIwMzI0LCJleHAiOjE3NDg3MDY3MjR9.JR6nizANyeaBOItFIdCbQpc-gwVghZdDVpqorP-3H8c
 
 ###########################################################

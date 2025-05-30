@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 
 import { UsuarioEntity } from './src/infrastructure/database/entities/usuario.entity';
 import { CursoEntity } from './src/infrastructure/database/entities/curso.entity';
+import { ModuloEntity } from './src/infrastructure/database/entities/modulo.entity';
 
 dotenv.config();
 
@@ -11,7 +12,7 @@ const isProd = process.env.NODE_ENV === 'production';
 export default new DataSource({
   type: 'postgres',
   url: process.env.DATABASE_URL,
-  entities: [UsuarioEntity, CursoEntity],
+  entities: [UsuarioEntity, CursoEntity, ModuloEntity],
   migrations: [
     isProd
       ? 'dist/infrastructure/database/migrations/*.js'

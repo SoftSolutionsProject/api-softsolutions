@@ -1,4 +1,5 @@
 import { CursoModel } from 'src/domain/models/curso.model';
+import { ModuloModel } from 'src/domain/models/modulo.model';
 
 export class CursoResponseDto {
   id: number;
@@ -10,6 +11,11 @@ export class CursoResponseDto {
   status: string;
   avaliacao: number;
   imagemCurso: string;
+  modulos?: { // 🔥 Adiciona a lista de módulos resumida
+    id: number;
+    nomeModulo: string;
+    tempoModulo: number;
+  }[];
 
   constructor(curso: CursoModel) {
     this.id = curso.id!;
@@ -21,5 +27,12 @@ export class CursoResponseDto {
     this.status = curso.status;
     this.avaliacao = curso.avaliacao;
     this.imagemCurso = curso.imagemCurso;
+
+    // 🔥 Adiciona a lista de módulos (apenas dados básicos)
+    this.modulos = curso.modulos?.map((modulo: ModuloModel) => ({
+      id: modulo.id!,
+      nomeModulo: modulo.nomeModulo,
+      tempoModulo: modulo.tempoModulo,
+    }));
   }
 }

@@ -82,3 +82,10 @@ Authorization: Bearer {{tokenAdmin}}
 
 GET {{baseUrl}}/cursos
 
+###########################################################
+############### BUSCAR CURSO PR ID SEM TOKEN - ✅  ############
+###########################################################
+
+GET {{baseUrl}}/cursos/14
+
+

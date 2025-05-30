@@ -1,5 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { CursoModel } from 'src/domain/models/curso.model';
+import { OneToMany } from 'typeorm';
+import { ModuloEntity } from './modulo.entity';
 
 @Entity('cursos')
 export class CursoEntity implements CursoModel {
@@ -32,4 +34,7 @@ export class CursoEntity implements CursoModel {
 
   @Column()
   imagemCurso: string;
+
+  @OneToMany(() => ModuloEntity, modulo => modulo.curso)
+  modulos: ModuloEntity[];
 }

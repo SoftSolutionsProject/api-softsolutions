@@ -17,8 +17,11 @@ export class CursoRepository {
   }
 
   async findById(id: number): Promise<CursoModel | null> {
-    return await this.repo.findOne({ where: { id } });
-  }
+  return await this.repo.findOne({
+    where: { id },
+    relations: ['modulos'],
+  });
+}
 
   async findAll(): Promise<CursoModel[]> {
     return await this.repo.find();

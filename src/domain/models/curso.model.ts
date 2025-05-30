@@ -1,3 +1,4 @@
+import { ModuloModel } from './modulo.model';
 export interface CursoModel {
   id?: number;
   nomeCurso: string;
@@ -9,4 +10,5 @@ export interface CursoModel {
   status: 'ativo' | 'inativo';
   avaliacao: number;
   imagemCurso: string;
+   modulos?: ModuloModel[]; 
 }
