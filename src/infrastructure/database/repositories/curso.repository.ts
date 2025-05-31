@@ -37,4 +37,11 @@ export class CursoRepository {
   async delete(id: number): Promise<void> {
     await this.repo.delete(id);
   }
+
+  async findByIdWithModulosAndAulas(id: number): Promise<CursoModel | null> {
+  return this.repo.findOne({
+    where: { id },
+    relations: ['modulos', 'modulos.aulas']
+  });
+}
 }

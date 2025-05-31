@@ -1,12 +1,14 @@
 import { Module } from '@nestjs/common';
+import { InfrastructureModule } from 'src/infrastructure/infrastructure.module';
 import { UsuarioController } from './http/controllers/usuario.controller';
 import { CursoController } from './http/controllers/curso.controller';
 import { ApplicationModule } from '../application/application.module';
 import { ModuloController } from './http/controllers/modulo.controller';
 import { AulaController } from './http/controllers/aula.controller';
+import { InscricaoController } from './http/controllers/inscricao.controller';
 
 @Module({
-  imports: [ApplicationModule],
-  controllers: [UsuarioController, CursoController, ModuloController, AulaController],
+  imports: [InfrastructureModule, ApplicationModule],
+  controllers: [UsuarioController, CursoController, ModuloController, AulaController, InscricaoController ],
 })
 export class InterfacesModule {}

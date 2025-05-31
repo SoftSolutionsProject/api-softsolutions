@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { ModuloEntity } from './modulo.entity';
 import { AulaModel } from 'src/domain/models/aula.model';
+import { ProgressoAulaEntity } from './progresso-aula.entity';
 
 @Entity('aulas')
 export class AulaEntity implements AulaModel {
@@ -24,4 +25,7 @@ export class AulaEntity implements AulaModel {
 
   @ManyToOne(() => ModuloEntity, modulo => modulo.aulas, { onDelete: 'CASCADE' })
   modulo: ModuloEntity;
+
+  @OneToMany(() => ProgressoAulaEntity, progresso => progresso.aula)
+  progressos: ProgressoAulaEntity[];
 }

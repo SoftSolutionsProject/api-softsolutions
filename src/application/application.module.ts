@@ -4,6 +4,8 @@ import { UsuarioEntity } from 'src/infrastructure/database/entities/usuario.enti
 import { CursoEntity } from 'src/infrastructure/database/entities/curso.entity';
 import { ModuloEntity } from '../infrastructure/database/entities/modulo.entity';
 import { AulaEntity } from 'src/infrastructure/database/entities/aula.entity';
+import { InscricaoEntity } from '../infrastructure/database/entities/inscricao.entity';
+import { ProgressoAulaEntity } from '../infrastructure/database/entities/progresso-aula.entity';
 
 import { InfrastructureModule } from 'src/infrastructure/infrastructure.module';
 
@@ -38,9 +40,17 @@ import { UpdateAulaUseCase } from './use-cases/aula/update-aula.use-case';
 import { ListAulaByModuloUseCase } from './use-cases/aula/list-aula-by-modulo.use-case';
 import { ListAulaByCursoUseCase } from './use-cases/aula/list-aula-by-curso.use-case';
 
+// Inscricao use cases
+import { InscreverUsuarioUseCase } from './use-cases/inscricao/inscrever-usuario.use-case';
+import { ListarInscricoesUseCase } from './use-cases/inscricao/listar-inscricoes.use-case';
+import { MarcarAulaConcluidaUseCase } from './use-cases/inscricao/marcar-aula-concluida.use-case';
+import { CancelarInscricaoUseCase } from './use-cases/inscricao/cancelar-inscricao.use-case';
+import { VerProgressoUseCase } from './use-cases/inscricao/ver-progresso.use-case';
+
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UsuarioEntity, CursoEntity, ModuloEntity, AulaEntity]),
+    TypeOrmModule.forFeature([UsuarioEntity, CursoEntity, ModuloEntity, AulaEntity,  InscricaoEntity,
+      ProgressoAulaEntity]),
     InfrastructureModule,
   ],
   providers: [
@@ -72,6 +82,13 @@ import { ListAulaByCursoUseCase } from './use-cases/aula/list-aula-by-curso.use-
     UpdateAulaUseCase,
     ListAulaByModuloUseCase,
     ListAulaByCursoUseCase,
+
+    // Inscricao
+    InscreverUsuarioUseCase,
+    ListarInscricoesUseCase,
+    MarcarAulaConcluidaUseCase,
+    CancelarInscricaoUseCase,
+    VerProgressoUseCase,
   ],
   exports: [
     // Usuario
@@ -103,6 +120,13 @@ import { ListAulaByCursoUseCase } from './use-cases/aula/list-aula-by-curso.use-
     UpdateAulaUseCase,
     ListAulaByModuloUseCase,
     ListAulaByCursoUseCase,
+
+    // Inscricao
+    InscreverUsuarioUseCase,
+    ListarInscricoesUseCase,
+    MarcarAulaConcluidaUseCase,
+    CancelarInscricaoUseCase,
+    VerProgressoUseCase,
   ],
 })
 export class ApplicationModule {}

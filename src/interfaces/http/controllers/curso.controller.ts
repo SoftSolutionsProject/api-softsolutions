@@ -11,6 +11,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import { AuthGuard } from '../guards/auth.guard';
 import { User } from '../decorators/user.decorator';
 import { CreateCursoDto } from '../dtos/requests/create-curso.dto';
@@ -21,6 +22,8 @@ import { GetCursoByIdUseCase } from '../../../application/use-cases/curso/get-cu
 import { ListCursoUseCase } from '../../../application/use-cases/curso/list-curso.use-case';
 import { UpdateCursoUseCase } from '../../../application/use-cases/curso/update-curso.use-case';
 import { CursoResponseDto } from '../dtos/responses/curso.response.dto';
+import { CursoRepository } from 'src/infrastructure/database/repositories/curso.repository';
+import { InscricaoRepository } from 'src/infrastructure/database/repositories/inscricao.repository';
 
 @Controller('cursos')
 export class CursoController {
@@ -30,6 +33,8 @@ export class CursoController {
     private readonly listCurso: ListCursoUseCase,
     private readonly updateCurso: UpdateCursoUseCase,
     private readonly deleteCurso: DeleteCursoUseCase,
+    private readonly cursoRepo: CursoRepository,
+    private readonly inscricaoRepo: InscricaoRepository,
   ) {}
 
   @UseGuards(AuthGuard)
@@ -80,4 +85,28 @@ export class CursoController {
     if (isNaN(idNumber)) throw new ForbiddenException('ID inválido');
     return this.deleteCurso.execute(idNumber);
   }
+
+  
+@UseGuards(AuthGuard)
+@Get(':id/aulas')
+async getModulosEAulas(
+  @Param('id') id: string,
+  @User('sub') idUsuario: number, // Pegamos o id do usuário do token
+) {
+  const idNumber = parseInt(id);
+  if (isNaN(idNumber)) throw new ForbiddenException('ID inválido');
+
+  // Verifica se o curso existe
+  const curso = await this.cursoRepo.findByIdWithModulosAndAulas(idNumber);
+  if (!curso) throw new NotFoundException('Curso não encontrado');
+
+  // Verifica se o usuário está inscrito no curso
+  const inscricao = await this.inscricaoRepo.findByUsuarioAndCurso(idUsuario, idNumber);
+  if (!inscricao || inscricao.status !== 'ativo') {
+    throw new ForbiddenException('Você não está inscrito neste curso');
+  }
+
+  return curso.modulos;
+}
+  
 }

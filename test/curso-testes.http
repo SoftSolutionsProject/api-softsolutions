@@ -3,7 +3,7 @@
 ###########################################################
 
 @baseUrl = http://localhost:4000
-@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIxLCJlbWFpbCI6IjVANS5jb20iLCJ0aXBvIjoiYWx1bm8iLCJpYXQiOjE3NDg0NjY1ODIsImV4cCI6MTc0ODU1Mjk4Mn0.tr4eEWHoP8U5z18wM79TJZymDZmigtkJdQ8XJDWW-tQ
+@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIxLCJlbWFpbCI6IjVANS5jb20iLCJ0aXBvIjoiYWx1bm8iLCJpYXQiOjE3NDg2NTAxOTQsImV4cCI6MTc0ODczNjU5NH0.7dV63f59tgAOhejV4c8IEaKkVzkS7JZSPA55i792zVk
 @tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIwLCJlbWFpbCI6ImFkbWluQHRlc3RlLmNvbSIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzQ4NDY2NjIwLCJleHAiOjE3NDg1NTMwMjB9.QHyalKdAopRog_K0WHLFtAeXx9JyujE5x0J-rek1hbA
 
 ###########################################################
@@ -53,7 +53,7 @@ Authorization: Bearer {{tokenAluno}}
 ########### 🔍 BUSCAR CURSO POR ID - ADMIN ✅ ##############
 ###########################################################
 
-GET {{baseUrl}}/cursos/12
+GET {{baseUrl}}/cursos/17
 Authorization: Bearer {{tokenAdmin}}
 
 ###########################################################
@@ -89,3 +89,41 @@ GET {{baseUrl}}/cursos
 GET {{baseUrl}}/cursos/17
 
 
+###########################################################
+############# 📋 LISTAR MÓDULOS E AULAS DO CURSO ##########
+###########################################################
+
+GET {{baseUrl}}/inscricoes/17/aulas
+Authorization: Bearer {{tokenAluno}}
+
+###########################################################
+######### 📋 TESTE: LISTAR MÓDULOS E AULAS DO CURSO #######
+###########################################################
+
+GET {{baseUrl}}/cursos/17/aulas
+Authorization: Bearer {{tokenAluno}}
+
+###########################################################
+######### 📋 TESTE: LISTAR MÓDULOS E AULAS DO CURSO #######
+######### 🔐 USUÁRIO INSCRITO (deve funcionar) ✅ ##########
+###########################################################
+
+GET {{baseUrl}}/cursos/17/aulas
+Authorization: Bearer {{tokenAluno}}
+
+
+###########################################################
+######### 📋 TESTE: LISTAR MÓDULOS E AULAS DO CURSO #######
+####### 🔒 USUÁRIO NÃO INSCRITO (deve dar 403) ❌ ##########
+###########################################################
+
+GET {{baseUrl}}/cursos/17/aulas
+Authorization: Bearer {{tokenAdmin}}
+
+
+###########################################################
+######### 📋 TESTE: LISTAR MÓDULOS E AULAS DO CURSO #######
+########### 🔓 SEM TOKEN (deve dar 401) ❌ #################
+###########################################################
+
+GET {{baseUrl}}/cursos/17/aulas

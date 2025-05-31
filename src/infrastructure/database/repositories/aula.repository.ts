@@ -49,4 +49,11 @@ export class AulaRepository {
       relations: ['modulo', 'modulo.curso']
     });
   }
+
+  async findByIdWithModuloAndCurso(id: number): Promise<AulaModel | null> {
+  return this.repo.findOne({
+    where: { id },
+    relations: ['modulo', 'modulo.curso']
+  });
+}
 }

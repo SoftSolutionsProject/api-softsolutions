@@ -1,7 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany  } from 'typeorm';
 import { CursoModel } from 'src/domain/models/curso.model';
-import { OneToMany } from 'typeorm';
 import { ModuloEntity } from './modulo.entity';
+import { InscricaoEntity } from './inscricao.entity';
 
 @Entity('cursos')
 export class CursoEntity implements CursoModel {
@@ -37,4 +37,7 @@ export class CursoEntity implements CursoModel {
 
   @OneToMany(() => ModuloEntity, modulo => modulo.curso)
   modulos: ModuloEntity[];
+
+  @OneToMany(() => InscricaoEntity, inscricao => inscricao.curso)
+  inscricoes: InscricaoEntity[];
 }
