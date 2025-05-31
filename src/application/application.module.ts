@@ -16,6 +16,7 @@ import { GetUsuarioByIdUseCase } from './use-cases/usuario/get-usuario-by-id.use
 import { ListUsuarioUseCase } from './use-cases/usuario/list-usuario.use-case';
 import { LoginUsuarioUseCase } from './use-cases/usuario/login-usuario.use-case';
 import { UpdateUsuarioUseCase } from './use-cases/usuario/update-usuario.use-case';
+import { EnviarEmailUseCase } from './use-cases/email/enviar-email.use-case';
 
 // Curso use cases
 import { CreateCursoUseCase } from './use-cases/curso/create-curso.use-case';
@@ -89,6 +90,9 @@ import { VerProgressoUseCase } from './use-cases/inscricao/ver-progresso.use-cas
     MarcarAulaConcluidaUseCase,
     CancelarInscricaoUseCase,
     VerProgressoUseCase,
+
+    //email
+    EnviarEmailUseCase
   ],
   exports: [
     // Usuario
@@ -127,6 +131,9 @@ import { VerProgressoUseCase } from './use-cases/inscricao/ver-progresso.use-cas
     MarcarAulaConcluidaUseCase,
     CancelarInscricaoUseCase,
     VerProgressoUseCase,
+
+    //EnviarEmailUseCase
+    EnviarEmailUseCase
   ],
 })
 export class ApplicationModule {}
