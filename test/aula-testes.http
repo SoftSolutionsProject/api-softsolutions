@@ -1,0 +1,126 @@
+###########################################################
+#################### 🔐 VARIÁVEIS #########################
+###########################################################
+
+@baseUrl = http://localhost:4000
+@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIxLCJlbWFpbCI6IjVANS5jb20iLCJ0aXBvIjoiYWx1bm8iLCJpYXQiOjE3NDg2Mzc2ODEsImV4cCI6MTc0ODcyNDA4MX0.UVRkmSRBSm-whdEAb21w9V5q-bTu5IT6xOBEVuYFjXk
+@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIwLCJlbWFpbCI6ImFkbWluQHRlc3RlLmNvbSIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzQ4NjQxNzI4LCJleHAiOjE3NDg3MjgxMjh9.tgnPMaZAlftwNDcPoZJ8zh3u1w__jBBjSNHUxakzQ8s
+
+###########################################################
+########### 🎓 CRIAÇÃO DE AULA - ADMIN ✅ ##################
+###########################################################
+
+POST {{baseUrl}}/aulas
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "nomeAula": "Introdução ao NestJS",
+  "tempoAula": 45,
+  "videoUrl": "https://youtube.com/nestjs-intro",
+  "materialApoio": ["slide1.pdf", "exercicios.zip"],
+  "descricaoConteudo": "Aula introdutória sobre NestJS e seus conceitos",
+  "idModulo": 16
+}
+
+###########################################################
+####### 🎓 TENTATIVA DE CRIAR AULA - ALUNO ❌ (403) ########
+###########################################################
+
+POST {{baseUrl}}/aulas
+Authorization: Bearer {{tokenAluno}}
+Content-Type: application/json
+
+{
+  "nomeAula": "Aula Proibida",
+  "tempoAula": 30,
+  "videoUrl": "https://youtube.com/erro",
+  "descricaoConteudo": "Aula sem permissão",
+  "idModulo": 1
+}
+
+###########################################################
+############### 📋 LISTAR TODAS AS AULAS ##################
+###########################################################
+
+GET {{baseUrl}}/aulas
+
+###########################################################
+############# 🔍 BUSCAR AULA POR ID ✅ ####################
+###########################################################
+
+GET {{baseUrl}}/aulas/26
+
+###########################################################
+####### ✏️ ATUALIZAR AULA - ADMIN ✅ #######################
+###########################################################
+
+PUT {{baseUrl}}/aulas/26
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "nomeAula": "Introdução ao NestJS (Atualizado)",
+  "tempoAula": 50,
+  "descricaoConteudo": "Aula introdutória sobre NestJS - conteúdo expandido"
+}
+
+###########################################################
+#### ✏️ TENTATIVA ATUALIZAR AULA - ALUNO ❌ (403) ##########
+###########################################################
+
+PUT {{baseUrl}}/aulas/1
+Authorization: Bearer {{tokenAluno}}
+Content-Type: application/json
+
+{
+  "nomeAula": "Aula Alterada Ilegalmente"
+}
+
+###########################################################
+########### 🗑️ REMOVER AULA - ADMIN ✅ #####################
+###########################################################
+
+DELETE {{baseUrl}}/aulas/8
+Authorization: Bearer {{tokenAdmin}}
+
+###########################################################
+##### 🗑️ TENTATIVA REMOVER AULA - ALUNO ❌ (403) ###########
+###########################################################
+
+DELETE {{baseUrl}}/aulas/1
+Authorization: Bearer {{tokenAluno}}
+
+###########################################################
+########### 📚 LISTAR AULAS POR MÓDULO ####################
+###########################################################
+
+GET {{baseUrl}}/aulas/modulo/12
+
+###########################################################
+########### 📚 LISTAR AULAS POR CURSO #####################
+###########################################################
+
+GET {{baseUrl}}/aulas/curso/17
+
+###########################################################
+############### 🔒 SEM TOKEN - ❌ (401) ####################
+###########################################################
+
+POST {{baseUrl}}/aulas
+Content-Type: application/json
+
+{
+  "nomeAula": "Aula sem autenticação",
+  "tempoAula": 30,
+  "videoUrl": "https://youtube.com/sem-auth",
+  "descricaoConteudo": "Não deveria funcionar",
+  "idModulo": 1
+}
+
+###########################################################
+############### 🔒 TOKEN INVÁLIDO ❌ (401) #################
+###########################################################
+
+GET {{baseUrl}}/aulas
+Authorization: Bearer TOKEN_INVALIDO

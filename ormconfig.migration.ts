@@ -1,11 +1,12 @@
 import { DataSource } from 'typeorm';
-import { Usuario } from './src/domain/usuario/usuario.entity';
-import { Curso } from './src/domain/curso/curso.entity';
-import { Modulo } from './src/domain/modulo/modulo.entity';
-import { Aula } from './src/domain/aula/aula.entity';
-import { Inscricao } from './src/domain/inscricao/inscricao.entity';
-import { ProgressoAula } from './src/domain/inscricao/progresso-aula.entity';
 import * as dotenv from 'dotenv';
+
+import { UsuarioEntity } from './src/infrastructure/database/entities/usuario.entity';
+import { CursoEntity } from './src/infrastructure/database/entities/curso.entity';
+import { ModuloEntity } from './src/infrastructure/database/entities/modulo.entity';
+import { AulaEntity } from './src/infrastructure/database/entities/aula.entity';
+import { InscricaoEntity } from './src/infrastructure/database/entities/inscricao.entity';
+import { ProgressoAulaEntity } from './src/infrastructure/database/entities/progresso-aula.entity';
 
 dotenv.config();
 
@@ -14,10 +15,10 @@ const isProd = process.env.NODE_ENV === 'production';
 export default new DataSource({
   type: 'postgres',
   url: process.env.DATABASE_URL,
-  entities: [Usuario, Curso, Modulo, Aula, Inscricao, ProgressoAula],
+  entities: [UsuarioEntity, CursoEntity, ModuloEntity, AulaEntity, ProgressoAulaEntity, InscricaoEntity],
   migrations: [
     isProd
       ? 'dist/infrastructure/database/migrations/*.js'
-      : 'src/infrastructure/database/migrations/*.ts'
+      : 'src/infrastructure/database/migrations/*.ts',
   ],
 });

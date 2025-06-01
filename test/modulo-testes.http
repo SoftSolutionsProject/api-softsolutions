@@ -1,0 +1,168 @@
+###########################################################
+#################### 🔐 VARIÁVEIS #########################
+###########################################################
+
+@baseUrl = http://localhost:4000
+@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIxLCJlbWFpbCI6IjVANS5jb20iLCJ0aXBvIjoiYWx1bm8iLCJpYXQiOjE3NDg2Mzc3OTUsImV4cCI6MTc0ODcyNDE5NX0.ug7qx5_aPU9BDfUttOZSXSqSR-OYU_8ESkSBichZAzs
+@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIwLCJlbWFpbCI6ImFkbWluQHRlc3RlLmNvbSIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzQ4NjM3NzY0LCJleHAiOjE3NDg3MjQxNjR9.usEphFk8ihAjM-RCcJG-qXc_NBYIc_fF7bmaUSB_EX0
+
+###########################################################
+######## 🚀 CRIAR CURSO (PRÉ-REQUISITO PARA MÓDULOS) #######
+###########################################################
+
+POST {{baseUrl}}/cursos
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "nomeCurso": "Curso de Teste para Módulos",
+  "tempoCurso": 200,
+  "descricaoCurta": "Curso para testar módulos",
+  "descricaoDetalhada": "Este curso será usado para testar a criação de módulos",
+  "professor": "Professor Teste",
+  "categoria": "Testes",
+  "imagemCurso": "curso-teste.jpg"
+}
+
+###########################################################
+############## 🚀 CRIAR MÓDULO - ADMIN ####################
+###########################################################
+
+POST {{baseUrl}}/modulos
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "nomeModulo": "Módulo de Teste 1",
+  "tempoModulo": 60,
+  "idCurso": 17
+}
+
+###########################################################
+######## 🚀 CRIAR MÓDULO - ALUNO ❌ (403 Forbidden) ######
+###########################################################
+
+POST {{baseUrl}}/modulos
+Authorization: Bearer {{tokenAluno}}
+Content-Type: application/json
+
+{
+  "nomeModulo": "Módulo Não Autorizado",
+  "tempoModulo": 30,
+  "idCurso": 1
+}
+
+###########################################################
+############## 📋 LISTAR TODOS OS MÓDULOS #################
+###########################################################
+
+GET {{baseUrl}}/modulos
+Authorization: Bearer {{tokenAluno}}
+
+###########################################################
+######### 🔍 BUSCAR MÓDULO POR ID - ADMIN #################
+###########################################################
+
+GET {{baseUrl}}/modulos/5
+Authorization: Bearer {{tokenAdmin}}
+
+###########################################################
+######### 🔍 BUSCAR MÓDULO POR ID - ALUNO #################
+###########################################################
+
+GET {{baseUrl}}/modulos/5
+Authorization: Bearer {{tokenAluno}}
+
+###########################################################
+######### 🔍 BUSCAR MÓDULO INEXISTENTE ❌ (404) ##########
+###########################################################
+
+GET {{baseUrl}}/modulos/999
+Authorization: Bearer {{tokenAdmin}}
+
+###########################################################
+######## ✏️ ATUALIZAR MÓDULO - ADMIN ######################
+###########################################################
+
+PUT {{baseUrl}}/modulos/11
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "nomeModulo": "Módulo de Teste Atualizado",
+  "tempoModulo": 90
+}
+
+###########################################################
+#### ✏️ ATUALIZAR MÓDULO - ALUNO ❌ (403 Forbidden) ######
+###########################################################
+
+PUT {{baseUrl}}/modulos/11
+Authorization: Bearer {{tokenAluno}}
+Content-Type: application/json
+
+{
+  "nomeModulo": "Tentativa não autorizada",
+  "tempoModulo": 10
+}
+
+###########################################################
+######## 🗑️ DELETAR MÓDULO - ADMIN #######################
+###########################################################
+
+DELETE {{baseUrl}}/modulos/11
+Authorization: Bearer {{tokenAdmin}}
+
+###########################################################
+#### 🗑️ DELETAR MÓDULO - ALUNO ❌ (403 Forbidden) ########
+###########################################################
+
+DELETE {{baseUrl}}/modulos/2
+Authorization: Bearer {{tokenAluno}}
+
+###########################################################
+### 🗑️ DELETAR MÓDULO INEXISTENTE ❌ (404 Not Found) ######
+###########################################################
+
+DELETE {{baseUrl}}/modulos/999
+Authorization: Bearer {{tokenAdmin}}
+
+###########################################################
+############### 🔒 SEM TOKEN - ❌ (401) ##################
+###########################################################
+
+GET {{baseUrl}}/modulos
+
+###########################################################
+############### 🔒 TOKEN INVÁLIDO ❌ (401) ###############
+###########################################################
+
+GET {{baseUrl}}/modulos
+Authorization: Bearer TOKEN_INVALIDO
+
+###########################################################
+#### 🚀 CRIAR MÓDULO COM CURSO INEXISTENTE ❌ (404) ######
+###########################################################
+
+POST {{baseUrl}}/modulos
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "nomeModulo": "Módulo com Curso Inválido",
+  "tempoModulo": 30,
+  "idCurso": 999
+}
+
+###########################################################
+#### ✏️ ATUALIZAR MÓDULO COM DADOS INVÁLIDOS ❌ (400) ####
+###########################################################
+
+PUT {{baseUrl}}/modulos/12
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "nomeModulo": "aaaaaaaaaaaaaaaa",
+  "tempoModulo": 10
+}
