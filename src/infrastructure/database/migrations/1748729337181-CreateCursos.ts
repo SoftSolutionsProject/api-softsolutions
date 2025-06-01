@@ -1,12 +1,10 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class CreateCurso1745611111111 implements MigrationInterface {
-  name = 'CreateCurso1745611111111';
-
+export class CreateCursos1748729337181 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
       CREATE TABLE "cursos" (
-        "id" SERIAL NOT NULL,
+        "id" SERIAL PRIMARY KEY,
         "nomeCurso" VARCHAR NOT NULL,
         "tempoCurso" INTEGER NOT NULL,
         "descricaoCurta" VARCHAR NOT NULL,
@@ -15,9 +13,8 @@ export class CreateCurso1745611111111 implements MigrationInterface {
         "categoria" VARCHAR NOT NULL,
         "status" VARCHAR NOT NULL DEFAULT 'ativo',
         "avaliacao" FLOAT NOT NULL DEFAULT 0,
-        "imagemCurso" VARCHAR NOT NULL,
-        CONSTRAINT "PK_cursos_id" PRIMARY KEY ("id")
-      )
+        "imagemCurso" VARCHAR NOT NULL
+      );
     `);
   }
 
