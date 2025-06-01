@@ -22,7 +22,8 @@
     "migration:generate": "npm run typeorm -- migration:generate",
     "migration:run": "npm run typeorm -- migration:run",
     "migration:run:prod": "node --require tsconfig-paths/register ./node_modules/typeorm/cli.js --dataSource dist/ormconfig.migration.js migration:run",
-    "migration:new": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate src/infrastructure/database/migrations/%npm_config_name% -d ormconfig.migration.ts"
+    "migration:new": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate src/infrastructure/database/migrations/%npm_config_name% -d ormconfig.migration.ts",
+    "seed": "ts-node -r tsconfig-paths/register src/seeds/seed.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.1.2",

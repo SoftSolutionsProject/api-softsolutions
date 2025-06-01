@@ -17,7 +17,7 @@ export class AulaEntity implements AulaModel {
   @Column()
   videoUrl: string;
 
-  @Column('simple-array', { nullable: true })
+  @Column({ type: 'jsonb', nullable: true })
   materialApoio: string[];
 
   @Column()

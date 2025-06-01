@@ -8,7 +8,7 @@ export class CreateAulas1748729339005 implements MigrationInterface {
         "nomeAula" VARCHAR NOT NULL,
         "tempoAula" INTEGER NOT NULL,
         "videoUrl" VARCHAR NOT NULL,
-        "materialApoio" TEXT[],
+        "materialApoio" JSONB,
         "descricaoConteudo" TEXT NOT NULL,
         "moduloId" INTEGER REFERENCES modulos(id) ON DELETE CASCADE
       );
