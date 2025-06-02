@@ -19,7 +19,7 @@ import { CancelarInscricaoUseCase } from '../../../application/use-cases/inscric
 import { VerProgressoUseCase } from '../../../application/use-cases/inscricao/ver-progresso.use-case';
 import { InscricaoRepository } from '../../../infrastructure/database/repositories/inscricao.repository';
 import { CursoRepository } from '../../../infrastructure/database/repositories/curso.repository';
-
+import { DesmarcarAulaConcluidaUseCase } from '../../../application/use-cases/inscricao/desmarcar-aula-concluida.use-case';
 
 @Controller('inscricoes')
 @UseGuards(AuthGuard)
@@ -31,7 +31,8 @@ export class InscricaoController {
     private readonly cancelarInscricaoUseCase: CancelarInscricaoUseCase,
     private readonly verProgressoUseCase: VerProgressoUseCase,
     private readonly inscricaoRepo: InscricaoRepository,
-    private readonly cursoRepo: CursoRepository
+    private readonly cursoRepo: CursoRepository,
+     private readonly desmarcarAulaConcluidaUseCase: DesmarcarAulaConcluidaUseCase
   ) {}
 
   @Post('cursos/:idCurso')
@@ -85,6 +86,16 @@ export class InscricaoController {
     return this.marcarAulaConcluidaUseCase.execute(idInscricao, idAula, idUsuario);
   }
 
+   @Post(':idInscricao/desmarcar-aula/:idAula')
+  async desmarcarAula(
+    @Param('idInscricao') idInscricao: number,
+    @Param('idAula') idAula: number,
+    @User('sub') idUsuario: number
+  ) {
+    return this.desmarcarAulaConcluidaUseCase.execute(idInscricao, idAula, idUsuario);
+  }
+
+
 @UseGuards(AuthGuard)
 @Get(':id/aulas')
 async getModulosEAulas(
@@ -105,6 +116,8 @@ async getModulosEAulas(
   }
 
   return curso.modulos;
+
+  
 }
 
 }
