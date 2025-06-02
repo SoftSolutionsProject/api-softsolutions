@@ -3,7 +3,7 @@
 ###########################################################
 
 @baseUrl = http://localhost:4000
-@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIxLCJlbWFpbCI6IjVANS5jb20iLCJ0aXBvIjoiYWx1bm8iLCJpYXQiOjE3NDg2NDY5NzQsImV4cCI6MTc0ODczMzM3NH0.gH5shs1imh8Ka1TbEXe0GJTPB1YfPzwKw2utiFmZMyw
+@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoibHVjYXNAdGVzdGUuY29tIiwidGlwbyI6ImFsdW5vIiwiaWF0IjoxNzQ4ODkxNDMxLCJleHAiOjE3NDg5Nzc4MzF9.ferhPuDsd52dltlMQEq_vzAAU2U67IsHaHQPrvxEJik
 @tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIwLCJlbWFpbCI6ImFkbWluQHRlc3RlLmNvbSIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzQ4NjQ3MDAxLCJleHAiOjE3NDg3MzM0MDF9.oAUEQgOKZGNRO6vp4pdNAh8kG_oMLsRR5cj642U3cCg
 
 ###########################################################
@@ -35,7 +35,7 @@ GET {{baseUrl}}/inscricoes/999/progresso
 Authorization: Bearer {{tokenAluno}}
 
 ### 7. MARCAR AULA COMO CONCLUÍDA (SUCESSO)
-POST {{baseUrl}}/inscricoes/17/concluir-aula/29
+POST {{baseUrl}}/inscricoes/1/concluir-aula/14
 Authorization: Bearer {{tokenAluno}}
 
 ### 8. MARCAR AULA INEXISTENTE (ERRO)
@@ -94,4 +94,14 @@ Authorization: Bearer {{tokenAluno}}
 
 ### 19. TENTAR MARCAR AULA COM IDS INVÁLIDOS (ERRO 400)
 POST {{baseUrl}}/inscricoes/abc/concluir-aula/xyz
+Authorization: Bearer {{tokenAluno}}
+
+
+
+### 20. DESMARCAR AULA COMO CONCLUÍDA (SUCESSO)
+POST {{baseUrl}}/inscricoes/1/desmarcar-aula/14
+Authorization: Bearer {{tokenAluno}}
+
+### 21. DESMARCAR AULA INEXISTENTE (ERRO)
+POST {{baseUrl}}/inscricoes/17/desmarcar-aula/999
 Authorization: Bearer {{tokenAluno}}

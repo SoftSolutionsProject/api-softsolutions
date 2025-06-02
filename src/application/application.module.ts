@@ -47,6 +47,7 @@ import { ListarInscricoesUseCase } from './use-cases/inscricao/listar-inscricoes
 import { MarcarAulaConcluidaUseCase } from './use-cases/inscricao/marcar-aula-concluida.use-case';
 import { CancelarInscricaoUseCase } from './use-cases/inscricao/cancelar-inscricao.use-case';
 import { VerProgressoUseCase } from './use-cases/inscricao/ver-progresso.use-case';
+import { DesmarcarAulaConcluidaUseCase } from './use-cases/inscricao/desmarcar-aula-concluida.use-case';
 
 @Module({
   imports: [
@@ -90,6 +91,7 @@ import { VerProgressoUseCase } from './use-cases/inscricao/ver-progresso.use-cas
     MarcarAulaConcluidaUseCase,
     CancelarInscricaoUseCase,
     VerProgressoUseCase,
+    DesmarcarAulaConcluidaUseCase,
 
     //email
     EnviarEmailUseCase
@@ -131,6 +133,7 @@ import { VerProgressoUseCase } from './use-cases/inscricao/ver-progresso.use-cas
     MarcarAulaConcluidaUseCase,
     CancelarInscricaoUseCase,
     VerProgressoUseCase,
+    DesmarcarAulaConcluidaUseCase,
 
     //EnviarEmailUseCase
     EnviarEmailUseCase
