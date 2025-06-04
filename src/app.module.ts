@@ -1,19 +1,14 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
 
-import { UsuarioModule } from './interfaces/http/usuario/usuario.module';
-import { CursoModule } from './interfaces/http/curso/curso.module';
-import { ModuloModule } from './interfaces/http/modulo/modulo.module';
-import { AulaModule } from './interfaces/http/aula/aula.module';
-import { InscricaoModule } from './interfaces/http/inscricao/inscricao.module';
-import { EmailModule } from './interfaces/http/email/email.module';
-import { AuthModule } from './interfaces/http/auth/auth.module';
+import { InfrastructureModule } from './infrastructure/infrastructure.module';
+import { ApplicationModule } from './application/application.module';
+import { InterfacesModule } from './interfaces/interfaces.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: process.env.DATABASE_URL,
@@ -22,14 +17,9 @@ import { AuthModule } from './interfaces/http/auth/auth.module';
       migrations: ['dist/infrastructure/database/migrations/*.js'],
       migrationsRun: true,
     }),
-    AuthModule,
-    UsuarioModule,
-    CursoModule,
-    ModuloModule,
-    AulaModule,
-    InscricaoModule,
-    EmailModule,
+    InfrastructureModule,
+    ApplicationModule,
+    InterfacesModule,
   ],
-  controllers: [AppController],
 })
 export class AppModule {}

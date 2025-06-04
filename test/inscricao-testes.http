@@ -1,0 +1,107 @@
+###########################################################
+#################### 🔐 VARIÁVEIS #########################
+###########################################################
+
+@baseUrl = http://localhost:4000
+@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoibHVjYXNAdGVzdGUuY29tIiwidGlwbyI6ImFsdW5vIiwiaWF0IjoxNzQ4ODkxNDMxLCJleHAiOjE3NDg5Nzc4MzF9.ferhPuDsd52dltlMQEq_vzAAU2U67IsHaHQPrvxEJik
+@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIwLCJlbWFpbCI6ImFkbWluQHRlc3RlLmNvbSIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzQ4NjQ3MDAxLCJleHAiOjE3NDg3MzM0MDF9.oAUEQgOKZGNRO6vp4pdNAh8kG_oMLsRR5cj642U3cCg
+
+###########################################################
+############## 🚀 TESTES DE INSCRIÇÃO #####################
+###########################################################
+
+### 1. INSCREVER ALUNO EM CURSO EXISTENTE (SUCESSO)
+POST {{baseUrl}}/inscricoes/cursos/17
+Authorization: Bearer {{tokenAluno}}
+
+### 2. TENTAR INSCREVER NO MESMO CURSO NOVAMENTE (ERRO)
+POST {{baseUrl}}/inscricoes/cursos/17
+Authorization: Bearer {{tokenAluno}}
+
+### 3. INSCREVER EM CURSO INEXISTENTE (ERRO)
+POST {{baseUrl}}/inscricoes/cursos/999
+Authorization: Bearer {{tokenAluno}}
+
+### 4. LISTAR INSCRIÇÕES DO ALUNO (SUCESSO)
+GET {{baseUrl}}/inscricoes/usuario
+Authorization: Bearer {{tokenAluno}}
+
+### 5. VER PROGRESSO DO CURSO (SUCESSO)
+GET {{baseUrl}}/inscricoes/17/progresso
+Authorization: Bearer {{tokenAluno}}
+
+### 6. VER PROGRESSO DE INSCRIÇÃO INEXISTENTE (ERRO)
+GET {{baseUrl}}/inscricoes/999/progresso
+Authorization: Bearer {{tokenAluno}}
+
+### 7. MARCAR AULA COMO CONCLUÍDA (SUCESSO)
+POST {{baseUrl}}/inscricoes/1/concluir-aula/14
+Authorization: Bearer {{tokenAluno}}
+
+### 8. MARCAR AULA INEXISTENTE (ERRO)
+POST {{baseUrl}}/inscricoes/1/concluir-aula/999
+Authorization: Bearer {{tokenAluno}}
+
+### 9. MARCAR AULA DE OUTRO CURSO (ERRO)
+POST {{baseUrl}}/inscricoes/1/concluir-aula/5
+Authorization: Bearer {{tokenAluno}}
+
+### 10. CANCELAR INSCRIÇÃO (SUCESSO)
+DELETE {{baseUrl}}/inscricoes/17/cancelar
+Authorization: Bearer {{tokenAluno}}
+
+### 11. TENTAR CANCELAR INSCRIÇÃO JÁ CANCELADA (ERRO)
+DELETE {{baseUrl}}/inscricoes/17/cancelar
+Authorization: Bearer {{tokenAluno}}
+
+### 12. REINSCREVER EM CURSO CANCELADO (SUCESSO)
+POST {{baseUrl}}/inscricoes/cursos/17
+Authorization: Bearer {{tokenAluno}}
+
+### 13. TENTAR ACESSAR INSCRIÇÃO DE OUTRO USUÁRIO (ERRO)
+GET {{baseUrl}}/inscricoes/17/progresso
+Authorization: Bearer {{tokenAluno}}
+
+###########################################################
+############## 🚀 TESTES COMO ADMINISTRADOR ###############
+###########################################################
+
+### 14. ADMIN TENTA SE INSCREVER EM CURSO (SUCESSO - SE PERMITIDO)
+POST {{baseUrl}}/inscricoes/cursos/17
+Authorization: Bearer {{tokenAdmin}}
+
+### 15. ADMIN TENTA CANCELAR INSCRIÇÃO DE ALUNO (DEPENDE DAS REGRAS)
+DELETE {{baseUrl}}/inscricoes/17/cancelar
+Authorization: Bearer {{tokenAdmin}}
+
+###########################################################
+############## 🚀 TESTES SEM AUTENTICAÇÃO #################
+###########################################################
+
+### 16. TENTAR INSCREVER SEM TOKEN (ERRO 401)
+POST {{baseUrl}}/inscricoes/cursos/1
+
+### 17. TENTAR LISTAR INSCRIÇÕES SEM TOKEN (ERRO 401)
+GET {{baseUrl}}/inscricoes/usuario
+
+###########################################################
+############## 🚀 TESTES DE VALIDAÇÃO #####################
+###########################################################
+
+### 18. TENTAR INSCREVER EM CURSO COM ID INVÁLIDO (ERRO 400)
+POST {{baseUrl}}/inscricoes/cursos/abc
+Authorization: Bearer {{tokenAluno}}
+
+### 19. TENTAR MARCAR AULA COM IDS INVÁLIDOS (ERRO 400)
+POST {{baseUrl}}/inscricoes/abc/concluir-aula/xyz
+Authorization: Bearer {{tokenAluno}}
+
+
+
+### 20. DESMARCAR AULA COMO CONCLUÍDA (SUCESSO)
+POST {{baseUrl}}/inscricoes/1/desmarcar-aula/14
+Authorization: Bearer {{tokenAluno}}
+
+### 21. DESMARCAR AULA INEXISTENTE (ERRO)
+POST {{baseUrl}}/inscricoes/17/desmarcar-aula/999
+Authorization: Bearer {{tokenAluno}}
