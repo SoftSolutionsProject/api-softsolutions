@@ -7,8 +7,8 @@ import { CursoController } from './curso.controller';
 import { AuthModule } from '../auth/auth.module';
 import { AulaModule } from '../aula/aula.module';
 import { AulaService } from '../../../application/aula/use-cases/aula.service';
-import { Modulo } from 'src/domain/modulo/modulo.entity';
-import { Inscricao } from 'src/domain/inscricao/inscricao.entity';
+import { Modulo } from '../../../../src/domain/modulo/modulo.entity';
+import { Inscricao } from '../../../../src/domain/inscricao/inscricao.entity';
 
 @Module({
   imports: [

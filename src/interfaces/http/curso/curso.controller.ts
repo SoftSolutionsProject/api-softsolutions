@@ -14,7 +14,7 @@ import {
   import { AuthGuard } from '../auth/auth.guard';
   import { User } from '../usuario/decorators/user.decorator';
   import { ForbiddenException } from '@nestjs/common';
-  import { AulaService } from 'src/application/aula/use-cases/aula.service';
+  import { AulaService } from '../../../../src/application/aula/use-cases/aula.service';
   
   @Controller('cursos')
   export class CursoController {

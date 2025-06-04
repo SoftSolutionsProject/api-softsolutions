@@ -7,7 +7,7 @@ import { AulaService } from '../../../application/aula/use-cases/aula.service';
 import { AulaController } from './aula.controller';
 import { AuthModule } from '../auth/auth.module';
 import { Curso } from '../../../domain/curso/curso.entity';
-import { ProgressoAula } from 'src/domain/inscricao/progresso-aula.entity';
+import { ProgressoAula } from '../../../../src/domain/inscricao/progresso-aula.entity';
 
 @Module({
   imports: [
