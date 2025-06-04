@@ -13,6 +13,28 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/test_db
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      EMAIL_SUPPORT_USER: ${{ secrets.EMAIL_SUPPORT_USER }}
+      EMAIL_SUPPORT_PASS: ${{ secrets.EMAIL_SUPPORT_PASS }}
+      EMAIL_SUPPORT_DESTINATION: ${{ secrets.EMAIL_SUPPORT_DESTINATION }}
+      NODE_ENV: test
     
     steps:
     - name: Checkout repository
@@ -35,13 +57,18 @@ jobs:
     - name: Install dependencies
       run: npm install
     
+    - name: Run database migrations
+      run: npm run migration:run
+    
+    - name: Run seeds
+      run: npm run seed
+    
     - name: Run linter
       run: npm run lint || true
     
     - name: Run tests
       run: npm run test:e2e
-      
-    # Versionamento Semântico
+
     - name: Install semver
       run: npm install -g semver
     
@@ -112,10 +139,12 @@ jobs:
         npm version ${{ env.new_version }} --no-git-tag-version
     
     - name: Criar a imagem Docker
+      if: github.ref == 'refs/heads/main' && env.new_version != ''
       run: |
         docker build -t ${{ secrets.USUARIO_DOCKER }}/softsolutionsfatecvotorantim/backend:${{ env.new_version }} .
 
     - name: Push para o Docker Hub
+      if: github.ref == 'refs/heads/main' && env.new_version != ''
       run: |
         docker push ${{ secrets.USUARIO_DOCKER }}/softsolutionsfatecvotorantim/backend:${{ env.new_version }}
 
