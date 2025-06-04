@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { InfrastructureModule } from 'src/infrastructure/infrastructure.module';
+import { InfrastructureModule } from '../../src/infrastructure/infrastructure.module';
 import { UsuarioController } from './http/controllers/usuario.controller';
 import { CursoController } from './http/controllers/curso.controller';
 import { ApplicationModule } from '../application/application.module';
