@@ -29,7 +29,7 @@ jobs:
           - 5432:5432
 
     env:
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/test_db
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test_db
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
       EMAIL_SUPPORT_USER: ${{ secrets.EMAIL_SUPPORT_USER }}
       EMAIL_SUPPORT_PASS: ${{ secrets.EMAIL_SUPPORT_PASS }}
