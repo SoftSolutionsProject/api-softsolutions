@@ -39,7 +39,7 @@ jobs:
       run: npm run lint || true
     
     - name: Run tests
-      run: npm test
+      run: npm run test:e2e
       
     # Versionamento Semântico
     - name: Install semver
