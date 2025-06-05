@@ -1,0 +1,311 @@
+🔐 VARIÁVEIS DE CONTROLE
+@baseUrl = http://localhost:4000
+@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE5LCJlbWFpbCI6ImFsdW5vQHRlc3RlLmNvbSIsInRpcG8iOiJhbHVubyIsImlhdCI6MTc0NjQ3MjYzMCwiZXhwIjoxNzQ2NTU5MDMwfQ.ZBT_65YfQdmGuO02gQ0nPxLAtQjvw4wJahyF4emUqeE
+@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIwLCJlbWFpbCI6ImFkbWluQHRlc3RlLmNvbSIsInRpcG8iOiJhbHVubyIsImlhdCI6MTc0NjQ3MjkzMSwiZXhwIjoxNzQ2NTU5MzMxfQ.MYl64yFvhiZFI0zuFF04KhWUkviSVeY-s-aWMR6Sp-U
+
+#######################################
+
+
+//🟦 CADASTRO DE ALUNO
+POST {{baseUrl}}/usuarios/cadastro
+Content-Type: application/json
+
+{
+  "nomeUsuario": "Aluno Teste",
+  "cpfUsuario": "42109179074",
+  "email": "aluno@teste.com",
+  "senha": "12345678"
+}
+
+
+#######################################
+
+
+//🟦 CADASTRO DE ADMINISTRADOR
+POST {{baseUrl}}/usuarios/cadastro
+Content-Type: application/json
+
+{
+  "nomeUsuario": "Admin Teste",
+  "cpfUsuario": "21145408044",
+  "email": "admin@teste.com",
+  "senha": "admin123",
+  "tipo": "administrador"
+}
+
+
+#######################################
+
+
+//🟦 LOGIN - ALUNO
+POST {{baseUrl}}/usuarios/login
+Content-Type: application/json
+
+{
+  "email": "10@10.com",
+  "senha": "123456"
+}
+
+
+#######################################
+
+
+//🟦 LOGIN - ADMIN
+POST {{baseUrl}}/usuarios/login
+Content-Type: application/json
+
+{
+  "email": "admin@teste.com",
+  "senha": "admin123"
+}
+
+
+#######################################
+
+
+//🟦 LISTAR TODOS OS USUÁRIOS (ALUNO — 403)
+GET {{baseUrl}}/usuarios
+Authorization: Bearer {{tokenAluno}}
+
+
+#######################################
+
+
+//🟦 LISTAR TODOS OS USUÁRIOS (ADMIN)
+GET {{baseUrl}}/usuarios
+Authorization: Bearer {{tokenAdmin}}
+
+
+#######################################
+
+
+//🟦 BUSCAR USUÁRIO POR ID
+GET {{baseUrl}}/usuarios/2
+Authorization: Bearer {{tokenAdmin}}
+
+
+#######################################
+
+
+//🟦 BUSCAR USUÁRIO POR ID SENDO ALUNO
+GET {{baseUrl}}/usuarios/19
+Authorization: Bearer {{tokenAluno}}
+
+#######################################
+
+
+//🟦 TENTATIVA DE ALTERAÇÃO DE TIPO DE USUÁRIO (NEGADO)
+PUT {{baseUrl}}/usuarios/19
+Authorization: Bearer {{tokenAluno}}
+Content-Type: application/json
+
+{
+  "tipo": "administrador"
+}
+
+
+#######################################
+
+
+//🟦 ACESSO AO PRÓPRIO PERFIL
+GET {{baseUrl}}/usuarios/19
+Authorization: Bearer {{tokenAluno}}
+
+
+#######################################
+
+
+//🟦 REMOÇÃO DO PRÓPRIO USUÁRIO
+DELETE {{baseUrl}}/usuarios/19
+Authorization: Bearer {{tokenAluno}}
+
+
+#######################################
+
+
+//🟦 DELETAR UM USUÁRIO
+DELETE {{baseUrl}}/usuarios/18
+Authorization: Bearer {{tokenAdmin}}
+
+
+#######################################
+
+
+//🟦 TENTATIVA DE CRIAR CURSO COM ALUNO (403)
+POST {{baseUrl}}/cursos
+Authorization: Bearer {{tokenAluno}}
+Content-Type: application/json
+
+{
+  "nomeCurso": "Curso Restrito",
+  "tempoCurso": 100,
+  "descricaoCurta": "Teste",
+  "descricaoDetalhada": "Teste detalhado",
+  "professor": "Zé da Silva",
+  "categoria": "Back-end",
+  "imagemCurso": "imagem.png"
+}
+
+
+#######################################
+
+
+//🟦 CRIAÇÃO DE CURSO COM ADMIN
+POST {{baseUrl}}/cursos
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "nomeCurso": "Curso Oficial",
+  "tempoCurso": 200,
+  "descricaoCurta": "Curso completo",
+  "descricaoDetalhada": "Aulas práticas e teóricas",
+  "professor": "Maria",
+  "categoria": "Fullstack",
+  "imagemCurso": "imagem.png"
+}
+
+
+#######################################
+
+
+//🟦 LISTAR TODOS OS CURSOS
+GET {{baseUrl}}/cursos
+Authorization: Bearer {{tokenAluno}}
+
+
+#######################################
+
+
+//🟦 LISTAR AULAS DE UM CURSO
+GET {{baseUrl}}/cursos/8/aulas
+
+
+#######################################
+
+
+//🟦 TENTATIVA DE CRIAR MÓDULO COM ALUNO (403)
+POST {{baseUrl}}/modulos
+Authorization: Bearer {{tokenAluno}}
+Content-Type: application/json
+
+{
+  "nomeModulo": "Módulo Proibido",
+  "tempoModulo": 90,
+  "idCurso": 1
+}
+
+
+#######################################
+
+
+//🟦 CRIAÇÃO DE MÓDULO COM ADMIN
+POST {{baseUrl}}/modulos
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "nomeModulo": "Módulo 1",
+  "tempoModulo": 120,
+  "idCurso": 11
+}
+
+
+#######################################
+
+
+//🟦 LISTAR AULAS DE UM MÓDULO
+GET {{baseUrl}}/aulas/modulo/5
+Authorization: Bearer {{tokenAluno}}
+
+
+#######################################
+
+
+//🟦 TENTATIVA DE CRIAR AULA COM ALUNO (403)
+POST {{baseUrl}}/aulas
+Authorization: Bearer {{tokenAluno}}
+Content-Type: application/json
+
+{
+  "nomeAula": "Aula Proibida",
+  "tempoAula": 30,
+  "videoUrl": "https://youtube.com/erro",
+  "descricaoConteudo": "Aula sem permissão",
+  "idModulo": 1
+}
+
+
+#######################################
+
+
+//🟦 CRIAÇÃO DE AULA COM ADMIN
+POST {{baseUrl}}/aulas
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "nomeAula": "Primeira Aula",
+  "tempoAula": 30,
+  "videoUrl": "https://youtube.com/aula1",
+  "descricaoConteudo": "Introdução à plataforma",
+  "idModulo": 10
+}
+
+
+#######################################
+
+
+//🟦 INSCRIÇÃO DO ALUNO NO CURSO
+POST {{baseUrl}}/inscricoes/cursos/7
+Authorization: Bearer {{tokenAluno}}
+
+
+#######################################
+
+
+//🟦 LISTAR INSCRIÇÕES DO USUÁRIO
+GET {{baseUrl}}/inscricoes/usuario
+Authorization: Bearer {{tokenAluno}}
+
+
+#######################################
+
+
+//🟦 VER PROGRESSO DO CURSO
+GET {{baseUrl}}/inscricoes/14/progresso
+Authorization: Bearer {{tokenAluno}}
+
+
+#######################################
+
+
+//🟦 MARCAR AULA COMO CONCLUÍDA
+POST {{baseUrl}}/inscricoes/14/concluir-aula/3
+Authorization: Bearer {{tokenAluno}}
+
+
+#######################################
+
+
+//🟦 CANCELAR INSCRIÇÃO
+DELETE {{baseUrl}}/inscricoes/14/cancelar
+Authorization: Bearer {{tokenAluno}}
+
+
+#######################################
+
+
+//🟦 ENVIO DE E-MAIL DE SUPORTE
+POST {{baseUrl}}/email/suporte
+Content-Type: application/json
+
+{
+  "nome": "Clemencia",
+  "email": "Creidinha@gmail.com",
+  "assunto": "Erro no curso",
+  "mensagem": "Ao acessar o curso, o vídeo não carrega."
+}
+
+
+#######################################

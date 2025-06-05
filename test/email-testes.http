@@ -1,0 +1,64 @@
+###########################################################
+#################### 🔐 VARIÁVEIS #########################
+###########################################################
+
+@baseUrl = http://localhost:4000
+@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIxLCJlbWFpbCI6IjVANS5jb20iLCJ0aXBvIjoiYWx1bm8iLCJpYXQiOjE3NDg2Mzc2ODEsImV4cCI6MTc0ODcyNDA4MX0.UVRkmSRBSm-whdEAb21w9V5q-bTu5IT6xOBEVuYFjXk
+@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIwLCJlbWFpbCI6ImFkbWluQHRlc3RlLmNvbSIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzQ4NjQxNzI4LCJleHAiOjE3NDg3MjgxMjh9.tgnPMaZAlftwNDcPoZJ8zh3u1w__jBBjSNHUxakzQ8s
+
+###########################################################
+################ ✉️ ENVIO DE E-MAIL - PÚBLICO ✅ ###########
+###########################################################
+
+POST {{baseUrl}}/email/suporte
+Content-Type: application/json
+
+{
+  "nome": "João Silva",
+  "email": "joao.silva@exemplo.com",
+  "assunto": "Problema no acesso",
+  "mensagem": "Não consigo acessar minha conta desde ontem. Podem ajudar?"
+}
+
+###########################################################
+######## ✉️ ENVIO DE E-MAIL - DADOS INCOMPLETOS ❌ (400) ###
+###########################################################
+
+POST {{baseUrl}}/email/suporte
+Content-Type: application/json
+
+{
+  "nome": "Maria Oliveira",
+  "email": "maria.oliveira@exemplo.com",
+  "assunto": "",
+  "mensagem": ""
+}
+
+###########################################################
+#### ✉️ ENVIO DE E-MAIL - FORMATO DE E-MAIL INVÁLIDO ❌ (400) ###
+###########################################################
+
+POST {{baseUrl}}/email/suporte
+Content-Type: application/json
+
+{
+  "nome": "Carlos Souza",
+  "email": "carlos.souza",
+  "assunto": "Dúvida sobre cursos",
+  "mensagem": "Gostaria de saber mais sobre os cursos disponíveis"
+}
+
+###########################################################
+#### ✉️ ENVIO DE E-MAIL - COM TOKEN (TAMBÉM FUNCIONA) ✅ ###
+###########################################################
+
+POST {{baseUrl}}/email/suporte
+Authorization: Bearer {{tokenAluno}}
+Content-Type: application/json
+
+{
+  "nome": "Aluno Teste",
+  "email": "aluno@teste.com",
+  "assunto": "Dúvida na aula",
+  "mensagem": "Não consegui entender o conceito de middleware na última aula"
+}
