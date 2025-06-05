@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsuarioEntity } from 'src/infrastructure/database/entities/usuario.entity';
-import { CursoEntity } from 'src/infrastructure/database/entities/curso.entity';
+import { UsuarioEntity } from '../../src/infrastructure/database/entities/usuario.entity';
+import { CursoEntity } from '../../src/infrastructure/database/entities/curso.entity';
 import { ModuloEntity } from '../infrastructure/database/entities/modulo.entity';
-import { AulaEntity } from 'src/infrastructure/database/entities/aula.entity';
+import { AulaEntity } from '../../src/infrastructure/database/entities/aula.entity';
 import { InscricaoEntity } from '../infrastructure/database/entities/inscricao.entity';
 import { ProgressoAulaEntity } from '../infrastructure/database/entities/progresso-aula.entity';
 
-import { InfrastructureModule } from 'src/infrastructure/infrastructure.module';
+import { InfrastructureModule } from '../../src/infrastructure/infrastructure.module';
 
 // Usuario use cases
 import { CreateUsuarioUseCase } from './use-cases/usuario/create-usuario.use-case';
