@@ -84,7 +84,7 @@ jobs:
         fi
     
     - name: Calculate and generate new version
-      if: github.ref == 'refs/heads/main'
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
@@ -130,35 +130,82 @@ jobs:
           NEW_VERSION=$(semver -i patch $CURRENT_VERSION)
         fi
         
+        # Adiciona sufixo beta para a branch develop
+        if [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
+          NEW_VERSION="${NEW_VERSION}-beta.$(date +%Y%m%d%H%M%S)"
+        fi
+        
         echo "Nova versão: $NEW_VERSION"
         echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
     
     - name: Update package.json version
-      if: github.ref == 'refs/heads/main' && env.new_version != ''
+      if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
       run: |
-        npm version ${{ env.new_version }} --no-git-tag-version
-    
+        CURRENT_PKG_VERSION=$(node -p "require('./package.json').version")
+        echo "Versão atual no package.json: $CURRENT_PKG_VERSION"
+        echo "Nova versão calculada: ${{ env.new_version }}"
+        
+        if [[ "$CURRENT_PKG_VERSION" != "${{ env.new_version }}" ]]; then
+          npm version ${{ env.new_version }} --no-git-tag-version
+          echo "Versão atualizada com sucesso!"
+        else
+          echo "Versão já está atualizada, pulando..."
+        fi
+
     - name: Criar a imagem Docker
-      if: github.ref == 'refs/heads/main' && env.new_version != ''
+      if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
+      env:
+        DATABASE_URL: ""
+        JWT_SECRET: ""
+        EMAIL_SUPPORT_USER: ""
+        EMAIL_SUPPORT_PASS: ""
+        EMAIL_SUPPORT_DESTINATION: ""
       run: |
-        docker build -t ${{ secrets.USUARIO_DOCKER }}/softsolutionsfatecvotorantim/backend:${{ env.new_version }} .
+        # Sempre cria a tag versionada
+        docker build \
+          --no-cache \
+          -t ${{ secrets.USUARIO_DOCKER }}/backend:${{ env.new_version }} \
+          .
+        
+        # Só cria tag latest na main
+        if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+          docker tag ${{ secrets.USUARIO_DOCKER }}/backend:${{ env.new_version }} ${{ secrets.USUARIO_DOCKER }}/backend:latest
+        fi
 
     - name: Push para o Docker Hub
-      if: github.ref == 'refs/heads/main' && env.new_version != ''
+      if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
       run: |
-        docker push ${{ secrets.USUARIO_DOCKER }}/softsolutionsfatecvotorantim/backend:${{ env.new_version }}
+        # Sempre faz push da versão específica
+        docker push ${{ secrets.USUARIO_DOCKER }}/backend:${{ env.new_version }}
+        
+        # Só faz push do latest na main
+        if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+          docker push ${{ secrets.USUARIO_DOCKER }}/backend:latest
+        fi
 
     - name: Commit and push new version
-      if: github.ref == 'refs/heads/main' && env.new_version != ''
+      if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
-        git add package.json
-        git commit -m "chore(release): version ${{ env.new_version }}"
-        git tag v${{ env.new_version }}
-        git push origin main --tags
+        
+        # Verificar se há mudanças no package.json
+        if git diff --quiet package.json; then
+          echo "Nenhuma mudança no package.json, pulando commit..."
+        else
+          git add package.json
+          git commit -m "chore(release): version ${{ env.new_version }}"
+          git tag v${{ env.new_version }}
+          
+          # Push to appropriate branch
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            git push origin main --tags
+          else
+            git push origin develop --tags
+          fi
+        fi
     
     # Email Notification
     - name: Send email on failure
