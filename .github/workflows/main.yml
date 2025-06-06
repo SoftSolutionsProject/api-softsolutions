@@ -132,7 +132,7 @@ jobs:
         
         # Adiciona sufixo beta para a branch develop
         if [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
-          NEW_VERSION="${NEW_VERSION}-beta.$(date +%Y%m%d%H%M%S)"
+          NEW_VERSION="${NEW_VERSION}-beta.$(date +%Y%m%d)"
         fi
         
         echo "Nova versão: $NEW_VERSION"
