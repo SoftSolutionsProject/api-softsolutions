@@ -70,9 +70,11 @@ jobs:
       run: npm run test:e2e
 
     - name: Install semver
+      if: github.ref == 'refs/heads/main'
       run: npm install -g semver
     
     - name: Create initial tag if not exists
+      if: github.ref == 'refs/heads/main'
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
@@ -84,7 +86,7 @@ jobs:
         fi
     
     - name: Calculate and generate new version
-      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+      if: github.ref == 'refs/heads/main'
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
@@ -120,30 +122,21 @@ jobs:
         
         # Calculate new version
         CURRENT_VERSION=${LAST_TAG#v}
-        
-        # Remove qualquer sufixo beta existente da versão atual
-        CLEAN_VERSION=$(echo "$CURRENT_VERSION" | sed 's/-beta\.[0-9]*//g')
-        
-        NEW_VERSION=$CLEAN_VERSION
+        NEW_VERSION=$CURRENT_VERSION
         
         if [[ $MAJOR -eq 1 ]]; then
-          NEW_VERSION=$(semver -i major $CLEAN_VERSION)
+          NEW_VERSION=$(semver -i major $CURRENT_VERSION)
         elif [[ $MINOR -eq 1 ]]; then
-          NEW_VERSION=$(semver -i minor $CLEAN_VERSION)
+          NEW_VERSION=$(semver -i minor $CURRENT_VERSION)
         elif [[ $PATCH -eq 1 ]]; then
-          NEW_VERSION=$(semver -i patch $CLEAN_VERSION)
-        fi
-        
-        # Adiciona sufixo beta para a branch develop
-        if [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
-          NEW_VERSION="${NEW_VERSION}-beta.$(date +%Y%m%d)"
+          NEW_VERSION=$(semver -i patch $CURRENT_VERSION)
         fi
         
         echo "Nova versão: $NEW_VERSION"
         echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
     
     - name: Update package.json version
-      if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
+      if: github.ref == 'refs/heads/main' && env.new_version != ''
       run: |
         CURRENT_PKG_VERSION=$(node -p "require('./package.json').version")
         echo "Versão atual no package.json: $CURRENT_PKG_VERSION"
@@ -157,7 +150,7 @@ jobs:
         fi
 
     - name: Criar a imagem Docker
-      if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
+      if: github.ref == 'refs/heads/main' && env.new_version != ''
       env:
         DATABASE_URL: ""
         JWT_SECRET: ""
@@ -165,30 +158,20 @@ jobs:
         EMAIL_SUPPORT_PASS: ""
         EMAIL_SUPPORT_DESTINATION: ""
       run: |
-        # Sempre cria a tag versionada
         docker build \
           --no-cache \
           -t ${{ secrets.USUARIO_DOCKER }}/backend:${{ env.new_version }} \
+          -t ${{ secrets.USUARIO_DOCKER }}/backend:latest \
           .
-        
-        # Só cria tag latest na main
-        if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-          docker tag ${{ secrets.USUARIO_DOCKER }}/backend:${{ env.new_version }} ${{ secrets.USUARIO_DOCKER }}/backend:latest
-        fi
 
     - name: Push para o Docker Hub
-      if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
+      if: github.ref == 'refs/heads/main' && env.new_version != ''
       run: |
-        # Sempre faz push da versão específica
         docker push ${{ secrets.USUARIO_DOCKER }}/backend:${{ env.new_version }}
-        
-        # Só faz push do latest na main
-        if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-          docker push ${{ secrets.USUARIO_DOCKER }}/backend:latest
-        fi
+        docker push ${{ secrets.USUARIO_DOCKER }}/backend:latest
 
     - name: Commit and push new version
-      if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
+      if: github.ref == 'refs/heads/main' && env.new_version != ''
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
@@ -202,13 +185,7 @@ jobs:
           git add package.json
           git commit -m "chore(release): version ${{ env.new_version }}"
           git tag v${{ env.new_version }}
-          
-          # Push to appropriate branch
-          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            git push origin main --tags
-          else
-            git push origin develop --tags
-          fi
+          git push origin main --tags
         fi
     
     # Email Notification
@@ -220,13 +197,14 @@ jobs:
         server_port: 587
         username: ${{secrets.EMAIL_ORIGEM}}
         password: ${{secrets.SENHA_EMAIL}}
-        subject: Workflow Failure in GitHub Actions
+        subject: Backend Workflow Failure in GitHub Actions
         body: |
-          The GitHub Actions workflow for ${{ github.repository }} has failed.
+          The GitHub Actions workflow for backend ${{ github.repository }} has failed.
           
           Workflow: ${{ github.workflow }}
           Action: ${{ github.action }}
           Repository: ${{ github.repository }}
+          Branch: ${{ github.ref }}
           
           Check the Actions tab for more details.
         to: ${{secrets.EMAIL_DESTINO}}
