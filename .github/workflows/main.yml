@@ -161,15 +161,27 @@ jobs:
         EMAIL_SUPPORT_PASS: ""
         EMAIL_SUPPORT_DESTINATION: ""
       run: |
+        # Sempre cria a tag versionada
         docker build \
           --no-cache \
           -t ${{ secrets.USUARIO_DOCKER }}/backend:${{ env.new_version }} \
           .
+        
+        # Só cria tag latest na main
+        if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+          docker tag ${{ secrets.USUARIO_DOCKER }}/backend:${{ env.new_version }} ${{ secrets.USUARIO_DOCKER }}/backend:latest
+        fi
 
     - name: Push para o Docker Hub
       if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
       run: |
+        # Sempre faz push da versão específica
         docker push ${{ secrets.USUARIO_DOCKER }}/backend:${{ env.new_version }}
+        
+        # Só faz push do latest na main
+        if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+          docker push ${{ secrets.USUARIO_DOCKER }}/backend:latest
+        fi
 
     - name: Commit and push new version
       if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
