@@ -84,7 +84,7 @@ jobs:
         fi
     
     - name: Calculate and generate new version
-      if: github.ref == 'refs/heads/main'
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
@@ -130,26 +130,40 @@ jobs:
           NEW_VERSION=$(semver -i patch $CURRENT_VERSION)
         fi
         
+        # Adiciona sufixo beta para a branch develop
+        if [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
+          NEW_VERSION="${NEW_VERSION}-beta.$(date +%Y%m%d%H%M%S)"
+        fi
+        
         echo "Nova versão: $NEW_VERSION"
         echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
     
     - name: Update package.json version
-      if: github.ref == 'refs/heads/main' && env.new_version != ''
+      if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
       run: |
         npm version ${{ env.new_version }} --no-git-tag-version
     
     - name: Criar a imagem Docker
-      if: github.ref == 'refs/heads/main' && env.new_version != ''
+      if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
+      env:
+        DATABASE_URL: ""
+        JWT_SECRET: ""
+        EMAIL_SUPPORT_USER: ""
+        EMAIL_SUPPORT_PASS: ""
+        EMAIL_SUPPORT_DESTINATION: ""
       run: |
-        docker build -t ${{ secrets.USUARIO_DOCKER }}/softsolutionsfatecvotorantim/backend:${{ env.new_version }} .
+        docker build \
+          --no-cache \
+          -t ${{ secrets.USUARIO_DOCKER }}/backend:${{ env.new_version }} \
+          .
 
     - name: Push para o Docker Hub
-      if: github.ref == 'refs/heads/main' && env.new_version != ''
+      if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
       run: |
-        docker push ${{ secrets.USUARIO_DOCKER }}/softsolutionsfatecvotorantim/backend:${{ env.new_version }}
+        docker push ${{ secrets.USUARIO_DOCKER }}/backend:${{ env.new_version }}
 
     - name: Commit and push new version
-      if: github.ref == 'refs/heads/main' && env.new_version != ''
+      if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
@@ -158,7 +172,13 @@ jobs:
         git add package.json
         git commit -m "chore(release): version ${{ env.new_version }}"
         git tag v${{ env.new_version }}
-        git push origin main --tags
+        
+        # Push to appropriate branch
+        if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+          git push origin main --tags
+        else
+          git push origin develop --tags
+        fi
     
     # Email Notification
     - name: Send email on failure
