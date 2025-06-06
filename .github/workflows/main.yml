@@ -141,8 +141,17 @@ jobs:
     - name: Update package.json version
       if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
       run: |
-        npm version ${{ env.new_version }} --no-git-tag-version
-    
+        CURRENT_PKG_VERSION=$(node -p "require('./package.json').version")
+        echo "Versão atual no package.json: $CURRENT_PKG_VERSION"
+        echo "Nova versão calculada: ${{ env.new_version }}"
+        
+        if [[ "$CURRENT_PKG_VERSION" != "${{ env.new_version }}" ]]; then
+          npm version ${{ env.new_version }} --no-git-tag-version
+          echo "Versão atualizada com sucesso!"
+        else
+          echo "Versão já está atualizada, pulando..."
+        fi
+
     - name: Criar a imagem Docker
       if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
       env:
