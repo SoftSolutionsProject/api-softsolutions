@@ -141,12 +141,15 @@ jobs:
     - name: Criar a imagem Docker
       if: github.ref == 'refs/heads/main' && env.new_version != ''
       run: |
-        docker build -t ${{ secrets.USUARIO_DOCKER }}/softsolutionsfatecvotorantim/backend:${{ env.new_version }} .
+        docker build \
+          --no-cache \
+          -t ${{ secrets.USUARIO_DOCKER }}/backend:${{ env.new_version }} \
+          .
 
     - name: Push para o Docker Hub
       if: github.ref == 'refs/heads/main' && env.new_version != ''
       run: |
-        docker push ${{ secrets.USUARIO_DOCKER }}/softsolutionsfatecvotorantim/backend:${{ env.new_version }}
+        docker push ${{ secrets.USUARIO_DOCKER }}/backend:${{ env.new_version }}
 
     - name: Commit and push new version
       if: github.ref == 'refs/heads/main' && env.new_version != ''
