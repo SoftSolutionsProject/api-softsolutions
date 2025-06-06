@@ -29,7 +29,7 @@ jobs:
           - 5432:5432
 
     env:
-      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test_db
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/test_db
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
       EMAIL_SUPPORT_USER: ${{ secrets.EMAIL_SUPPORT_USER }}
       EMAIL_SUPPORT_PASS: ${{ secrets.EMAIL_SUPPORT_PASS }}
@@ -143,7 +143,7 @@ jobs:
         echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
     
     - name: Update package.json version
-      if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
+      if: github.ref == 'refs/heads/main' && env.new_version != ''
       run: |
         CURRENT_PKG_VERSION=$(node -p "require('./package.json').version")
         echo "Versão atual no package.json: $CURRENT_PKG_VERSION"
@@ -155,6 +155,16 @@ jobs:
         else
           echo "Versão já está atualizada, pulando..."
         fi
+
+    - name: Criar tag beta no GitHub (apenas develop)
+      if: github.ref == 'refs/heads/develop' && env.new_version != ''
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git tag v${{ env.new_version }}
+        git push origin v${{ env.new_version }}
 
     - name: Criar a imagem Docker
       if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
@@ -188,7 +198,7 @@ jobs:
         fi
 
     - name: Commit and push new version
-      if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && env.new_version != ''
+      if: github.ref == 'refs/heads/main' && env.new_version != ''
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
@@ -202,13 +212,7 @@ jobs:
           git add package.json
           git commit -m "chore(release): version ${{ env.new_version }}"
           git tag v${{ env.new_version }}
-          
-          # Push to appropriate branch
-          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            git push origin main --tags
-          else
-            git push origin develop --tags
-          fi
+          git push origin main --tags
         fi
     
     # Email Notification
