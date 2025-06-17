@@ -1,0 +1,34 @@
+###########################################################
+################## 🎓 CERTIFICADOS #########################
+###########################################################
+
+@baseUrl = http://localhost:4000
+@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoibHVjYXNAdGVzdGUuY29tIiwidGlwbyI6ImFsdW5vIiwiaWF0IjoxNzQ5NjYzMTg4LCJleHAiOjE3NDk3NDk1ODh9.d1lLYF1hEzSBZJBjrKNC6Rur0XY5u0dSeVXqBj_DMKM
+@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIwLCJlbWFpbCI6ImFkbWluQHRlc3RlLmNvbSIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzQ4NDY2NjIwLCJleHAiOjE3NDg1NTMwMjB9.QHyalKdAopRog_K0WHLFtAeXx9JyujE5x0J-rek1hbA
+
+###########################################################
+########### 📜 EMITIR CERTIFICADO - ALUNO ✅ ###############
+###########################################################
+
+GET {{baseUrl}}/certificados/2
+Authorization: Bearer {{tokenAluno}}
+
+###########################################################
+########### 🔍 VALIDAR CERTIFICADO - PÚBLICO ✅ ############
+###########################################################
+
+### Substitua o UUID por um número de série válido do seu banco
+GET {{baseUrl}}/certificados/publico/5e329c71-f2d3-41df-b7d5-34b6f55895e2
+
+###########################################################
+#### 🚫 TENTATIVA DE EMITIR CERTIFICADO SEM AUTH ❌ (401) ###
+###########################################################
+
+GET {{baseUrl}}/certificados/1
+
+###########################################################
+### 🚫 TENTATIVA DE EMITIR CERTIFICADO DE OUTRO ALUNO ❌ ###
+###########################################################
+
+GET {{baseUrl}}/certificados/3
+Authorization: Bearer {{tokenAluno}}

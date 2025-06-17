@@ -12,12 +12,13 @@ import { InscricaoEntity } from './database/entities/inscricao.entity';
 import { ProgressoAulaEntity } from './database/entities/progresso-aula.entity';
 import { InscricaoRepository } from './database/repositories/inscricao.repository';
 import { ProgressoAulaRepository } from './database/repositories/progresso-aula.repository';
-
+import { CertificadoEntity } from './database/entities/certificado.entity';
+import { CertificadoRepository } from './database/repositories/certificado.repository';
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UsuarioEntity, CursoEntity, ModuloEntity, AulaEntity, InscricaoEntity, ProgressoAulaEntity])],
-  providers: [UsuarioRepository, CursoRepository, ModuloRepository, AulaRepository, InscricaoRepository, ProgressoAulaRepository,],
-  exports: [UsuarioRepository, CursoRepository, ModuloRepository, AulaRepository, InscricaoRepository,ProgressoAulaRepository,],
+  imports: [TypeOrmModule.forFeature([UsuarioEntity, CursoEntity, ModuloEntity, AulaEntity, InscricaoEntity, ProgressoAulaEntity, CertificadoEntity])],
+  providers: [UsuarioRepository, CursoRepository, ModuloRepository, AulaRepository, InscricaoRepository, ProgressoAulaRepository, CertificadoRepository],
+  exports: [UsuarioRepository, CursoRepository, ModuloRepository, AulaRepository, InscricaoRepository,ProgressoAulaRepository, CertificadoRepository],
 })
 export class InfrastructureModule {}

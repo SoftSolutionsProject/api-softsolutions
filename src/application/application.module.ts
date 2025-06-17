@@ -6,6 +6,7 @@ import { ModuloEntity } from '../infrastructure/database/entities/modulo.entity'
 import { AulaEntity } from '../../src/infrastructure/database/entities/aula.entity';
 import { InscricaoEntity } from '../infrastructure/database/entities/inscricao.entity';
 import { ProgressoAulaEntity } from '../infrastructure/database/entities/progresso-aula.entity';
+import { EmitirCertificadoUseCase } from './use-cases/certificado/emitir-certificado.use-case';
 
 import { InfrastructureModule } from '../../src/infrastructure/infrastructure.module';
 
@@ -94,7 +95,10 @@ import { DesmarcarAulaConcluidaUseCase } from './use-cases/inscricao/desmarcar-a
     DesmarcarAulaConcluidaUseCase,
 
     //email
-    EnviarEmailUseCase
+    EnviarEmailUseCase,
+
+    // Certificado
+    EmitirCertificadoUseCase
   ],
   exports: [
     // Usuario
@@ -136,7 +140,10 @@ import { DesmarcarAulaConcluidaUseCase } from './use-cases/inscricao/desmarcar-a
     DesmarcarAulaConcluidaUseCase,
 
     //EnviarEmailUseCase
-    EnviarEmailUseCase
+    EnviarEmailUseCase,
+
+    // Certificado
+    EmitirCertificadoUseCase,
   ],
 })
 export class ApplicationModule {}
