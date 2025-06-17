@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
+// Entities
 import { UsuarioEntity } from '../../src/infrastructure/database/entities/usuario.entity';
 import { CursoEntity } from '../../src/infrastructure/database/entities/curso.entity';
 import { ModuloEntity } from '../infrastructure/database/entities/modulo.entity';
 import { AulaEntity } from '../../src/infrastructure/database/entities/aula.entity';
 import { InscricaoEntity } from '../infrastructure/database/entities/inscricao.entity';
 import { ProgressoAulaEntity } from '../infrastructure/database/entities/progresso-aula.entity';
-import { EmitirCertificadoUseCase } from './use-cases/certificado/emitir-certificado.use-case';
+import { CertificadoEntity } from '../infrastructure/database/entities/certificado.entity';
+import { AvaliacaoEntity } from '../infrastructure/database/entities/avaliacao.entity';
 
 import { InfrastructureModule } from '../../src/infrastructure/infrastructure.module';
 
@@ -17,6 +20,8 @@ import { GetUsuarioByIdUseCase } from './use-cases/usuario/get-usuario-by-id.use
 import { ListUsuarioUseCase } from './use-cases/usuario/list-usuario.use-case';
 import { LoginUsuarioUseCase } from './use-cases/usuario/login-usuario.use-case';
 import { UpdateUsuarioUseCase } from './use-cases/usuario/update-usuario.use-case';
+
+// Email
 import { EnviarEmailUseCase } from './use-cases/email/enviar-email.use-case';
 
 // Curso use cases
@@ -50,100 +55,80 @@ import { CancelarInscricaoUseCase } from './use-cases/inscricao/cancelar-inscric
 import { VerProgressoUseCase } from './use-cases/inscricao/ver-progresso.use-case';
 import { DesmarcarAulaConcluidaUseCase } from './use-cases/inscricao/desmarcar-aula-concluida.use-case';
 
+// Certificado
+import { EmitirCertificadoUseCase } from './use-cases/certificado/emitir-certificado.use-case';
+
+// Avaliacao use cases
+import { CriarAvaliacaoUseCase } from './use-cases/avaliacao/criar-avaliacao.use-case';
+import { AtualizarAvaliacaoUseCase } from './use-cases/avaliacao/atualizar-avaliacao.use-case';
+
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UsuarioEntity, CursoEntity, ModuloEntity, AulaEntity,  InscricaoEntity,
-      ProgressoAulaEntity]),
+    TypeOrmModule.forFeature([
+      UsuarioEntity, CursoEntity, ModuloEntity, AulaEntity,
+      InscricaoEntity, ProgressoAulaEntity, CertificadoEntity, AvaliacaoEntity
+    ]),
     InfrastructureModule,
   ],
   providers: [
     // Usuario
-    CreateUsuarioUseCase,
-    DeleteUsuarioUseCase,
-    GetUsuarioByIdUseCase,
-    ListUsuarioUseCase,
-    LoginUsuarioUseCase,
-    UpdateUsuarioUseCase,
+    CreateUsuarioUseCase, DeleteUsuarioUseCase, GetUsuarioByIdUseCase,
+    ListUsuarioUseCase, LoginUsuarioUseCase, UpdateUsuarioUseCase,
+
     // Curso
-    CreateCursoUseCase,
-    DeleteCursoUseCase,
-    GetCursoByIdUseCase,
-    ListCursoUseCase,
-    UpdateCursoUseCase,
-
-    CreateModuloUseCase,
-    DeleteModuloUseCase,
-    GetModuloByIdUseCase,
-    ListModuloUseCase,
-    UpdateModuloUseCase,
-
-     // Aula
-    CreateAulaUseCase,
-    DeleteAulaUseCase,
-    GetAulaByIdUseCase,
-    ListAulaUseCase,
-    UpdateAulaUseCase,
-    ListAulaByModuloUseCase,
-    ListAulaByCursoUseCase,
-
-    // Inscricao
-    InscreverUsuarioUseCase,
-    ListarInscricoesUseCase,
-    MarcarAulaConcluidaUseCase,
-    CancelarInscricaoUseCase,
-    VerProgressoUseCase,
-    DesmarcarAulaConcluidaUseCase,
-
-    //email
-    EnviarEmailUseCase,
-
-    // Certificado
-    EmitirCertificadoUseCase
-  ],
-  exports: [
-    // Usuario
-    CreateUsuarioUseCase,
-    DeleteUsuarioUseCase,
-    GetUsuarioByIdUseCase,
-    ListUsuarioUseCase,
-    LoginUsuarioUseCase,
-    UpdateUsuarioUseCase,
-    // Curso
-    CreateCursoUseCase,
-    DeleteCursoUseCase,
-    GetCursoByIdUseCase,
-    ListCursoUseCase,
-    UpdateCursoUseCase,
+    CreateCursoUseCase, DeleteCursoUseCase, GetCursoByIdUseCase,
+    ListCursoUseCase, UpdateCursoUseCase,
 
     // Modulo
-    CreateModuloUseCase,
-    DeleteModuloUseCase,
-    GetModuloByIdUseCase,
-    ListModuloUseCase,
-    UpdateModuloUseCase,
+    CreateModuloUseCase, DeleteModuloUseCase, GetModuloByIdUseCase,
+    ListModuloUseCase, UpdateModuloUseCase,
 
     // Aula
-    CreateAulaUseCase,
-    DeleteAulaUseCase,
-    GetAulaByIdUseCase,
-    ListAulaUseCase,
-    UpdateAulaUseCase,
-    ListAulaByModuloUseCase,
-    ListAulaByCursoUseCase,
+    CreateAulaUseCase, DeleteAulaUseCase, GetAulaByIdUseCase,
+    ListAulaUseCase, UpdateAulaUseCase, ListAulaByModuloUseCase, ListAulaByCursoUseCase,
 
     // Inscricao
-    InscreverUsuarioUseCase,
-    ListarInscricoesUseCase,
-    MarcarAulaConcluidaUseCase,
-    CancelarInscricaoUseCase,
-    VerProgressoUseCase,
-    DesmarcarAulaConcluidaUseCase,
+    InscreverUsuarioUseCase, ListarInscricoesUseCase, MarcarAulaConcluidaUseCase,
+    CancelarInscricaoUseCase, VerProgressoUseCase, DesmarcarAulaConcluidaUseCase,
 
-    //EnviarEmailUseCase
+    // Email
     EnviarEmailUseCase,
 
     // Certificado
     EmitirCertificadoUseCase,
+
+    // Avaliacao
+    CriarAvaliacaoUseCase, AtualizarAvaliacaoUseCase
+  ],
+  exports: [
+    // Usuario
+    CreateUsuarioUseCase, DeleteUsuarioUseCase, GetUsuarioByIdUseCase,
+    ListUsuarioUseCase, LoginUsuarioUseCase, UpdateUsuarioUseCase,
+
+    // Curso
+    CreateCursoUseCase, DeleteCursoUseCase, GetCursoByIdUseCase,
+    ListCursoUseCase, UpdateCursoUseCase,
+
+    // Modulo
+    CreateModuloUseCase, DeleteModuloUseCase, GetModuloByIdUseCase,
+    ListModuloUseCase, UpdateModuloUseCase,
+
+    // Aula
+    CreateAulaUseCase, DeleteAulaUseCase, GetAulaByIdUseCase,
+    ListAulaUseCase, UpdateAulaUseCase, ListAulaByModuloUseCase, ListAulaByCursoUseCase,
+
+    // Inscricao
+    InscreverUsuarioUseCase, ListarInscricoesUseCase, MarcarAulaConcluidaUseCase,
+    CancelarInscricaoUseCase, VerProgressoUseCase, DesmarcarAulaConcluidaUseCase,
+
+    // Email
+    EnviarEmailUseCase,
+
+    // Certificado
+    EmitirCertificadoUseCase,
+
+    // Avaliacao
+    CriarAvaliacaoUseCase, AtualizarAvaliacaoUseCase
   ],
 })
 export class ApplicationModule {}

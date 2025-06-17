@@ -1,0 +1,100 @@
+###########################################################
+#################### 🔐 VARIÁVEIS #########################
+###########################################################
+
+@baseUrl = http://localhost:4000
+@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoibWFyaWFAdGVzdGUuY29tIiwidGlwbyI6ImFsdW5vIiwiaWF0IjoxNzUwMTkzMzQwLCJleHAiOjE3NTAyNzk3NDB9.DcHOReDejprwnh0503Lq-GkSXYO2REgrcIcUnPNqQMg
+@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiYWRtaW5AdGVzdGUuY29tIiwidGlwbyI6ImFkbWluaXN0cmFkb3IiLCJpYXQiOjE3NTAxOTMyMjIsImV4cCI6MTc1MDI3OTYyMn0.MPVe-WEawZvrVUDGLYYXqlYL1P1IXHXZeXFcp-fPTYo
+
+###########################################################
+############## 🚀 CRIAR AVALIAÇÃO - ALUNO ✅ ##############
+###########################################################
+
+POST {{baseUrl}}/avaliacoes
+Authorization: Bearer {{tokenAluno}}
+Content-Type: application/json
+
+{
+  "nota": 5,
+  "comentario": "Curso excelente!",
+  "cursoId": 7
+}
+
+###########################################################
+###### 🚫 CRIAR AVALIAÇÃO SEM CERTIFICADO - ERRO ❌ #######
+###########################################################
+
+POST {{baseUrl}}/avaliacoes
+Authorization: Bearer {{tokenAluno}}
+Content-Type: application/json
+
+{
+  "nota": 4,
+  "comentario": "Tentativa sem certificado",
+  "cursoId": 99
+}
+
+###########################################################
+###### 🚫 CRIAR AVALIAÇÃO SENDO ADMIN - ERRO ❌ ###########
+###########################################################
+
+POST {{baseUrl}}/avaliacoes
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "nota": 4,
+  "comentario": "Admin não pode avaliar",
+  "cursoId": 17
+}
+
+###########################################################
+############ 📋 ATUALIZAR AVALIAÇÃO - ALUNO ✅ ############
+###########################################################
+
+PATCH {{baseUrl}}/avaliacoes/8
+Authorization: Bearer {{tokenAluno}}
+Content-Type: application/json
+
+{
+  "nota": 4,
+  "comentario": "Atualizei minha avaliação para 4 estrelas."
+}
+
+###########################################################
+###### 🚫 ATUALIZAR AVALIAÇÃO DE OUTRO USUÁRIO ❌ #########
+###########################################################
+
+PATCH {{baseUrl}}/avaliacoes/2
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "nota": 1,
+  "comentario": "Admin tentando editar avaliação de aluno."
+}
+
+###########################################################
+###### 🚫 CRIAR AVALIAÇÃO SEM TOKEN - ERRO (401) ❌ #######
+###########################################################
+
+POST {{baseUrl}}/avaliacoes
+Content-Type: application/json
+
+{
+  "nota": 5,
+  "comentario": "Sem token não deve permitir.",
+  "cursoId": 17
+}
+
+###########################################################
+###### 🚫 ATUALIZAR AVALIAÇÃO SEM TOKEN - ERRO (401) ❌ ###
+###########################################################
+
+PATCH {{baseUrl}}/avaliacoes/1
+Content-Type: application/json
+
+{
+  "nota": 3,
+  "comentario": "Sem token não deve permitir atualização."
+}

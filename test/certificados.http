@@ -18,7 +18,7 @@ Authorization: Bearer {{tokenAluno}}
 ###########################################################
 
 ### Substitua o UUID por um número de série válido do seu banco
-GET {{baseUrl}}/certificados/publico/5e329c71-f2d3-41df-b7d5-34b6f55895e2
+GET {{baseUrl}}/certificados/publico/1df898ea-9f39-4995-a67a-b6df65f6039d
 
 ###########################################################
 #### 🚫 TENTATIVA DE EMITIR CERTIFICADO SEM AUTH ❌ (401) ###
