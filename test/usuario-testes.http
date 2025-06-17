@@ -3,8 +3,8 @@
 ###########################################################
 
 @baseUrl = http://localhost:4000
-@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoibHVjYXNAdGVzdGUuY29tIiwidGlwbyI6ImFsdW5vIiwiaWF0IjoxNzQ5NjYzMTg4LCJleHAiOjE3NDk3NDk1ODh9.d1lLYF1hEzSBZJBjrKNC6Rur0XY5u0dSeVXqBj_DMKM
-@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIwLCJlbWFpbCI6ImFkbWluQHRlc3RlLmNvbSIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzQ4NjIwMzI0LCJleHAiOjE3NDg3MDY3MjR9.JR6nizANyeaBOItFIdCbQpc-gwVghZdDVpqorP-3H8c
+@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoibHVjYXNAdGVzdGUuY29tIiwidGlwbyI6ImFsdW5vIiwiaWF0IjoxNzUwMTkyOTU1LCJleHAiOjE3NTAyNzkzNTV9.b85XThwK-2rQWblY5julsL5yPmTo3EpktWx7DF-bLFM
+@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiYWRtaW5AdGVzdGUuY29tIiwidGlwbyI6ImFkbWluaXN0cmFkb3IiLCJpYXQiOjE3NTAxOTMyMjIsImV4cCI6MTc1MDI3OTYyMn0.MPVe-WEawZvrVUDGLYYXqlYL1P1IXHXZeXFcp-fPTYo
 
 ###########################################################
 ############## 🚀 CADASTRO DE ALUNO #######################
@@ -43,7 +43,7 @@ POST {{baseUrl}}/usuarios/login
 Content-Type: application/json
 
 {
-  "email": "lucas@teste.com",
+  "email": "maria@teste.com",
   "senha": "123456"
 }
 
@@ -56,7 +56,7 @@ Content-Type: application/json
 
 {
   "email": "admin@teste.com",
-  "senha": "admin123"
+  "senha": "123456"
 }
 
 ###########################################################
