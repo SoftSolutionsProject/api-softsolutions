@@ -1,12 +1,29 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { UsuarioModel } from 'src/domain/models/usuario.model';
+
 export class UsuarioResponseDto {
+  @ApiProperty()
   id: number;
+
+  @ApiProperty()
   nomeUsuario: string;
+
+  @ApiProperty()
   email: string;
+
+  @ApiProperty()
   tipo: string;
+
+  @ApiProperty()
   cpfUsuario: string;
+
+  @ApiProperty({ required: false })
   telefone?: string;
+
+  @ApiProperty({ required: false, type: Object })
   endereco?: any;
+
+  @ApiProperty({ required: false, type: Object })
   localizacao?: any;
 
   constructor(usuario: Partial<UsuarioModel>) {

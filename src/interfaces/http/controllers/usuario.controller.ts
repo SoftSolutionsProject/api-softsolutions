@@ -11,6 +11,13 @@ import {
   HttpStatus,
   ForbiddenException,
 } from '@nestjs/common';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiParam,
+} from '@nestjs/swagger';
 import { AuthGuard } from '../guards/auth.guard';
 import { User } from '../decorators/user.decorator';
 import { CreateUsuarioDto } from '../dtos/requests/create-usuario.dto';
@@ -23,7 +30,9 @@ import { ListUsuarioUseCase } from '../../../application/use-cases/usuario/list-
 import { LoginUsuarioUseCase } from '../../../application/use-cases/usuario/login-usuario.use-case';
 import { UpdateUsuarioUseCase } from '../../../application/use-cases/usuario/update-usuario.use-case';
 import { UsuarioResponseDto } from '../dtos/responses/usuario.response.dto';
+import { LoginUsuarioResponseDto } from '../dtos/responses/login-usuario.response.dto';
 
+@ApiTags('Usuarios')
 @Controller('usuarios')
 export class UsuarioController {
   constructor(
@@ -37,6 +46,8 @@ export class UsuarioController {
 
   @Post('cadastro')
   @HttpCode(HttpStatus.CREATED)
+  @ApiOperation({ summary: 'Cadastrar novo usuário' })
+  @ApiResponse({ status: 201, type: UsuarioResponseDto })
   async create(@Body() dto: CreateUsuarioDto) {
     const usuario = await this.createUsuario.execute(dto);
     return new UsuarioResponseDto(usuario);
@@ -44,12 +55,17 @@ export class UsuarioController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Login do usuário' })
+  @ApiResponse({ status: 200, type: LoginUsuarioResponseDto })
   login(@Body() dto: LoginUsuarioDto) {
     return this.loginUsuario.execute(dto.email, dto.senha);
   }
 
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   @Get()
+  @ApiOperation({ summary: 'Listar todos os usuários (apenas admins)' })
+  @ApiResponse({ status: 200, type: [UsuarioResponseDto] })
   async list(@User('tipo') tipo: string) {
     if (tipo !== 'administrador')
       throw new ForbiddenException('Apenas administradores podem listar usuários');
@@ -59,7 +75,11 @@ export class UsuarioController {
   }
 
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   @Get(':id')
+  @ApiOperation({ summary: 'Buscar usuário por ID' })
+  @ApiParam({ name: 'id', type: Number, description: 'ID do usuário' })
+  @ApiResponse({ status: 200, type: UsuarioResponseDto })
   async getById(
     @Param('id') id: string,
     @User('sub') userId: number,
@@ -75,7 +95,11 @@ export class UsuarioController {
   }
 
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   @Put(':id')
+  @ApiOperation({ summary: 'Atualizar dados do usuário' })
+  @ApiParam({ name: 'id', type: Number, description: 'ID do usuário' })
+  @ApiResponse({ status: 200, type: UsuarioResponseDto })
   async update(
     @Param('id') id: string,
     @Body() dto: UpdateUsuarioDto,
@@ -92,7 +116,11 @@ export class UsuarioController {
   }
 
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   @Delete(':id')
+  @ApiOperation({ summary: 'Deletar usuário' })
+  @ApiParam({ name: 'id', type: Number, description: 'ID do usuário' })
+  @ApiResponse({ status: 200, description: 'Usuário deletado com sucesso' })
   delete(
     @Param('id') id: string,
     @User('sub') userId: number,
