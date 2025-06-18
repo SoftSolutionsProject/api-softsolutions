@@ -3,7 +3,7 @@
 ###########################################################
 
 @baseUrl = http://localhost:4000
-@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoibWFyaWFAdGVzdGUuY29tIiwidGlwbyI6ImFsdW5vIiwiaWF0IjoxNzUwMTkzMzQwLCJleHAiOjE3NTAyNzk3NDB9.DcHOReDejprwnh0503Lq-GkSXYO2REgrcIcUnPNqQMg
+@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoibWFyaWFAdGVzdGUuY29tIiwidGlwbyI6ImFsdW5vIiwiaWF0IjoxNzUwMjAwOTMxLCJleHAiOjE3NTAyODczMzF9.gHtqgSA3hq3z7KQJGZz9fAlDzm6mhUfFvHEorBQcA8k
 @tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiYWRtaW5AdGVzdGUuY29tIiwidGlwbyI6ImFkbWluaXN0cmFkb3IiLCJpYXQiOjE3NTAxOTMyMjIsImV4cCI6MTc1MDI3OTYyMn0.MPVe-WEawZvrVUDGLYYXqlYL1P1IXHXZeXFcp-fPTYo
 
 ###########################################################
@@ -15,9 +15,9 @@ Authorization: Bearer {{tokenAluno}}
 Content-Type: application/json
 
 {
-  "nota": 5,
+  "nota": 3,
   "comentario": "Curso excelente!",
-  "cursoId": 7
+  "cursoId": 10
 }
 
 ###########################################################
@@ -29,9 +29,9 @@ Authorization: Bearer {{tokenAluno}}
 Content-Type: application/json
 
 {
-  "nota": 4,
+  "nota": 1,
   "comentario": "Tentativa sem certificado",
-  "cursoId": 99
+  "cursoId": 10
 }
 
 ###########################################################
@@ -45,19 +45,19 @@ Content-Type: application/json
 {
   "nota": 4,
   "comentario": "Admin não pode avaliar",
-  "cursoId": 17
+  "cursoId": 10
 }
 
 ###########################################################
 ############ 📋 ATUALIZAR AVALIAÇÃO - ALUNO ✅ ############
 ###########################################################
 
-PATCH {{baseUrl}}/avaliacoes/8
+PATCH {{baseUrl}}/avaliacoes/12
 Authorization: Bearer {{tokenAluno}}
 Content-Type: application/json
 
 {
-  "nota": 4,
+  "nota": 1,
   "comentario": "Atualizei minha avaliação para 4 estrelas."
 }
 
@@ -98,3 +98,22 @@ Content-Type: application/json
   "nota": 3,
   "comentario": "Sem token não deve permitir atualização."
 }
+
+###########################################################
+############## 🟢 LISTAR AVALIAÇÕES DE CURSO ✅ ##############
+###########################################################
+
+GET {{baseUrl}}/avaliacoes/curso/10
+Authorization: Bearer {{tokenAluno}}
+
+###########################################################
+############## ✅ GET MINHA AVALIAÇÃO POR CURSO ✅ #########
+###########################################################
+
+GET {{baseUrl}}/avaliacoes/curso/10/minha
+Authorization: Bearer {{tokenAluno}}
+
+
+####
+GET {{baseUrl}}/avaliacoes/curso/10
+Authorization: Bearer {{tokenAluno}}
