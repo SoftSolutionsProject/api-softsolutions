@@ -65,4 +65,11 @@ export class AvaliacaoRepository {
       cursoId: entity.curso?.id,
     };
   }
+
+  async findByCourse(courseId: number) {
+  return this.repo.find({
+    where: { curso: { id: courseId } },
+    relations: ['usuario'],
+  });
+}
 }
