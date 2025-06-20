@@ -1,8 +1,19 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 export class CertificadoPublicoResponseDto {
+  @ApiProperty()
   numeroSerie: string;
+
+  @ApiProperty()
   aluno: string;
+
+  @ApiProperty()
   curso: string;
+
+  @ApiProperty()
   cargaHoraria: number;
+
+  @ApiProperty()
   dataEmissao: Date;
 
   constructor(certificado: {
