@@ -1,17 +1,40 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { CursoModel } from 'src/domain/models/curso.model';
 import { ModuloModel } from 'src/domain/models/modulo.model';
 import { AulaModel } from 'src/domain/models/aula.model';
 
 export class CursoResponseDto {
+  @ApiProperty()
   id: number;
+
+  @ApiProperty()
   nomeCurso: string;
+
+  @ApiProperty()
   tempoCurso: number;
+
+  @ApiProperty()
   descricaoCurta: string;
+
+  @ApiProperty()
   professor: string;
+
+  @ApiProperty()
   categoria: string;
+
+  @ApiProperty()
   status: string;
+
+  @ApiProperty()
   avaliacao: number;
+
+  @ApiProperty()
   imagemCurso: string;
+
+  @ApiProperty({
+    required: false,
+    type: [Object],
+  })
   modulos?: {
     id: number;
     nomeModulo: string;
