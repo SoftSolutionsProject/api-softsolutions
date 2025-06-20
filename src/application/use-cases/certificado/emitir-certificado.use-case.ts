@@ -116,7 +116,7 @@ private async gerarPdf(
   // Link de verificação
   doc.moveDown(2.5);
   doc.fontSize(10).fillColor('#95A5A6').text(
-    'Este certificado pode ser verificado em: www.suaplataforma.com/validar-certificado',
+    'Este certificado pode ser verificado em: solutionssoft.vercel.app/certificados',
     { align: 'center', oblique: true }
   );
 
