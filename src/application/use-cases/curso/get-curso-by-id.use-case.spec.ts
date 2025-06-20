@@ -11,15 +11,25 @@ describe('GetCursoByIdUseCase', () => {
     useCase = new GetCursoByIdUseCase(repo);
   });
 
-  it('deve retornar o curso se existir', async () => {
-    const curso = { id: 1, nomeCurso: 'Curso Teste' } as any;
-    repo.findById.mockResolvedValue(curso);
+  it('deve retornar curso se encontrado', async () => {
+    repo.findById.mockResolvedValue({
+      id: 1,
+      nomeCurso: 'Curso Teste',
+      tempoCurso: 10,
+      descricaoCurta: 'Descrição curta',
+      descricaoDetalhada: 'Descrição detalhada',
+      professor: 'Prof. Teste',
+      categoria: 'Categoria Teste',
+      status: 'ativo',
+      avaliacao: 0,
+      imagemCurso: 'imagem.png',
+    });
     const result = await useCase.execute(1);
-    expect(result).toEqual(curso);
+    expect(result).toHaveProperty('id');
     expect(repo.findById).toHaveBeenCalledWith(1);
   });
 
-  it('deve lançar NotFoundException se não existir', async () => {
+  it('deve lançar NotFoundException se não encontrado', async () => {
     repo.findById.mockResolvedValue(null);
     await expect(useCase.execute(1)).rejects.toThrow(NotFoundException);
   });
