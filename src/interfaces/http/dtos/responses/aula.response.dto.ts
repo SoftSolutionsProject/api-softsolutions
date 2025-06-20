@@ -1,12 +1,26 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { AulaModel } from 'src/domain/models/aula.model';
 
 export class AulaResponseDto {
+  @ApiProperty()
   id: number;
+
+  @ApiProperty()
   nomeAula: string;
+
+  @ApiProperty()
   tempoAula: number;
+
+  @ApiProperty()
   videoUrl: string;
+
+  @ApiProperty({ required: false, type: [String] })
   materialApoio?: string[];
+
+  @ApiProperty()
   descricaoConteudo: string;
+
+  @ApiProperty()
   modulo: {
     id: number;
     nomeModulo: string;
