@@ -117,12 +117,6 @@ npm run format           # Formatação de código
 
 ---
 
-## 🌍 Produção
-
-- **Swagger**: http://localhost:4000/api
-
----
-
 ## 🧰 Tecnologias Utilizadas
 
 - **Framework**: [NestJS](https://nestjs.com)
