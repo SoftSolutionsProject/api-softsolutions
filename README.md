@@ -6,9 +6,6 @@
 
 - [📘 Swagger API Docs](http://localhost:4000/api) – Documentação interativa da API
 
----
-
-## 🚀 Como Executar
 
 ### ⚙️ Pré-requisitos
 
@@ -16,8 +13,7 @@
 - **Docker** >= 20.x
 - **Docker Compose** >= 2.x
 
----
-
+## 🚀 Como Executar
 ### 🐳 Execução com Docker (Recomendado)
 
 1. **Clone o repositório**
@@ -44,8 +40,6 @@
 
 5. **Acesse a aplicação**
    - **Swagger**: http://localhost:4000/api
-
----
 
 ### 💻 Execução local sem Docker
 
@@ -76,8 +70,6 @@
    npm run start:dev
    ```
 
----
-
 ## 🐋 Comandos Docker úteis
 
 ```bash
@@ -87,7 +79,6 @@ docker-compose logs -f              # Ver os logs em tempo real
 docker-compose exec api bash        # Acessar o shell do container da API
 ```
 
----
 
 ## 📜 Scripts Disponíveis
 
@@ -115,7 +106,6 @@ npm run lint             # Verificação de código
 npm run format           # Formatação de código
 ```
 
----
 
 ## 🧰 Tecnologias Utilizadas
 
@@ -131,7 +121,6 @@ npm run format           # Formatação de código
 - **Arquitetura**: Clean Architecture
 - **CI/CD**: GitHub Actions
 
----
 
 ## 📂 Estrutura do Projeto
 
@@ -149,8 +138,6 @@ src/
 └── config/               # Configurações globais do projeto 
 
 ```
-
----
 
 ## Equipe
 
