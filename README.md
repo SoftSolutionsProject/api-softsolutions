@@ -2,9 +2,15 @@
 
 > Backend utilizando NestJS com Clean Architecture e TypeORM.
 
+## 🗂️ Modelo DER
+
+![Modelo DER](https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/Soft.png)
+
 ## 📚 Documentação
 
 - [📘 Swagger API Docs](http://localhost:4000/api) – Documentação interativa da API
+- [🚀 API em Produção](https://api-softsolutions.onrender.com) — Endpoint público da API.
+- [🌐 Frontend em Produção](https://solutionssoft.vercel.app) — Interface web conectada à API.
 
 
 ### ⚙️ Pré-requisitos
@@ -14,38 +20,13 @@
 - **Docker Compose** >= 2.x
 
 ## 🚀 Como Executar
-### 🐳 Execução com Docker (Recomendado)
+
+
+### 💻 Execução local
 
 1. **Clone o repositório**
    ```bash
-   git clone <URL_DO_REPOSITORIO>
-   cd api-softsolutions-develop
-   ```
-
-2. **Configure as variáveis de ambiente**
-   ```bash
-   cp .env.example .env
-   # Edite o .env com suas credenciais e configurações
-   ```
-
-3. **Suba os containers**
-   ```bash
-   docker-compose up -d --build
-   ```
-
-4. **Execute as migrações no banco**
-   ```bash
-   docker-compose exec api npm run typeorm:migrate
-   ```
-
-5. **Acesse a aplicação**
-   - **Swagger**: http://localhost:4000/api
-
-### 💻 Execução local sem Docker
-
-1. **Clone o repositório**
-   ```bash
-   git clone <URL_DO_REPOSITORIO>
+   git clone https://github.com/SoftSolutionsProject/api-softsolutions
    cd api-softsolutions-develop
    ```
 
@@ -58,52 +39,55 @@
    ```bash
    cp .env.example .env
    # Edite com as variáveis locais de banco e porta
+   # Windows (CMD): copy .env.example .env
    ```
 
 4. **Execute as migrações**
    ```bash
-   npm run typeorm:migrate
+   npm run migration:run
    ```
 
-5. **Inicie o servidor**
+5. **Execute os seeders para popular o banco:**
+ ```bash
+   npm run seed
+   ```
+
+6. **Inicie o servidor**
    ```bash
    npm run start:dev
    ```
-
-## 🐋 Comandos Docker úteis
-
-```bash
-docker-compose up -d --build        # Subir os containers
-docker-compose down                 # Parar os containers
-docker-compose logs -f              # Ver os logs em tempo real
-docker-compose exec api bash        # Acessar o shell do container da API
-```
 
 
 ## 📜 Scripts Disponíveis
 
 ```bash
 # Desenvolvimento
-npm run start:dev        # Modo desenvolvimento
-npm run start:debug      # Modo debug
-
-# Produção
-npm run build            # Compilar
-npm run start:prod       # Executar produção
+npm run start:dev         # Iniciar em modo desenvolvimento (watch)
+npm run start:debug       # Iniciar em modo debug (watch)
+npm run start             # Iniciar aplicação
+npm run build             # Compilar aplicação
+npm run start:prod        # Executar versão compilada
 
 # Banco de Dados (TypeORM)
-npm run typeorm:generate # Gerar migração
-npm run typeorm:migrate  # Executar migrações
-npm run typeorm:revert   # Reverter última migração
+npm run typeorm           # Executar CLI do TypeORM
+npm run migration:generate # Gerar nova migração
+npm run migration:new     # Gerar nova migração com nome (use: npm run migration:new --name=nome)
+npm run migration:run     # Executar migrações pendentes
+npm run migration:run:prod # Executar migrações em produção
 
-# Testes
-npm run test             # Testes unitários
-npm run test:watch       # Testes com watch mode
-npm run test:cov         # Cobertura de testes
+# Seeders
+npm run seed              # Executar seeders (popula dados iniciais)
+
+# ✅ Testes
+npm run test              # Executar testes unitários
+npm run test:watch        # Executar testes em modo watch
+npm run test:cov          # Verificar cobertura de testes
+npm run test:debug        # Debug de testes unitários
+npm run test:e2e          # Testes end-to-end
 
 # Lint e Format
-npm run lint             # Verificação de código
-npm run format           # Formatação de código
+npm run lint              # Verificar problemas de lint e corrigir
+npm run format            # Formatar código com Prettier
 ```
 
 
