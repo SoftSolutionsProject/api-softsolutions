@@ -13,7 +13,6 @@
 - **Docker** >= 20.x
 - **Docker Compose** >= 2.x
 
----
 ## 🚀 Como Executar
 ### 🐳 Execução com Docker (Recomendado)
 
@@ -70,8 +69,6 @@
    ```bash
    npm run start:dev
    ```
-
----
 
 ## 🐋 Comandos Docker úteis
 
@@ -141,8 +138,6 @@ src/
 └── config/               # Configurações globais do projeto 
 
 ```
-
----
 
 ## Equipe
 
