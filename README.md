@@ -151,3 +151,13 @@ src/
 ```
 
 ---
+
+## Equipe
+
+| Função          | Membro                   |  Conecte-se                  |
+|-----------------|--------------------------|----------------------------------------------------------------------------------------------------------------------|
+|  Desenvolvedor  | Caio Henrique Rodrigues  | [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/CaioRodrigues12)              |
+|  Desenvolvedor  | Évellin de Lima Jacinto  | [![GitHub Badge](https://img.shields.io/badge/GitHub-000000?style=flat&logo=github)](https://github.com/evllinlima)  |
+|  Desenvolvedor  | Lucas Salvador Notaro    | [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/LucasNotaro)     |
+|  Desenvolvedor  | Lucas Santo Gomes        | [![GitHub Badge](https://img.shields.io/badge/GitHub-000000?style=flat&logo=github)](https://github.com/lucassantosgomes02) |
+|  Desenvolvedor  | Rafael da Costa Castro   | [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/RafaelCostaCastro)        |
