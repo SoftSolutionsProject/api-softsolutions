@@ -62,6 +62,9 @@ import { EmitirCertificadoUseCase } from './use-cases/certificado/emitir-certifi
 import { CriarAvaliacaoUseCase } from './use-cases/avaliacao/criar-avaliacao.use-case';
 import { AtualizarAvaliacaoUseCase } from './use-cases/avaliacao/atualizar-avaliacao.use-case';
 
+// Dashboard use case
+import { BuildDashboardUseCase } from './use-cases/dashboard/build-dashboard.use-case';
+
 @Module({
   imports: [
     TypeOrmModule.forFeature([
@@ -98,7 +101,10 @@ import { AtualizarAvaliacaoUseCase } from './use-cases/avaliacao/atualizar-avali
     EmitirCertificadoUseCase,
 
     // Avaliacao
-    CriarAvaliacaoUseCase, AtualizarAvaliacaoUseCase
+    CriarAvaliacaoUseCase, AtualizarAvaliacaoUseCase,
+
+    // Dashboard
+    BuildDashboardUseCase
   ],
   exports: [
     // Usuario
@@ -128,7 +134,10 @@ import { AtualizarAvaliacaoUseCase } from './use-cases/avaliacao/atualizar-avali
     EmitirCertificadoUseCase,
 
     // Avaliacao
-    CriarAvaliacaoUseCase, AtualizarAvaliacaoUseCase
+    CriarAvaliacaoUseCase, AtualizarAvaliacaoUseCase,
+
+    // Dashboard
+    BuildDashboardUseCase
   ],
 })
 export class ApplicationModule {}
