@@ -58,4 +58,12 @@ export class CertificadoRepository {
       relations: ['usuario', 'curso'],
     });
   }
+
+  async findAllByUsuario(id: number): Promise<CertificadoEntity[]> {
+  return this.repo.find({
+    where: { usuario: { id } },
+    relations: ['usuario', 'curso'],
+  });
+}
+
 }

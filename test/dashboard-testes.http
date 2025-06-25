@@ -1,0 +1,19 @@
+###########################################################
+#################### 🔐 VARIÁVEIS #########################
+###########################################################
+
+@baseUrl = http://localhost:4000
+@tokenAluno = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoibHVjYXNAdGVzdGUuY29tIiwidGlwbyI6ImFsdW5vIiwiaWF0IjoxNzUwODE1NTIwLCJleHAiOjE3NTA5MDE5MjB9.1Oc7D3_Xdf99IdSwpGFlD6sY7DXfKA-5JaH70mhNT64
+
+
+
+###########################################################
+#################### 📊 DASHBOARD - ALUNO #################
+###########################################################
+
+GET {{baseUrl}}/usuarios/2/dashboard
+Authorization: Bearer {{tokenAluno}}
+
+### 5. VER PROGRESSO DO CURSO (SUCESSO)
+GET {{baseUrl}}/inscricoes/21/progresso
+Authorization: Bearer {{tokenAluno}}

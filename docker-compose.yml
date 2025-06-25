@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16
+    container_name: softsolutions_db
+    restart: always
+    environment:
+      POSTGRES_DB: dev_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  api:
+    image: softsolutionsfatecvotorantim/backend:latest  # SEU NOME DA IMAGEM AQUI, minúsculo
+    container_name: softsolutions_api
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/dev_db
+      NODE_ENV: production
+    ports:
+      - "4000:4000"
+
+volumes:
+  pg_data:
