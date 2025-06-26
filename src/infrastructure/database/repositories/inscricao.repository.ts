@@ -55,4 +55,14 @@ export class InscricaoRepository {
   async simpleUpdate(id: number, data: Partial<InscricaoModel>): Promise<void> {
   await this.repo.update(id, data);
 }
+
+async countByCurso(cursoId: number): Promise<number> {
+  return this.repo.count({
+    where: {
+      curso: { id: cursoId },
+      status: 'ativo', // ou remova se quiser contar todas inscrições
+    },
+  });
+}
+
 }
