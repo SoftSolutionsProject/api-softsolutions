@@ -133,4 +133,21 @@ export class CursoController {
 
     return curso.modulos;
   }
+
+  
+@Get(':id/inscritos')
+@ApiOperation({ summary: 'Obter quantidade de inscritos no curso (público)' })
+@ApiParam({ name: 'id', type: Number })
+@ApiResponse({ status: 200, description: 'Quantidade de inscritos no curso' })
+async getQuantidadeInscritos(@Param('id') id: string) {
+  const idCurso = parseInt(id);
+  if (isNaN(idCurso)) throw new ForbiddenException('ID inválido');
+
+  const curso = await this.cursoRepo.findById(idCurso);
+  if (!curso) throw new NotFoundException('Curso não encontrado');
+
+  const count = await this.inscricaoRepo.countByCurso(idCurso);
+  return { quantidadeInscritos: count };
+}
+
 }
