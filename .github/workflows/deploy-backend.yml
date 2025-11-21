@@ -27,9 +27,10 @@ jobs:
             docker stop api-softsolutions || true
             docker rm api-softsolutions || true
 
-            echo ">> Subindo novo container"
+            echo ">> Subindo novo container (com restart automático e porta interna)"
             docker run -d --name api-softsolutions \
-              -p 4000:4000 \
+              --restart unless-stopped \
+              -p 127.0.0.1:4000:4000 \
               -e PORT=4000 \
               -e DATABASE_URL="${{ secrets.DATABASE_URL_PROD }}" \
               -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
