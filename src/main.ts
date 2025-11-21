@@ -8,7 +8,9 @@ async function bootstrap() {
   app.enableCors({
     origin: [
     'http://localhost:4200',  
-    'https://solutionssoft.vercel.app'
+    'https://solutionssoft.vercel.app',
+    'http://ec2-3-212-230-198.compute-1.amazonaws.com',
+    'http://3.212.230.198'
   ],  
     credentials: true,
   });
