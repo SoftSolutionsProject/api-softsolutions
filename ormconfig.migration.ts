@@ -16,10 +16,12 @@ export default new DataSource({
   type: 'postgres',
   url: process.env.DATABASE_URL,
 
-
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  
+  ssl: isProd
+    ? {
+        rejectUnauthorized: false,
+      }
+    : false,
 
   entities: [
     UsuarioEntity,
