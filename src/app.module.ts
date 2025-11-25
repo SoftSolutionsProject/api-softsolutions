@@ -9,14 +9,20 @@ import { InterfacesModule } from './interfaces/interfaces.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      url: process.env.DATABASE_URL,
-      autoLoadEntities: true,
-      synchronize: false,
-      migrations: ['dist/infrastructure/database/migrations/*.js'],
-      migrationsRun: true,
-    }),
+
+TypeOrmModule.forRoot({
+  type: 'postgres',
+  url: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+  autoLoadEntities: true,
+  synchronize: false,
+  migrations: ['dist/infrastructure/database/migrations/*.js'],
+  migrationsRun: true,
+}),
+
+
     InfrastructureModule,
     ApplicationModule,
     InterfacesModule,
