@@ -15,7 +15,23 @@ const isProd = process.env.NODE_ENV === 'production';
 export default new DataSource({
   type: 'postgres',
   url: process.env.DATABASE_URL,
-  entities: [UsuarioEntity, CursoEntity, ModuloEntity, AulaEntity, ProgressoAulaEntity, InscricaoEntity],
+
+  
+  ssl: isProd
+    ? {
+        rejectUnauthorized: false,
+      }
+    : false,
+
+  entities: [
+    UsuarioEntity,
+    CursoEntity,
+    ModuloEntity,
+    AulaEntity,
+    ProgressoAulaEntity,
+    InscricaoEntity,
+  ],
+
   migrations: [
     isProd
       ? 'dist/infrastructure/database/migrations/*.js'
