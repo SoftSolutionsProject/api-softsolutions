@@ -13,7 +13,7 @@
 - [🌐 Frontend em Produção](https://solutionssoft.vercel.app) — Interface web conectada à API.
 
 
-### ⚙️ Pré-requisitos
+### ⚙️ Pré-requisitos.
 
 - **Node.js** >= 18.x
 - **Docker** >= 20.x
