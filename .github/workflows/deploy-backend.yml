@@ -33,6 +33,7 @@ jobs:
               -p 127.0.0.1:4000:4000 \
               -e PORT=4000 \
               -e NODE_ENV=production \
+              -e NODE_TLS_REJECT_UNAUTHORIZED=0 \
               -e DATABASE_URL="${{ secrets.DATABASE_URL_PROD }}" \
               -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
               -e EMAIL_SUPPORT_USER="${{ secrets.EMAIL_SUPPORT_USER }}" \
