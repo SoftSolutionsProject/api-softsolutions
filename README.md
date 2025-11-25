@@ -19,7 +19,7 @@
 - **Docker** >= 20.x
 - **Docker Compose** >= 2.x
 
-## 🚀 Como Executar
+## Como Executar
 
 
 ### 💻 Execução local
