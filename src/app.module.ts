@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { InfrastructureModule } from './infrastructure/infrastructure.module';
 import { ApplicationModule } from './application/application.module';
 import { InterfacesModule } from './interfaces/interfaces.module';
+import { ArtifactsModule } from './artifacts/artifacts.module';
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -30,6 +31,7 @@ const isProd = process.env.NODE_ENV === 'production';
     InfrastructureModule,
     ApplicationModule,
     InterfacesModule,
+    ArtifactsModule,
   ],
 })
 export class AppModule {}

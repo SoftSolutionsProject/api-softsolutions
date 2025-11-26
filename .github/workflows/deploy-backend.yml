@@ -39,7 +39,14 @@ jobs:
               -e EMAIL_SUPPORT_USER="${{ secrets.EMAIL_SUPPORT_USER }}" \
               -e EMAIL_SUPPORT_PASS="${{ secrets.EMAIL_SUPPORT_PASS }}" \
               -e EMAIL_SUPPORT_DESTINATION="${{ secrets.EMAIL_SUPPORT_DESTINATION }}" \
+              -e AWS_REGION="${{ vars.AWS_REGION }}" \
+              -e AWS_S3_BUCKET="${{ vars.AWS_S3_BUCKET }}" \
+              -e AWS_S3_BUCKET_REPLICA="${{ vars.AWS_S3_BUCKET_REPLICA }}" \
+              -e AWS_AVATAR_TABLE="${{ vars.AWS_AVATAR_TABLE }}" \
               softsolutionsfatecvotorantim/backend:latest
 
             echo ">> Containers em execução:"
             docker ps
+
+
+            
