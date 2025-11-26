@@ -9,8 +9,8 @@
 ## 📚 Documentação
 
 - [📘 Swagger API Docs](http://localhost:4000/api) – Documentação interativa da API
-- [🚀 API em Produção](https://api-softsolutions.onrender.com) — Endpoint público da API.
-- [🌐 Frontend em Produção](https://solutionssoft.vercel.app) — Interface web conectada à API.
+- [🚀 API em Produção](https://api-softsolutions.onrender.com) — Endpoint público da API
+- [🌐 Frontend em Produção](https://solutionssoft.vercel.app) — Interface web conectada à API
 
 
 ### ⚙️ Pré-requisitos.
