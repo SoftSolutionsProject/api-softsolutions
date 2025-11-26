@@ -1,9 +1,20 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ErrorLoggingInterceptor } from './common/logging/error-logging.interceptor';
+import { JsonLogger } from './common/logging/json-logger';
+import { RequestLoggingMiddleware } from './common/logging/request-logging.middleware';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const logger = new JsonLogger();
+  const app = await NestFactory.create(AppModule, { logger });
+
+  app.useLogger(logger);
+
+  const requestLoggingMiddleware = new RequestLoggingMiddleware(logger);
+  app.use(requestLoggingMiddleware.use.bind(requestLoggingMiddleware));
+
+  app.useGlobalInterceptors(new ErrorLoggingInterceptor(logger));
 
   app.enableCors({
     origin: [
