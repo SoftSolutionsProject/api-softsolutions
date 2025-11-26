@@ -123,6 +123,23 @@ src/
 
 ```
 
+## ☁️ Deploy AWS – Infraestrutura
+
+### Arquitetura / Fluxograma
+![Fluxograma AWS](src/assets/FluxogramaAWS.png)
+
+### 🌐 Endpoints em Produção (AWS EC2)
+
+- **Backend (NestJS + Nginx + Docker)**
+  - http://ec2-54-164-244-60.compute-1.amazonaws.com
+
+- **Frontend (Angular + Nginx + Docker)**
+  - http://ec2-3-212-230-198.compute-1.amazonaws.com
+
+> ⚠️ **Observação:** A infraestrutura AWS utilizada neste projeto está hospedada em um ambiente de laboratório acadêmico. Por isso, as instâncias podem ser desligadas periodicamente e os endpoints podem não estar sempre disponíveis.
+
+
+
 ## Equipe
 
 | Função          | Membro                   |  Conecte-se                  |
