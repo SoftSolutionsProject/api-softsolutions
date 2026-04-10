@@ -11,6 +11,7 @@ import { EmailController } from './http/controllers/email.controller';
 import { CertificadoController } from './http/controllers/certificado.controller';
 import { AvaliacaoController } from './http/controllers/avaliacao.controller';
 import { DashboardController } from './http/controllers/dashboard.controller';
+import { SearchController } from './http/controllers/search.controller';
 
 
 @Module({
@@ -25,6 +26,7 @@ import { DashboardController } from './http/controllers/dashboard.controller';
     CertificadoController,
     AvaliacaoController,
     DashboardController,
+    SearchController,
   ],
 })
 export class InterfacesModule {}

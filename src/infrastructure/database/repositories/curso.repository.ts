@@ -29,6 +29,12 @@ export class CursoRepository {
     return await this.repo.find();
   }
 
+  async findAllWithModulosEAulas(): Promise<CursoModel[]> {
+    return this.repo.find({
+      relations: ['modulos', 'modulos.aulas'],
+    });
+  }
+
   async update(id: number, data: Partial<CursoModel>): Promise<CursoModel> {
     await this.repo.update(id, data);
     return (await this.findById(id))!;

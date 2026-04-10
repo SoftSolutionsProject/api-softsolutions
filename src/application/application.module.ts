@@ -64,6 +64,9 @@ import { AtualizarAvaliacaoUseCase } from './use-cases/avaliacao/atualizar-avali
 
 // Dashboard use case
 import { BuildDashboardUseCase } from './use-cases/dashboard/build-dashboard.use-case';
+import { SemanticDocumentBuilder } from './services/search/semantic-document.builder';
+import { SimpleSimilarityEngine } from './services/search/simple-similarity.engine';
+import { SearchCursosUseCase } from './use-cases/search/search-cursos.use-case';
 
 @Module({
   imports: [
@@ -104,7 +107,12 @@ import { BuildDashboardUseCase } from './use-cases/dashboard/build-dashboard.use
     CriarAvaliacaoUseCase, AtualizarAvaliacaoUseCase,
 
     // Dashboard
-    BuildDashboardUseCase
+    BuildDashboardUseCase,
+
+    // Busca
+    SemanticDocumentBuilder,
+    SimpleSimilarityEngine,
+    SearchCursosUseCase,
   ],
   exports: [
     // Usuario
@@ -137,7 +145,12 @@ import { BuildDashboardUseCase } from './use-cases/dashboard/build-dashboard.use
     CriarAvaliacaoUseCase, AtualizarAvaliacaoUseCase,
 
     // Dashboard
-    BuildDashboardUseCase
+    BuildDashboardUseCase,
+
+    // Busca
+    SemanticDocumentBuilder,
+    SimpleSimilarityEngine,
+    SearchCursosUseCase,
   ],
 })
 export class ApplicationModule {}
