@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common';
 import { ListarInscricoesUseCase } from './listar-inscricoes.use-case';
 import { InscricaoRepository } from '../../../infrastructure/database/repositories/inscricao.repository';
 import { UsuarioRepository } from '../../../infrastructure/database/repositories/usuario.repository';
@@ -7,53 +8,24 @@ describe('ListarInscricoesUseCase', () => {
   let inscricaoRepo: jest.Mocked<InscricaoRepository>;
   let usuarioRepo: jest.Mocked<UsuarioRepository>;
 
-  const inscricaoMock = {
-    id: 1,
-    status: 'ativo' as const,
-    dataInscricao: new Date(),
-    usuario: {
-      id: 1,
-      nomeUsuario: 'João',
-      cpfUsuario: '12345678900',
-      email: 'joao@email.com',
-      senha: 'senha123',
-      tipo: 'aluno'
-    },
-    curso: {
-      id: 1,
-      nomeCurso: 'Curso Teste',
-      tempoCurso: 120,
-      descricaoCurta: 'Descrição curta',
-      descricaoDetalhada: 'Descrição detalhada',
-      imagemCurso: 'imagem.jpg',
-      categoria: 'Categoria Teste',
-      status: 'ativo' as const,
-      professor: 'Professor Teste',
-      avaliacao: 4.5,
-      modulos: []
-    }
-  };
-
   beforeEach(() => {
     inscricaoRepo = {
-      findByUsuario: jest.fn()
+      findByUsuario: jest.fn(),
     } as any;
 
     usuarioRepo = {
-      findById: jest.fn()
+      findById: jest.fn(),
     } as any;
 
     useCase = new ListarInscricoesUseCase(inscricaoRepo, usuarioRepo);
   });
 
   it('deve listar inscrições do usuário', async () => {
+    const inscricoes = [{ id: 1 }, { id: 2 }];
     usuarioRepo.findById.mockResolvedValue({ id: 1 } as any);
-    inscricaoRepo.findByUsuario.mockResolvedValue([inscricaoMock as any]);
+    inscricaoRepo.findByUsuario.mockResolvedValue(inscricoes as any);
 
-    const result = await useCase.execute(1);
-
-    expect(Array.isArray(result)).toBe(true);
-    expect(usuarioRepo.findById).toHaveBeenCalledWith(1);
+    await expect(useCase.execute(1)).resolves.toEqual(inscricoes);
     expect(inscricaoRepo.findByUsuario).toHaveBeenCalledWith(1);
   });
 
@@ -61,10 +33,13 @@ describe('ListarInscricoesUseCase', () => {
     usuarioRepo.findById.mockResolvedValue({ id: 1 } as any);
     inscricaoRepo.findByUsuario.mockResolvedValue([]);
 
-    const result = await useCase.execute(1);
+    await expect(useCase.execute(1)).resolves.toEqual([]);
+  });
 
-    expect(result).toEqual([]);
-    expect(usuarioRepo.findById).toHaveBeenCalledWith(1);
-    expect(inscricaoRepo.findByUsuario).toHaveBeenCalledWith(1);
+  it('deve lançar erro quando o usuário não existir', async () => {
+    usuarioRepo.findById.mockResolvedValue(null);
+
+    await expect(useCase.execute(1)).rejects.toThrow(NotFoundException);
+    expect(inscricaoRepo.findByUsuario).not.toHaveBeenCalled();
   });
 });

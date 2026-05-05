@@ -1,13 +1,9 @@
-import { DataSource } from 'typeorm';
-import { UsuarioEntity } from 'src/infrastructure/database/entities/usuario.entity';
 import * as bcrypt from 'bcrypt';
-import ormConfig from '../../ormconfig.migration';
+import { UsuarioEntity } from '../infrastructure/database/entities/usuario.entity';
+import { seedDataSource } from './seed-data-source';
 
 export async function runSeedUsuarios() {
-  const dataSource = ormConfig;
-  await dataSource.initialize();
-
-  const repo = dataSource.getRepository(UsuarioEntity);
+  const repo = seedDataSource.getRepository(UsuarioEntity);
   const senhaCriptografada = await bcrypt.hash('123456', 10);
 
   await repo.insert([
@@ -24,12 +20,12 @@ export async function runSeedUsuarios() {
         bairro: 'Centro',
         cidade: 'São Paulo',
         estado: 'SP',
-        cep: '01000-000'
+        cep: '01000-000',
       } as any,
       localizacao: {
         latitude: -23.55052,
-        longitude: -46.633308
-      } as any
+        longitude: -46.633308,
+      } as any,
     },
     {
       nomeUsuario: 'Lucas Oliveira',
@@ -44,12 +40,12 @@ export async function runSeedUsuarios() {
         bairro: 'Bela Vista',
         cidade: 'São Paulo',
         estado: 'SP',
-        cep: '01310-100'
+        cep: '01310-100',
       } as any,
       localizacao: {
         latitude: -23.561684,
-        longitude: -46.656139
-      } as any
+        longitude: -46.656139,
+      } as any,
     },
     {
       nomeUsuario: 'Maria Souza',
@@ -64,12 +60,12 @@ export async function runSeedUsuarios() {
         bairro: 'Jardins',
         cidade: 'São Paulo',
         estado: 'SP',
-        cep: '01440-001'
+        cep: '01440-001',
       } as any,
       localizacao: {
         latitude: -23.561,
-        longitude: -46.654
-      } as any
+        longitude: -46.654,
+      } as any,
     },
     {
       nomeUsuario: 'João Silva',
@@ -84,12 +80,12 @@ export async function runSeedUsuarios() {
         bairro: 'Liberdade',
         cidade: 'São Paulo',
         estado: 'SP',
-        cep: '01503-001'
+        cep: '01503-001',
       } as any,
       localizacao: {
         latitude: -23.5572,
-        longitude: -46.6356
-      } as any
+        longitude: -46.6356,
+      } as any,
     },
     {
       nomeUsuario: 'Ana Paula',
@@ -104,15 +100,14 @@ export async function runSeedUsuarios() {
         bairro: 'Vila Mariana',
         cidade: 'São Paulo',
         estado: 'SP',
-        cep: '04110-001'
+        cep: '04110-001',
       } as any,
       localizacao: {
         latitude: -23.589,
-        longitude: -46.634
-      } as any
-    }
+        longitude: -46.634,
+      } as any,
+    },
   ]);
 
   console.log('Usuários completos inseridos com sucesso!');
-  await dataSource.destroy();
 }

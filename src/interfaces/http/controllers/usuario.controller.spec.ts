@@ -48,18 +48,14 @@ describe('UsuarioController', () => {
     controller = module.get<UsuarioController>(UsuarioController);
   });
 
-  it('deve ser definido', () => {
-    expect(controller).toBeDefined();
-  });
-
   it('deve criar usuário', async () => {
-    createUsuario.execute.mockResolvedValue(usuarioMock);
-    const result = await controller.create({} as any);
+    createUsuario.execute.mockResolvedValue(usuarioMock as any);
+
+    await expect(controller.create({} as any)).resolves.toHaveProperty('id');
     expect(createUsuario.execute).toHaveBeenCalled();
-    expect(result).toHaveProperty('id');
   });
 
-  it('deve fazer login', async () => {
+  it('deve fazer login repassando email e senha', async () => {
     loginUsuario.execute.mockResolvedValue({
       access_token: 'token',
       usuario: {
@@ -68,63 +64,73 @@ describe('UsuarioController', () => {
         email: usuarioMock.email,
         tipo: usuarioMock.tipo,
       },
-    });
+    } as any);
 
-    const result = await controller.login({ email: 'a', senha: 'b' });
-    expect(loginUsuario.execute).toHaveBeenCalled();
-    expect(result).toHaveProperty('access_token');
+    await expect(controller.login({ email: 'a', senha: 'b' } as any)).resolves.toHaveProperty(
+      'access_token',
+    );
+    expect(loginUsuario.execute).toHaveBeenCalledWith('a', 'b');
   });
 
   it('deve listar usuários se admin', async () => {
-    listUsuario.execute.mockResolvedValue([usuarioMock]);
-    const result = await controller.list('administrador');
-    expect(listUsuario.execute).toHaveBeenCalled();
-    expect(result[0]).toHaveProperty('id');
+    listUsuario.execute.mockResolvedValue([usuarioMock as any]);
+
+    await expect(controller.list('administrador')).resolves.toHaveLength(1);
   });
 
   it('deve negar listagem se não admin', async () => {
     await expect(controller.list('aluno')).rejects.toThrow(ForbiddenException);
   });
 
-  it('deve pegar usuário por ID se admin ou dono', async () => {
-    getUsuarioById.execute.mockResolvedValue(usuarioMock);
-    const result = await controller.getById('1', 1, 'aluno');
-    expect(getUsuarioById.execute).toHaveBeenCalled();
-    expect(result).toHaveProperty('id');
+  it('deve pegar usuário por ID se admin ou dono e validar id inválido', async () => {
+    getUsuarioById.execute.mockResolvedValue(usuarioMock as any);
 
-    const adminResult = await controller.getById('1', 99, 'administrador');
-    expect(adminResult).toHaveProperty('id');
+    await expect(controller.getById('1', 1, 'aluno')).resolves.toHaveProperty('id');
+    await expect(controller.getById('1', 99, 'administrador')).resolves.toHaveProperty(
+      'id',
+    );
+    await expect(controller.getById('abc', 1, 'aluno')).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 
-  it('deve negar getById se não admin nem dono', async () => {
-    await expect(controller.getById('1', 2, 'aluno')).rejects.toThrow(ForbiddenException);
+  it('deve negar getById se não for admin nem dono', async () => {
+    await expect(controller.getById('1', 2, 'aluno')).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 
-  it('deve atualizar usuário se admin ou dono', async () => {
-    updateUsuario.execute.mockResolvedValue(usuarioMock);
-    const result = await controller.update('1', {}, 1, 'aluno');
-    expect(updateUsuario.execute).toHaveBeenCalled();
-    expect(result).toHaveProperty('id');
+  it('deve atualizar usuário se admin ou dono e validar id inválido', async () => {
+    updateUsuario.execute.mockResolvedValue(usuarioMock as any);
 
-    const adminResult = await controller.update('1', {}, 99, 'administrador');
-    expect(adminResult).toHaveProperty('id');
+    await expect(controller.update('1', {}, 1, 'aluno')).resolves.toHaveProperty('id');
+    await expect(controller.update('1', {}, 99, 'administrador')).resolves.toHaveProperty(
+      'id',
+    );
+    await expect(controller.update('abc', {}, 1, 'aluno')).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 
-  it('deve negar update se não admin nem dono', async () => {
-    await expect(controller.update('1', {}, 2, 'aluno')).rejects.toThrow(ForbiddenException);
+  it('deve negar update se não for admin nem dono', async () => {
+    await expect(controller.update('1', {}, 2, 'aluno')).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 
-  it('deve deletar usuário se admin ou dono', async () => {
-    deleteUsuario.execute.mockResolvedValue({ message: 'OK' });
-    const result = await controller.delete('1', 1, 'aluno');
-    expect(deleteUsuario.execute).toHaveBeenCalled();
+  it('deve deletar usuário se admin ou dono e validar id inválido', async () => {
+    deleteUsuario.execute.mockResolvedValue({ message: 'OK' } as any);
 
-    const adminResult = await controller.delete('1', 99, 'administrador');
-    expect(adminResult).toEqual({ message: 'OK' });
+    await expect(controller.delete('1', 1, 'aluno')).resolves.toEqual({
+      message: 'OK',
+    });
+    await expect(controller.delete('1', 99, 'administrador')).resolves.toEqual({
+      message: 'OK',
+    });
+    expect(() => controller.delete('abc', 1, 'aluno')).toThrow(ForbiddenException);
   });
 
- it('deve negar delete se não admin nem dono', () => {
-  expect(() => controller.delete('1', 2, 'aluno')).toThrow(ForbiddenException);
-});
-
+  it('deve negar delete se não for admin nem dono', () => {
+    expect(() => controller.delete('1', 2, 'aluno')).toThrow(ForbiddenException);
+  });
 });

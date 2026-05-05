@@ -1,12 +1,8 @@
-import { DataSource } from 'typeorm';
-import { CursoEntity } from 'src/infrastructure/database/entities/curso.entity';
-import ormConfig from '../../ormconfig.migration';
+import { CursoEntity } from '../infrastructure/database/entities/curso.entity';
+import { seedDataSource } from './seed-data-source';
 
 export async function runSeedCursos() {
-  const dataSource = ormConfig;
-  await dataSource.initialize();
-
-  const repo = dataSource.getRepository(CursoEntity);
+  const repo = seedDataSource.getRepository(CursoEntity);
 
   await repo.insert([
     {
@@ -18,7 +14,7 @@ export async function runSeedCursos() {
       categoria: 'Backend',
       status: 'ativo',
       avaliacao: 4.8,
-      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/1.png'
+      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/1.png',
     },
     {
       nomeCurso: 'Aplicativos Móveis com React Native',
@@ -29,7 +25,7 @@ export async function runSeedCursos() {
       categoria: 'Mobile',
       status: 'ativo',
       avaliacao: 4.7,
-      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/2.png'
+      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/2.png',
     },
     {
       nomeCurso: 'UX/UI Design para Iniciantes',
@@ -40,7 +36,7 @@ export async function runSeedCursos() {
       categoria: 'Design',
       status: 'ativo',
       avaliacao: 4.6,
-      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/3.png'
+      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/3.png',
     },
     {
       nomeCurso: 'Desenvolvimento Java para Web',
@@ -51,7 +47,7 @@ export async function runSeedCursos() {
       categoria: 'Backend',
       status: 'ativo',
       avaliacao: 4.9,
-      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/4.png'
+      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/4.png',
     },
     {
       nomeCurso: 'Programação Web com PHP',
@@ -62,7 +58,7 @@ export async function runSeedCursos() {
       categoria: 'Backend',
       status: 'ativo',
       avaliacao: 4.5,
-      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/5.png'
+      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/5.png',
     },
     {
       nomeCurso: 'HTML5: Estrutura e Semântica',
@@ -73,7 +69,7 @@ export async function runSeedCursos() {
       categoria: 'Frontend',
       status: 'ativo',
       avaliacao: 4.7,
-      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/6.png'
+      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/6.png',
     },
     {
       nomeCurso: 'Banco de Dados com MS SQL Server',
@@ -84,7 +80,7 @@ export async function runSeedCursos() {
       categoria: 'Banco de Dados',
       status: 'ativo',
       avaliacao: 4.6,
-      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/7.png'
+      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/7.png',
     },
     {
       nomeCurso: 'Versionamento de Código com Git',
@@ -95,7 +91,7 @@ export async function runSeedCursos() {
       categoria: 'DevOps',
       status: 'ativo',
       avaliacao: 4.8,
-      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/8.png'
+      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/8.png',
     },
     {
       nomeCurso: 'Web Design Responsivo',
@@ -106,7 +102,7 @@ export async function runSeedCursos() {
       categoria: 'Design',
       status: 'ativo',
       avaliacao: 4.9,
-      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/9.png'
+      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/9.png',
     },
     {
       nomeCurso: 'Introdução à Computação em Nuvem',
@@ -117,7 +113,7 @@ export async function runSeedCursos() {
       categoria: 'Infraestrutura',
       status: 'ativo',
       avaliacao: 4.6,
-      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/10.png'
+      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/10.png',
     },
     {
       nomeCurso: 'Design Generativo e Algoritmos',
@@ -128,7 +124,7 @@ export async function runSeedCursos() {
       categoria: 'Design',
       status: 'ativo',
       avaliacao: 4.7,
-      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/11.png'
+      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/11.png',
     },
     {
       nomeCurso: 'JavaScript Avançado para Web',
@@ -139,12 +135,9 @@ export async function runSeedCursos() {
       categoria: 'Frontend',
       status: 'ativo',
       avaliacao: 4.9,
-      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/12.png'
-    }
+      imagemCurso: 'https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/12.png',
+    },
   ]);
 
   console.log('Cursos inseridos com sucesso!');
-  await dataSource.destroy();
 }
-
-

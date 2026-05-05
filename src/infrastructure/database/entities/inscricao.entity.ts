@@ -15,7 +15,7 @@ export class InscricaoEntity implements InscricaoModel {
   @ManyToOne(() => CursoEntity, curso => curso.inscricoes)
   curso: CursoEntity;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ default: () => 'CURRENT_TIMESTAMP' })
   dataInscricao: Date;
 
   @Column({ default: 'ativo' })

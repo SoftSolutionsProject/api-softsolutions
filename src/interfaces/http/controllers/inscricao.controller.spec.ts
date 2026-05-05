@@ -8,6 +8,11 @@ import { VerProgressoUseCase } from '../../../application/use-cases/inscricao/ve
 import { DesmarcarAulaConcluidaUseCase } from '../../../application/use-cases/inscricao/desmarcar-aula-concluida.use-case';
 import { InscricaoRepository } from '../../../infrastructure/database/repositories/inscricao.repository';
 import { CursoRepository } from '../../../infrastructure/database/repositories/curso.repository';
+import {
+  BadRequestException,
+  ForbiddenException,
+  NotFoundException,
+} from '@nestjs/common';
 
 describe('InscricaoController', () => {
   let controller: InscricaoController;
@@ -19,15 +24,6 @@ describe('InscricaoController', () => {
   let desmarcarAulaConcluida: jest.Mocked<DesmarcarAulaConcluidaUseCase>;
   let inscricaoRepo: jest.Mocked<InscricaoRepository>;
   let cursoRepo: jest.Mocked<CursoRepository>;
-
-  const usuarioMock = {
-    id: 1,
-    nomeUsuario: 'Teste',
-    cpfUsuario: '00000000000',
-    email: 'teste@email.com',
-    senha: '123456',
-    tipo: 'aluno' as 'aluno',
-  };
 
   const cursoMock = {
     id: 1,
@@ -45,31 +41,25 @@ describe('InscricaoController', () => {
 
   const inscricaoMock = {
     id: 1,
-    usuario: usuarioMock,
     curso: cursoMock,
     dataInscricao: new Date(),
     status: 'ativo' as 'ativo',
   };
 
   const progressoMock = {
-  id: 1,
-  inscricao: inscricaoMock,
-  aula: {
     id: 1,
-    nomeAula: 'Aula',
-    tempoAula: 30,
-    videoUrl: 'url',
-    descricaoConteudo: 'conteudo',
-    modulo: {
+    inscricao: inscricaoMock,
+    aula: {
       id: 1,
-      nomeModulo: 'Modulo',
-      tempoModulo: 60,
-      curso: cursoMock, // cursoMock já está 100% correto
+      nomeAula: 'Aula',
+      tempoAula: 30,
+      videoUrl: 'url',
+      descricaoConteudo: 'conteudo',
+      modulo: { id: 1, nomeModulo: 'Modulo', tempoModulo: 60, curso: cursoMock },
     },
-  },
-  concluida: true,
-  dataConclusao: new Date(),
-};
+    concluida: true,
+    dataConclusao: new Date(),
+  };
 
   beforeEach(async () => {
     inscreverUsuario = { execute: jest.fn() } as any;
@@ -99,49 +89,83 @@ describe('InscricaoController', () => {
   });
 
   it('deve inscrever usuário', async () => {
-    inscreverUsuario.execute.mockResolvedValue(inscricaoMock);
-    const result = await controller.inscrever(1, 1);
-    expect(result).toHaveProperty('id');
+    inscreverUsuario.execute.mockResolvedValue(inscricaoMock as any);
+
+    await expect(controller.inscrever(1, 1)).resolves.toHaveProperty('id');
+    expect(inscreverUsuario.execute).toHaveBeenCalledWith(1, 1);
   });
 
-  it('deve listar inscrições', async () => {
-    listarInscricoes.execute.mockResolvedValue([inscricaoMock]);
-    const result = await controller.listar(1);
-    expect(result[0]).toHaveProperty('id');
+  it('deve converter NotFound em NotFound e outros erros em BadRequest no fluxo de inscrição', async () => {
+    inscreverUsuario.execute.mockRejectedValueOnce(
+      new NotFoundException('Curso não encontrado'),
+    );
+    await expect(controller.inscrever(1, 1)).rejects.toThrow(NotFoundException);
+
+    inscreverUsuario.execute.mockRejectedValueOnce(new Error('falhou'));
+    await expect(controller.inscrever(1, 1)).rejects.toThrow(BadRequestException);
   });
 
-  it('deve ver progresso', async () => {
+  it('deve listar inscrições e ver progresso', async () => {
+    listarInscricoes.execute.mockResolvedValue([inscricaoMock as any]);
     verProgresso.execute.mockResolvedValue({
       progresso: 50,
       aulasConcluidas: 5,
       totalAulas: 10,
     });
-    const result = await controller.progresso(1, 1);
-    expect(result).toHaveProperty('progresso');
+
+    await expect(controller.listar(1)).resolves.toHaveLength(1);
+    await expect(controller.progresso(1, 1)).resolves.toHaveProperty('progresso');
   });
 
-  it('deve cancelar inscrição', async () => {
+  it('deve cancelar inscrição usando id do usuário para aluno e id da inscrição para admin', async () => {
     cancelarInscricao.execute.mockResolvedValue({ message: 'OK' });
-    const result = await controller.cancelar(1, 1, 'administrador');
-    expect(result).toHaveProperty('message');
+
+    await controller.cancelar(10, 2, 'aluno');
+    expect(cancelarInscricao.execute).toHaveBeenCalledWith(2, 10, false);
+
+    await controller.cancelar(10, 2, 'administrador');
+    expect(cancelarInscricao.execute).toHaveBeenCalledWith(10, 10, true);
   });
 
-  it('deve marcar aula como concluída', async () => {
-    marcarAulaConcluida.execute.mockResolvedValue(progressoMock);
-    const result = await controller.concluirAula(1, 1, 1);
-    expect(result).toHaveProperty('id');
-  });
+  it('deve marcar e desmarcar aula concluída', async () => {
+    marcarAulaConcluida.execute.mockResolvedValue(progressoMock as any);
+    desmarcarAulaConcluida.execute.mockResolvedValue(progressoMock as any);
 
-  it('deve desmarcar aula como concluída', async () => {
-    desmarcarAulaConcluida.execute.mockResolvedValue(progressoMock);
-    const result = await controller.desmarcarAula(1, 1, 1);
-    expect(result).toHaveProperty('id');
+    await expect(controller.concluirAula(1, 1, 1)).resolves.toHaveProperty('id');
+    await expect(controller.desmarcarAula(1, 1, 1)).resolves.toHaveProperty('id');
   });
 
   it('deve obter módulos e aulas se inscrito', async () => {
-    cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(cursoMock);
-    inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue(inscricaoMock);
-    const result = await controller.getModulosEAulas('1', 1);
-    expect(Array.isArray(result)).toBe(true);
+    cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(cursoMock as any);
+    inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue(inscricaoMock as any);
+
+    await expect(controller.getModulosEAulas('1', 1)).resolves.toEqual([]);
+  });
+
+  it('deve validar id e curso no acesso aos módulos', async () => {
+    await expect(controller.getModulosEAulas('abc', 1)).rejects.toThrow(
+      ForbiddenException,
+    );
+
+    cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(null);
+    await expect(controller.getModulosEAulas('1', 1)).rejects.toThrow(
+      NotFoundException,
+    );
+  });
+
+  it('deve negar acesso aos módulos quando não houver inscrição ativa', async () => {
+    cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(cursoMock as any);
+    inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue(null);
+    await expect(controller.getModulosEAulas('1', 1)).rejects.toThrow(
+      ForbiddenException,
+    );
+
+    inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue({
+      ...inscricaoMock,
+      status: 'cancelado',
+    } as any);
+    await expect(controller.getModulosEAulas('1', 1)).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 });

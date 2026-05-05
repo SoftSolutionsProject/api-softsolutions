@@ -85,6 +85,45 @@ npm run test:cov          # Verificar cobertura de testes
 npm run test:debug        # Debug de testes unitários
 npm run test:e2e          # Testes end-to-end
 
+## 🔗 Testes de Integração
+
+Além dos testes unitários, o projeto possui **testes de integração** cobrindo fluxos críticos do sistema. Estes testes garantem que os módulos funcionam corretamente juntos e que os principais casos de uso do negócio estão protegidos contra regressões.
+
+### Onde estão os testes de integração?
+
+Os arquivos seguem o padrão:
+
+```
+src/application/use-cases/*/*.integration.spec.ts
+```
+
+### Fluxos cobertos
+
+- **Usuário + Curso + Inscrição**: Criação de usuário, curso e inscrição vinculada.
+- **Curso + Módulo + Aula**: Vínculo entre curso, módulos e aulas.
+- **Progresso de Aula**: Registro de progresso do aluno em uma aula.
+- **Avaliação de Curso**: Avaliação de curso por usuário inscrito.
+- **Emissão de Certificado**: Geração de certificado para usuário aprovado.
+- **Cancelamento de Inscrição**: Cancelamento de inscrição de usuário em curso.
+
+### Como executar todos os testes (unitários + integração)
+
+```bash
+npm run test
+```
+O comando acima executa todos os testes unitários e de integração juntos. O resultado exibirá o status de cada suíte e o total de testes executados.
+
+### Cobertura
+
+Para verificar a cobertura de testes:
+
+```bash
+npm run test:cov
+```
+O relatório será gerado na pasta `coverage/`.
+
+---
+
 # Lint e Format
 npm run lint              # Verificar problemas de lint e corrigir
 npm run format            # Formatar código com Prettier

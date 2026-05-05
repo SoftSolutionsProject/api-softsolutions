@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-
 // Entities
 import { UsuarioEntity } from './database/entities/usuario.entity';
 import { CursoEntity } from './database/entities/curso.entity';
@@ -23,22 +22,45 @@ import { CertificadoRepository } from './database/repositories/certificado.repos
 import { AvaliacaoRepository } from './database/repositories/avaliacao.repository';
 import { DashboardRepository } from './database/repositories/dashboard.repository';
 
+// Search service
+import { IntentClassifierService } from './search/nlp/intent-classifier.service';
+
 @Module({
   imports: [
     TypeOrmModule.forFeature([
-      UsuarioEntity, CursoEntity, ModuloEntity, AulaEntity,
-      InscricaoEntity, ProgressoAulaEntity, CertificadoEntity, AvaliacaoEntity,
+      UsuarioEntity,
+      CursoEntity,
+      ModuloEntity,
+      AulaEntity,
+      InscricaoEntity,
+      ProgressoAulaEntity,
+      CertificadoEntity,
+      AvaliacaoEntity,
     ]),
   ],
   providers: [
-    UsuarioRepository, CursoRepository, ModuloRepository,
-    AulaRepository, InscricaoRepository, ProgressoAulaRepository,
-    CertificadoRepository, AvaliacaoRepository, DashboardRepository
+    UsuarioRepository,
+    CursoRepository,
+    ModuloRepository,
+    AulaRepository,
+    InscricaoRepository,
+    ProgressoAulaRepository,
+    CertificadoRepository,
+    AvaliacaoRepository,
+    DashboardRepository,
+    IntentClassifierService,
   ],
   exports: [
-    UsuarioRepository, CursoRepository, ModuloRepository,
-    AulaRepository, InscricaoRepository, ProgressoAulaRepository,
-    CertificadoRepository, AvaliacaoRepository, DashboardRepository
+    UsuarioRepository,
+    CursoRepository,
+    ModuloRepository,
+    AulaRepository,
+    InscricaoRepository,
+    ProgressoAulaRepository,
+    CertificadoRepository,
+    AvaliacaoRepository,
+    DashboardRepository,
+    IntentClassifierService,
   ],
 })
 export class InfrastructureModule {}

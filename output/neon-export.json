@@ -1,0 +1,3157 @@
+{
+  "cursos": [
+    {
+      "id": 2,
+      "nomeCurso": "Aplicativos Móveis com React Native",
+      "tempoCurso": 50,
+      "descricaoCurta": "Desenvolva apps para iOS e Android com React Native.",
+      "descricaoDetalhada": "Domine a criação de apps híbridos, explorando componentes, navegação e integração com APIs.",
+      "professor": "Ana Paula",
+      "categoria": "Mobile",
+      "status": "ativo",
+      "avaliacao": 3,
+      "imagemCurso": "https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/2.png"
+    },
+    {
+      "id": 4,
+      "nomeCurso": "Desenvolvimento Java para Web",
+      "tempoCurso": 60,
+      "descricaoCurta": "Crie aplicações web robustas em Java.",
+      "descricaoDetalhada": "Aprenda a usar Java no desenvolvimento de sistemas escaláveis e performáticos.",
+      "professor": "João Silva",
+      "categoria": "Backend",
+      "status": "ativo",
+      "avaliacao": 4,
+      "imagemCurso": "https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/4.png"
+    },
+    {
+      "id": 5,
+      "nomeCurso": "Programação Web com PHP",
+      "tempoCurso": 45,
+      "descricaoCurta": "Domine a linguagem PHP no back-end.",
+      "descricaoDetalhada": "Construa sites e APIs dinâmicas utilizando PHP e boas práticas de desenvolvimento.",
+      "professor": "Carla Dias",
+      "categoria": "Backend",
+      "status": "ativo",
+      "avaliacao": 5,
+      "imagemCurso": "https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/5.png"
+    },
+    {
+      "id": 11,
+      "nomeCurso": "Design Generativo e Algoritmos",
+      "tempoCurso": 35,
+      "descricaoCurta": "Descubra como criar com algoritmos generativos.",
+      "descricaoDetalhada": "Explore como criar padrões e obras interativas usando programação criativa.",
+      "professor": "Roberto Souza",
+      "categoria": "Design",
+      "status": "ativo",
+      "avaliacao": 4,
+      "imagemCurso": "https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/12.png"
+    },
+    {
+      "id": 1,
+      "nomeCurso": "Desenvolvimento Web com Python",
+      "tempoCurso": 40,
+      "descricaoCurta": "Crie aplicações web dinâmicas com Python.",
+      "descricaoDetalhada": "Aprenda a usar Python em projetos reais de back-end, integrando com bancos de dados e APIs REST.",
+      "professor": "Lucas Ferreira",
+      "categoria": "Backend",
+      "status": "ativo",
+      "avaliacao": 5,
+      "imagemCurso": "https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/11.png"
+    },
+    {
+      "id": 9,
+      "nomeCurso": "Web Design Responsivo",
+      "tempoCurso": 30,
+      "descricaoCurta": "Crie interfaces adaptáveis para todos os dispositivos.",
+      "descricaoDetalhada": "Explore técnicas de design responsivo para oferecer a melhor experiência em qualquer tela.",
+      "professor": "Renato Silva",
+      "categoria": "Design",
+      "status": "ativo",
+      "avaliacao": 5,
+      "imagemCurso": "https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/9.png"
+    },
+    {
+      "id": 3,
+      "nomeCurso": "UX/UI Design para Iniciantes",
+      "tempoCurso": 30,
+      "descricaoCurta": "Aprenda as bases de UX e UI Design.",
+      "descricaoDetalhada": "Explore a criação de interfaces intuitivas e agradáveis, com foco em experiência do usuário.",
+      "professor": "Maria Souza",
+      "categoria": "Design",
+      "status": "ativo",
+      "avaliacao": 4.666666666666667,
+      "imagemCurso": "https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/3.png"
+    },
+    {
+      "id": 13,
+      "nomeCurso": "Fundamentos em Python",
+      "tempoCurso": 10,
+      "descricaoCurta": "Principais fundamentos da linguagem Python",
+      "descricaoDetalhada": "O curso Fundamentos em Python oferece uma introdução sólida e progressiva à linguagem Python, ideal para iniciantes ou para quem deseja fortalecer sua base na programação. Ministrado pelo Prof. Dr. Dilermando Piva Junior, o curso combina teoria, prática e desafios em vídeo-aulas curtas, didáticas e organizadas por módulos temáticos",
+      "professor": "Dilermando Piva JR",
+      "categoria": "Python",
+      "status": "ativo",
+      "avaliacao": 5,
+      "imagemCurso": "https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/1.png"
+    },
+    {
+      "id": 10,
+      "nomeCurso": "Introdução à Computação em Nuvem",
+      "tempoCurso": 40,
+      "descricaoCurta": "Entenda os conceitos e práticas de cloud computing.",
+      "descricaoDetalhada": "Aprenda a usar serviços em nuvem para escalar e otimizar aplicações.",
+      "professor": "Bianca Martins",
+      "categoria": "Infraestrutura",
+      "status": "ativo",
+      "avaliacao": 4,
+      "imagemCurso": "https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/10.png"
+    },
+    {
+      "id": 12,
+      "nomeCurso": "JavaScript Avançado para Web",
+      "tempoCurso": 55,
+      "descricaoCurta": "Aprofunde seus conhecimentos em JavaScript.",
+      "descricaoDetalhada": "Aprenda recursos avançados e boas práticas para aplicações web modernas.",
+      "professor": "Camila Oliveira",
+      "categoria": "Frontend",
+      "status": "ativo",
+      "avaliacao": 3.5,
+      "imagemCurso": "https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/12.png"
+    },
+    {
+      "id": 8,
+      "nomeCurso": "Versionamento de Código com Git",
+      "tempoCurso": 20,
+      "descricaoCurta": "Gerencie seu código com Git e GitHub.",
+      "descricaoDetalhada": "Aprenda a usar Git para controlar versões, colaborar em equipe e trabalhar com repositórios.",
+      "professor": "Juliana Gomes",
+      "categoria": "DevOps",
+      "status": "ativo",
+      "avaliacao": 5,
+      "imagemCurso": "https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/8.png"
+    },
+    {
+      "id": 6,
+      "nomeCurso": "HTML5: Estrutura e Semântica",
+      "tempoCurso": 25,
+      "descricaoCurta": "Fundamentos e semântica do HTML5.",
+      "descricaoDetalhada": "Construa páginas web organizadas e acessíveis utilizando a linguagem base da web.",
+      "professor": "Pedro Lima",
+      "categoria": "Frontend",
+      "status": "ativo",
+      "avaliacao": 3,
+      "imagemCurso": "https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/6.png"
+    },
+    {
+      "id": 7,
+      "nomeCurso": "Banco de Dados com MS SQL Server",
+      "tempoCurso": 50,
+      "descricaoCurta": "Administre e otimize bancos de dados SQL Server.",
+      "descricaoDetalhada": "Aprenda a modelar, consultar e manter bancos de dados robustos usando MS SQL Server.",
+      "professor": "Lucas Carvalho",
+      "categoria": "Banco de Dados",
+      "status": "ativo",
+      "avaliacao": 4,
+      "imagemCurso": "https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/cards/7.png"
+    }
+  ],
+  "modulos": [
+    {
+      "id": 1,
+      "nomeModulo": "Introdução ao Python e Flask",
+      "tempoModulo": 15,
+      "cursoId": 1
+    },
+    {
+      "id": 2,
+      "nomeModulo": "Modelagem de Dados e SQLAlchemy",
+      "tempoModulo": 20,
+      "cursoId": 1
+    },
+    {
+      "id": 3,
+      "nomeModulo": "Integração de APIs e Autenticação",
+      "tempoModulo": 25,
+      "cursoId": 1
+    },
+    {
+      "id": 4,
+      "nomeModulo": "Gerenciamento de Sessões e Cookies",
+      "tempoModulo": 15,
+      "cursoId": 1
+    },
+    {
+      "id": 5,
+      "nomeModulo": "Desempenho e Escalabilidade",
+      "tempoModulo": 20,
+      "cursoId": 1
+    },
+    {
+      "id": 6,
+      "nomeModulo": "Ambiente e Primeiros Passos",
+      "tempoModulo": 15,
+      "cursoId": 2
+    },
+    {
+      "id": 7,
+      "nomeModulo": "Componentes e Navegação",
+      "tempoModulo": 20,
+      "cursoId": 2
+    },
+    {
+      "id": 8,
+      "nomeModulo": "Integração com APIs e Banco de Dados",
+      "tempoModulo": 25,
+      "cursoId": 2
+    },
+    {
+      "id": 9,
+      "nomeModulo": "Testes e Debugging",
+      "tempoModulo": 15,
+      "cursoId": 2
+    },
+    {
+      "id": 10,
+      "nomeModulo": "Publicação e Distribuição",
+      "tempoModulo": 20,
+      "cursoId": 2
+    },
+    {
+      "id": 11,
+      "nomeModulo": "Fundamentos de UX",
+      "tempoModulo": 10,
+      "cursoId": 3
+    },
+    {
+      "id": 12,
+      "nomeModulo": "Princípios Visuais e Hierarquia",
+      "tempoModulo": 15,
+      "cursoId": 3
+    },
+    {
+      "id": 13,
+      "nomeModulo": "Ferramentas de Prototipagem",
+      "tempoModulo": 20,
+      "cursoId": 3
+    },
+    {
+      "id": 14,
+      "nomeModulo": "Design de Interação",
+      "tempoModulo": 15,
+      "cursoId": 3
+    },
+    {
+      "id": 15,
+      "nomeModulo": "Testes de Usabilidade",
+      "tempoModulo": 10,
+      "cursoId": 3
+    },
+    {
+      "id": 16,
+      "nomeModulo": "Conceitos e Estruturas Java",
+      "tempoModulo": 20,
+      "cursoId": 4
+    },
+    {
+      "id": 17,
+      "nomeModulo": "Spring Boot e MVC",
+      "tempoModulo": 25,
+      "cursoId": 4
+    },
+    {
+      "id": 18,
+      "nomeModulo": "Segurança e Boas Práticas",
+      "tempoModulo": 15,
+      "cursoId": 4
+    },
+    {
+      "id": 19,
+      "nomeModulo": "JPA e Persistência de Dados",
+      "tempoModulo": 20,
+      "cursoId": 4
+    },
+    {
+      "id": 20,
+      "nomeModulo": "Integração com Front-end",
+      "tempoModulo": 15,
+      "cursoId": 4
+    },
+    {
+      "id": 21,
+      "nomeModulo": "Fundamentos do PHP",
+      "tempoModulo": 15,
+      "cursoId": 5
+    },
+    {
+      "id": 22,
+      "nomeModulo": "Laravel e Padrões de Projeto",
+      "tempoModulo": 20,
+      "cursoId": 5
+    },
+    {
+      "id": 23,
+      "nomeModulo": "Boas Práticas e Segurança",
+      "tempoModulo": 15,
+      "cursoId": 5
+    },
+    {
+      "id": 24,
+      "nomeModulo": "Trabalhando com APIs REST",
+      "tempoModulo": 20,
+      "cursoId": 5
+    },
+    {
+      "id": 25,
+      "nomeModulo": "Testes e Depuração",
+      "tempoModulo": 15,
+      "cursoId": 5
+    },
+    {
+      "id": 26,
+      "nomeModulo": "Introdução ao HTML5",
+      "tempoModulo": 10,
+      "cursoId": 6
+    },
+    {
+      "id": 27,
+      "nomeModulo": "Estrutura Semântica e SEO",
+      "tempoModulo": 15,
+      "cursoId": 6
+    },
+    {
+      "id": 28,
+      "nomeModulo": "Acessibilidade e Melhores Práticas",
+      "tempoModulo": 10,
+      "cursoId": 6
+    },
+    {
+      "id": 29,
+      "nomeModulo": "Formulários Avançados",
+      "tempoModulo": 15,
+      "cursoId": 6
+    },
+    {
+      "id": 30,
+      "nomeModulo": "Boas Práticas de Marcação",
+      "tempoModulo": 10,
+      "cursoId": 6
+    },
+    {
+      "id": 31,
+      "nomeModulo": "Modelagem e Consultas",
+      "tempoModulo": 20,
+      "cursoId": 7
+    },
+    {
+      "id": 32,
+      "nomeModulo": "Procedures e Otimização",
+      "tempoModulo": 25,
+      "cursoId": 7
+    },
+    {
+      "id": 33,
+      "nomeModulo": "Backup e Recuperação",
+      "tempoModulo": 15,
+      "cursoId": 7
+    },
+    {
+      "id": 34,
+      "nomeModulo": "Segurança e Permissões",
+      "tempoModulo": 20,
+      "cursoId": 7
+    },
+    {
+      "id": 35,
+      "nomeModulo": "Integração com Aplicações",
+      "tempoModulo": 15,
+      "cursoId": 7
+    },
+    {
+      "id": 36,
+      "nomeModulo": "Fundamentos e Instalação",
+      "tempoModulo": 10,
+      "cursoId": 8
+    },
+    {
+      "id": 37,
+      "nomeModulo": "Branches e Merge",
+      "tempoModulo": 15,
+      "cursoId": 8
+    },
+    {
+      "id": 38,
+      "nomeModulo": "Colaboração com Pull Requests",
+      "tempoModulo": 15,
+      "cursoId": 8
+    },
+    {
+      "id": 39,
+      "nomeModulo": "Revertendo Mudanças",
+      "tempoModulo": 10,
+      "cursoId": 8
+    },
+    {
+      "id": 40,
+      "nomeModulo": "Fluxos de Trabalho com Git",
+      "tempoModulo": 10,
+      "cursoId": 8
+    },
+    {
+      "id": 41,
+      "nomeModulo": "Princípios do Design Responsivo",
+      "tempoModulo": 10,
+      "cursoId": 9
+    },
+    {
+      "id": 42,
+      "nomeModulo": "Media Queries e Layouts",
+      "tempoModulo": 15,
+      "cursoId": 9
+    },
+    {
+      "id": 43,
+      "nomeModulo": "Boas Práticas e Performance",
+      "tempoModulo": 15,
+      "cursoId": 9
+    },
+    {
+      "id": 44,
+      "nomeModulo": "Design Mobile-First",
+      "tempoModulo": 10,
+      "cursoId": 9
+    },
+    {
+      "id": 45,
+      "nomeModulo": "Imagens e Recursos Flexíveis",
+      "tempoModulo": 10,
+      "cursoId": 9
+    },
+    {
+      "id": 46,
+      "nomeModulo": "Fundamentos e Conceitos",
+      "tempoModulo": 15,
+      "cursoId": 10
+    },
+    {
+      "id": 47,
+      "nomeModulo": "Serviços e Modelos de Nuvem",
+      "tempoModulo": 20,
+      "cursoId": 10
+    },
+    {
+      "id": 48,
+      "nomeModulo": "Segurança e Custos",
+      "tempoModulo": 15,
+      "cursoId": 10
+    },
+    {
+      "id": 49,
+      "nomeModulo": "Ferramentas e Plataformas",
+      "tempoModulo": 15,
+      "cursoId": 10
+    },
+    {
+      "id": 50,
+      "nomeModulo": "Tendências e Futuro da Nuvem",
+      "tempoModulo": 10,
+      "cursoId": 10
+    },
+    {
+      "id": 51,
+      "nomeModulo": "Conceitos e Ferramentas",
+      "tempoModulo": 15,
+      "cursoId": 11
+    },
+    {
+      "id": 52,
+      "nomeModulo": "Criação de Algoritmos Visuais",
+      "tempoModulo": 20,
+      "cursoId": 11
+    },
+    {
+      "id": 53,
+      "nomeModulo": "Exemplos Práticos e Aplicações",
+      "tempoModulo": 15,
+      "cursoId": 11
+    },
+    {
+      "id": 54,
+      "nomeModulo": "Animações e Interatividade",
+      "tempoModulo": 15,
+      "cursoId": 11
+    },
+    {
+      "id": 55,
+      "nomeModulo": "Casos de Uso Avançados",
+      "tempoModulo": 15,
+      "cursoId": 11
+    },
+    {
+      "id": 56,
+      "nomeModulo": "ES6+ e Recursos Avançados",
+      "tempoModulo": 20,
+      "cursoId": 12
+    },
+    {
+      "id": 57,
+      "nomeModulo": "Manipulação Avançada de DOM",
+      "tempoModulo": 20,
+      "cursoId": 12
+    },
+    {
+      "id": 58,
+      "nomeModulo": "Boas Práticas e Performance",
+      "tempoModulo": 15,
+      "cursoId": 12
+    },
+    {
+      "id": 59,
+      "nomeModulo": "Web APIs e Padrões Modernos",
+      "tempoModulo": 15,
+      "cursoId": 12
+    },
+    {
+      "id": 60,
+      "nomeModulo": "Testes e Ferramentas de Debug",
+      "tempoModulo": 15,
+      "cursoId": 12
+    },
+    {
+      "id": 62,
+      "nomeModulo": "Por que aprender e introdução",
+      "tempoModulo": 21,
+      "cursoId": 13
+    },
+    {
+      "id": 63,
+      "nomeModulo": "Instalação e uso do Python",
+      "tempoModulo": 59,
+      "cursoId": 13
+    },
+    {
+      "id": 64,
+      "nomeModulo": "Primeiros comandos e boas práticas",
+      "tempoModulo": 117,
+      "cursoId": 13
+    },
+    {
+      "id": 65,
+      "nomeModulo": "Variáveis e tipos de dados",
+      "tempoModulo": 75,
+      "cursoId": 13
+    },
+    {
+      "id": 66,
+      "nomeModulo": "Expressões e estruturas condicionais",
+      "tempoModulo": 78,
+      "cursoId": 13
+    },
+    {
+      "id": 67,
+      "nomeModulo": "Estruturas de repetição",
+      "tempoModulo": 56,
+      "cursoId": 13
+    },
+    {
+      "id": 68,
+      "nomeModulo": "Estruturas de dados",
+      "tempoModulo": 140,
+      "cursoId": 13
+    },
+    {
+      "id": 69,
+      "nomeModulo": "Funções",
+      "tempoModulo": 79,
+      "cursoId": 13
+    }
+  ],
+  "aulas": [
+    {
+      "id": 1,
+      "nomeAula": "Introdução ao módulo: Introdução ao Python e Flask",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 1
+    },
+    {
+      "id": 2,
+      "nomeAula": "Conceitos principais de Introdução ao Python e Flask",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 1
+    },
+    {
+      "id": 3,
+      "nomeAula": "Práticas e exercícios: Introdução ao Python e Flask",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 1
+    },
+    {
+      "id": 4,
+      "nomeAula": "Introdução ao módulo: Modelagem de Dados e SQLAlchemy",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 2
+    },
+    {
+      "id": 5,
+      "nomeAula": "Conceitos principais de Modelagem de Dados e SQLAlchemy",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 2
+    },
+    {
+      "id": 6,
+      "nomeAula": "Práticas e exercícios: Modelagem de Dados e SQLAlchemy",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 2
+    },
+    {
+      "id": 7,
+      "nomeAula": "Introdução ao módulo: Integração de APIs e Autenticação",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 3
+    },
+    {
+      "id": 8,
+      "nomeAula": "Conceitos principais de Integração de APIs e Autenticação",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 3
+    },
+    {
+      "id": 9,
+      "nomeAula": "Práticas e exercícios: Integração de APIs e Autenticação",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 3
+    },
+    {
+      "id": 10,
+      "nomeAula": "Introdução ao módulo: Gerenciamento de Sessões e Cookies",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 4
+    },
+    {
+      "id": 11,
+      "nomeAula": "Conceitos principais de Gerenciamento de Sessões e Cookies",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 4
+    },
+    {
+      "id": 12,
+      "nomeAula": "Práticas e exercícios: Gerenciamento de Sessões e Cookies",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 4
+    },
+    {
+      "id": 13,
+      "nomeAula": "Introdução ao módulo: Desempenho e Escalabilidade",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 5
+    },
+    {
+      "id": 14,
+      "nomeAula": "Conceitos principais de Desempenho e Escalabilidade",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 5
+    },
+    {
+      "id": 15,
+      "nomeAula": "Práticas e exercícios: Desempenho e Escalabilidade",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 5
+    },
+    {
+      "id": 16,
+      "nomeAula": "Introdução ao módulo: Ambiente e Primeiros Passos",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 6
+    },
+    {
+      "id": 17,
+      "nomeAula": "Conceitos principais de Ambiente e Primeiros Passos",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 6
+    },
+    {
+      "id": 18,
+      "nomeAula": "Práticas e exercícios: Ambiente e Primeiros Passos",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 6
+    },
+    {
+      "id": 19,
+      "nomeAula": "Introdução ao módulo: Componentes e Navegação",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 7
+    },
+    {
+      "id": 20,
+      "nomeAula": "Conceitos principais de Componentes e Navegação",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 7
+    },
+    {
+      "id": 21,
+      "nomeAula": "Práticas e exercícios: Componentes e Navegação",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 7
+    },
+    {
+      "id": 22,
+      "nomeAula": "Introdução ao módulo: Integração com APIs e Banco de Dados",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 8
+    },
+    {
+      "id": 23,
+      "nomeAula": "Conceitos principais de Integração com APIs e Banco de Dados",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 8
+    },
+    {
+      "id": 24,
+      "nomeAula": "Práticas e exercícios: Integração com APIs e Banco de Dados",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 8
+    },
+    {
+      "id": 25,
+      "nomeAula": "Introdução ao módulo: Testes e Debugging",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 9
+    },
+    {
+      "id": 26,
+      "nomeAula": "Conceitos principais de Testes e Debugging",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 9
+    },
+    {
+      "id": 27,
+      "nomeAula": "Práticas e exercícios: Testes e Debugging",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 9
+    },
+    {
+      "id": 28,
+      "nomeAula": "Introdução ao módulo: Publicação e Distribuição",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 10
+    },
+    {
+      "id": 214,
+      "nomeAula": "Desafio deste Módulo",
+      "tempoAula": 3,
+      "videoUrl": "https://www.youtube.com/embed/jP0WjB6vBE8?si=IQs_2NWSR6WyBJHY",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 66
+    },
+    {
+      "id": 29,
+      "nomeAula": "Conceitos principais de Publicação e Distribuição",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 10
+    },
+    {
+      "id": 30,
+      "nomeAula": "Práticas e exercícios: Publicação e Distribuição",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 10
+    },
+    {
+      "id": 31,
+      "nomeAula": "Introdução ao módulo: Fundamentos de UX",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 11
+    },
+    {
+      "id": 32,
+      "nomeAula": "Conceitos principais de Fundamentos de UX",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 11
+    },
+    {
+      "id": 33,
+      "nomeAula": "Práticas e exercícios: Fundamentos de UX",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 11
+    },
+    {
+      "id": 34,
+      "nomeAula": "Introdução ao módulo: Princípios Visuais e Hierarquia",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 12
+    },
+    {
+      "id": 35,
+      "nomeAula": "Conceitos principais de Princípios Visuais e Hierarquia",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 12
+    },
+    {
+      "id": 36,
+      "nomeAula": "Práticas e exercícios: Princípios Visuais e Hierarquia",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 12
+    },
+    {
+      "id": 37,
+      "nomeAula": "Introdução ao módulo: Ferramentas de Prototipagem",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 13
+    },
+    {
+      "id": 38,
+      "nomeAula": "Conceitos principais de Ferramentas de Prototipagem",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 13
+    },
+    {
+      "id": 39,
+      "nomeAula": "Práticas e exercícios: Ferramentas de Prototipagem",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 13
+    },
+    {
+      "id": 40,
+      "nomeAula": "Introdução ao módulo: Design de Interação",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 14
+    },
+    {
+      "id": 41,
+      "nomeAula": "Conceitos principais de Design de Interação",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 14
+    },
+    {
+      "id": 42,
+      "nomeAula": "Práticas e exercícios: Design de Interação",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 14
+    },
+    {
+      "id": 43,
+      "nomeAula": "Introdução ao módulo: Testes de Usabilidade",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 15
+    },
+    {
+      "id": 44,
+      "nomeAula": "Conceitos principais de Testes de Usabilidade",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 15
+    },
+    {
+      "id": 45,
+      "nomeAula": "Práticas e exercícios: Testes de Usabilidade",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 15
+    },
+    {
+      "id": 46,
+      "nomeAula": "Introdução ao módulo: Conceitos e Estruturas Java",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 16
+    },
+    {
+      "id": 47,
+      "nomeAula": "Conceitos principais de Conceitos e Estruturas Java",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 16
+    },
+    {
+      "id": 48,
+      "nomeAula": "Práticas e exercícios: Conceitos e Estruturas Java",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 16
+    },
+    {
+      "id": 49,
+      "nomeAula": "Introdução ao módulo: Spring Boot e MVC",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 17
+    },
+    {
+      "id": 50,
+      "nomeAula": "Conceitos principais de Spring Boot e MVC",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 17
+    },
+    {
+      "id": 51,
+      "nomeAula": "Práticas e exercícios: Spring Boot e MVC",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 17
+    },
+    {
+      "id": 52,
+      "nomeAula": "Introdução ao módulo: Segurança e Boas Práticas",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 18
+    },
+    {
+      "id": 53,
+      "nomeAula": "Conceitos principais de Segurança e Boas Práticas",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 18
+    },
+    {
+      "id": 54,
+      "nomeAula": "Práticas e exercícios: Segurança e Boas Práticas",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 18
+    },
+    {
+      "id": 55,
+      "nomeAula": "Introdução ao módulo: JPA e Persistência de Dados",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 19
+    },
+    {
+      "id": 56,
+      "nomeAula": "Conceitos principais de JPA e Persistência de Dados",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 19
+    },
+    {
+      "id": 57,
+      "nomeAula": "Práticas e exercícios: JPA e Persistência de Dados",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 19
+    },
+    {
+      "id": 58,
+      "nomeAula": "Introdução ao módulo: Integração com Front-end",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 20
+    },
+    {
+      "id": 59,
+      "nomeAula": "Conceitos principais de Integração com Front-end",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 20
+    },
+    {
+      "id": 60,
+      "nomeAula": "Práticas e exercícios: Integração com Front-end",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 20
+    },
+    {
+      "id": 61,
+      "nomeAula": "Introdução ao módulo: Fundamentos do PHP",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 21
+    },
+    {
+      "id": 62,
+      "nomeAula": "Conceitos principais de Fundamentos do PHP",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 21
+    },
+    {
+      "id": 63,
+      "nomeAula": "Práticas e exercícios: Fundamentos do PHP",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 21
+    },
+    {
+      "id": 64,
+      "nomeAula": "Introdução ao módulo: Laravel e Padrões de Projeto",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 22
+    },
+    {
+      "id": 65,
+      "nomeAula": "Conceitos principais de Laravel e Padrões de Projeto",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 22
+    },
+    {
+      "id": 66,
+      "nomeAula": "Práticas e exercícios: Laravel e Padrões de Projeto",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 22
+    },
+    {
+      "id": 67,
+      "nomeAula": "Introdução ao módulo: Boas Práticas e Segurança",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 23
+    },
+    {
+      "id": 68,
+      "nomeAula": "Conceitos principais de Boas Práticas e Segurança",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 23
+    },
+    {
+      "id": 69,
+      "nomeAula": "Práticas e exercícios: Boas Práticas e Segurança",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 23
+    },
+    {
+      "id": 70,
+      "nomeAula": "Introdução ao módulo: Trabalhando com APIs REST",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 24
+    },
+    {
+      "id": 71,
+      "nomeAula": "Conceitos principais de Trabalhando com APIs REST",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 24
+    },
+    {
+      "id": 72,
+      "nomeAula": "Práticas e exercícios: Trabalhando com APIs REST",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 24
+    },
+    {
+      "id": 73,
+      "nomeAula": "Introdução ao módulo: Testes e Depuração",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 25
+    },
+    {
+      "id": 74,
+      "nomeAula": "Conceitos principais de Testes e Depuração",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 25
+    },
+    {
+      "id": 75,
+      "nomeAula": "Práticas e exercícios: Testes e Depuração",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 25
+    },
+    {
+      "id": 76,
+      "nomeAula": "Introdução ao módulo: Introdução ao HTML5",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 26
+    },
+    {
+      "id": 77,
+      "nomeAula": "Conceitos principais de Introdução ao HTML5",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 26
+    },
+    {
+      "id": 78,
+      "nomeAula": "Práticas e exercícios: Introdução ao HTML5",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 26
+    },
+    {
+      "id": 79,
+      "nomeAula": "Introdução ao módulo: Estrutura Semântica e SEO",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 27
+    },
+    {
+      "id": 80,
+      "nomeAula": "Conceitos principais de Estrutura Semântica e SEO",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 27
+    },
+    {
+      "id": 81,
+      "nomeAula": "Práticas e exercícios: Estrutura Semântica e SEO",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 27
+    },
+    {
+      "id": 82,
+      "nomeAula": "Introdução ao módulo: Acessibilidade e Melhores Práticas",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 28
+    },
+    {
+      "id": 83,
+      "nomeAula": "Conceitos principais de Acessibilidade e Melhores Práticas",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 28
+    },
+    {
+      "id": 84,
+      "nomeAula": "Práticas e exercícios: Acessibilidade e Melhores Práticas",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 28
+    },
+    {
+      "id": 85,
+      "nomeAula": "Introdução ao módulo: Formulários Avançados",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 29
+    },
+    {
+      "id": 86,
+      "nomeAula": "Conceitos principais de Formulários Avançados",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 29
+    },
+    {
+      "id": 87,
+      "nomeAula": "Práticas e exercícios: Formulários Avançados",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 29
+    },
+    {
+      "id": 88,
+      "nomeAula": "Introdução ao módulo: Boas Práticas de Marcação",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 30
+    },
+    {
+      "id": 89,
+      "nomeAula": "Conceitos principais de Boas Práticas de Marcação",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 30
+    },
+    {
+      "id": 90,
+      "nomeAula": "Práticas e exercícios: Boas Práticas de Marcação",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 30
+    },
+    {
+      "id": 91,
+      "nomeAula": "Introdução ao módulo: Modelagem e Consultas",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 31
+    },
+    {
+      "id": 92,
+      "nomeAula": "Conceitos principais de Modelagem e Consultas",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 31
+    },
+    {
+      "id": 93,
+      "nomeAula": "Práticas e exercícios: Modelagem e Consultas",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 31
+    },
+    {
+      "id": 94,
+      "nomeAula": "Introdução ao módulo: Procedures e Otimização",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 32
+    },
+    {
+      "id": 95,
+      "nomeAula": "Conceitos principais de Procedures e Otimização",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 32
+    },
+    {
+      "id": 96,
+      "nomeAula": "Práticas e exercícios: Procedures e Otimização",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 32
+    },
+    {
+      "id": 97,
+      "nomeAula": "Introdução ao módulo: Backup e Recuperação",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 33
+    },
+    {
+      "id": 98,
+      "nomeAula": "Conceitos principais de Backup e Recuperação",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 33
+    },
+    {
+      "id": 99,
+      "nomeAula": "Práticas e exercícios: Backup e Recuperação",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 33
+    },
+    {
+      "id": 100,
+      "nomeAula": "Introdução ao módulo: Segurança e Permissões",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 34
+    },
+    {
+      "id": 101,
+      "nomeAula": "Conceitos principais de Segurança e Permissões",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 34
+    },
+    {
+      "id": 102,
+      "nomeAula": "Práticas e exercícios: Segurança e Permissões",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 34
+    },
+    {
+      "id": 103,
+      "nomeAula": "Introdução ao módulo: Integração com Aplicações",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 35
+    },
+    {
+      "id": 104,
+      "nomeAula": "Conceitos principais de Integração com Aplicações",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 35
+    },
+    {
+      "id": 105,
+      "nomeAula": "Práticas e exercícios: Integração com Aplicações",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 35
+    },
+    {
+      "id": 106,
+      "nomeAula": "Introdução ao módulo: Fundamentos e Instalação",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 36
+    },
+    {
+      "id": 107,
+      "nomeAula": "Conceitos principais de Fundamentos e Instalação",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 36
+    },
+    {
+      "id": 108,
+      "nomeAula": "Práticas e exercícios: Fundamentos e Instalação",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 36
+    },
+    {
+      "id": 109,
+      "nomeAula": "Introdução ao módulo: Branches e Merge",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 37
+    },
+    {
+      "id": 110,
+      "nomeAula": "Conceitos principais de Branches e Merge",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 37
+    },
+    {
+      "id": 111,
+      "nomeAula": "Práticas e exercícios: Branches e Merge",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 37
+    },
+    {
+      "id": 112,
+      "nomeAula": "Introdução ao módulo: Colaboração com Pull Requests",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 38
+    },
+    {
+      "id": 113,
+      "nomeAula": "Conceitos principais de Colaboração com Pull Requests",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 38
+    },
+    {
+      "id": 114,
+      "nomeAula": "Práticas e exercícios: Colaboração com Pull Requests",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 38
+    },
+    {
+      "id": 115,
+      "nomeAula": "Introdução ao módulo: Revertendo Mudanças",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 39
+    },
+    {
+      "id": 116,
+      "nomeAula": "Conceitos principais de Revertendo Mudanças",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 39
+    },
+    {
+      "id": 117,
+      "nomeAula": "Práticas e exercícios: Revertendo Mudanças",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 39
+    },
+    {
+      "id": 118,
+      "nomeAula": "Introdução ao módulo: Fluxos de Trabalho com Git",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 40
+    },
+    {
+      "id": 119,
+      "nomeAula": "Conceitos principais de Fluxos de Trabalho com Git",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 40
+    },
+    {
+      "id": 120,
+      "nomeAula": "Práticas e exercícios: Fluxos de Trabalho com Git",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 40
+    },
+    {
+      "id": 121,
+      "nomeAula": "Introdução ao módulo: Princípios do Design Responsivo",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 41
+    },
+    {
+      "id": 122,
+      "nomeAula": "Conceitos principais de Princípios do Design Responsivo",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 41
+    },
+    {
+      "id": 123,
+      "nomeAula": "Práticas e exercícios: Princípios do Design Responsivo",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 41
+    },
+    {
+      "id": 124,
+      "nomeAula": "Introdução ao módulo: Media Queries e Layouts",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 42
+    },
+    {
+      "id": 125,
+      "nomeAula": "Conceitos principais de Media Queries e Layouts",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 42
+    },
+    {
+      "id": 126,
+      "nomeAula": "Práticas e exercícios: Media Queries e Layouts",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 42
+    },
+    {
+      "id": 127,
+      "nomeAula": "Introdução ao módulo: Boas Práticas e Performance",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 43
+    },
+    {
+      "id": 128,
+      "nomeAula": "Conceitos principais de Boas Práticas e Performance",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 43
+    },
+    {
+      "id": 129,
+      "nomeAula": "Práticas e exercícios: Boas Práticas e Performance",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 43
+    },
+    {
+      "id": 130,
+      "nomeAula": "Introdução ao módulo: Design Mobile-First",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 44
+    },
+    {
+      "id": 131,
+      "nomeAula": "Conceitos principais de Design Mobile-First",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 44
+    },
+    {
+      "id": 132,
+      "nomeAula": "Práticas e exercícios: Design Mobile-First",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 44
+    },
+    {
+      "id": 133,
+      "nomeAula": "Introdução ao módulo: Imagens e Recursos Flexíveis",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 45
+    },
+    {
+      "id": 134,
+      "nomeAula": "Conceitos principais de Imagens e Recursos Flexíveis",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 45
+    },
+    {
+      "id": 135,
+      "nomeAula": "Práticas e exercícios: Imagens e Recursos Flexíveis",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 45
+    },
+    {
+      "id": 136,
+      "nomeAula": "Introdução ao módulo: Fundamentos e Conceitos",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 46
+    },
+    {
+      "id": 137,
+      "nomeAula": "Conceitos principais de Fundamentos e Conceitos",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 46
+    },
+    {
+      "id": 138,
+      "nomeAula": "Práticas e exercícios: Fundamentos e Conceitos",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 46
+    },
+    {
+      "id": 139,
+      "nomeAula": "Introdução ao módulo: Serviços e Modelos de Nuvem",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 47
+    },
+    {
+      "id": 140,
+      "nomeAula": "Conceitos principais de Serviços e Modelos de Nuvem",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 47
+    },
+    {
+      "id": 141,
+      "nomeAula": "Práticas e exercícios: Serviços e Modelos de Nuvem",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 47
+    },
+    {
+      "id": 142,
+      "nomeAula": "Introdução ao módulo: Segurança e Custos",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 48
+    },
+    {
+      "id": 143,
+      "nomeAula": "Conceitos principais de Segurança e Custos",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 48
+    },
+    {
+      "id": 144,
+      "nomeAula": "Práticas e exercícios: Segurança e Custos",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 48
+    },
+    {
+      "id": 145,
+      "nomeAula": "Introdução ao módulo: Ferramentas e Plataformas",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 49
+    },
+    {
+      "id": 146,
+      "nomeAula": "Conceitos principais de Ferramentas e Plataformas",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 49
+    },
+    {
+      "id": 147,
+      "nomeAula": "Práticas e exercícios: Ferramentas e Plataformas",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 49
+    },
+    {
+      "id": 148,
+      "nomeAula": "Introdução ao módulo: Tendências e Futuro da Nuvem",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 50
+    },
+    {
+      "id": 149,
+      "nomeAula": "Conceitos principais de Tendências e Futuro da Nuvem",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 50
+    },
+    {
+      "id": 150,
+      "nomeAula": "Práticas e exercícios: Tendências e Futuro da Nuvem",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 50
+    },
+    {
+      "id": 151,
+      "nomeAula": "Introdução ao módulo: Conceitos e Ferramentas",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 51
+    },
+    {
+      "id": 152,
+      "nomeAula": "Conceitos principais de Conceitos e Ferramentas",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 51
+    },
+    {
+      "id": 153,
+      "nomeAula": "Práticas e exercícios: Conceitos e Ferramentas",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 51
+    },
+    {
+      "id": 154,
+      "nomeAula": "Introdução ao módulo: Criação de Algoritmos Visuais",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 52
+    },
+    {
+      "id": 155,
+      "nomeAula": "Conceitos principais de Criação de Algoritmos Visuais",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 52
+    },
+    {
+      "id": 156,
+      "nomeAula": "Práticas e exercícios: Criação de Algoritmos Visuais",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 52
+    },
+    {
+      "id": 157,
+      "nomeAula": "Introdução ao módulo: Exemplos Práticos e Aplicações",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 53
+    },
+    {
+      "id": 158,
+      "nomeAula": "Conceitos principais de Exemplos Práticos e Aplicações",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 53
+    },
+    {
+      "id": 159,
+      "nomeAula": "Práticas e exercícios: Exemplos Práticos e Aplicações",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 53
+    },
+    {
+      "id": 160,
+      "nomeAula": "Introdução ao módulo: Animações e Interatividade",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 54
+    },
+    {
+      "id": 161,
+      "nomeAula": "Conceitos principais de Animações e Interatividade",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 54
+    },
+    {
+      "id": 162,
+      "nomeAula": "Práticas e exercícios: Animações e Interatividade",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 54
+    },
+    {
+      "id": 163,
+      "nomeAula": "Introdução ao módulo: Casos de Uso Avançados",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 55
+    },
+    {
+      "id": 164,
+      "nomeAula": "Conceitos principais de Casos de Uso Avançados",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 55
+    },
+    {
+      "id": 165,
+      "nomeAula": "Práticas e exercícios: Casos de Uso Avançados",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 55
+    },
+    {
+      "id": 166,
+      "nomeAula": "Introdução ao módulo: ES6+ e Recursos Avançados",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 56
+    },
+    {
+      "id": 167,
+      "nomeAula": "Conceitos principais de ES6+ e Recursos Avançados",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 56
+    },
+    {
+      "id": 168,
+      "nomeAula": "Práticas e exercícios: ES6+ e Recursos Avançados",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 56
+    },
+    {
+      "id": 169,
+      "nomeAula": "Introdução ao módulo: Manipulação Avançada de DOM",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 57
+    },
+    {
+      "id": 170,
+      "nomeAula": "Conceitos principais de Manipulação Avançada de DOM",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 57
+    },
+    {
+      "id": 171,
+      "nomeAula": "Práticas e exercícios: Manipulação Avançada de DOM",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 57
+    },
+    {
+      "id": 172,
+      "nomeAula": "Introdução ao módulo: Boas Práticas e Performance",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 58
+    },
+    {
+      "id": 215,
+      "nomeAula": "Resposta do Desafio deste Módulo",
+      "tempoAula": 11,
+      "videoUrl": "https://www.youtube.com/embed/yAmhZ6g9r-Q?si=aLCUqCqCXrIFKDcp",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 66
+    },
+    {
+      "id": 173,
+      "nomeAula": "Conceitos principais de Boas Práticas e Performance",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 58
+    },
+    {
+      "id": 174,
+      "nomeAula": "Práticas e exercícios: Boas Práticas e Performance",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 58
+    },
+    {
+      "id": 175,
+      "nomeAula": "Introdução ao módulo: Web APIs e Padrões Modernos",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 59
+    },
+    {
+      "id": 176,
+      "nomeAula": "Conceitos principais de Web APIs e Padrões Modernos",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 59
+    },
+    {
+      "id": 177,
+      "nomeAula": "Práticas e exercícios: Web APIs e Padrões Modernos",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 59
+    },
+    {
+      "id": 178,
+      "nomeAula": "Introdução ao módulo: Testes e Ferramentas de Debug",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/introducao.pdf"
+      ],
+      "descricaoConteudo": "Apresentação dos objetivos e visão geral do módulo.",
+      "moduloId": 60
+    },
+    {
+      "id": 179,
+      "nomeAula": "Conceitos principais de Testes e Ferramentas de Debug",
+      "tempoAula": 15,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/conceitos.pdf"
+      ],
+      "descricaoConteudo": "Exposição dos conceitos fundamentais e exemplos práticos.",
+      "moduloId": 60
+    },
+    {
+      "id": 180,
+      "nomeAula": "Práticas e exercícios: Testes e Ferramentas de Debug",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs",
+      "materialApoio": [
+        "https://softsolutions.com.br/material/praticas.pdf"
+      ],
+      "descricaoConteudo": "Atividades e aplicações práticas para consolidar o conhecimento.",
+      "moduloId": 60
+    },
+    {
+      "id": 181,
+      "nomeAula": "Por que aprender programação?",
+      "tempoAula": 8,
+      "videoUrl": "https://www.youtube.com/embed/eGVNRynWMJ0?si=YCnHlybLGCXEGTgr",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 62
+    },
+    {
+      "id": 182,
+      "nomeAula": "Por que aprender Python?",
+      "tempoAula": 4,
+      "videoUrl": "https://www.youtube.com/embed/BHEcKtP8bTI?si=oa05KuUUGWZ6mlrZ",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 62
+    },
+    {
+      "id": 183,
+      "nomeAula": "Comparação de Python com outras linguagens",
+      "tempoAula": 4,
+      "videoUrl": "https://www.youtube.com/embed/9CONtKJkdwY?si=XY5uI-BDFqbNOfH5",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 62
+    },
+    {
+      "id": 184,
+      "nomeAula": "Quem sou eu? Prof. Dr. Dilermando Piva Jr.",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/1nnvScRn7p4?si=4I7Uub2zB5TGi5Ei",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 62
+    },
+    {
+      "id": 185,
+      "nomeAula": "A Instalação do Python",
+      "tempoAula": 19,
+      "videoUrl": "https://www.youtube.com/embed/0iRTcMzS6EI?si=Oy6etuCvFJj7r9k0",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 63
+    },
+    {
+      "id": 186,
+      "nomeAula": "Escolha de uma IDE",
+      "tempoAula": 6,
+      "videoUrl": "https://www.youtube.com/embed/Lxqt0vdWTMw?si=d96kuPE61j6MuTiU",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 63
+    },
+    {
+      "id": 187,
+      "nomeAula": "Instalação do PyCharm no Windows",
+      "tempoAula": 9,
+      "videoUrl": "https://www.youtube.com/embed/7POnvegXmnc?si=jyip6gTzU36Rzo2K",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 63
+    },
+    {
+      "id": 188,
+      "nomeAula": "Instalação do PyCharm no Linux",
+      "tempoAula": 9,
+      "videoUrl": "https://www.youtube.com/embed/zT0nf7-wNRk?si=vqxC2MUNawZxFB7o",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 63
+    },
+    {
+      "id": 189,
+      "nomeAula": "Instalação do PyCharm no MacOS",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/cYyQYADkC9Q?si=gHwVG7opy7Oo_hMl",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 63
+    },
+    {
+      "id": 190,
+      "nomeAula": "Programação em Python utilizando o Navegador",
+      "tempoAula": 4,
+      "videoUrl": "https://www.youtube.com/embed/z76V6WcwXa0?si=DkVPhBClgBosGIBe",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 63
+    },
+    {
+      "id": 191,
+      "nomeAula": "Programação Python utilizando um APP no celular",
+      "tempoAula": 4,
+      "videoUrl": "https://www.youtube.com/embed/X-cXcYWKdhY?si=nXjMKC4woLdX7X2m",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 63
+    },
+    {
+      "id": 192,
+      "nomeAula": "História da Linguagem Python",
+      "tempoAula": 7,
+      "videoUrl": "https://www.youtube.com/embed/Y3hnQBse3ss?si=EfCcM4W7nejcGxL_",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 64
+    },
+    {
+      "id": 193,
+      "nomeAula": "Zen do Python",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/lXitJ2TBuT0?si=Xy4kmekHdvNUOiCp",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 64
+    },
+    {
+      "id": 194,
+      "nomeAula": "PEP 8",
+      "tempoAula": 8,
+      "videoUrl": "https://www.youtube.com/embed/OpO-mne_yRM?si=Aff0j59z1amJ59qj",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 64
+    },
+    {
+      "id": 195,
+      "nomeAula": "Funções dir() e help()",
+      "tempoAula": 6,
+      "videoUrl": "https://www.youtube.com/embed/FA_oF-OaLsk?si=6fpEAv4Fd8TjHfNv",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 64
+    },
+    {
+      "id": 196,
+      "nomeAula": "Primeiros comandos em Python: print e input",
+      "tempoAula": 26,
+      "videoUrl": "https://www.youtube.com/embed/ASRhTpJNqq0?si=W1HWFU5StXg5eG3Y",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 64
+    },
+    {
+      "id": 197,
+      "nomeAula": "Resposta do 1º Desafio",
+      "tempoAula": 7,
+      "videoUrl": "https://www.youtube.com/embed/13LMpFucSX8?si=V4E8gf3FObB_I7rE",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 64
+    },
+    {
+      "id": 198,
+      "nomeAula": "Identificadores e Palavras Reservadas em Python",
+      "tempoAula": 6,
+      "videoUrl": "https://www.youtube.com/embed/i-GmnaIji8g?si=7hUWJuwIbfWHfQC2",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 64
+    },
+    {
+      "id": 199,
+      "nomeAula": "Comentários em Linguagem Python",
+      "tempoAula": 3,
+      "videoUrl": "https://www.youtube.com/embed/18qnageghXg?si=NgbISFtjq_e1wqBB",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 64
+    },
+    {
+      "id": 200,
+      "nomeAula": "Primeiros comandos em Python: usando uma IDE",
+      "tempoAula": 16,
+      "videoUrl": "https://www.youtube.com/embed/g38rVYXIsk4?si=x1S9r-Edijj88oYW",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 64
+    },
+    {
+      "id": 201,
+      "nomeAula": "O que é uma variável?",
+      "tempoAula": 6,
+      "videoUrl": "https://www.youtube.com/embed/VAmRRTBXG4A?si=a7WQkGEz7_znWP3y",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 65
+    },
+    {
+      "id": 202,
+      "nomeAula": "O que é uma constante?",
+      "tempoAula": 2,
+      "videoUrl": "https://www.youtube.com/embed/BhT27SUz5Kc?si=0LYcdUYxXickSkB0",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 65
+    },
+    {
+      "id": 203,
+      "nomeAula": "Tipos de Dados: INTEIRO",
+      "tempoAula": 8,
+      "videoUrl": "https://www.youtube.com/embed/bFZk6l1OZDo?si=CB1XDDnlBXyHqCtH",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 65
+    },
+    {
+      "id": 204,
+      "nomeAula": "Tipos de Dados: FLOAT e COMPLEX",
+      "tempoAula": 19,
+      "videoUrl": "https://www.youtube.com/embed/5iEaMPaqV2Y?si=YNRRn7ww8iJcWAvs",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 65
+    },
+    {
+      "id": 205,
+      "nomeAula": "Tipos de Dados: BOOLEAN",
+      "tempoAula": 3,
+      "videoUrl": "https://www.youtube.com/embed/fAX8uIXDWyA?si=sTv6JVNYy8nCVK4h",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 65
+    },
+    {
+      "id": 206,
+      "nomeAula": "Tipos de Dados: STRING",
+      "tempoAula": 18,
+      "videoUrl": "https://www.youtube.com/embed/UprOjDArIGE?si=YDPjFyl-RtbC6J6e",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 65
+    },
+    {
+      "id": 207,
+      "nomeAula": "Escopo e Conversão de Variáveis",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/o-SS_fMl0a4?si=jE7fzoCUn_jOXkV6",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 65
+    },
+    {
+      "id": 208,
+      "nomeAula": "Desafio deste módulo",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/H0tbaq7S6M0?si=iQc7ZXQdsVrz2BZj",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 65
+    },
+    {
+      "id": 209,
+      "nomeAula": "O que é uma Expressão Matemática?",
+      "tempoAula": 7,
+      "videoUrl": "https://www.youtube.com/embed/rb2orBc_gVM?si=Gm5fz8FMkJspI9r3",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 66
+    },
+    {
+      "id": 210,
+      "nomeAula": "O que é uma Expressão Lógica?",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/7fREjLdJBOc?si=IW1r3kMjd2PaxYp6",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 66
+    },
+    {
+      "id": 211,
+      "nomeAula": "Estrutura Condicional",
+      "tempoAula": 20,
+      "videoUrl": "https://www.youtube.com/embed/4Bc5HMEMyM4?si=J9dch5VBzfKlHDMI",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 66
+    },
+    {
+      "id": 212,
+      "nomeAula": "Comando elif",
+      "tempoAula": 18,
+      "videoUrl": "https://www.youtube.com/embed/jT-zjJs8Pqc?si=gYXehr4KQqb0ujrA",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 66
+    },
+    {
+      "id": 213,
+      "nomeAula": "Aninhamento de Ifs",
+      "tempoAula": 9,
+      "videoUrl": "https://www.youtube.com/embed/Jq_jZ-iXEGM?si=Tvj0tOQNrxclYqJ1",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 66
+    },
+    {
+      "id": 216,
+      "nomeAula": "O que é uma estrutura de repetição?",
+      "tempoAula": 5,
+      "videoUrl": "https://www.youtube.com/embed/PUJV52JcCcU?si=pGxONKJGZSJPkU2h",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 67
+    },
+    {
+      "id": 217,
+      "nomeAula": "Estruturas de Repetição: Comando for",
+      "tempoAula": 22,
+      "videoUrl": "https://www.youtube.com/embed/tHtBuGFYVnE?si=mJcc-WjQa5xf3akv",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 67
+    },
+    {
+      "id": 218,
+      "nomeAula": "Estruturas de Repetição Comando while",
+      "tempoAula": 12,
+      "videoUrl": "https://www.youtube.com/embed/7gwvopBnLqQ?si=cWZSm7dQ6uIxMZLF",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 67
+    },
+    {
+      "id": 219,
+      "nomeAula": "Estrut. de Repetição: Comandos break e continue",
+      "tempoAula": 9,
+      "videoUrl": "https://www.youtube.com/embed/Eb9C_FdVtDU?si=RjT2C6NF76osewOT",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 67
+    },
+    {
+      "id": 220,
+      "nomeAula": "Desafio deste módulo",
+      "tempoAula": 2,
+      "videoUrl": "https://www.youtube.com/embed/xReD5eSsDxU?si=EiDUeQ28wFQKgmUW",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 67
+    },
+    {
+      "id": 221,
+      "nomeAula": "Resposta do Desafio deste módulo",
+      "tempoAula": 6,
+      "videoUrl": "https://www.youtube.com/embed/NuQwPx3Ep_k?si=FZQOrzWeoXgtvOSG",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 67
+    },
+    {
+      "id": 222,
+      "nomeAula": "Listas",
+      "tempoAula": 46,
+      "videoUrl": "https://www.youtube.com/embed/u1c2Z9E1DuM?si=hdQuiMeMIXR-dt0Y",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 68
+    },
+    {
+      "id": 223,
+      "nomeAula": "Tuplas",
+      "tempoAula": 21,
+      "videoUrl": "https://www.youtube.com/embed/ckvv1-oS14Q?si=WR1sHF5QV9vNQKFg",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 68
+    },
+    {
+      "id": 224,
+      "nomeAula": "Dicionários",
+      "tempoAula": 32,
+      "videoUrl": "https://www.youtube.com/embed/5OCdIbjmftA?si=PlMr04CQ7RaEYbEp",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 68
+    },
+    {
+      "id": 225,
+      "nomeAula": "Conjuntos",
+      "tempoAula": 30,
+      "videoUrl": "https://www.youtube.com/embed/kEuoxAlZIjg?si=iZf3ZFHAZCCFSbTl",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 68
+    },
+    {
+      "id": 226,
+      "nomeAula": "Desafio deste Módulo",
+      "tempoAula": 1,
+      "videoUrl": "https://www.youtube.com/embed/y7fkEXtyb8k?si=zYiUI3ZbBao6qpcW",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 68
+    },
+    {
+      "id": 227,
+      "nomeAula": "Resposta do Desafio deste Módulo",
+      "tempoAula": 11,
+      "videoUrl": "https://www.youtube.com/embed/ApZAcxrC7JI?si=9haezVqCtTlDszFb",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 68
+    },
+    {
+      "id": 228,
+      "nomeAula": "O que é uma Função?",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/m8e_E2pcpX4?si=OP5qbAtBxFoCJ6ov",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 69
+    },
+    {
+      "id": 229,
+      "nomeAula": "Função sem retorno",
+      "tempoAula": 10,
+      "videoUrl": "https://www.youtube.com/embed/eJZhUA-SJWc?si=3KVAM26zVIIaEiw0",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 69
+    },
+    {
+      "id": 230,
+      "nomeAula": "Função com retorno",
+      "tempoAula": 7,
+      "videoUrl": "https://www.youtube.com/embed/Kij9vdbzmXY?si=Gsh1Y1smHEnDf5JY",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 69
+    },
+    {
+      "id": 231,
+      "nomeAula": "Função com parâmetro",
+      "tempoAula": 16,
+      "videoUrl": "https://www.youtube.com/embed/5ty7-Bh2pIs?si=KeN8qw4wUHVFfAhd",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 69
+    },
+    {
+      "id": 232,
+      "nomeAula": "Função com parâmetro padrão",
+      "tempoAula": 8,
+      "videoUrl": "https://www.youtube.com/embed/NAI4z51RK2Q?si=2e-ju3BMdDMaLpeC",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 69
+    },
+    {
+      "id": 233,
+      "nomeAula": "Documentação de Funções: DocString",
+      "tempoAula": 7,
+      "videoUrl": "https://www.youtube.com/embed/Ng655oU-Cos?si=FxIEPscNR068uBL3",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 69
+    },
+    {
+      "id": 234,
+      "nomeAula": "Argumentos *args e **kwargs",
+      "tempoAula": 14,
+      "videoUrl": "https://www.youtube.com/embed/bgvLtxWkIsE?si=J2LwpVsUnbuIgInB",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 69
+    },
+    {
+      "id": 235,
+      "nomeAula": "Desafio deste Módulo (e resposta)",
+      "tempoAula": 9,
+      "videoUrl": "https://www.youtube.com/embed/l1nXfE3akd4?si=42rN7vELKnjM2_PV",
+      "materialApoio": [
+        "exercicios.zip"
+      ],
+      "descricaoConteudo": "Fundamentos Python",
+      "moduloId": 69
+    }
+  ]
+}

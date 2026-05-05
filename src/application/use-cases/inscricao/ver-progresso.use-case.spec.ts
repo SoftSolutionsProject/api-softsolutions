@@ -1,5 +1,3 @@
-// ver-progresso.use-case.spec.ts
-import { Test, TestingModule } from '@nestjs/testing';
 import { VerProgressoUseCase } from './ver-progresso.use-case';
 import { InscricaoRepository } from '../../../infrastructure/database/repositories/inscricao.repository';
 import { ProgressoAulaRepository } from '../../../infrastructure/database/repositories/progresso-aula.repository';
@@ -10,7 +8,7 @@ describe('VerProgressoUseCase', () => {
   let inscricaoRepo: jest.Mocked<InscricaoRepository>;
   let progressoRepo: jest.Mocked<ProgressoAulaRepository>;
 
-  beforeEach(async () => {
+  beforeEach(() => {
     inscricaoRepo = {
       findById: jest.fn(),
     } as any;
@@ -19,45 +17,75 @@ describe('VerProgressoUseCase', () => {
       countConcluidasByInscricao: jest.fn(),
     } as any;
 
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        VerProgressoUseCase,
-        { provide: InscricaoRepository, useValue: inscricaoRepo },
-        { provide: ProgressoAulaRepository, useValue: progressoRepo },
-      ],
-    }).compile();
-
-    useCase = module.get<VerProgressoUseCase>(VerProgressoUseCase);
+    useCase = new VerProgressoUseCase(inscricaoRepo, progressoRepo);
   });
 
   it('deve retornar o progresso corretamente', async () => {
-    const inscricaoMock = {
+    inscricaoRepo.findById.mockResolvedValue({
       id: 1,
       usuario: { id: 1 },
       curso: {
-        modulos: [
-          { aulas: [{}, {}, {}] },
-          { aulas: [{}, {}] },
-        ],
+        modulos: [{ aulas: [{}, {}, {}] }, { aulas: [{}, {}] }],
       },
-    };
-
-    inscricaoRepo.findById.mockResolvedValue(inscricaoMock as any);
+    } as any);
     progressoRepo.countConcluidasByInscricao.mockResolvedValue(3);
 
-    const result = await useCase.execute(1, 1);
-
-    expect(inscricaoRepo.findById).toHaveBeenCalledWith(1);
-    expect(progressoRepo.countConcluidasByInscricao).toHaveBeenCalledWith(1);
-    expect(result).toEqual({
-      progresso: 60, // 3 de 5 aulas concluídas
+    await expect(useCase.execute(1, 1)).resolves.toEqual({
+      progresso: 60,
       aulasConcluidas: 3,
       totalAulas: 5,
     });
   });
 
-  it('deve lançar erro se inscrição não existir ou não pertencer', async () => {
+  it('deve retornar progresso zero quando o curso não tiver módulos', async () => {
+    inscricaoRepo.findById.mockResolvedValue({
+      id: 1,
+      usuario: { id: 1 },
+      curso: {
+        modulos: undefined,
+      },
+    } as any);
+    progressoRepo.countConcluidasByInscricao.mockResolvedValue(0);
+
+    await expect(useCase.execute(1, 1)).resolves.toEqual({
+      progresso: 0,
+      aulasConcluidas: 0,
+      totalAulas: 0,
+    });
+  });
+
+  it('deve tratar módulos sem aulas como zero no total', async () => {
+    inscricaoRepo.findById.mockResolvedValue({
+      id: 1,
+      usuario: { id: 1 },
+      curso: {
+        modulos: [{ aulas: undefined }],
+      },
+    } as any);
+    progressoRepo.countConcluidasByInscricao.mockResolvedValue(0);
+
+    await expect(useCase.execute(1, 1)).resolves.toEqual({
+      progresso: 0,
+      aulasConcluidas: 0,
+      totalAulas: 0,
+    });
+  });
+
+  it('deve lançar erro se inscrição não existir', async () => {
     inscricaoRepo.findById.mockResolvedValue(null);
+
     await expect(useCase.execute(1, 1)).rejects.toThrow(NotFoundException);
+  });
+
+  it('deve lançar erro se inscrição pertencer a outro usuário', async () => {
+    inscricaoRepo.findById.mockResolvedValue({
+      id: 1,
+      usuario: { id: 999 },
+      curso: { modulos: [] },
+    } as any);
+
+    await expect(useCase.execute(1, 1)).rejects.toThrow(
+      'Inscrição não encontrada',
+    );
   });
 });

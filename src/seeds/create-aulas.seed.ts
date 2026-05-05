@@ -1,14 +1,10 @@
-import { DataSource } from 'typeorm';
-import { AulaEntity } from 'src/infrastructure/database/entities/aula.entity';
-import { ModuloEntity } from 'src/infrastructure/database/entities/modulo.entity';
-import ormConfig from '../../ormconfig.migration';
+import { AulaEntity } from '../infrastructure/database/entities/aula.entity';
+import { ModuloEntity } from '../infrastructure/database/entities/modulo.entity';
+import { seedDataSource } from './seed-data-source';
 
 export async function runSeedAulas() {
-  const dataSource = ormConfig;
-  await dataSource.initialize();
-
-  const aulaRepo = dataSource.getRepository(AulaEntity);
-  const moduloRepo = dataSource.getRepository(ModuloEntity);
+  const aulaRepo = seedDataSource.getRepository(AulaEntity);
+  const moduloRepo = seedDataSource.getRepository(ModuloEntity);
 
   const modulos = await moduloRepo.find();
 
@@ -22,7 +18,7 @@ export async function runSeedAulas() {
         videoUrl: 'https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs',
         materialApoio: ['https://softsolutions.com.br/material/introducao.pdf'],
         descricaoConteudo: 'Apresentação dos objetivos e visão geral do módulo.',
-        modulo
+        modulo,
       },
       {
         nomeAula: `Conceitos principais de ${modulo.nomeModulo}`,
@@ -30,7 +26,7 @@ export async function runSeedAulas() {
         videoUrl: 'https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs',
         materialApoio: ['https://softsolutions.com.br/material/conceitos.pdf'],
         descricaoConteudo: 'Exposição dos conceitos fundamentais e exemplos práticos.',
-        modulo
+        modulo,
       },
       {
         nomeAula: `Práticas e exercícios: ${modulo.nomeModulo}`,
@@ -38,8 +34,8 @@ export async function runSeedAulas() {
         videoUrl: 'https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs',
         materialApoio: ['https://softsolutions.com.br/material/praticas.pdf'],
         descricaoConteudo: 'Atividades e aplicações práticas para consolidar o conhecimento.',
-        modulo
-      }
+        modulo,
+      },
     ];
 
     aulasParaInserir.push(...aulas);
@@ -48,5 +44,4 @@ export async function runSeedAulas() {
   await aulaRepo.save(aulasParaInserir);
 
   console.log('Aulas para todos os módulos inseridas com sucesso!');
-  await dataSource.destroy();
 }

@@ -14,55 +14,35 @@ describe('InscreverUsuarioUseCase', () => {
   let progressoRepo: jest.Mocked<ProgressoAulaRepository>;
   let aulaRepo: jest.Mocked<AulaRepository>;
 
- const usuarioMock = {
-  id: 1,
-  nomeUsuario: 'João',
-  cpfUsuario: '12345678900',
-  email: 'joao@email.com',
-  senha: 'senha123',
-  tipo: 'aluno'
-} as const;
+  const usuarioMock = {
+    id: 1,
+    nomeUsuario: 'João',
+    cpfUsuario: '12345678900',
+    email: 'joao@email.com',
+    senha: 'senha123',
+    tipo: 'aluno',
+  } as const;
 
-const cursoMock = {
-  id: 1,
-  nomeCurso: 'Curso Teste',
-  tempoCurso: 120,
-  descricaoCurta: 'Descrição curta',
-  descricaoDetalhada: 'Descrição detalhada',
-  imagemCurso: 'imagem.jpg',
-  categoria: 'Categoria Teste',
-  status: 'ativo' as 'ativo',
-  professor: 'Professor Teste',
-  avaliacao: 4.5,
-  modulos: [
-    {
-      id: 1,
-      nomeModulo: 'Modulo Teste',
-      tempoModulo: 60,
-      curso: {} as any,
-      aulas: [
-        {
-          id: 1,
-          nomeAula: 'Aula Fake',
-          tempoAula: 10,
-          videoUrl: 'http://fake.url/video',
-          descricaoConteudo: 'Descrição fake',
-          modulo: {} as any
-        }
-      ]
-    }
-  ]
-};
+  const cursoMock = {
+    id: 1,
+    nomeCurso: 'Curso Teste',
+    modulos: [
+      {
+        aulas: [
+          { id: 1, nomeAula: 'Aula 1' },
+          { id: 2, nomeAula: 'Aula 2' },
+        ],
+      },
+    ],
+  };
 
-
-
-const inscricaoMock = {
-  id: 1,
-  status: 'ativo' as 'ativo', // CORRETO AGORA!
-  dataInscricao: new Date(),
-  usuario: usuarioMock,
-  curso: cursoMock
-};
+  const inscricaoMock = {
+    id: 1,
+    status: 'ativo' as const,
+    dataInscricao: new Date('2026-04-29T00:00:00.000Z'),
+    usuario: usuarioMock,
+    curso: cursoMock,
+  };
 
   beforeEach(() => {
     usuarioRepo = { findById: jest.fn() } as any;
@@ -70,10 +50,10 @@ const inscricaoMock = {
     inscricaoRepo = {
       findByUsuarioAndCurso: jest.fn(),
       create: jest.fn(),
-      update: jest.fn()
+      update: jest.fn(),
     } as any;
     progressoRepo = {
-      createMany: jest.fn()
+      createMany: jest.fn(),
     } as any;
     aulaRepo = {} as any;
 
@@ -82,43 +62,55 @@ const inscricaoMock = {
       cursoRepo,
       inscricaoRepo,
       progressoRepo,
-      aulaRepo
+      aulaRepo,
     );
   });
 
-  it('deve inscrever o usuário com sucesso', async () => {
+  it('deve inscrever o usuário com sucesso e criar progresso para as aulas', async () => {
     usuarioRepo.findById.mockResolvedValue(usuarioMock as any);
     cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(cursoMock as any);
     inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue(null);
     inscricaoRepo.create.mockResolvedValue(inscricaoMock as any);
 
     const result = await useCase.execute(1, 1);
+
     expect(result).toHaveProperty('id');
-    expect(inscricaoRepo.create).toHaveBeenCalled();
-    expect(progressoRepo.createMany).toHaveBeenCalled();
+    expect(inscricaoRepo.create).toHaveBeenCalledWith({
+      usuario: usuarioMock,
+      curso: cursoMock,
+      status: 'ativo',
+    });
+    expect(progressoRepo.createMany).toHaveBeenCalledWith([
+      expect.objectContaining({ aula: cursoMock.modulos[0].aulas[0], concluida: false }),
+      expect.objectContaining({ aula: cursoMock.modulos[0].aulas[1], concluida: false }),
+    ]);
   });
 
- it('deve reativar inscrição cancelada', async () => {
-  usuarioRepo.findById.mockResolvedValue(usuarioMock as any);
-  cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(cursoMock as any);
-  inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue({
-    ...inscricaoMock,
-    status: 'cancelado'
-  });
-  inscricaoRepo.update.mockResolvedValue(inscricaoMock as any);
-
-  const result = await useCase.execute(1, 1);
-  expect(result).toHaveProperty('id');
-  expect(inscricaoRepo.update).toHaveBeenCalled();
-});
-
-  it('deve lançar erro se inscrição já existir e não estiver cancelada', async () => {
+  it('deve reativar inscrição cancelada', async () => {
     usuarioRepo.findById.mockResolvedValue(usuarioMock as any);
     cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(cursoMock as any);
     inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue({
       ...inscricaoMock,
-      status: 'ativo'
-    });
+      status: 'cancelado',
+    } as any);
+    inscricaoRepo.update.mockResolvedValue(inscricaoMock as any);
+
+    await useCase.execute(1, 1);
+
+    expect(inscricaoRepo.update).toHaveBeenCalledWith(
+      1,
+      expect.objectContaining({
+        status: 'ativo',
+        dataInscricao: expect.any(Date),
+      }),
+    );
+    expect(progressoRepo.createMany).not.toHaveBeenCalled();
+  });
+
+  it('deve lançar erro se inscrição já existir e estiver ativa', async () => {
+    usuarioRepo.findById.mockResolvedValue(usuarioMock as any);
+    cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(cursoMock as any);
+    inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue(inscricaoMock as any);
 
     await expect(useCase.execute(1, 1)).rejects.toThrow(BadRequestException);
   });
@@ -132,7 +124,46 @@ const inscricaoMock = {
 
   it('deve lançar NotFoundException se usuário não for encontrado', async () => {
     usuarioRepo.findById.mockResolvedValue(null);
+    cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(cursoMock as any);
 
     await expect(useCase.execute(1, 1)).rejects.toThrow(NotFoundException);
+  });
+
+  it('deve não criar progresso quando o curso não tiver aulas', async () => {
+    const cursoSemAulas = {
+      ...cursoMock,
+      modulos: [],
+    };
+    usuarioRepo.findById.mockResolvedValue(usuarioMock as any);
+    cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(cursoSemAulas as any);
+    inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue(null);
+    inscricaoRepo.create.mockResolvedValue({
+      ...inscricaoMock,
+      curso: cursoSemAulas,
+    } as any);
+
+    await useCase.execute(1, 1);
+
+    expect(progressoRepo.createMany).not.toHaveBeenCalled();
+  });
+
+  it('deve não criar progresso quando houver módulos sem lista de aulas', async () => {
+    const cursoComModuloSemAulas = {
+      ...cursoMock,
+      modulos: [{ aulas: undefined }],
+    };
+    usuarioRepo.findById.mockResolvedValue(usuarioMock as any);
+    cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(
+      cursoComModuloSemAulas as any,
+    );
+    inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue(null);
+    inscricaoRepo.create.mockResolvedValue({
+      ...inscricaoMock,
+      curso: cursoComModuloSemAulas,
+    } as any);
+
+    await useCase.execute(1, 1);
+
+    expect(progressoRepo.createMany).not.toHaveBeenCalled();
   });
 });

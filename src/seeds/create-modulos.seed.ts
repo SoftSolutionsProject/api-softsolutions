@@ -1,14 +1,10 @@
-import { DataSource } from 'typeorm';
-import { ModuloEntity } from 'src/infrastructure/database/entities/modulo.entity';
-import { CursoEntity } from 'src/infrastructure/database/entities/curso.entity';
-import ormConfig from '../../ormconfig.migration';
+import { ModuloEntity } from '../infrastructure/database/entities/modulo.entity';
+import { CursoEntity } from '../infrastructure/database/entities/curso.entity';
+import { seedDataSource } from './seed-data-source';
 
 export async function runSeedModulos() {
-  const dataSource = ormConfig;
-  await dataSource.initialize();
-
-  const moduloRepo = dataSource.getRepository(ModuloEntity);
-  const cursoRepo = dataSource.getRepository(CursoEntity);
+  const moduloRepo = seedDataSource.getRepository(ModuloEntity);
+  const cursoRepo = seedDataSource.getRepository(CursoEntity);
 
   const cursos = await cursoRepo.find();
 
@@ -20,8 +16,8 @@ export async function runSeedModulos() {
         { nome: 'Modelagem de Dados e SQLAlchemy', tempo: 20 },
         { nome: 'Integração de APIs e Autenticação', tempo: 25 },
         { nome: 'Gerenciamento de Sessões e Cookies', tempo: 15 },
-        { nome: 'Desempenho e Escalabilidade', tempo: 20 }
-      ]
+        { nome: 'Desempenho e Escalabilidade', tempo: 20 },
+      ],
     },
     {
       curso: 'Aplicativos Móveis com React Native',
@@ -30,8 +26,8 @@ export async function runSeedModulos() {
         { nome: 'Componentes e Navegação', tempo: 20 },
         { nome: 'Integração com APIs e Banco de Dados', tempo: 25 },
         { nome: 'Testes e Debugging', tempo: 15 },
-        { nome: 'Publicação e Distribuição', tempo: 20 }
-      ]
+        { nome: 'Publicação e Distribuição', tempo: 20 },
+      ],
     },
     {
       curso: 'UX/UI Design para Iniciantes',
@@ -40,8 +36,8 @@ export async function runSeedModulos() {
         { nome: 'Princípios Visuais e Hierarquia', tempo: 15 },
         { nome: 'Ferramentas de Prototipagem', tempo: 20 },
         { nome: 'Design de Interação', tempo: 15 },
-        { nome: 'Testes de Usabilidade', tempo: 10 }
-      ]
+        { nome: 'Testes de Usabilidade', tempo: 10 },
+      ],
     },
     {
       curso: 'Desenvolvimento Java para Web',
@@ -50,8 +46,8 @@ export async function runSeedModulos() {
         { nome: 'Spring Boot e MVC', tempo: 25 },
         { nome: 'Segurança e Boas Práticas', tempo: 15 },
         { nome: 'JPA e Persistência de Dados', tempo: 20 },
-        { nome: 'Integração com Front-end', tempo: 15 }
-      ]
+        { nome: 'Integração com Front-end', tempo: 15 },
+      ],
     },
     {
       curso: 'Programação Web com PHP',
@@ -60,8 +56,8 @@ export async function runSeedModulos() {
         { nome: 'Laravel e Padrões de Projeto', tempo: 20 },
         { nome: 'Boas Práticas e Segurança', tempo: 15 },
         { nome: 'Trabalhando com APIs REST', tempo: 20 },
-        { nome: 'Testes e Depuração', tempo: 15 }
-      ]
+        { nome: 'Testes e Depuração', tempo: 15 },
+      ],
     },
     {
       curso: 'HTML5: Estrutura e Semântica',
@@ -70,8 +66,8 @@ export async function runSeedModulos() {
         { nome: 'Estrutura Semântica e SEO', tempo: 15 },
         { nome: 'Acessibilidade e Melhores Práticas', tempo: 10 },
         { nome: 'Formulários Avançados', tempo: 15 },
-        { nome: 'Boas Práticas de Marcação', tempo: 10 }
-      ]
+        { nome: 'Boas Práticas de Marcação', tempo: 10 },
+      ],
     },
     {
       curso: 'Banco de Dados com MS SQL Server',
@@ -80,8 +76,8 @@ export async function runSeedModulos() {
         { nome: 'Procedures e Otimização', tempo: 25 },
         { nome: 'Backup e Recuperação', tempo: 15 },
         { nome: 'Segurança e Permissões', tempo: 20 },
-        { nome: 'Integração com Aplicações', tempo: 15 }
-      ]
+        { nome: 'Integração com Aplicações', tempo: 15 },
+      ],
     },
     {
       curso: 'Versionamento de Código com Git',
@@ -90,8 +86,8 @@ export async function runSeedModulos() {
         { nome: 'Branches e Merge', tempo: 15 },
         { nome: 'Colaboração com Pull Requests', tempo: 15 },
         { nome: 'Revertendo Mudanças', tempo: 10 },
-        { nome: 'Fluxos de Trabalho com Git', tempo: 10 }
-      ]
+        { nome: 'Fluxos de Trabalho com Git', tempo: 10 },
+      ],
     },
     {
       curso: 'Web Design Responsivo',
@@ -100,8 +96,8 @@ export async function runSeedModulos() {
         { nome: 'Media Queries e Layouts', tempo: 15 },
         { nome: 'Boas Práticas e Performance', tempo: 15 },
         { nome: 'Design Mobile-First', tempo: 10 },
-        { nome: 'Imagens e Recursos Flexíveis', tempo: 10 }
-      ]
+        { nome: 'Imagens e Recursos Flexíveis', tempo: 10 },
+      ],
     },
     {
       curso: 'Introdução à Computação em Nuvem',
@@ -110,8 +106,8 @@ export async function runSeedModulos() {
         { nome: 'Serviços e Modelos de Nuvem', tempo: 20 },
         { nome: 'Segurança e Custos', tempo: 15 },
         { nome: 'Ferramentas e Plataformas', tempo: 15 },
-        { nome: 'Tendências e Futuro da Nuvem', tempo: 10 }
-      ]
+        { nome: 'Tendências e Futuro da Nuvem', tempo: 10 },
+      ],
     },
     {
       curso: 'Design Generativo e Algoritmos',
@@ -120,8 +116,8 @@ export async function runSeedModulos() {
         { nome: 'Criação de Algoritmos Visuais', tempo: 20 },
         { nome: 'Exemplos Práticos e Aplicações', tempo: 15 },
         { nome: 'Animações e Interatividade', tempo: 15 },
-        { nome: 'Casos de Uso Avançados', tempo: 15 }
-      ]
+        { nome: 'Casos de Uso Avançados', tempo: 15 },
+      ],
     },
     {
       curso: 'JavaScript Avançado para Web',
@@ -130,24 +126,24 @@ export async function runSeedModulos() {
         { nome: 'Manipulação Avançada de DOM', tempo: 20 },
         { nome: 'Boas Práticas e Performance', tempo: 15 },
         { nome: 'Web APIs e Padrões Modernos', tempo: 15 },
-        { nome: 'Testes e Ferramentas de Debug', tempo: 15 }
-      ]
-    }
+        { nome: 'Testes e Ferramentas de Debug', tempo: 15 },
+      ],
+    },
   ];
 
   for (const curso of cursos) {
-    const modulosCurso = modulosPorCurso.find(m => m.curso === curso.nomeCurso);
-    if (modulosCurso) {
-      for (const modulo of modulosCurso.modulos) {
-        await moduloRepo.insert({
-          nomeModulo: modulo.nome,
-          tempoModulo: modulo.tempo,
-          curso
-        });
-      }
+    const modulosCurso = modulosPorCurso.find((m) => m.curso === curso.nomeCurso);
+
+    if (!modulosCurso) continue;
+
+    for (const modulo of modulosCurso.modulos) {
+      await moduloRepo.insert({
+        nomeModulo: modulo.nome,
+        tempoModulo: modulo.tempo,
+        curso,
+      });
     }
   }
 
   console.log('Módulos (5 por curso) inseridos com sucesso!');
-  await dataSource.destroy();
 }
