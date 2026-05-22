@@ -1,11 +1,11 @@
-import { 
-  Controller, 
-  Post, 
-  Patch, 
-  Body, 
-  Param, 
-  UseGuards, 
-  Get 
+import {
+  Controller,
+  Post,
+  Patch,
+  Body,
+  Param,
+  UseGuards,
+  Get,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -36,17 +36,16 @@ export class AvaliacaoController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Criar nova avaliação (usuário autenticado)' })
   @ApiResponse({ status: 201, description: 'Avaliação criada com sucesso' })
-  async criar(
-    @User('sub') userId: number,
-    @Body() dto: CreateAvaliacaoDto,
-  ) {
+  async criar(@User('sub') userId: number, @Body() dto: CreateAvaliacaoDto) {
     return this.criarAvaliacaoUseCase.execute(userId, dto);
   }
 
   @Patch(':id')
   @UseGuards(AuthGuard)
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'Atualizar avaliação existente (usuário autenticado)' })
+  @ApiOperation({
+    summary: 'Atualizar avaliação existente (usuário autenticado)',
+  })
   @ApiParam({ name: 'id', type: Number })
   @ApiResponse({ status: 200, description: 'Avaliação atualizada com sucesso' })
   async atualizar(
@@ -63,7 +62,7 @@ export class AvaliacaoController {
   @ApiResponse({ status: 200, description: 'Lista de avaliações do curso' })
   async listarAvaliacoesPorCurso(@Param('cursoId') cursoId: number) {
     const avaliacoes = await this.avaliacaoRepo.findByCourse(+cursoId);
-    return avaliacoes.map(a => ({
+    return avaliacoes.map((a) => ({
       nota: a.nota,
       comentario: a.comentario,
       autor: a.usuario?.nomeUsuario ?? null,
@@ -78,7 +77,7 @@ export class AvaliacaoController {
   @ApiResponse({ status: 200, description: 'Avaliação do usuário retornada' })
   async getMinhaAvaliacao(
     @User('sub') userId: number,
-    @Param('cursoId') cursoId: number
+    @Param('cursoId') cursoId: number,
   ) {
     return this.avaliacaoRepo.findByUserAndCourse(userId, +cursoId);
   }

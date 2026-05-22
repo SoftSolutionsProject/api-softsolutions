@@ -26,26 +26,36 @@ describe('CriarAvaliacaoUseCase', () => {
     usuarioRepo = { findById: jest.fn() };
 
     useCase = new CriarAvaliacaoUseCase(
-      avaliacaoRepo, inscricaoRepo, certificadoRepo, cursoRepo, usuarioRepo,
+      avaliacaoRepo,
+      inscricaoRepo,
+      certificadoRepo,
+      cursoRepo,
+      usuarioRepo,
     );
   });
 
   it('deve lançar Forbidden se usuário não for aluno', async () => {
     usuarioRepo.findById.mockResolvedValue({ tipo: 'administrador' });
-    await expect(useCase.execute(userId, dto)).rejects.toThrow(ForbiddenException);
+    await expect(useCase.execute(userId, dto)).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 
   it('deve lançar Forbidden se usuário não estiver inscrito', async () => {
     usuarioRepo.findById.mockResolvedValue({ tipo: 'aluno' });
     inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue(null);
-    await expect(useCase.execute(userId, dto)).rejects.toThrow(ForbiddenException);
+    await expect(useCase.execute(userId, dto)).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 
   it('deve lançar Forbidden se não tiver certificado', async () => {
     usuarioRepo.findById.mockResolvedValue({ tipo: 'aluno' });
     inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue({});
     certificadoRepo.findByInscricao.mockResolvedValue(null);
-    await expect(useCase.execute(userId, dto)).rejects.toThrow(ForbiddenException);
+    await expect(useCase.execute(userId, dto)).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 
   it('deve lançar BadRequest se já existir avaliação', async () => {
@@ -53,7 +63,9 @@ describe('CriarAvaliacaoUseCase', () => {
     inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue({});
     certificadoRepo.findByInscricao.mockResolvedValue({});
     avaliacaoRepo.findByUserAndCourse.mockResolvedValue({});
-    await expect(useCase.execute(userId, dto)).rejects.toThrow(BadRequestException);
+    await expect(useCase.execute(userId, dto)).rejects.toThrow(
+      BadRequestException,
+    );
   });
 
   it('deve lançar BadRequest se curso não encontrado', async () => {
@@ -62,7 +74,9 @@ describe('CriarAvaliacaoUseCase', () => {
     certificadoRepo.findByInscricao.mockResolvedValue({});
     avaliacaoRepo.findByUserAndCourse.mockResolvedValue(null);
     cursoRepo.findById.mockResolvedValue(null);
-    await expect(useCase.execute(userId, dto)).rejects.toThrow(BadRequestException);
+    await expect(useCase.execute(userId, dto)).rejects.toThrow(
+      BadRequestException,
+    );
   });
 
   it('deve criar avaliação, atualizar média e retornar modelo', async () => {

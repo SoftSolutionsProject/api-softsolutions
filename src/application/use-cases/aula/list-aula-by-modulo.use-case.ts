@@ -12,7 +12,7 @@ export class ListAulaByModuloUseCase {
   async execute(idModulo: number) {
     const modulo = await this.moduloRepo.findById(idModulo);
     if (!modulo) throw new NotFoundException('Módulo não encontrado');
-    
+
     return this.aulaRepo.findByModulo(idModulo);
   }
 }

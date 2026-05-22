@@ -17,7 +17,8 @@ export class ErrorLoggingInterceptor implements NestInterceptor {
     const httpContext = context.switchToHttp();
     const request = httpContext.getRequest<RequestWithId>();
     const requestId = request?.requestId;
-    const contextName = context.getClass()?.name || ErrorLoggingInterceptor.name;
+    const contextName =
+      context.getClass()?.name || ErrorLoggingInterceptor.name;
 
     return next.handle().pipe(
       catchError((error) => {

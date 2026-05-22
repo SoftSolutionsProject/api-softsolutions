@@ -15,7 +15,12 @@ export class AvaliacaoRepository {
     private readonly cursoRepo: CursoRepository,
   ) {}
 
-  async create(data: { nota: number, comentario: string, usuarioId: number, cursoId: number }): Promise<AvaliacaoEntity> {
+  async create(data: {
+    nota: number;
+    comentario: string;
+    usuarioId: number;
+    cursoId: number;
+  }): Promise<AvaliacaoEntity> {
     const usuario = await this.usuarioRepo.findById(data.usuarioId);
     const curso = await this.cursoRepo.findById(data.cursoId);
 
@@ -31,10 +36,16 @@ export class AvaliacaoRepository {
   }
 
   async findById(id: number): Promise<AvaliacaoEntity | null> {
-    return this.repo.findOne({ where: { id }, relations: ['usuario', 'curso'] });
+    return this.repo.findOne({
+      where: { id },
+      relations: ['usuario', 'curso'],
+    });
   }
 
-  async findByUserAndCourse(usuarioId: number, cursoId: number): Promise<AvaliacaoModel | null> {
+  async findByUserAndCourse(
+    usuarioId: number,
+    cursoId: number,
+  ): Promise<AvaliacaoModel | null> {
     const entity = await this.repo.findOne({
       where: { usuario: { id: usuarioId }, curso: { id: cursoId } },
       relations: ['usuario', 'curso'],
@@ -43,7 +54,8 @@ export class AvaliacaoRepository {
   }
 
   async getCourseAverage(cursoId: number): Promise<number> {
-    const { avg } = await this.repo.createQueryBuilder('a')
+    const { avg } = await this.repo
+      .createQueryBuilder('a')
       .select('AVG(a.nota)', 'avg')
       .where('a.cursoId = :cursoId', { cursoId })
       .getRawOne();
@@ -67,9 +79,9 @@ export class AvaliacaoRepository {
   }
 
   async findByCourse(courseId: number) {
-  return this.repo.find({
-    where: { curso: { id: courseId } },
-    relations: ['usuario'],
-  });
-}
+    return this.repo.find({
+      where: { curso: { id: courseId } },
+      relations: ['usuario'],
+    });
+  }
 }

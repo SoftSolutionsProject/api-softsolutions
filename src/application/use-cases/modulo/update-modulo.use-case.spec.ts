@@ -13,15 +13,22 @@ describe('UpdateModuloUseCase', () => {
 
   it('deve lançar exceção se módulo não existir', async () => {
     moduloRepo.findById.mockResolvedValue(null);
-    await expect(useCase.execute(1, { nomeModulo: 'Novo Nome' })).rejects.toThrow(NotFoundException);
+    await expect(
+      useCase.execute(1, { nomeModulo: 'Novo Nome' }),
+    ).rejects.toThrow(NotFoundException);
   });
 
   it('deve atualizar módulo se existir', async () => {
     moduloRepo.findById.mockResolvedValue({ id: 1 } as any);
-    moduloRepo.update.mockResolvedValue({ id: 1, nomeModulo: 'Atualizado' } as any);
+    moduloRepo.update.mockResolvedValue({
+      id: 1,
+      nomeModulo: 'Atualizado',
+    } as any);
 
     const result = await useCase.execute(1, { nomeModulo: 'Atualizado' });
     expect(result).toEqual({ id: 1, nomeModulo: 'Atualizado' });
-    expect(moduloRepo.update).toHaveBeenCalledWith(1, { nomeModulo: 'Atualizado' });
+    expect(moduloRepo.update).toHaveBeenCalledWith(1, {
+      nomeModulo: 'Atualizado',
+    });
   });
 });

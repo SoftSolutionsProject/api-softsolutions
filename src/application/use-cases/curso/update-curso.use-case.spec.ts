@@ -24,7 +24,8 @@ describe('UpdateCursoUseCase', () => {
   it('deve lançar NotFoundException se curso não existir', async () => {
     repo.findById.mockResolvedValue(null);
 
-    await expect(useCase.execute(99, { nomeCurso: 'Teste' }))
-      .rejects.toThrow(NotFoundException);
+    await expect(useCase.execute(99, { nomeCurso: 'Teste' })).rejects.toThrow(
+      NotFoundException,
+    );
   });
 });

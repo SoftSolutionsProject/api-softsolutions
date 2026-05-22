@@ -17,7 +17,7 @@ describe('ListarInscricoesUseCase', () => {
       cpfUsuario: '12345678900',
       email: 'joao@email.com',
       senha: 'senha123',
-      tipo: 'aluno'
+      tipo: 'aluno',
     },
     curso: {
       id: 1,
@@ -30,17 +30,17 @@ describe('ListarInscricoesUseCase', () => {
       status: 'ativo' as const,
       professor: 'Professor Teste',
       avaliacao: 4.5,
-      modulos: []
-    }
+      modulos: [],
+    },
   };
 
   beforeEach(() => {
     inscricaoRepo = {
-      findByUsuario: jest.fn()
+      findByUsuario: jest.fn(),
     } as any;
 
     usuarioRepo = {
-      findById: jest.fn()
+      findById: jest.fn(),
     } as any;
 
     useCase = new ListarInscricoesUseCase(inscricaoRepo, usuarioRepo);

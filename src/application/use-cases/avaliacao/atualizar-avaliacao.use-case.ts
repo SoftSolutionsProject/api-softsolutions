@@ -1,4 +1,8 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { AvaliacaoRepository } from '../../../infrastructure/database/repositories/avaliacao.repository';
 import { CursoRepository } from '../../../infrastructure/database/repositories/curso.repository';
 import { UpdateAvaliacaoDto } from 'src/interfaces/http/dtos/requests/update-avaliacao.dto';
@@ -13,7 +17,10 @@ export class AtualizarAvaliacaoUseCase {
   async execute(userId: number, avaliacaoId: number, dto: UpdateAvaliacaoDto) {
     const entity = await this.avaliacaoRepo.findById(avaliacaoId);
     if (!entity) throw new NotFoundException('Avaliação não encontrada.');
-    if (entity.usuario.id !== userId) throw new ForbiddenException('Você só pode editar sua própria avaliação.');
+    if (entity.usuario.id !== userId)
+      throw new ForbiddenException(
+        'Você só pode editar sua própria avaliação.',
+      );
 
     entity.nota = dto.nota;
     entity.comentario = dto.comentario ?? '';

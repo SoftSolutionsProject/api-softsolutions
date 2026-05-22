@@ -66,7 +66,9 @@ describe('CursoController', () => {
   });
 
   it('deve negar criação se não admin', async () => {
-    await expect(controller.create({} as any, 'aluno')).rejects.toThrow(ForbiddenException);
+    await expect(controller.create({} as any, 'aluno')).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 
   it('deve listar cursos', async () => {
@@ -88,7 +90,9 @@ describe('CursoController', () => {
   });
 
   it('deve negar update se não admin', async () => {
-    await expect(controller.update('1', {} as any, 'aluno')).rejects.toThrow(ForbiddenException);
+    await expect(controller.update('1', {} as any, 'aluno')).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 
   it('deve deletar curso se admin', async () => {
@@ -98,12 +102,16 @@ describe('CursoController', () => {
   });
 
   it('deve negar delete se não admin', async () => {
-    await expect(controller.delete('1', 'aluno')).rejects.toThrow(ForbiddenException);
+    await expect(controller.delete('1', 'aluno')).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 
   it('deve retornar módulos se inscrito', async () => {
     cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(cursoMock);
-    inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue({ status: 'ativo' } as any);
+    inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue({
+      status: 'ativo',
+    } as any);
 
     const result = await controller.getModulosEAulas('1', 1);
     expect(Array.isArray(result)).toBe(true);
@@ -113,6 +121,8 @@ describe('CursoController', () => {
     cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(cursoMock);
     inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue(null);
 
-    await expect(controller.getModulosEAulas('1', 1)).rejects.toThrow(ForbiddenException);
+    await expect(controller.getModulosEAulas('1', 1)).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 });

@@ -1,4 +1,12 @@
-import { Controller, Get, Param, ParseIntPipe, Request, UnauthorizedException, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Request,
+  UnauthorizedException,
+  UseGuards,
+} from '@nestjs/common';
 import { BuildDashboardUseCase } from 'src/application/use-cases/dashboard/build-dashboard.use-case';
 import { DashboardResponseDto } from 'src/interfaces/http/dtos/responses/dashboard-response.dto';
 import { AuthGuard } from 'src/interfaces/http/guards/auth.guard';
@@ -15,7 +23,9 @@ export class DashboardController {
   ): Promise<DashboardResponseDto> {
     const usuarioIdDoToken = req.user.sub;
     if (id !== usuarioIdDoToken) {
-      throw new UnauthorizedException('Você só pode acessar seu próprio dashboard.');
+      throw new UnauthorizedException(
+        'Você só pode acessar seu próprio dashboard.',
+      );
     }
 
     return this.buildDashboardUseCase.execute(usuarioIdDoToken);

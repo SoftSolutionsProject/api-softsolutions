@@ -31,7 +31,9 @@ export class CreateUsuarioUseCase {
       ...data,
       senha: senhaHash,
       tipo: 'aluno',
-      telefone: data.telefone ? this.formatarTelefone(data.telefone) : undefined,
+      telefone: data.telefone
+        ? this.formatarTelefone(data.telefone)
+        : undefined,
     });
 
     const { senha, ...result } = usuario;
@@ -49,7 +51,8 @@ export class CreateUsuarioUseCase {
     cpf = cpf.replace(/[^\d]+/g, '');
     if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
 
-    let soma = 0, resto;
+    let soma = 0,
+      resto;
     for (let i = 1; i <= 9; i++)
       soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
     resto = (soma * 10) % 11;

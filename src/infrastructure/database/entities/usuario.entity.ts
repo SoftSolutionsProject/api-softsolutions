@@ -31,6 +31,6 @@ export class UsuarioEntity implements UsuarioModel {
   @Column()
   tipo: 'aluno' | 'administrador';
 
-  @OneToMany(() => InscricaoEntity, inscricao => inscricao.usuario)
+  @OneToMany(() => InscricaoEntity, (inscricao) => inscricao.usuario)
   inscricoes: InscricaoEntity[];
 }

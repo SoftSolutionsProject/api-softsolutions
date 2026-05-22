@@ -20,36 +20,39 @@ export class CertificadoRepository {
   ) {}
 
   async create(data: Partial<CertificadoModel>): Promise<CertificadoEntity> {
-  if (!data.usuario || !data.usuario.id) {
-    throw new Error('Usuário não informado ou sem ID');
+    if (!data.usuario || !data.usuario.id) {
+      throw new Error('Usuário não informado ou sem ID');
+    }
+
+    if (!data.curso || !data.curso.id) {
+      throw new Error('Curso não informado ou sem ID');
+    }
+
+    const usuarioEntity = await this.usuarioRepo.findById(data.usuario.id);
+    const cursoEntity = await this.cursoRepo.findById(data.curso.id);
+
+    const certificado = this.repo.create({
+      numeroSerie: data.numeroSerie!,
+      usuario: usuarioEntity as any,
+      curso: cursoEntity as any,
+      dataEmissao: data.dataEmissao!,
+    });
+
+    return this.repo.save(certificado);
   }
 
-  if (!data.curso || !data.curso.id) {
-    throw new Error('Curso não informado ou sem ID');
-  }
-
-  const usuarioEntity = await this.usuarioRepo.findById(data.usuario.id);
-  const cursoEntity = await this.cursoRepo.findById(data.curso.id);
-
-  const certificado = this.repo.create({
-    numeroSerie: data.numeroSerie!,
-    usuario: usuarioEntity as any,
-    curso: cursoEntity as any,
-    dataEmissao: data.dataEmissao!,
-  });
-
-  return this.repo.save(certificado);
-}
-
-
-  async findByNumeroSerie(numeroSerie: string): Promise<CertificadoEntity | null> {
+  async findByNumeroSerie(
+    numeroSerie: string,
+  ): Promise<CertificadoEntity | null> {
     return this.repo.findOne({
       where: { numeroSerie },
       relations: ['usuario', 'curso'],
     });
   }
 
-  async findByInscricao(inscricao: InscricaoModel): Promise<CertificadoEntity | null> {
+  async findByInscricao(
+    inscricao: InscricaoModel,
+  ): Promise<CertificadoEntity | null> {
     return this.repo.findOne({
       where: {
         usuario: { id: inscricao.usuario.id },
@@ -60,10 +63,9 @@ export class CertificadoRepository {
   }
 
   async findAllByUsuario(id: number): Promise<CertificadoEntity[]> {
-  return this.repo.find({
-    where: { usuario: { id } },
-    relations: ['usuario', 'curso'],
-  });
-}
-
+    return this.repo.find({
+      where: { usuario: { id } },
+      relations: ['usuario', 'curso'],
+    });
+  }
 }

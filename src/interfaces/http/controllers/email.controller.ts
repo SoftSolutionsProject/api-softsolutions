@@ -1,4 +1,10 @@
-import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { EnviarEmailUseCase } from 'src/application/use-cases/email/enviar-email.use-case';
 import { SendEmailDto } from '../dtos/requests/send-email.dto';

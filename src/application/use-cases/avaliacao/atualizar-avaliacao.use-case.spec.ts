@@ -13,36 +13,35 @@ describe('AtualizarAvaliacaoUseCase', () => {
   const cursoId = 100;
 
   const entityMock = {
-  id: avaliacaoId,
-  nota: 4,
-  comentario: 'Bom curso',
-  criadoEm: new Date(),
-  atualizadoEm: new Date(),
-  usuario: {
-    id: usuarioId,
-    nomeUsuario: 'Lucas',
-    cpfUsuario: '000',
-    email: 'x',
-    senha: 'x',
-    tipo: 'aluno' as 'aluno',
-    inscricoes: [],
-  },
-curso: {
-  id: cursoId,
-  nomeCurso: 'Curso Teste',
-  tempoCurso: 10,
-  descricaoCurta: 'Curta',
-  descricaoDetalhada: 'Detalhada',
-  categoria: 'Programação',
-  status: 'ativo' as 'ativo', // 👈 Força o literal
-  imagemCurso: 'imagem.jpg',
-  avaliacao: 4,
-  professor: 'Professor Teste',
-  modulos: [],
-  inscricoes: [],
-},
-};
-
+    id: avaliacaoId,
+    nota: 4,
+    comentario: 'Bom curso',
+    criadoEm: new Date(),
+    atualizadoEm: new Date(),
+    usuario: {
+      id: usuarioId,
+      nomeUsuario: 'Lucas',
+      cpfUsuario: '000',
+      email: 'x',
+      senha: 'x',
+      tipo: 'aluno' as const,
+      inscricoes: [],
+    },
+    curso: {
+      id: cursoId,
+      nomeCurso: 'Curso Teste',
+      tempoCurso: 10,
+      descricaoCurta: 'Curta',
+      descricaoDetalhada: 'Detalhada',
+      categoria: 'Programação',
+      status: 'ativo' as const, // 👈 Força o literal
+      imagemCurso: 'imagem.jpg',
+      avaliacao: 4,
+      professor: 'Professor Teste',
+      modulos: [],
+      inscricoes: [],
+    },
+  };
 
   beforeEach(() => {
     avaliacaoRepo = {
@@ -61,24 +60,33 @@ curso: {
 
   it('deve lançar NotFoundException se avaliação não encontrada', async () => {
     avaliacaoRepo.findById.mockResolvedValue(null);
-    await expect(useCase.execute(usuarioId, avaliacaoId, { nota: 5, comentario: 'Ok' }))
-      .rejects
-      .toThrow(NotFoundException);
+    await expect(
+      useCase.execute(usuarioId, avaliacaoId, { nota: 5, comentario: 'Ok' }),
+    ).rejects.toThrow(NotFoundException);
   });
 
   it('deve lançar ForbiddenException se usuário não for dono', async () => {
     avaliacaoRepo.findById.mockResolvedValue({
       ...entityMock,
-      usuario: { ...entityMock.usuario, id: 999, inscricoes: [], tipo: 'aluno' }
+      usuario: {
+        ...entityMock.usuario,
+        id: 999,
+        inscricoes: [],
+        tipo: 'aluno',
+      },
     });
-    await expect(useCase.execute(usuarioId, avaliacaoId, { nota: 5 }))
-      .rejects
-      .toThrow(ForbiddenException);
+    await expect(
+      useCase.execute(usuarioId, avaliacaoId, { nota: 5 }),
+    ).rejects.toThrow(ForbiddenException);
   });
 
   it('deve atualizar avaliação, recalcular média e retornar modelo', async () => {
     avaliacaoRepo.findById.mockResolvedValue(entityMock);
-    avaliacaoRepo.save.mockResolvedValue({ ...entityMock, nota: 5, comentario: 'Atualizado' });
+    avaliacaoRepo.save.mockResolvedValue({
+      ...entityMock,
+      nota: 5,
+      comentario: 'Atualizado',
+    });
     avaliacaoRepo.getCourseAverage.mockResolvedValue(4.5);
     avaliacaoRepo.toModel.mockReturnValue({
       id: avaliacaoId,
@@ -90,7 +98,10 @@ curso: {
       cursoId: cursoId,
     });
 
-    const result = await useCase.execute(usuarioId, avaliacaoId, { nota: 5, comentario: 'Atualizado' });
+    const result = await useCase.execute(usuarioId, avaliacaoId, {
+      nota: 5,
+      comentario: 'Atualizado',
+    });
 
     expect(avaliacaoRepo.findById).toHaveBeenCalledWith(avaliacaoId);
     expect(avaliacaoRepo.save).toHaveBeenCalled();

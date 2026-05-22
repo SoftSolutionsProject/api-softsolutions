@@ -22,12 +22,16 @@ describe('CancelarInscricaoUseCase', () => {
       usuario: { id: 1 },
     };
     inscricaoRepo.findById.mockResolvedValue(inscricaoMock);
-    inscricaoRepo.update.mockResolvedValue({ message: 'Inscrição cancelada com sucesso' });
+    inscricaoRepo.update.mockResolvedValue({
+      message: 'Inscrição cancelada com sucesso',
+    });
 
     const result = await useCase.execute(1, 1);
 
     expect(inscricaoRepo.findById).toHaveBeenCalledWith(1);
-    expect(inscricaoRepo.update).toHaveBeenCalledWith(1, { status: 'cancelado' });
+    expect(inscricaoRepo.update).toHaveBeenCalledWith(1, {
+      status: 'cancelado',
+    });
     expect(result).toEqual({ message: 'Inscrição cancelada com sucesso' });
   });
 
@@ -41,7 +45,9 @@ describe('CancelarInscricaoUseCase', () => {
     const result = await useCase.execute(1, 1, true);
 
     expect(inscricaoRepo.findById).toHaveBeenCalledWith(1);
-    expect(inscricaoRepo.update).toHaveBeenCalledWith(1, { status: 'cancelado' });
+    expect(inscricaoRepo.update).toHaveBeenCalledWith(1, {
+      status: 'cancelado',
+    });
     expect(result).toHaveProperty('message');
   });
 

@@ -89,7 +89,9 @@ export class CursoController {
     @User('tipo') tipo: string,
   ) {
     if (tipo !== 'administrador')
-      throw new ForbiddenException('Apenas administradores podem atualizar cursos');
+      throw new ForbiddenException(
+        'Apenas administradores podem atualizar cursos',
+      );
     const idNumber = parseInt(id);
     if (isNaN(idNumber)) throw new ForbiddenException('ID inválido');
     const curso = await this.updateCurso.execute(idNumber, dto);
@@ -104,7 +106,9 @@ export class CursoController {
   @ApiResponse({ status: 200, description: 'Curso removido com sucesso' })
   async delete(@Param('id') id: string, @User('tipo') tipo: string) {
     if (tipo !== 'administrador')
-      throw new ForbiddenException('Apenas administradores podem remover cursos');
+      throw new ForbiddenException(
+        'Apenas administradores podem remover cursos',
+      );
     const idNumber = parseInt(id);
     if (isNaN(idNumber)) throw new ForbiddenException('ID inválido');
     return this.deleteCurso.execute(idNumber);
@@ -113,7 +117,9 @@ export class CursoController {
   @UseGuards(AuthGuard)
   @ApiBearerAuth()
   @Get(':id/aulas')
-  @ApiOperation({ summary: 'Obter módulos e aulas do curso (requer inscrição)' })
+  @ApiOperation({
+    summary: 'Obter módulos e aulas do curso (requer inscrição)',
+  })
   @ApiParam({ name: 'id', type: Number })
   @ApiResponse({ status: 200, description: 'Lista de módulos e aulas' })
   async getModulosEAulas(
@@ -126,7 +132,10 @@ export class CursoController {
     const curso = await this.cursoRepo.findByIdWithModulosAndAulas(idNumber);
     if (!curso) throw new NotFoundException('Curso não encontrado');
 
-    const inscricao = await this.inscricaoRepo.findByUsuarioAndCurso(idUsuario, idNumber);
+    const inscricao = await this.inscricaoRepo.findByUsuarioAndCurso(
+      idUsuario,
+      idNumber,
+    );
     if (!inscricao || inscricao.status !== 'ativo') {
       throw new ForbiddenException('Você não está inscrito neste curso');
     }
@@ -134,20 +143,18 @@ export class CursoController {
     return curso.modulos;
   }
 
-  
-@Get(':id/inscritos')
-@ApiOperation({ summary: 'Obter quantidade de inscritos no curso (público)' })
-@ApiParam({ name: 'id', type: Number })
-@ApiResponse({ status: 200, description: 'Quantidade de inscritos no curso' })
-async getQuantidadeInscritos(@Param('id') id: string) {
-  const idCurso = parseInt(id);
-  if (isNaN(idCurso)) throw new ForbiddenException('ID inválido');
+  @Get(':id/inscritos')
+  @ApiOperation({ summary: 'Obter quantidade de inscritos no curso (público)' })
+  @ApiParam({ name: 'id', type: Number })
+  @ApiResponse({ status: 200, description: 'Quantidade de inscritos no curso' })
+  async getQuantidadeInscritos(@Param('id') id: string) {
+    const idCurso = parseInt(id);
+    if (isNaN(idCurso)) throw new ForbiddenException('ID inválido');
 
-  const curso = await this.cursoRepo.findById(idCurso);
-  if (!curso) throw new NotFoundException('Curso não encontrado');
+    const curso = await this.cursoRepo.findById(idCurso);
+    if (!curso) throw new NotFoundException('Curso não encontrado');
 
-  const count = await this.inscricaoRepo.countByCurso(idCurso);
-  return { quantidadeInscritos: count };
-}
-
+    const count = await this.inscricaoRepo.countByCurso(idCurso);
+    return { quantidadeInscritos: count };
+  }
 }

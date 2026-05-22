@@ -30,7 +30,7 @@ export class UpdateUsuarioDto {
   };
 
   @ApiPropertyOptional({
-    example: { type: 'Point', coordinates: [-46.625290, -23.533773] },
+    example: { type: 'Point', coordinates: [-46.62529, -23.533773] },
   })
   localizacao?: {
     type: 'Point';

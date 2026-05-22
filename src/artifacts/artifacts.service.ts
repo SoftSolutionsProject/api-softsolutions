@@ -1,10 +1,11 @@
-import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
-import {
-  DynamoDBClient,
-  DynamoDBClientConfig,
-} from '@aws-sdk/client-dynamodb';
+import { DynamoDBClient, DynamoDBClientConfig } from '@aws-sdk/client-dynamodb';
 import {
   DynamoDBDocumentClient,
   PutCommand,
@@ -121,12 +122,15 @@ export class ArtifactsService {
       throw new NotFoundException('Avatar não encontrado para este usuário');
     }
 
-    const latest = items.reduce((latestItem, current) => {
-      if (!latestItem) return current;
-      return new Date(current.createdAt) > new Date(latestItem.createdAt)
-        ? current
-        : latestItem;
-    }, items[0] as AvatarRecord | undefined);
+    const latest = items.reduce(
+      (latestItem, current) => {
+        if (!latestItem) return current;
+        return new Date(current.createdAt) > new Date(latestItem.createdAt)
+          ? current
+          : latestItem;
+      },
+      items[0] as AvatarRecord | undefined,
+    );
 
     if (!latest) {
       throw new NotFoundException('Avatar não encontrado para este usuário');
