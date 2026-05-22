@@ -8,7 +8,7 @@ export class DeleteAulaUseCase {
   async execute(id: number): Promise<{ message: string }> {
     const aula = await this.aulaRepo.findById(id);
     if (!aula) throw new NotFoundException('Aula não encontrada');
-    
+
     await this.aulaRepo.delete(id);
     return { message: 'Aula removida com sucesso' };
   }

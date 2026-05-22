@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { UsuarioEntity } from './usuario.entity';
 import { CursoEntity } from './curso.entity';
 import { ProgressoAulaEntity } from './progresso-aula.entity';
@@ -9,10 +15,10 @@ export class InscricaoEntity implements InscricaoModel {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => UsuarioEntity, usuario => usuario.inscricoes)
+  @ManyToOne(() => UsuarioEntity, (usuario) => usuario.inscricoes)
   usuario: UsuarioEntity;
 
-  @ManyToOne(() => CursoEntity, curso => curso.inscricoes)
+  @ManyToOne(() => CursoEntity, (curso) => curso.inscricoes)
   curso: CursoEntity;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
@@ -21,6 +27,6 @@ export class InscricaoEntity implements InscricaoModel {
   @Column({ default: 'ativo' })
   status: 'ativo' | 'concluido' | 'cancelado';
 
-  @OneToMany(() => ProgressoAulaEntity, progresso => progresso.inscricao)
+  @OneToMany(() => ProgressoAulaEntity, (progresso) => progresso.inscricao)
   progressoAulas: ProgressoAulaEntity[];
 }

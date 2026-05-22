@@ -1,13 +1,13 @@
-import { 
-  Controller, 
-  Post, 
-  Get, 
-  Delete, 
-  Param, 
+import {
+  Controller,
+  Post,
+  Get,
+  Delete,
+  Param,
   UseGuards,
   NotFoundException,
   BadRequestException,
-  ForbiddenException
+  ForbiddenException,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -40,7 +40,7 @@ export class InscricaoController {
     private readonly verProgressoUseCase: VerProgressoUseCase,
     private readonly inscricaoRepo: InscricaoRepository,
     private readonly cursoRepo: CursoRepository,
-    private readonly desmarcarAulaConcluidaUseCase: DesmarcarAulaConcluidaUseCase
+    private readonly desmarcarAulaConcluidaUseCase: DesmarcarAulaConcluidaUseCase,
   ) {}
 
   @Post('cursos/:idCurso')
@@ -49,7 +49,7 @@ export class InscricaoController {
   @ApiResponse({ status: 201, description: 'Inscrição realizada com sucesso' })
   async inscrever(
     @Param('idCurso') idCurso: number,
-    @User('sub') idUsuario: number
+    @User('sub') idUsuario: number,
   ) {
     try {
       return await this.inscreverUsuarioUseCase.execute(idUsuario, idCurso);
@@ -74,7 +74,7 @@ export class InscricaoController {
   @ApiResponse({ status: 200, description: 'Progresso retornado com sucesso' })
   async progresso(
     @Param('idInscricao') idInscricao: number,
-    @User('sub') idUsuario: number
+    @User('sub') idUsuario: number,
   ) {
     return this.verProgressoUseCase.execute(idInscricao, idUsuario);
   }
@@ -86,13 +86,13 @@ export class InscricaoController {
   async cancelar(
     @Param('idInscricao') idInscricao: number,
     @User('sub') idUsuario: number,
-    @User('tipo') tipo: string
+    @User('tipo') tipo: string,
   ) {
     const isAdmin = tipo === 'administrador';
     return this.cancelarInscricaoUseCase.execute(
-      isAdmin ? idInscricao : idUsuario, 
+      isAdmin ? idInscricao : idUsuario,
       idInscricao,
-      isAdmin
+      isAdmin,
     );
   }
 
@@ -104,9 +104,13 @@ export class InscricaoController {
   async concluirAula(
     @Param('idInscricao') idInscricao: number,
     @Param('idAula') idAula: number,
-    @User('sub') idUsuario: number
+    @User('sub') idUsuario: number,
   ) {
-    return this.marcarAulaConcluidaUseCase.execute(idInscricao, idAula, idUsuario);
+    return this.marcarAulaConcluidaUseCase.execute(
+      idInscricao,
+      idAula,
+      idUsuario,
+    );
   }
 
   @Post(':idInscricao/desmarcar-aula/:idAula')
@@ -117,15 +121,22 @@ export class InscricaoController {
   async desmarcarAula(
     @Param('idInscricao') idInscricao: number,
     @Param('idAula') idAula: number,
-    @User('sub') idUsuario: number
+    @User('sub') idUsuario: number,
   ) {
-    return this.desmarcarAulaConcluidaUseCase.execute(idInscricao, idAula, idUsuario);
+    return this.desmarcarAulaConcluidaUseCase.execute(
+      idInscricao,
+      idAula,
+      idUsuario,
+    );
   }
 
   @Get(':id/aulas')
   @ApiOperation({ summary: 'Listar módulos e aulas do curso inscrito' })
   @ApiParam({ name: 'id', type: Number })
-  @ApiResponse({ status: 200, description: 'Lista de módulos e aulas do curso' })
+  @ApiResponse({
+    status: 200,
+    description: 'Lista de módulos e aulas do curso',
+  })
   async getModulosEAulas(
     @Param('id') id: string,
     @User('sub') idUsuario: number,
@@ -136,7 +147,10 @@ export class InscricaoController {
     const curso = await this.cursoRepo.findByIdWithModulosAndAulas(idNumber);
     if (!curso) throw new NotFoundException('Curso não encontrado');
 
-    const inscricao = await this.inscricaoRepo.findByUsuarioAndCurso(idUsuario, idNumber);
+    const inscricao = await this.inscricaoRepo.findByUsuarioAndCurso(
+      idUsuario,
+      idNumber,
+    );
     if (!inscricao || inscricao.status !== 'ativo') {
       throw new ForbiddenException('Você não está inscrito neste curso');
     }

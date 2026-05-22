@@ -18,7 +18,7 @@ describe('DesmarcarAulaConcluidaUseCase', () => {
       inscricaoRepo,
       progressoRepo,
       aulaRepo,
-      certificadoRepo
+      certificadoRepo,
     );
   });
 
@@ -31,7 +31,11 @@ describe('DesmarcarAulaConcluidaUseCase', () => {
     certificadoRepo.findByInscricao.mockResolvedValue(null);
     aulaRepo.findByIdWithModuloAndCurso.mockResolvedValue(aula);
     progressoRepo.findByInscricaoAndAula.mockResolvedValue(progresso);
-    progressoRepo.update.mockResolvedValue({ ...progresso, concluida: false, dataConclusao: undefined });
+    progressoRepo.update.mockResolvedValue({
+      ...progresso,
+      concluida: false,
+      dataConclusao: undefined,
+    });
 
     const result = await useCase.execute(1, 1, 1);
 

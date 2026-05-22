@@ -9,7 +9,14 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import * as multer from 'multer';
 import { ArtifactsService } from './artifacts.service';
 import { UploadAvatarResponseDto } from './dto/upload-avatar.dto';
@@ -42,12 +49,10 @@ export class ArtifactsController {
       limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
     }),
   )
-  async uploadAvatar(
-    @Req() req: any,
-    @UploadedFile() file: MulterFile,
-  ) {
+  async uploadAvatar(@Req() req: any, @UploadedFile() file: MulterFile) {
     const userId = req?.user?.id ?? req?.user?.sub;
-    if (!userId) throw new BadRequestException('Usuário não autenticado ou token sem id');
+    if (!userId)
+      throw new BadRequestException('Usuário não autenticado ou token sem id');
     return this.artifactsService.uploadAvatar(String(userId), file);
   }
 
@@ -58,7 +63,8 @@ export class ArtifactsController {
   @ApiResponse({ status: 200, type: GetAvatarResponseDto })
   async getAvatar(@Req() req: any) {
     const userId = req?.user?.id ?? req?.user?.sub;
-    if (!userId) throw new BadRequestException('Usuário não autenticado ou token sem id');
+    if (!userId)
+      throw new BadRequestException('Usuário não autenticado ou token sem id');
     return this.artifactsService.getAvatar(String(userId));
   }
 }

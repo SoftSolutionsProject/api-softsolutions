@@ -30,12 +30,13 @@ describe('UpdateUsuarioUseCase', () => {
     const result = await useCase.execute(1, { telefone: '11999999999' });
     expect(result).not.toHaveProperty('senha');
     expect(result.telefone).toBe('(11) 99999-9999');
-
   });
 
   it('deve lançar erro se usuário não encontrado', async () => {
     usuarioRepo.findById.mockResolvedValue(null);
-    await expect(useCase.execute(1, {})).rejects.toThrow('Usuário não encontrado');
+    await expect(useCase.execute(1, {})).rejects.toThrow(
+      'Usuário não encontrado',
+    );
   });
 
   it('deve lançar erro se tentar alterar CPF', async () => {
@@ -50,7 +51,7 @@ describe('UpdateUsuarioUseCase', () => {
     usuarioRepo.findById.mockResolvedValue(usuario);
 
     await expect(
-      useCase.execute(1, { cpfUsuario: '12345678900' })
+      useCase.execute(1, { cpfUsuario: '12345678900' }),
     ).rejects.toThrow('Não é permitido alterar o CPF');
   });
 });

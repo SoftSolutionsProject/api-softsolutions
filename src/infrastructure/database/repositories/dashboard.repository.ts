@@ -18,33 +18,40 @@ export class DashboardRepository {
 
   async getDashboardData(usuarioId: number): Promise<DashboardResponseDto> {
     const inscricoes = await this.inscricaoRepo.findByUsuario(usuarioId);
-    const inscricoesAtivas = inscricoes.filter(i => i.status === 'ativo');
+    const inscricoesAtivas = inscricoes.filter((i) => i.status === 'ativo');
     const certificados = await this.certificadoRepo.findAllByUsuario(usuarioId);
 
     const progressoPorCurso = inscricoesAtivas.map((inscricao) => {
       const cursoId = inscricao.curso?.id ?? 0;
       const nomeCurso = inscricao.curso?.nomeCurso ?? '';
       const totalAulas = inscricao.progressoAulas?.length ?? 0;
-      const concluidas = inscricao.progressoAulas?.filter((p) => p.concluida).length ?? 0;
-      const percentualConcluido = totalAulas > 0 ? Math.round((concluidas / totalAulas) * 100) : 0;
+      const concluidas =
+        inscricao.progressoAulas?.filter((p) => p.concluida).length ?? 0;
+      const percentualConcluido =
+        totalAulas > 0 ? Math.round((concluidas / totalAulas) * 100) : 0;
 
       return { cursoId, nomeCurso, percentualConcluido };
     });
 
     const historicoEstudo = this.getHistoricoEstudo(inscricoes);
     const diasAtivosEstudo = historicoEstudo.length;
-    const ultimoDiaAtividade = diasAtivosEstudo > 0
-      ? historicoEstudo[historicoEstudo.length - 1].data
-      : null;
+    const ultimoDiaAtividade =
+      diasAtivosEstudo > 0
+        ? historicoEstudo[historicoEstudo.length - 1].data
+        : null;
 
-    const datas = historicoEstudo.map(h => h.data);
+    const datas = historicoEstudo.map((h) => h.data);
     const diasConsecutivosEstudo = this.getDiasConsecutivos(datas);
-    const sequenciaAtualDiasConsecutivos = this.getSequenciaAtualConsecutiva(datas);
+    const sequenciaAtualDiasConsecutivos =
+      this.getSequenciaAtualConsecutiva(datas);
 
     const cursosPorCategoria = this.getCursosPorCategoria(inscricoesAtivas);
     const notasMediasPorCurso = await this.getNotasMedias(inscricoes);
     const tempoTotalEstudoMinutos = this.getTempoTotalEstudado(inscricoes);
-    const avaliacoes = await this.getAvaliacoesPorUsuario(usuarioId, inscricoes);
+    const avaliacoes = await this.getAvaliacoesPorUsuario(
+      usuarioId,
+      inscricoes,
+    );
 
     return {
       totalCursosInscritos: inscricoesAtivas.length,
@@ -66,11 +73,14 @@ export class DashboardRepository {
     const progresso = inscricoes.flatMap((i) => i?.progressoAulas ?? []);
     const agrupado = progresso
       .filter((p) => p?.dataConclusao)
-      .reduce((acc, p) => {
-        const data = p.dataConclusao?.toISOString().split('T')[0] ?? '';
-        acc[data] = (acc[data] || 0) + (p?.aula?.tempoAula ?? 0);
-        return acc;
-      }, {} as Record<string, number>);
+      .reduce(
+        (acc, p) => {
+          const data = p.dataConclusao?.toISOString().split('T')[0] ?? '';
+          acc[data] = (acc[data] || 0) + (p?.aula?.tempoAula ?? 0);
+          return acc;
+        },
+        {} as Record<string, number>,
+      );
 
     return Object.entries(agrupado)
       .sort(([a], [b]) => a.localeCompare(b))
@@ -83,12 +93,15 @@ export class DashboardRepository {
   private getDiasConsecutivos(datas: string[]): number {
     if (datas.length === 0) return 0;
 
-    const dias = datas.map(d => new Date(d)).sort((a, b) => a.getTime() - b.getTime());
+    const dias = datas
+      .map((d) => new Date(d))
+      .sort((a, b) => a.getTime() - b.getTime());
     let streak = 1;
     let maxStreak = 1;
 
     for (let i = 1; i < dias.length; i++) {
-      const diff = (dias[i].getTime() - dias[i - 1].getTime()) / (1000 * 60 * 60 * 24);
+      const diff =
+        (dias[i].getTime() - dias[i - 1].getTime()) / (1000 * 60 * 60 * 24);
       if (diff === 1) {
         streak++;
         maxStreak = Math.max(maxStreak, streak);
@@ -102,7 +115,7 @@ export class DashboardRepository {
 
   private getSequenciaAtualConsecutiva(datas: string[]): number {
     const diasEstudoSet = new Set(datas);
-    let hoje = new Date();
+    const hoje = new Date();
     let contador = 0;
 
     while (true) {
@@ -119,11 +132,14 @@ export class DashboardRepository {
   }
 
   private getCursosPorCategoria(inscricoes: any[]) {
-    const agrupado = inscricoes.reduce((acc, i) => {
-      const categoria = i?.curso?.categoria ?? 'Outros';
-      acc[categoria] = (acc[categoria] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
+    const agrupado = inscricoes.reduce(
+      (acc, i) => {
+        const categoria = i?.curso?.categoria ?? 'Outros';
+        acc[categoria] = (acc[categoria] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
 
     return Object.entries(agrupado).map(([categoria, total]) => ({
       categoria,
@@ -138,7 +154,7 @@ export class DashboardRepository {
         const nomeCurso = i?.curso?.nomeCurso ?? '';
         const notaMedia = await this.avaliacaoRepo.getCourseAverage(cursoId);
         return { cursoId, nomeCurso, notaMedia };
-      })
+      }),
     );
   }
 
@@ -154,13 +170,16 @@ export class DashboardRepository {
       inscricoes.map(async (i) => {
         const cursoId = i?.curso?.id ?? 0;
         const nomeCurso = i?.curso?.nomeCurso ?? '';
-        const avaliacao = await this.avaliacaoRepo.findByUserAndCourse(usuarioId, cursoId);
+        const avaliacao = await this.avaliacaoRepo.findByUserAndCourse(
+          usuarioId,
+          cursoId,
+        );
         return {
           cursoId,
           nomeCurso,
           avaliacaoFeita: !!avaliacao,
         };
-      })
+      }),
     );
   }
 }

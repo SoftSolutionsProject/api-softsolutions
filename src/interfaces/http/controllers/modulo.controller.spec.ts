@@ -18,7 +18,7 @@ describe('ModuloController', () => {
     id: 1,
     nomeModulo: 'Modulo Teste',
     tempoModulo: 100,
-    curso: { id: 1 }
+    curso: { id: 1 },
   };
 
   beforeEach(async () => {
@@ -71,7 +71,9 @@ describe('ModuloController', () => {
   });
 
   it('deve negar update se não admin', async () => {
-    await expect(controller.update('1', {} as any, 'aluno')).rejects.toThrowError();
+    await expect(
+      controller.update('1', {} as any, 'aluno'),
+    ).rejects.toThrowError();
   });
 
   it('deve remover módulo se admin', async () => {

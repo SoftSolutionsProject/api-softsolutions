@@ -5,7 +5,10 @@ import { ModuloRepository } from '../../../infrastructure/database/repositories/
 export class UpdateModuloUseCase {
   constructor(private readonly moduloRepo: ModuloRepository) {}
 
-  async execute(id: number, data: { nomeModulo?: string; tempoModulo?: number }) {
+  async execute(
+    id: number,
+    data: { nomeModulo?: string; tempoModulo?: number },
+  ) {
     const modulo = await this.moduloRepo.findById(id);
     if (!modulo) throw new NotFoundException('Módulo não encontrado');
 

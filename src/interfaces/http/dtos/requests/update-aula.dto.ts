@@ -7,7 +7,9 @@ export class UpdateAulaDto {
   @ApiPropertyOptional({ example: 90 })
   tempoAula?: number;
 
-  @ApiPropertyOptional({ example: 'https://meuservidor.com/videos/atualizado.mp4' })
+  @ApiPropertyOptional({
+    example: 'https://meuservidor.com/videos/atualizado.mp4',
+  })
   videoUrl?: string;
 
   @ApiPropertyOptional({

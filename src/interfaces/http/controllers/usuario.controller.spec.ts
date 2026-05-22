@@ -22,7 +22,7 @@ describe('UsuarioController', () => {
     nomeUsuario: 'Lucas',
     cpfUsuario: '04852227012',
     email: 'lucas@email.com',
-    tipo: 'aluno' as 'aluno',
+    tipo: 'aluno' as const,
   };
 
   beforeEach(async () => {
@@ -97,7 +97,9 @@ describe('UsuarioController', () => {
   });
 
   it('deve negar getById se não admin nem dono', async () => {
-    await expect(controller.getById('1', 2, 'aluno')).rejects.toThrow(ForbiddenException);
+    await expect(controller.getById('1', 2, 'aluno')).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 
   it('deve atualizar usuário se admin ou dono', async () => {
@@ -111,7 +113,9 @@ describe('UsuarioController', () => {
   });
 
   it('deve negar update se não admin nem dono', async () => {
-    await expect(controller.update('1', {}, 2, 'aluno')).rejects.toThrow(ForbiddenException);
+    await expect(controller.update('1', {}, 2, 'aluno')).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 
   it('deve deletar usuário se admin ou dono', async () => {
@@ -123,8 +127,9 @@ describe('UsuarioController', () => {
     expect(adminResult).toEqual({ message: 'OK' });
   });
 
- it('deve negar delete se não admin nem dono', () => {
-  expect(() => controller.delete('1', 2, 'aluno')).toThrow(ForbiddenException);
-});
-
+  it('deve negar delete se não admin nem dono', () => {
+    expect(() => controller.delete('1', 2, 'aluno')).toThrow(
+      ForbiddenException,
+    );
+  });
 });

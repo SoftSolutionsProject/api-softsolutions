@@ -35,10 +35,7 @@ describe('VerProgressoUseCase', () => {
       id: 1,
       usuario: { id: 1 },
       curso: {
-        modulos: [
-          { aulas: [{}, {}, {}] },
-          { aulas: [{}, {}] },
-        ],
+        modulos: [{ aulas: [{}, {}, {}] }, { aulas: [{}, {}] }],
       },
     };
 

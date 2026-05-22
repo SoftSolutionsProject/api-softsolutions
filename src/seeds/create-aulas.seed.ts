@@ -19,27 +19,33 @@ export async function runSeedAulas() {
       {
         nomeAula: `Introdução ao módulo: ${modulo.nomeModulo}`,
         tempoAula: 5,
-        videoUrl: 'https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs',
+        videoUrl:
+          'https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs',
         materialApoio: ['https://softsolutions.com.br/material/introducao.pdf'],
-        descricaoConteudo: 'Apresentação dos objetivos e visão geral do módulo.',
-        modulo
+        descricaoConteudo:
+          'Apresentação dos objetivos e visão geral do módulo.',
+        modulo,
       },
       {
         nomeAula: `Conceitos principais de ${modulo.nomeModulo}`,
         tempoAula: 15,
-        videoUrl: 'https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs',
+        videoUrl:
+          'https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs',
         materialApoio: ['https://softsolutions.com.br/material/conceitos.pdf'],
-        descricaoConteudo: 'Exposição dos conceitos fundamentais e exemplos práticos.',
-        modulo
+        descricaoConteudo:
+          'Exposição dos conceitos fundamentais e exemplos práticos.',
+        modulo,
       },
       {
         nomeAula: `Práticas e exercícios: ${modulo.nomeModulo}`,
         tempoAula: 10,
-        videoUrl: 'https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs',
+        videoUrl:
+          'https://www.youtube.com/embed/QGBkp-pvTi4?si=kwPdbIrkOMtf1ZXs',
         materialApoio: ['https://softsolutions.com.br/material/praticas.pdf'],
-        descricaoConteudo: 'Atividades e aplicações práticas para consolidar o conhecimento.',
-        modulo
-      }
+        descricaoConteudo:
+          'Atividades e aplicações práticas para consolidar o conhecimento.',
+        modulo,
+      },
     ];
 
     aulasParaInserir.push(...aulas);

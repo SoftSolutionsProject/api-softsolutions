@@ -17,7 +17,9 @@ describe('CreateAulaUseCase', () => {
 
   it('deve lançar exceção se o módulo não existir', async () => {
     moduloRepo.findById.mockResolvedValue(null);
-    await expect(useCase.execute({ idModulo: 1 } as any)).rejects.toThrow(NotFoundException);
+    await expect(useCase.execute({ idModulo: 1 } as any)).rejects.toThrow(
+      NotFoundException,
+    );
   });
 
   it('deve criar aula se módulo existir', async () => {

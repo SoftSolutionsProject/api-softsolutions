@@ -13,16 +13,23 @@ export class LoginUsuarioUseCase {
     if (!usuario) throw new UnauthorizedException('Email ou senha inválidos');
 
     const senhaValida = await bcrypt.compare(senha, usuario.senha);
-    if (!senhaValida) throw new UnauthorizedException('Email ou senha inválidos');
+    if (!senhaValida)
+      throw new UnauthorizedException('Email ou senha inválidos');
 
-    const payload = { sub: usuario.id, email: usuario.email, tipo: usuario.tipo };
-    const token = jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '24h' });
+    const payload = {
+      sub: usuario.id,
+      email: usuario.email,
+      tipo: usuario.tipo,
+    };
+    const token = jwt.sign(payload, process.env.JWT_SECRET!, {
+      expiresIn: '24h',
+    });
 
     return new LoginUsuarioResponseDto(token, {
       id: usuario.id!,
       nome: usuario.nomeUsuario,
       email: usuario.email,
-      tipo: usuario.tipo
+      tipo: usuario.tipo,
     });
   }
 }

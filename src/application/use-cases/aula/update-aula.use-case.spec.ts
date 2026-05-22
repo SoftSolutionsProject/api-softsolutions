@@ -47,6 +47,9 @@ describe('UpdateAulaUseCase', () => {
     const result = await useCase.execute(1, dto);
 
     expect(result.nomeAula).toBe('Aula Atualizada');
-    expect(aulaRepo.update).toHaveBeenCalledWith(1, expect.objectContaining(dto));
+    expect(aulaRepo.update).toHaveBeenCalledWith(
+      1,
+      expect.objectContaining(dto),
+    );
   });
 });

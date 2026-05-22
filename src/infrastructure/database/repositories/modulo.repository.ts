@@ -17,9 +17,9 @@ export class ModuloRepository {
   }
 
   async findById(id: number): Promise<ModuloModel | null> {
-    return await this.repo.findOne({ 
+    return await this.repo.findOne({
       where: { id },
-      relations: ['curso']
+      relations: ['curso'],
     });
   }
 

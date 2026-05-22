@@ -21,14 +21,19 @@ describe('AvaliacaoController', () => {
   it('deve criar uma avaliação', async () => {
     criarAvaliacaoUseCase.execute.mockResolvedValue({ id: 1 });
     const result = await controller.criar(1, { nota: 5, cursoId: 10 });
-    expect(criarAvaliacaoUseCase.execute).toHaveBeenCalledWith(1, { nota: 5, cursoId: 10 });
+    expect(criarAvaliacaoUseCase.execute).toHaveBeenCalledWith(1, {
+      nota: 5,
+      cursoId: 10,
+    });
     expect(result).toEqual({ id: 1 });
   });
 
   it('deve atualizar uma avaliação', async () => {
     atualizarAvaliacaoUseCase.execute.mockResolvedValue({ id: 1 });
     const result = await controller.atualizar(1, 10, { nota: 4 });
-    expect(atualizarAvaliacaoUseCase.execute).toHaveBeenCalledWith(1, 10, { nota: 4 });
+    expect(atualizarAvaliacaoUseCase.execute).toHaveBeenCalledWith(1, 10, {
+      nota: 4,
+    });
     expect(result).toEqual({ id: 1 });
   });
 

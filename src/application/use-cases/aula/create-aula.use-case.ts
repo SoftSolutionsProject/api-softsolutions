@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { AulaRepository } from 'src/infrastructure/database/repositories/aula.repository';
 import { ModuloRepository } from 'src/infrastructure/database/repositories/modulo.repository';
 import { CreateAulaDto } from 'src/interfaces/http/dtos/requests/create-aula.dto';

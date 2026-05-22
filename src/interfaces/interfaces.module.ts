@@ -12,7 +12,6 @@ import { CertificadoController } from './http/controllers/certificado.controller
 import { AvaliacaoController } from './http/controllers/avaliacao.controller';
 import { DashboardController } from './http/controllers/dashboard.controller';
 
-
 @Module({
   imports: [InfrastructureModule, ApplicationModule],
   controllers: [

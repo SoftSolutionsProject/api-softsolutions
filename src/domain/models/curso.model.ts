@@ -10,5 +10,5 @@ export interface CursoModel {
   status: 'ativo' | 'inativo';
   avaliacao: number;
   imagemCurso: string;
-   modulos?: ModuloModel[]; 
+  modulos?: ModuloModel[];
 }

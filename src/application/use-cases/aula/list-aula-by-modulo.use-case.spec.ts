@@ -22,7 +22,9 @@ describe('ListAulaByModuloUseCase', () => {
 
   it('deve retornar lista de aulas se o módulo existir', async () => {
     moduloRepo.findById.mockResolvedValue({ id: 1 } as any);
-    aulaRepo.findByModulo.mockResolvedValue([{ id: 1, nomeAula: 'Teste' }] as any);
+    aulaRepo.findByModulo.mockResolvedValue([
+      { id: 1, nomeAula: 'Teste' },
+    ] as any);
 
     const result = await useCase.execute(1);
     expect(result).toEqual([{ id: 1, nomeAula: 'Teste' }]);

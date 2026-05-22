@@ -15,11 +15,14 @@ export class VerProgressoUseCase {
       throw new NotFoundException('Inscrição não encontrada');
     }
 
-    const totalAulas = inscricao.curso.modulos?.reduce(
-      (total, modulo) => total + (modulo.aulas?.length || 0), 0
-    ) || 0;
+    const totalAulas =
+      inscricao.curso.modulos?.reduce(
+        (total, modulo) => total + (modulo.aulas?.length || 0),
+        0,
+      ) || 0;
 
-    const aulasConcluidas = await this.progressoRepo.countConcluidasByInscricao(idInscricao);
+    const aulasConcluidas =
+      await this.progressoRepo.countConcluidasByInscricao(idInscricao);
     const progresso = totalAulas > 0 ? (aulasConcluidas / totalAulas) * 100 : 0;
 
     return { progresso, aulasConcluidas, totalAulas };

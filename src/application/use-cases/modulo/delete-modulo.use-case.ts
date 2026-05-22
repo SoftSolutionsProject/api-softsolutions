@@ -10,7 +10,7 @@ export class DeleteModuloUseCase {
     if (!moduloExistente) {
       throw new NotFoundException('Módulo não encontrado');
     }
-    
+
     await this.moduloRepo.delete(id);
     return { message: 'Módulo removido com sucesso' };
   }
