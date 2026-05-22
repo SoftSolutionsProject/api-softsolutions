@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-
 // Entities
 import { UsuarioEntity } from './database/entities/usuario.entity';
 import { CursoEntity } from './database/entities/curso.entity';
@@ -26,19 +25,37 @@ import { DashboardRepository } from './database/repositories/dashboard.repositor
 @Module({
   imports: [
     TypeOrmModule.forFeature([
-      UsuarioEntity, CursoEntity, ModuloEntity, AulaEntity,
-      InscricaoEntity, ProgressoAulaEntity, CertificadoEntity, AvaliacaoEntity,
+      UsuarioEntity,
+      CursoEntity,
+      ModuloEntity,
+      AulaEntity,
+      InscricaoEntity,
+      ProgressoAulaEntity,
+      CertificadoEntity,
+      AvaliacaoEntity,
     ]),
   ],
   providers: [
-    UsuarioRepository, CursoRepository, ModuloRepository,
-    AulaRepository, InscricaoRepository, ProgressoAulaRepository,
-    CertificadoRepository, AvaliacaoRepository, DashboardRepository
+    UsuarioRepository,
+    CursoRepository,
+    ModuloRepository,
+    AulaRepository,
+    InscricaoRepository,
+    ProgressoAulaRepository,
+    CertificadoRepository,
+    AvaliacaoRepository,
+    DashboardRepository,
   ],
   exports: [
-    UsuarioRepository, CursoRepository, ModuloRepository,
-    AulaRepository, InscricaoRepository, ProgressoAulaRepository,
-    CertificadoRepository, AvaliacaoRepository, DashboardRepository
+    UsuarioRepository,
+    CursoRepository,
+    ModuloRepository,
+    AulaRepository,
+    InscricaoRepository,
+    ProgressoAulaRepository,
+    CertificadoRepository,
+    AvaliacaoRepository,
+    DashboardRepository,
   ],
 })
 export class InfrastructureModule {}

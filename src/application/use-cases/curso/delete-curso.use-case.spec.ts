@@ -12,23 +12,22 @@ describe('DeleteCursoUseCase', () => {
   });
 
   it('deve deletar curso se existir', async () => {
-  repo.findById.mockResolvedValue({
-    id: 1,
-    nomeCurso: 'Curso Teste',
-    tempoCurso: 10,
-    descricaoCurta: 'Descrição curta',
-    descricaoDetalhada: 'Descrição detalhada',
-    professor: 'Prof. Teste',
-    categoria: 'Categoria Teste',
-    status: 'ativo',
-    avaliacao: 0,
-    imagemCurso: 'imagem.png',
+    repo.findById.mockResolvedValue({
+      id: 1,
+      nomeCurso: 'Curso Teste',
+      tempoCurso: 10,
+      descricaoCurta: 'Descrição curta',
+      descricaoDetalhada: 'Descrição detalhada',
+      professor: 'Prof. Teste',
+      categoria: 'Categoria Teste',
+      status: 'ativo',
+      avaliacao: 0,
+      imagemCurso: 'imagem.png',
+    });
+    repo.delete.mockResolvedValue();
+    const result = await useCase.execute(1);
+    expect(result).toEqual({ message: 'Curso removido com sucesso' });
+    expect(repo.findById).toHaveBeenCalledWith(1);
+    expect(repo.delete).toHaveBeenCalledWith(1);
   });
-  repo.delete.mockResolvedValue();
-  const result = await useCase.execute(1);
-  expect(result).toEqual({ message: 'Curso removido com sucesso' });
-  expect(repo.findById).toHaveBeenCalledWith(1);
-  expect(repo.delete).toHaveBeenCalledWith(1);
-});
-
 });

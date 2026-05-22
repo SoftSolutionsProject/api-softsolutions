@@ -27,7 +27,7 @@ describe('CertificadoController', () => {
 
   it('deve validar certificado público', async () => {
     const certMock = {
-      id: 1,  // ✅ adicionado para ser compatível
+      id: 1, // ✅ adicionado para ser compatível
       numeroSerie: 'mock-uuid',
       usuario: { nomeUsuario: 'Lucas' },
       curso: { nomeCurso: 'Curso X', tempoCurso: 40 },

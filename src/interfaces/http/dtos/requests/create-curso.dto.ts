@@ -19,7 +19,11 @@ export class CreateCursoDto {
   @ApiProperty({ example: 'Programação' })
   categoria: string;
 
-  @ApiProperty({ required: false, example: 'ativo', enum: ['ativo', 'inativo'] })
+  @ApiProperty({
+    required: false,
+    example: 'ativo',
+    enum: ['ativo', 'inativo'],
+  })
   status?: 'ativo' | 'inativo';
 
   @ApiProperty({ required: false, example: 5 })

@@ -17,9 +17,9 @@ export class AulaRepository {
   }
 
   async findById(id: number): Promise<AulaModel | null> {
-    return this.repo.findOne({ 
+    return this.repo.findOne({
       where: { id },
-      relations: ['modulo'] 
+      relations: ['modulo'],
     });
   }
 
@@ -37,23 +37,23 @@ export class AulaRepository {
   }
 
   async findByModulo(idModulo: number): Promise<AulaModel[]> {
-    return this.repo.find({ 
+    return this.repo.find({
       where: { modulo: { id: idModulo } },
-      relations: ['modulo']
+      relations: ['modulo'],
     });
   }
 
   async findByCurso(idCurso: number): Promise<AulaModel[]> {
     return this.repo.find({
       where: { modulo: { curso: { id: idCurso } } },
-      relations: ['modulo', 'modulo.curso']
+      relations: ['modulo', 'modulo.curso'],
     });
   }
 
   async findByIdWithModuloAndCurso(id: number): Promise<AulaModel | null> {
-  return this.repo.findOne({
-    where: { id },
-    relations: ['modulo', 'modulo.curso']
-  });
-}
+    return this.repo.findOne({
+      where: { id },
+      relations: ['modulo', 'modulo.curso'],
+    });
+  }
 }

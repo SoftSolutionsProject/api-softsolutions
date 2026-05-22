@@ -17,52 +17,57 @@ export class InscricaoRepository {
   }
 
   async findById(id: number): Promise<InscricaoModel | null> {
-  return this.repo.findOne({ 
-    where: { id },
-    relations: [
-      'usuario',
-      'curso',
-      'curso.modulos',
-      'curso.modulos.aulas',
-      'progressoAulas',
-      'progressoAulas.aula'
-    ]
-  });
-}
+    return this.repo.findOne({
+      where: { id },
+      relations: [
+        'usuario',
+        'curso',
+        'curso.modulos',
+        'curso.modulos.aulas',
+        'progressoAulas',
+        'progressoAulas.aula',
+      ],
+    });
+  }
 
-  async findByUsuarioAndCurso(idUsuario: number, idCurso: number): Promise<InscricaoModel | null> {
-    return this.repo.findOne({ 
-      where: { 
+  async findByUsuarioAndCurso(
+    idUsuario: number,
+    idCurso: number,
+  ): Promise<InscricaoModel | null> {
+    return this.repo.findOne({
+      where: {
         usuario: { id: idUsuario },
-        curso: { id: idCurso }
+        curso: { id: idCurso },
       },
-      relations: ['usuario', 'curso']
+      relations: ['usuario', 'curso'],
     });
   }
 
   async findByUsuario(idUsuario: number): Promise<InscricaoModel[]> {
-    return this.repo.find({ 
+    return this.repo.find({
       where: { usuario: { id: idUsuario } },
-      relations: ['curso', 'progressoAulas', 'progressoAulas.aula']
+      relations: ['curso', 'progressoAulas', 'progressoAulas.aula'],
     });
   }
 
-  async update(id: number, data: Partial<InscricaoModel>): Promise<InscricaoModel> {
+  async update(
+    id: number,
+    data: Partial<InscricaoModel>,
+  ): Promise<InscricaoModel> {
     await this.repo.update(id, data);
     return (await this.findById(id))!;
   }
 
   async simpleUpdate(id: number, data: Partial<InscricaoModel>): Promise<void> {
-  await this.repo.update(id, data);
-}
+    await this.repo.update(id, data);
+  }
 
-async countByCurso(cursoId: number): Promise<number> {
-  return this.repo.count({
-    where: {
-      curso: { id: cursoId },
-      status: 'ativo', // ou remova se quiser contar todas inscrições
-    },
-  });
-}
-
+  async countByCurso(cursoId: number): Promise<number> {
+    return this.repo.count({
+      where: {
+        curso: { id: cursoId },
+        status: 'ativo', // ou remova se quiser contar todas inscrições
+      },
+    });
+  }
 }

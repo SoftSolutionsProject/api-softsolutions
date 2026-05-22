@@ -36,7 +36,9 @@ describe('LoginUsuarioUseCase', () => {
   it('deve lançar erro se email não encontrado', async () => {
     usuarioRepo.findByEmail.mockResolvedValue(null);
 
-    await expect(useCase.execute('naoexiste@email.com', '123456')).rejects.toThrow();
+    await expect(
+      useCase.execute('naoexiste@email.com', '123456'),
+    ).rejects.toThrow();
   });
 
   it('deve lançar erro se senha inválida', async () => {
@@ -51,6 +53,8 @@ describe('LoginUsuarioUseCase', () => {
     };
     usuarioRepo.findByEmail.mockResolvedValue(usuario);
 
-    await expect(useCase.execute(usuario.email, 'senhaerrada')).rejects.toThrow();
+    await expect(
+      useCase.execute(usuario.email, 'senhaerrada'),
+    ).rejects.toThrow();
   });
 });

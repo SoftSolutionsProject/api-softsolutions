@@ -48,7 +48,8 @@ export class AulaController {
   @ApiOperation({ summary: 'Criar nova aula (apenas administrador)' })
   @ApiResponse({ status: 201, type: AulaResponseDto })
   async create(@Body() createDto: CreateAulaDto, @User('tipo') tipo: string) {
-    if (tipo !== 'administrador') throw new ForbiddenException('Apenas administradores podem criar aulas');
+    if (tipo !== 'administrador')
+      throw new ForbiddenException('Apenas administradores podem criar aulas');
     const aula = await this.createAula.execute(createDto);
     return new AulaResponseDto(aula);
   }
@@ -58,7 +59,7 @@ export class AulaController {
   @ApiResponse({ status: 200, type: [AulaResponseDto] })
   async list() {
     const aulas = await this.listAula.execute();
-    return aulas.map(aula => new AulaResponseDto(aula));
+    return aulas.map((aula) => new AulaResponseDto(aula));
   }
 
   @Get(':id')
@@ -81,7 +82,10 @@ export class AulaController {
     @Body() updateDto: UpdateAulaDto,
     @User('tipo') tipo: string,
   ) {
-    if (tipo !== 'administrador') throw new ForbiddenException('Apenas administradores podem atualizar aulas');
+    if (tipo !== 'administrador')
+      throw new ForbiddenException(
+        'Apenas administradores podem atualizar aulas',
+      );
     const aula = await this.updateAula.execute(parseInt(id), updateDto);
     return new AulaResponseDto(aula);
   }
@@ -93,7 +97,10 @@ export class AulaController {
   @ApiParam({ name: 'id', type: Number })
   @ApiResponse({ status: 200, description: 'Aula removida com sucesso' })
   async delete(@Param('id') id: string, @User('tipo') tipo: string) {
-    if (tipo !== 'administrador') throw new ForbiddenException('Apenas administradores podem remover aulas');
+    if (tipo !== 'administrador')
+      throw new ForbiddenException(
+        'Apenas administradores podem remover aulas',
+      );
     return this.deleteAula.execute(parseInt(id));
   }
 
@@ -103,7 +110,7 @@ export class AulaController {
   @ApiResponse({ status: 200, type: [AulaResponseDto] })
   async listByModulo(@Param('idModulo') idModulo: string) {
     const aulas = await this.listAulaByModulo.execute(parseInt(idModulo));
-    return aulas.map(aula => new AulaResponseDto(aula));
+    return aulas.map((aula) => new AulaResponseDto(aula));
   }
 
   @Get('curso/:idCurso')
@@ -112,6 +119,6 @@ export class AulaController {
   @ApiResponse({ status: 200, type: [AulaResponseDto] })
   async listByCurso(@Param('idCurso') idCurso: string) {
     const aulas = await this.listAulaByCurso.execute(parseInt(idCurso));
-    return aulas.map(aula => new AulaResponseDto(aula));
+    return aulas.map((aula) => new AulaResponseDto(aula));
   }
 }

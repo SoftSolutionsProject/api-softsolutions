@@ -42,7 +42,8 @@ export class ModuloController {
   @ApiOperation({ summary: 'Criar novo módulo (apenas administrador)' })
   @ApiResponse({ status: 201, description: 'Módulo criado com sucesso' })
   async create(@Body() dto: CreateModuloDto, @User('tipo') tipo: string) {
-    if (tipo !== 'administrador') throw new Error('Apenas administradores podem criar módulos');
+    if (tipo !== 'administrador')
+      throw new Error('Apenas administradores podem criar módulos');
     return this.createModulo.execute(dto);
   }
 
@@ -65,8 +66,13 @@ export class ModuloController {
   @ApiOperation({ summary: 'Atualizar módulo (apenas administrador)' })
   @ApiParam({ name: 'id', type: Number })
   @ApiResponse({ status: 200, description: 'Módulo atualizado com sucesso' })
-  async update(@Param('id') id: string, @Body() dto: UpdateModuloDto, @User('tipo') tipo: string) {
-    if (tipo !== 'administrador') throw new Error('Apenas administradores podem atualizar módulos');
+  async update(
+    @Param('id') id: string,
+    @Body() dto: UpdateModuloDto,
+    @User('tipo') tipo: string,
+  ) {
+    if (tipo !== 'administrador')
+      throw new Error('Apenas administradores podem atualizar módulos');
     return this.updateModulo.execute(parseInt(id), dto);
   }
 
@@ -75,7 +81,8 @@ export class ModuloController {
   @ApiParam({ name: 'id', type: Number })
   @ApiResponse({ status: 200, description: 'Módulo removido com sucesso' })
   async remove(@Param('id') id: string, @User('tipo') tipo: string) {
-    if (tipo !== 'administrador') throw new Error('Apenas administradores podem remover módulos');
+    if (tipo !== 'administrador')
+      throw new Error('Apenas administradores podem remover módulos');
     return this.deleteModulo.execute(parseInt(id));
   }
 }

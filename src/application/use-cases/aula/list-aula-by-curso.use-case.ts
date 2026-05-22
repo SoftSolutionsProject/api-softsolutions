@@ -12,7 +12,7 @@ export class ListAulaByCursoUseCase {
   async execute(idCurso: number) {
     const curso = await this.cursoRepo.findById(idCurso);
     if (!curso) throw new NotFoundException('Curso não encontrado');
-    
+
     return this.aulaRepo.findByCurso(idCurso);
   }
 }

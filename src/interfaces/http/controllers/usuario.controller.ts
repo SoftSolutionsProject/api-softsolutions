@@ -68,7 +68,9 @@ export class UsuarioController {
   @ApiResponse({ status: 200, type: [UsuarioResponseDto] })
   async list(@User('tipo') tipo: string) {
     if (tipo !== 'administrador')
-      throw new ForbiddenException('Apenas administradores podem listar usuários');
+      throw new ForbiddenException(
+        'Apenas administradores podem listar usuários',
+      );
 
     const usuarios = await this.listUsuario.execute();
     return usuarios.map((u) => new UsuarioResponseDto(u));

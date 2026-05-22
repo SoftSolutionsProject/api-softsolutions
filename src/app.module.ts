@@ -18,8 +18,8 @@ const isProd = process.env.NODE_ENV === 'production';
       url: process.env.DATABASE_URL,
 
       ssl: isProd
-        ? { rejectUnauthorized: false }  // produção (RDS)
-        : false,                         // desenvolvimento / testes
+        ? { rejectUnauthorized: false } // produção (RDS)
+        : false, // desenvolvimento / testes
 
       autoLoadEntities: true,
       synchronize: false,

@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 import { EmailModel } from 'src/domain/models/email.model';
 
@@ -17,11 +21,19 @@ export class EnviarEmailUseCase {
 
     // Validação do comprimento mínimo da mensagem
     if (dto.mensagem.length < 10) {
-      throw new BadRequestException('A mensagem deve ter pelo menos 10 caracteres');
+      throw new BadRequestException(
+        'A mensagem deve ter pelo menos 10 caracteres',
+      );
     }
 
-    if (!process.env.EMAIL_SUPPORT_USER || !process.env.EMAIL_SUPPORT_PASS || !process.env.EMAIL_SUPPORT_DESTINATION) {
-      throw new InternalServerErrorException('Configurações de e-mail não definidas.');
+    if (
+      !process.env.EMAIL_SUPPORT_USER ||
+      !process.env.EMAIL_SUPPORT_PASS ||
+      !process.env.EMAIL_SUPPORT_DESTINATION
+    ) {
+      throw new InternalServerErrorException(
+        'Configurações de e-mail não definidas.',
+      );
     }
 
     const transporter = nodemailer.createTransport({

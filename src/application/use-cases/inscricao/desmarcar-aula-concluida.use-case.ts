@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InscricaoRepository } from '../../../infrastructure/database/repositories/inscricao.repository';
 import { ProgressoAulaRepository } from '../../../infrastructure/database/repositories/progresso-aula.repository';
 import { AulaRepository } from '../../../infrastructure/database/repositories/aula.repository';
@@ -16,13 +20,17 @@ export class DesmarcarAulaConcluidaUseCase {
   async execute(idInscricao: number, idAula: number, idUsuario: number) {
     const inscricao = await this.inscricaoRepo.findById(idInscricao);
     if (!inscricao || inscricao.usuario.id !== idUsuario) {
-      throw new NotFoundException('Inscrição não encontrada ou não pertence ao usuário');
+      throw new NotFoundException(
+        'Inscrição não encontrada ou não pertence ao usuário',
+      );
     }
 
     // Verificar se já existe certificado emitido para esta inscrição
     const certificado = await this.certificadoRepo.findByInscricao(inscricao);
     if (certificado) {
-      throw new BadRequestException('Não é possível desmarcar aulas como concluídas após a emissão do certificado');
+      throw new BadRequestException(
+        'Não é possível desmarcar aulas como concluídas após a emissão do certificado',
+      );
     }
 
     const aula = await this.aulaRepo.findByIdWithModuloAndCurso(idAula);
@@ -30,7 +38,10 @@ export class DesmarcarAulaConcluidaUseCase {
       throw new BadRequestException('Aula não pertence ao curso da inscrição');
     }
 
-    const progresso = await this.progressoRepo.findByInscricaoAndAula(idInscricao, idAula);
+    const progresso = await this.progressoRepo.findByInscricaoAndAula(
+      idInscricao,
+      idAula,
+    );
     if (!progresso) throw new NotFoundException('Progresso não encontrado');
 
     progresso.concluida = false;

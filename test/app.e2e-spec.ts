@@ -21,5 +21,4 @@ describe('AppController (e2e)', () => {
       expect(true).toBe(true);
     });
   });
-
 });

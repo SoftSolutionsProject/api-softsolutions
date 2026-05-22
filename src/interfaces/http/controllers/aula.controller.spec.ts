@@ -20,31 +20,30 @@ describe('AulaController', () => {
   let listAulaByCurso: jest.Mocked<ListAulaByCursoUseCase>;
 
   const aulaMock = {
-  id: 1,
-  nomeAula: 'Aula Teste',
-  tempoAula: 30,
-  videoUrl: 'url',
-  descricaoConteudo: 'descricao',
-  materialApoio: [],
-  modulo: {
     id: 1,
-    nomeModulo: 'Modulo Teste',
-    tempoModulo: 100,
-    curso: {
+    nomeAula: 'Aula Teste',
+    tempoAula: 30,
+    videoUrl: 'url',
+    descricaoConteudo: 'descricao',
+    materialApoio: [],
+    modulo: {
       id: 1,
-      nomeCurso: 'Curso Teste',
-      tempoCurso: 100,
-      descricaoCurta: 'descricao',
-      descricaoDetalhada: 'detalhada',
-      professor: 'professor',
-      categoria: 'categoria',
-      status: 'ativo',
-      avaliacao: 5,
-      imagemCurso: 'url'
-    }
-  }
-};
-
+      nomeModulo: 'Modulo Teste',
+      tempoModulo: 100,
+      curso: {
+        id: 1,
+        nomeCurso: 'Curso Teste',
+        tempoCurso: 100,
+        descricaoCurta: 'descricao',
+        descricaoDetalhada: 'detalhada',
+        professor: 'professor',
+        categoria: 'categoria',
+        status: 'ativo',
+        avaliacao: 5,
+        imagemCurso: 'url',
+      },
+    },
+  };
 
   beforeEach(async () => {
     createAula = { execute: jest.fn() } as any;
@@ -78,7 +77,9 @@ describe('AulaController', () => {
   });
 
   it('deve negar criação se não admin', async () => {
-    await expect(controller.create({} as any, 'aluno')).rejects.toThrow(ForbiddenException);
+    await expect(controller.create({} as any, 'aluno')).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 
   it('deve listar todas as aulas', async () => {
@@ -100,7 +101,9 @@ describe('AulaController', () => {
   });
 
   it('deve negar update se não admin', async () => {
-    await expect(controller.update('1', {} as any, 'aluno')).rejects.toThrow(ForbiddenException);
+    await expect(controller.update('1', {} as any, 'aluno')).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 
   it('deve deletar aula se admin', async () => {
@@ -110,7 +113,9 @@ describe('AulaController', () => {
   });
 
   it('deve negar delete se não admin', async () => {
-    await expect(controller.delete('1', 'aluno')).rejects.toThrow(ForbiddenException);
+    await expect(controller.delete('1', 'aluno')).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 
   it('deve listar aulas por módulo', async () => {

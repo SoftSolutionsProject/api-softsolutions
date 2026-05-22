@@ -12,7 +12,7 @@ export class UpdateAulaUseCase {
 
     const updatedData = {
       ...aula,
-      ...dto
+      ...dto,
     };
 
     return this.aulaRepo.update(id, updatedData);

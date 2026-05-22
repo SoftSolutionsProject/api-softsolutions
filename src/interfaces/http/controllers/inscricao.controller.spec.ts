@@ -26,7 +26,7 @@ describe('InscricaoController', () => {
     cpfUsuario: '00000000000',
     email: 'teste@email.com',
     senha: '123456',
-    tipo: 'aluno' as 'aluno',
+    tipo: 'aluno' as const,
   };
 
   const cursoMock = {
@@ -37,7 +37,7 @@ describe('InscricaoController', () => {
     descricaoDetalhada: 'Desc detalhada',
     professor: 'Prof X',
     categoria: 'Categoria Y',
-    status: 'ativo' as 'ativo',
+    status: 'ativo' as const,
     avaliacao: 5,
     imagemCurso: 'url',
     modulos: [],
@@ -48,28 +48,28 @@ describe('InscricaoController', () => {
     usuario: usuarioMock,
     curso: cursoMock,
     dataInscricao: new Date(),
-    status: 'ativo' as 'ativo',
+    status: 'ativo' as const,
   };
 
   const progressoMock = {
-  id: 1,
-  inscricao: inscricaoMock,
-  aula: {
     id: 1,
-    nomeAula: 'Aula',
-    tempoAula: 30,
-    videoUrl: 'url',
-    descricaoConteudo: 'conteudo',
-    modulo: {
+    inscricao: inscricaoMock,
+    aula: {
       id: 1,
-      nomeModulo: 'Modulo',
-      tempoModulo: 60,
-      curso: cursoMock, // cursoMock já está 100% correto
+      nomeAula: 'Aula',
+      tempoAula: 30,
+      videoUrl: 'url',
+      descricaoConteudo: 'conteudo',
+      modulo: {
+        id: 1,
+        nomeModulo: 'Modulo',
+        tempoModulo: 60,
+        curso: cursoMock, // cursoMock já está 100% correto
+      },
     },
-  },
-  concluida: true,
-  dataConclusao: new Date(),
-};
+    concluida: true,
+    dataConclusao: new Date(),
+  };
 
   beforeEach(async () => {
     inscreverUsuario = { execute: jest.fn() } as any;
@@ -89,7 +89,10 @@ describe('InscricaoController', () => {
         { provide: MarcarAulaConcluidaUseCase, useValue: marcarAulaConcluida },
         { provide: CancelarInscricaoUseCase, useValue: cancelarInscricao },
         { provide: VerProgressoUseCase, useValue: verProgresso },
-        { provide: DesmarcarAulaConcluidaUseCase, useValue: desmarcarAulaConcluida },
+        {
+          provide: DesmarcarAulaConcluidaUseCase,
+          useValue: desmarcarAulaConcluida,
+        },
         { provide: InscricaoRepository, useValue: inscricaoRepo },
         { provide: CursoRepository, useValue: cursoRepo },
       ],

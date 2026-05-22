@@ -64,9 +64,12 @@ jobs:
       run: npm run seed
     
     - name: Run linter
-      run: npm run lint || true
+      run: npm run lint
     
-    - name: Run tests
+    - name: Run unit tests
+      run: npm test
+
+    - name: Run e2e tests
       run: npm run test:e2e
 
     - name: Install semver

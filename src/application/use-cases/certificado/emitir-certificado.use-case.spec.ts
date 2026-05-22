@@ -11,10 +11,7 @@ describe('EmitirCertificadoUseCase', () => {
     usuario: { id: 1 },
     curso: {
       id: 1,
-      modulos: [
-        { aulas: [{}, {}] },
-        { aulas: [{}] },
-      ],
+      modulos: [{ aulas: [{}, {}] }, { aulas: [{}] }],
     },
   };
 
@@ -23,7 +20,11 @@ describe('EmitirCertificadoUseCase', () => {
     progressoRepo = { countConcluidasByInscricao: jest.fn() };
     certificadoRepo = { findByInscricao: jest.fn(), create: jest.fn() };
 
-    useCase = new EmitirCertificadoUseCase(inscricaoRepo, progressoRepo, certificadoRepo);
+    useCase = new EmitirCertificadoUseCase(
+      inscricaoRepo,
+      progressoRepo,
+      certificadoRepo,
+    );
 
     // ✅ Mocka o método gerarPdf para evitar PDF real
     useCase['gerarPdf'] = jest.fn().mockResolvedValue(Buffer.from('mock-pdf'));
@@ -31,12 +32,19 @@ describe('EmitirCertificadoUseCase', () => {
 
   it('deve lançar NotFound se inscrição inválida', async () => {
     inscricaoRepo.findById.mockResolvedValue(null);
-    await expect(useCase.execute(1, 1)).rejects.toThrow('Inscrição não encontrada ou não pertence ao usuário');
+    await expect(useCase.execute(1, 1)).rejects.toThrow(
+      'Inscrição não encontrada ou não pertence ao usuário',
+    );
   });
 
   it('deve lançar NotFound se inscrição não pertencer ao usuário', async () => {
-    inscricaoRepo.findById.mockResolvedValue({ ...inscricaoMock, usuario: { id: 999 } });
-    await expect(useCase.execute(1, 1)).rejects.toThrow('Inscrição não encontrada ou não pertence ao usuário');
+    inscricaoRepo.findById.mockResolvedValue({
+      ...inscricaoMock,
+      usuario: { id: 999 },
+    });
+    await expect(useCase.execute(1, 1)).rejects.toThrow(
+      'Inscrição não encontrada ou não pertence ao usuário',
+    );
   });
 
   it('deve lançar Forbidden se não concluiu todas as aulas', async () => {
@@ -44,7 +52,9 @@ describe('EmitirCertificadoUseCase', () => {
     certificadoRepo.findByInscricao.mockResolvedValue(null);
     progressoRepo.countConcluidasByInscricao.mockResolvedValue(1); // Precisa ser 3
 
-    await expect(useCase.execute(1, 1)).rejects.toThrow('Você precisa concluir todas as aulas para emitir o certificado');
+    await expect(useCase.execute(1, 1)).rejects.toThrow(
+      'Você precisa concluir todas as aulas para emitir o certificado',
+    );
   });
 
   it('deve emitir certificado novo se não existir', async () => {
