@@ -34,7 +34,7 @@ export default new DataSource({
 
   migrations: [
     isProd
-      ? 'dist/infrastructure/database/migrations/*.js'
+      ? 'dist/{src/,}infrastructure/database/migrations/*.js'
       : 'src/infrastructure/database/migrations/*.ts',
   ],
 });
