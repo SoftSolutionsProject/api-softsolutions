@@ -5,6 +5,22 @@ import { ErrorLoggingInterceptor } from './common/logging/error-logging.intercep
 import { JsonLogger } from './common/logging/json-logger';
 import { RequestLoggingMiddleware } from './common/logging/request-logging.middleware';
 
+const defaultAllowedOrigins = [
+  'http://localhost:4200',
+  'https://solutionssoft.vercel.app',
+  'https://softsolutions-front-prod-brs-ewgbctepdgggewde.canadacentral-01.azurewebsites.net',
+  'http://softsolutions-front-prod-brs-ewgbctepdgggewde.canadacentral-01.azurewebsites.net',
+];
+
+function getAllowedOrigins(): string[] {
+  const extraOrigins = (process.env.CORS_ORIGINS || process.env.FRONTEND_ORIGINS || '')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+  return Array.from(new Set([...defaultAllowedOrigins, ...extraOrigins]));
+}
+
 async function bootstrap() {
   const logger = new JsonLogger();
   const app = await NestFactory.create(AppModule, { logger });
@@ -17,12 +33,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ErrorLoggingInterceptor(logger));
 
   app.enableCors({
-    origin: [
-      'http://localhost:4200',
-      'https://solutionssoft.vercel.app',
-      'http://ec2-3-212-230-198.compute-1.amazonaws.com',
-      'http://3.212.230.198',
-    ],
+    origin: getAllowedOrigins(),
     credentials: true,
   });
 

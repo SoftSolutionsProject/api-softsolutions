@@ -8,8 +8,10 @@ import { InterfacesModule } from './interfaces/interfaces.module';
 import { ArtifactsModule } from './artifacts/artifacts.module';
 import { SearchModule } from './modules/search.module';
 import { ChatbotModule } from './modules/chatbot.module';
+import { getDatabaseUrl } from './infrastructure/database/database-url';
 
 const isProd = process.env.NODE_ENV === 'production';
+const databaseUrl = getDatabaseUrl();
 
 @Module({
   imports: [
@@ -17,11 +19,11 @@ const isProd = process.env.NODE_ENV === 'production';
 
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: process.env.DATABASE_URL,
+      url: databaseUrl,
 
       ssl: isProd
-        ? { rejectUnauthorized: false } // produção (RDS)
-        : false, // desenvolvimento / testes
+        ? { rejectUnauthorized: false }
+        : false,
 
       autoLoadEntities: true,
       synchronize: false,
