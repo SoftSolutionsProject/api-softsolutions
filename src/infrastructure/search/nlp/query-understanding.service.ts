@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { AMBIGUOUS_TERMS, SEMANTIC_KNOWLEDGE } from './semantic-knowledge.dictionary';
+import {
+  AMBIGUOUS_TERMS,
+  SEMANTIC_KNOWLEDGE,
+} from './semantic-knowledge.dictionary';
 import { OpenAiGatewayService } from '../../shared/openai-gateway.service';
 
 interface ProcessedQuery {
@@ -72,10 +75,18 @@ export class QueryUnderstandingService {
     const tokens = this.removeAmbiguousTerms(rawTokens);
     const filteredTokens = tokens.filter((token) => !this.stopwords.has(token));
     const semanticContext = this.extractSemanticContext(filteredTokens);
-    const expandedQuery = this.buildExpandedQuery(normalizedText, semanticContext);
-    const intent = this.detectIntent(normalizedText, semanticContext.categories);
+    const expandedQuery = this.buildExpandedQuery(
+      normalizedText,
+      semanticContext,
+    );
+    const intent = this.detectIntent(
+      normalizedText,
+      semanticContext.categories,
+    );
     const confidence = filteredTokens.length ? 0.75 : 0;
-    const embedding = await this.openAiGateway.createEmbedding(expandedQuery || normalizedText);
+    const embedding = await this.openAiGateway.createEmbedding(
+      expandedQuery || normalizedText,
+    );
 
     return {
       originalText: originalText ?? '',
@@ -123,10 +134,18 @@ export class QueryUnderstandingService {
       const knowledge = SEMANTIC_KNOWLEDGE[token];
       if (!knowledge) continue;
 
-      knowledge.synonyms.slice(0, 4).forEach((item) => synonyms.add(this.normalize(item)));
-      knowledge.concepts.slice(0, 3).forEach((item) => concepts.add(this.normalize(item)));
-      knowledge.boostTerms.slice(0, 4).forEach((item) => boostTerms.add(this.normalize(item)));
-      knowledge.exclusions?.forEach((item) => exclusions.add(this.normalize(item)));
+      knowledge.synonyms
+        .slice(0, 4)
+        .forEach((item) => synonyms.add(this.normalize(item)));
+      knowledge.concepts
+        .slice(0, 3)
+        .forEach((item) => concepts.add(this.normalize(item)));
+      knowledge.boostTerms
+        .slice(0, 4)
+        .forEach((item) => boostTerms.add(this.normalize(item)));
+      knowledge.exclusions?.forEach((item) =>
+        exclusions.add(this.normalize(item)),
+      );
       categories.add(this.normalize(knowledge.category));
     }
 
@@ -139,33 +158,53 @@ export class QueryUnderstandingService {
     };
   }
 
-  private buildExpandedQuery(normalizedText: string, semanticContext: any): string {
+  private buildExpandedQuery(
+    normalizedText: string,
+    semanticContext: any,
+  ): string {
     return [
-      ...new Set([
-        normalizedText,
-        ...semanticContext.synonyms,
-        ...semanticContext.concepts,
-        ...semanticContext.boostTerms,
-      ].filter(Boolean)),
+      ...new Set(
+        [
+          normalizedText,
+          ...semanticContext.synonyms,
+          ...semanticContext.concepts,
+          ...semanticContext.boostTerms,
+        ].filter(Boolean),
+      ),
     ].join(' ');
   }
 
   private detectIntent(normalizedText: string, categories: string[]): string {
-    if (['oi', 'ola', 'bom dia', 'boa tarde', 'boa noite'].includes(normalizedText)) {
+    if (
+      ['oi', 'ola', 'bom dia', 'boa tarde', 'boa noite'].includes(
+        normalizedText,
+      )
+    ) {
       return 'saudacao';
     }
 
     if (/(obrigad|valeu)/.test(normalizedText)) return 'agradecimento';
     if (/(tchau|ate mais|até mais)/.test(normalizedText)) return 'despedida';
     if (/(tudo bem|como vai)/.test(normalizedText)) return 'conversa';
-    if (/(ia|inteligencia artificial|machine learning|chatgpt|llm)/.test(normalizedText)) {
+    if (
+      /(ia|inteligencia artificial|machine learning|chatgpt|llm)/.test(
+        normalizedText,
+      )
+    ) {
       return 'buscar_ia';
     }
-    if (/(aula|modulo|video|conteudo)/.test(normalizedText)) return 'buscar_aula';
-    if (/(trilha|carreira|roadmap)/.test(normalizedText)) return 'buscar_trilha';
+    if (/(aula|modulo|video|conteudo)/.test(normalizedText))
+      return 'buscar_aula';
+    if (/(trilha|carreira|roadmap)/.test(normalizedText))
+      return 'buscar_trilha';
     if (/(certificado|diploma)/.test(normalizedText)) return 'certificado';
     if (/(login|senha|entrar|acesso)/.test(normalizedText)) return 'login';
-    if (categories.length || /(curso|aprender|estudar|backend|frontend|python|react|java|sql|docker)/.test(normalizedText)) {
+    if (
+      categories.length ||
+      /(curso|aprender|estudar|backend|frontend|python|react|java|sql|docker)/.test(
+        normalizedText,
+      )
+    ) {
       return 'buscar_curso';
     }
 

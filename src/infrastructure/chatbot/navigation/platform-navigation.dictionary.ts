@@ -1,6 +1,13 @@
 export const PLATFORM_NAVIGATION = [
   {
-    keywords: ['login', 'logar', 'entrar', 'fazer login', 'acessar conta', 'minha conta'],
+    keywords: [
+      'login',
+      'logar',
+      'entrar',
+      'fazer login',
+      'acessar conta',
+      'minha conta',
+    ],
     navigation: [
       {
         label: 'Login',
@@ -10,7 +17,14 @@ export const PLATFORM_NAVIGATION = [
     ],
   },
   {
-    keywords: ['cadastro', 'cadastre-se', 'cadastrar', 'criar conta', 'registrar', 'nova conta'],
+    keywords: [
+      'cadastro',
+      'cadastre-se',
+      'cadastrar',
+      'criar conta',
+      'registrar',
+      'nova conta',
+    ],
     navigation: [
       {
         label: 'Cadastre-se',
@@ -20,7 +34,13 @@ export const PLATFORM_NAVIGATION = [
     ],
   },
   {
-    keywords: ['certificado', 'certificados', 'emitir certificado', 'baixar certificado', 'diploma'],
+    keywords: [
+      'certificado',
+      'certificados',
+      'emitir certificado',
+      'baixar certificado',
+      'diploma',
+    ],
     navigation: [
       {
         label: 'Certificados',
@@ -30,7 +50,18 @@ export const PLATFORM_NAVIGATION = [
     ],
   },
   {
-    keywords: ['curso', 'cursos', 'catalogo', 'catálogo', 'listar cursos', 'ver cursos', 'backend', 'frontend', 'python', 'react'],
+    keywords: [
+      'curso',
+      'cursos',
+      'catalogo',
+      'catálogo',
+      'listar cursos',
+      'ver cursos',
+      'backend',
+      'frontend',
+      'python',
+      'react',
+    ],
     navigation: [
       {
         label: 'Cursos',
@@ -40,7 +71,13 @@ export const PLATFORM_NAVIGATION = [
     ],
   },
   {
-    keywords: ['sobre', 'quem somos', 'empresa', 'softsolutions', 'sobre a plataforma'],
+    keywords: [
+      'sobre',
+      'quem somos',
+      'empresa',
+      'softsolutions',
+      'sobre a plataforma',
+    ],
     navigation: [
       {
         label: 'Sobre',
@@ -50,7 +87,15 @@ export const PLATFORM_NAVIGATION = [
     ],
   },
   {
-    keywords: ['contato', 'suporte', 'ajuda', 'email', 'falar com suporte', 'atendimento', 'problema'],
+    keywords: [
+      'contato',
+      'suporte',
+      'ajuda',
+      'email',
+      'falar com suporte',
+      'atendimento',
+      'problema',
+    ],
     navigation: [
       {
         label: 'Contato',
@@ -60,7 +105,13 @@ export const PLATFORM_NAVIGATION = [
     ],
   },
   {
-    keywords: ['esqueci senha', 'recuperar senha', 'trocar senha', 'resetar senha', 'senha'],
+    keywords: [
+      'esqueci senha',
+      'recuperar senha',
+      'trocar senha',
+      'resetar senha',
+      'senha',
+    ],
     navigation: [
       {
         label: 'Recuperar Senha',
@@ -70,4 +121,3 @@ export const PLATFORM_NAVIGATION = [
     ],
   },
 ];
-

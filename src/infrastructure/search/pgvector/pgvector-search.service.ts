@@ -135,7 +135,9 @@ export class PgVectorSearchService {
             doc.videoUrl,
             doc.tempoAula,
             doc.searchText,
-            ...(doc.embedding?.length ? [this.toVectorLiteral(doc.embedding)] : []),
+            ...(doc.embedding?.length
+              ? [this.toVectorLiteral(doc.embedding)]
+              : []),
           ],
         );
       }
@@ -161,7 +163,9 @@ export class PgVectorSearchService {
         curso.descricaoDetalhada,
         curso.categoria,
         curso.professor,
-      ].filter(Boolean).join(' ');
+      ]
+        .filter(Boolean)
+        .join(' ');
       const cursoProcessed = await this.queryUnderstanding.process(cursoText);
 
       if (cursoProcessed.embedding?.length) documentsWithEmbedding++;
@@ -203,7 +207,9 @@ export class PgVectorSearchService {
             modulo.nomeModulo,
             curso.nomeCurso,
             curso.categoria,
-          ].filter(Boolean).join(' ');
+          ]
+            .filter(Boolean)
+            .join(' ');
           const aulaProcessed = await this.queryUnderstanding.process(aulaText);
 
           if (aulaProcessed.embedding?.length) documentsWithEmbedding++;
@@ -273,8 +279,12 @@ export class PgVectorSearchService {
       curso: row.curso,
       videoUrl: row.video_url,
       tempoAula: row.tempo_aula,
-      url: row.tipo === 'curso' ? `/curso/${row.curso_id}` : `/curso/${row.curso_id}/aulas`,
-      semanticScore: Number(row.semantic_score ?? 0) + Number(row.lexical_score ?? 0),
+      url:
+        row.tipo === 'curso'
+          ? `/curso/${row.curso_id}`
+          : `/curso/${row.curso_id}/aulas`,
+      semanticScore:
+        Number(row.semantic_score ?? 0) + Number(row.lexical_score ?? 0),
     };
   }
 
@@ -288,8 +298,12 @@ export class PgVectorSearchService {
       .trim();
   }
 
-  private buildSearchText(parts: Array<string | number | null | undefined>): string {
-    return this.normalize(parts.filter((part) => part !== null && part !== undefined).join(' '));
+  private buildSearchText(
+    parts: Array<string | number | null | undefined>,
+  ): string {
+    return this.normalize(
+      parts.filter((part) => part !== null && part !== undefined).join(' '),
+    );
   }
 
   private toVectorLiteral(vector: number[]): string {

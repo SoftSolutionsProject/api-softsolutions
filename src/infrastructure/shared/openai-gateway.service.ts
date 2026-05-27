@@ -21,7 +21,9 @@ export class OpenAiGatewayService {
       const response = await axios.post(
         `${this.baseUrl}/embeddings`,
         {
-          model: this.configService.get<string>('OPENAI_EMBEDDING_MODEL') ?? 'text-embedding-3-small',
+          model:
+            this.configService.get<string>('OPENAI_EMBEDDING_MODEL') ??
+            'text-embedding-3-small',
           input,
         },
         {
@@ -35,7 +37,9 @@ export class OpenAiGatewayService {
 
       return response.data?.data?.[0]?.embedding;
     } catch (error: any) {
-      this.logger.warn(`Falha ao gerar embedding: ${error?.response?.data?.error?.message ?? error?.message ?? error}`);
+      this.logger.warn(
+        `Falha ao gerar embedding: ${error?.response?.data?.error?.message ?? error?.message ?? error}`,
+      );
       return undefined;
     }
   }
@@ -55,7 +59,9 @@ export class OpenAiGatewayService {
       const response = await axios.post(
         `${this.baseUrl}/chat/completions`,
         {
-          model: this.configService.get<string>('OPENAI_CHAT_MODEL') ?? 'gpt-4.1-mini',
+          model:
+            this.configService.get<string>('OPENAI_CHAT_MODEL') ??
+            'gpt-4.1-mini',
           temperature: options.temperature,
           max_tokens: options.maxTokens,
           messages: options.messages,
@@ -71,7 +77,9 @@ export class OpenAiGatewayService {
 
       return response.data?.choices?.[0]?.message?.content;
     } catch (error: any) {
-      this.logger.warn(`Falha ao consultar OpenAI: ${error?.response?.data?.error?.message ?? error?.message ?? error}`);
+      this.logger.warn(
+        `Falha ao consultar OpenAI: ${error?.response?.data?.error?.message ?? error?.message ?? error}`,
+      );
       return undefined;
     }
   }

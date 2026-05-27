@@ -21,4 +21,3 @@ export interface SearchItem {
   url?: string;
   semanticScore?: number;
 }
-

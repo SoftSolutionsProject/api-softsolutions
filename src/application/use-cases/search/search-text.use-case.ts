@@ -32,26 +32,39 @@ export class SearchTextUseCase {
 
     const processed = await this.queryUnderstanding.process(query);
     const searchQuery = processed.expandedQuery || processed.normalizedText;
-    const hits = await this.searchService.search(searchQuery, processed.embedding);
+    const hits = await this.searchService.search(
+      searchQuery,
+      processed.embedding,
+    );
 
     return this.rerankAndFilter(hits, processed).slice(0, 5);
   }
 
   private rerankAndFilter(items: SearchItem[], processed: any): SearchItem[] {
-    const categories = (processed.categories ?? []).map((item: string) => this.queryUnderstanding.normalize(item));
-    const exclusions = (processed.exclusions ?? []).map((item: string) => this.queryUnderstanding.normalize(item));
-    const matchedTerms = (processed.matchedTerms ?? []).map((item: string) => this.queryUnderstanding.normalize(item));
+    const categories = (processed.categories ?? []).map((item: string) =>
+      this.queryUnderstanding.normalize(item),
+    );
+    const exclusions = (processed.exclusions ?? []).map((item: string) =>
+      this.queryUnderstanding.normalize(item),
+    );
+    const matchedTerms = (processed.matchedTerms ?? []).map((item: string) =>
+      this.queryUnderstanding.normalize(item),
+    );
 
     return items
       .map((item) => {
-        const searchableText = this.queryUnderstanding.normalize([
-          item.titulo,
-          item.descricao,
-          item.conteudo,
-          item.curso,
-          item.modulo,
-          item.categoria,
-        ].filter(Boolean).join(' '));
+        const searchableText = this.queryUnderstanding.normalize(
+          [
+            item.titulo,
+            item.descricao,
+            item.conteudo,
+            item.curso,
+            item.modulo,
+            item.categoria,
+          ]
+            .filter(Boolean)
+            .join(' '),
+        );
 
         let score = item.semanticScore ?? 0;
         if (item.tipo === 'curso') score += 100;
@@ -62,7 +75,10 @@ export class SearchTextUseCase {
         }
 
         for (const category of categories) {
-          if (this.queryUnderstanding.normalize(item.categoria).includes(category)) score += 30;
+          if (
+            this.queryUnderstanding.normalize(item.categoria).includes(category)
+          )
+            score += 30;
         }
 
         for (const exclusion of exclusions) {
@@ -73,12 +89,15 @@ export class SearchTextUseCase {
       })
       .filter((item) => {
         if ((item.semanticScore ?? 0) <= 0) return false;
-        const categoria = this.queryUnderstanding.normalize(item.categoria ?? '');
-        if (categories.includes('backend') && categoria.includes('frontend')) return false;
-        if (categories.includes('frontend') && categoria.includes('backend')) return false;
+        const categoria = this.queryUnderstanding.normalize(
+          item.categoria ?? '',
+        );
+        if (categories.includes('backend') && categoria.includes('frontend'))
+          return false;
+        if (categories.includes('frontend') && categoria.includes('backend'))
+          return false;
         return true;
       })
       .sort((a, b) => (b.semanticScore ?? 0) - (a.semanticScore ?? 0));
   }
 }
-

@@ -8,4 +8,3 @@ export class TextSearchQueryDto {
   @MaxLength(500)
   q!: string;
 }
-

@@ -11,7 +11,9 @@ export class OpenaiService {
     conversationHistory: Array<{ role: string; content: string }> = [],
     navigationContext?: any,
   ): Promise<string> {
-    const hasRelevantContext = !context.includes('Nenhum conteudo relevante encontrado');
+    const hasRelevantContext = !context.includes(
+      'Nenhum conteudo relevante encontrado',
+    );
     const messages: Array<{ role: string; content: string }> = [
       {
         role: 'system',
@@ -76,7 +78,8 @@ Existe contexto relevante? ${hasRelevantContext ? 'SIM' : 'NAO'}
     const messages: Array<{ role: string; content: string }> = [
       {
         role: 'system',
-        content: 'Voce e o assistente oficial da SoftSolutions. Responda de forma curta, natural e amigavel.',
+        content:
+          'Voce e o assistente oficial da SoftSolutions. Responda de forma curta, natural e amigavel.',
       },
     ];
 
@@ -101,4 +104,3 @@ Existe contexto relevante? ${hasRelevantContext ? 'SIM' : 'NAO'}
     return response ?? 'Ola! Como posso te ajudar?';
   }
 }
-

@@ -25,7 +25,9 @@ export class SearchVoiceUseCase {
       confidence: processed.confidence,
       rankings: processed.rankings ?? [],
       searchQuery: processed.expandedQuery || processed.normalizedText,
-      querySource: processed.filteredTokens?.length ? 'filteredTokens' : 'normalizedText',
+      querySource: processed.filteredTokens?.length
+        ? 'filteredTokens'
+        : 'normalizedText',
       matchedTerms: processed.matchedTerms ?? [],
       results,
     };

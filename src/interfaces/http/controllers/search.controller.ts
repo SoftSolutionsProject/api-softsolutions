@@ -31,7 +31,9 @@ export class SearchController {
   }
 
   @Get('autocomplete')
-  async autocomplete(@Query('q') q: string): Promise<{ suggestions: string[] }> {
+  async autocomplete(
+    @Query('q') q: string,
+  ): Promise<{ suggestions: string[] }> {
     return {
       suggestions: await this.searchService.getSuggestions(q),
     };
@@ -39,13 +41,19 @@ export class SearchController {
 
   @Post('voice')
   @HttpCode(200)
-  async voiceSearch(@Body() dto: VoiceSearchRequestDto): Promise<VoiceSearchResponseDto> {
+  async voiceSearch(
+    @Body() dto: VoiceSearchRequestDto,
+  ): Promise<VoiceSearchResponseDto> {
     return this.searchVoiceUseCase.execute(dto);
   }
 
   @Post('reindex')
   @HttpCode(200)
-  async reindex(): Promise<{ message: string; totalDocuments: number; documentsWithEmbedding: number }> {
+  async reindex(): Promise<{
+    message: string;
+    totalDocuments: number;
+    documentsWithEmbedding: number;
+  }> {
     const result = await this.searchService.reindexCursosEAulas();
 
     return {
@@ -55,4 +63,3 @@ export class SearchController {
     };
   }
 }
-

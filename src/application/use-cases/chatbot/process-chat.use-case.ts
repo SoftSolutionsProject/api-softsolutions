@@ -18,8 +18,15 @@ export class ProcessChatUseCase {
     const processed = await this.queryUnderstandingService.process(dto.message);
     const navigationMatch = this.detectNavigation(dto.message);
 
-    if (['saudacao', 'agradecimento', 'despedida', 'conversa'].includes(processed.intent)) {
-      const response = await this.openaiService.generateSmallTalkResponse(dto.message, dto.history ?? []);
+    if (
+      ['saudacao', 'agradecimento', 'despedida', 'conversa'].includes(
+        processed.intent,
+      )
+    ) {
+      const response = await this.openaiService.generateSmallTalkResponse(
+        dto.message,
+        dto.history ?? [],
+      );
 
       return {
         response,
@@ -37,15 +44,26 @@ export class ProcessChatUseCase {
       };
     }
 
-    const searchableIntents = ['buscar_curso', 'buscar_aula', 'buscar_trilha', 'buscar_ia'];
+    const searchableIntents = [
+      'buscar_curso',
+      'buscar_aula',
+      'buscar_trilha',
+      'buscar_ia',
+    ];
     const results = searchableIntents.includes(processed.intent)
       ? await this.searchTextUseCase.execute(dto.message)
       : [];
-    const topResults = results.filter((item: any) => item.semanticScore === undefined || item.semanticScore > 0).slice(0, 5);
+    const topResults = results
+      .filter(
+        (item: any) =>
+          item.semanticScore === undefined || item.semanticScore > 0,
+      )
+      .slice(0, 5);
 
     if (processed.intent === 'buscar_ia' && !topResults.length) {
       return {
-        response: 'No momento, a SoftSolutions ainda nao possui cursos especificos de Inteligencia Artificial ou Machine Learning. Posso te ajudar a encontrar cursos de desenvolvimento web, backend, frontend ou tecnologias modernas de software.',
+        response:
+          'No momento, a SoftSolutions ainda nao possui cursos especificos de Inteligencia Artificial ou Machine Learning. Posso te ajudar a encontrar cursos de desenvolvimento web, backend, frontend ou tecnologias modernas de software.',
         intent: processed.intent,
         confidence: processed.confidence,
         suggestions: [],
@@ -61,8 +79,14 @@ export class ProcessChatUseCase {
     }
 
     const context = this.buildContext(topResults);
-    const requiresHumanSupport = processed.confidence < 0.15 && !topResults.length;
-    const response = await this.openaiService.generateResponse(dto.message, context, dto.history ?? [], navigationMatch);
+    const requiresHumanSupport =
+      processed.confidence < 0.15 && !topResults.length;
+    const response = await this.openaiService.generateResponse(
+      dto.message,
+      context,
+      dto.history ?? [],
+      navigationMatch,
+    );
     const suggestions = this.generateSuggestions(topResults);
 
     return {
@@ -103,7 +127,9 @@ Professor: ${item.professor ?? 'N/A'}
 
   private generateSuggestions(results: any[]): string[] {
     return [
-      ...new Set(results.map((item) => item.curso || item.titulo).filter(Boolean)),
+      ...new Set(
+        results.map((item) => item.curso || item.titulo).filter(Boolean),
+      ),
     ].slice(0, 5);
   }
 
@@ -116,7 +142,8 @@ Professor: ${item.professor ?? 'N/A'}
       let score = 0;
 
       for (const keyword of item.keywords) {
-        const normalizedKeyword = this.queryUnderstandingService.normalize(keyword);
+        const normalizedKeyword =
+          this.queryUnderstandingService.normalize(keyword);
         const words = normalized.split(' ');
 
         if (normalized === normalizedKeyword) score += 100;
@@ -133,4 +160,3 @@ Professor: ${item.professor ?? 'N/A'}
     return bestScore >= 40 ? bestMatch : null;
   }
 }
-

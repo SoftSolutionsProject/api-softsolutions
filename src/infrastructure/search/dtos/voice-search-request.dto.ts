@@ -8,4 +8,3 @@ export class VoiceSearchRequestDto {
   @MaxLength(500)
   text!: string;
 }
-

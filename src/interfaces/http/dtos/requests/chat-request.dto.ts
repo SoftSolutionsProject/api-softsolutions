@@ -1,4 +1,11 @@
-import { IsArray, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MaxLength,
+  ValidateNested,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 
 class ChatHistoryItemDto {
@@ -21,4 +28,3 @@ export class ChatRequestDto {
   @Type(() => ChatHistoryItemDto)
   history?: ChatHistoryItemDto[];
 }
-

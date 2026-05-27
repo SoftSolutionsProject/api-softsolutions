@@ -95,4 +95,3 @@ export const SEMANTIC_KNOWLEDGE: Record<string, SemanticKnowledgeEntry> = {
     category: 'ia',
   },
 };
-
