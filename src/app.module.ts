@@ -20,9 +20,7 @@ const isProd = process.env.NODE_ENV === 'production';
       type: 'postgres',
       url: getDatabaseUrl(),
 
-      ssl: isProd
-        ? { rejectUnauthorized: false }
-        : false,
+      ssl: isProd ? { rejectUnauthorized: false } : false,
 
       autoLoadEntities: true,
       synchronize: false,

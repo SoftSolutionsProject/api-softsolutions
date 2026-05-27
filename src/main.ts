@@ -13,7 +13,11 @@ const defaultAllowedOrigins = [
 ];
 
 function getAllowedOrigins(): string[] {
-  const extraOrigins = (process.env.CORS_ORIGINS || process.env.FRONTEND_ORIGINS || '')
+  const extraOrigins = (
+    process.env.CORS_ORIGINS ||
+    process.env.FRONTEND_ORIGINS ||
+    ''
+  )
     .split(',')
     .map((origin) => origin.trim())
     .filter(Boolean);
@@ -49,4 +53,5 @@ async function bootstrap() {
 
   await app.listen(process.env.PORT || 4000);
 }
-bootstrap();
+
+void bootstrap();
