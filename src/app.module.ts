@@ -11,7 +11,6 @@ import { ChatbotModule } from './modules/chatbot.module';
 import { getDatabaseUrl } from './infrastructure/database/database-url';
 
 const isProd = process.env.NODE_ENV === 'production';
-const databaseUrl = getDatabaseUrl();
 
 @Module({
   imports: [
@@ -19,7 +18,7 @@ const databaseUrl = getDatabaseUrl();
 
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: databaseUrl,
+      url: getDatabaseUrl(),
 
       ssl: isProd
         ? { rejectUnauthorized: false }
