@@ -1,0 +1,46 @@
+@baseUrl = http://localhost:4000
+
+### Chatbot - recomendacao de curso
+POST {{baseUrl}}/chatbot
+Content-Type: application/json
+
+{
+  "message": "Me recomende um curso de python",
+  "history": []
+}
+
+### Chatbot - navegacao da plataforma
+POST {{baseUrl}}/chatbot
+Content-Type: application/json
+
+{
+  "message": "Como faço para recuperar minha senha?",
+  "history": []
+}
+
+### Chatbot - conversa com historico
+POST {{baseUrl}}/chatbot
+Content-Type: application/json
+
+{
+  "message": "E qual desses cursos é melhor para backend?",
+  "history": [
+    {
+      "role": "user",
+      "content": "Quero aprender programação"
+    },
+    {
+      "role": "assistant",
+      "content": "Posso te ajudar a encontrar cursos de backend, frontend ou Python."
+    }
+  ]
+}
+
+### Chatbot - saudacao
+POST {{baseUrl}}/chatbot
+Content-Type: application/json
+
+{
+  "message": "Oi, tudo bem?",
+  "history": []
+}
