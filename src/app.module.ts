@@ -6,6 +6,8 @@ import { InfrastructureModule } from './infrastructure/infrastructure.module';
 import { ApplicationModule } from './application/application.module';
 import { InterfacesModule } from './interfaces/interfaces.module';
 import { ArtifactsModule } from './artifacts/artifacts.module';
+import { SearchModule } from './modules/search.module';
+import { ChatbotModule } from './modules/chatbot.module';
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -24,7 +26,10 @@ const isProd = process.env.NODE_ENV === 'production';
       autoLoadEntities: true,
       synchronize: false,
 
-      migrations: ['dist/infrastructure/database/migrations/*.js'],
+      migrations: [
+        'dist/infrastructure/database/migrations/*.js',
+        'dist/src/infrastructure/database/migrations/*.js',
+      ],
       migrationsRun: true,
     }),
 
@@ -32,6 +37,8 @@ const isProd = process.env.NODE_ENV === 'production';
     ApplicationModule,
     InterfacesModule,
     ArtifactsModule,
+    SearchModule,
+    ChatbotModule,
   ],
 })
 export class AppModule {}

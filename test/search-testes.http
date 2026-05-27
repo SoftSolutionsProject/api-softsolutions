@@ -1,0 +1,29 @@
+@baseUrl = http://localhost:4000
+
+### Health check
+GET {{baseUrl}}/health
+
+### Reindexar cursos e aulas no search_index
+# Observacao: consome OpenAI API para gerar embeddings.
+POST {{baseUrl}}/search/reindex
+
+### Busca semantica por texto - Python
+GET {{baseUrl}}/search/text-search?q=python
+
+### Busca semantica por texto - Backend
+GET {{baseUrl}}/search/text-search?q=quero aprender backend
+
+### Busca semantica por texto - Frontend
+GET {{baseUrl}}/search/text-search?q=curso de frontend com react
+
+### Autocomplete
+GET {{baseUrl}}/search/autocomplete?q=py
+
+### Busca por voz
+POST {{baseUrl}}/search/voice
+Content-Type: application/json
+
+{
+  "text": "quero aprender python"
+}
+
