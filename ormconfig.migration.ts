@@ -7,14 +7,16 @@ import { ModuloEntity } from './src/infrastructure/database/entities/modulo.enti
 import { AulaEntity } from './src/infrastructure/database/entities/aula.entity';
 import { InscricaoEntity } from './src/infrastructure/database/entities/inscricao.entity';
 import { ProgressoAulaEntity } from './src/infrastructure/database/entities/progresso-aula.entity';
+import { getDatabaseUrl } from './src/infrastructure/database/database-url';
 
 dotenv.config();
 
 const isProd = process.env.NODE_ENV === 'production';
+const databaseUrl = getDatabaseUrl();
 
 export default new DataSource({
   type: 'postgres',
-  url: process.env.DATABASE_URL,
+  url: databaseUrl,
 
   
   ssl: isProd
