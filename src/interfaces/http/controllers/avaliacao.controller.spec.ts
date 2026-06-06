@@ -45,6 +45,14 @@ describe('AvaliacaoController', () => {
     expect(result).toEqual([{ nota: 5, comentario: 'Ótimo', autor: 'Lucas' }]);
   });
 
+  it('deve retornar autor nulo quando avaliação não possui usuário', async () => {
+    avaliacaoRepo.findByCourse.mockResolvedValue([
+      { nota: 4, comentario: 'Bom', usuario: undefined },
+    ]);
+    const result = await controller.listarAvaliacoesPorCurso(10);
+    expect(result[0].autor).toBeNull();
+  });
+
   it('deve retornar a avaliação do usuário', async () => {
     avaliacaoRepo.findByUserAndCourse.mockResolvedValue({ id: 1 });
     const result = await controller.getMinhaAvaliacao(1, 10);

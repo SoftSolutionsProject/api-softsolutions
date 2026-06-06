@@ -132,4 +132,15 @@ describe('UsuarioController', () => {
       ForbiddenException,
     );
   });
+
+  it.each([
+    () => controller.getById('abc', 1, 'aluno'),
+    () => controller.update('abc', {}, 1, 'aluno'),
+  ])('deve rejeitar ID inválido em operações assíncronas', async (action) => {
+    await expect(action()).rejects.toThrow('ID inválido');
+  });
+
+  it('deve rejeitar ID inválido ao deletar', () => {
+    expect(() => controller.delete('abc', 1, 'aluno')).toThrow('ID inválido');
+  });
 });

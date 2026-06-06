@@ -57,4 +57,31 @@ describe('VerProgressoUseCase', () => {
     inscricaoRepo.findById.mockResolvedValue(null);
     await expect(useCase.execute(1, 1)).rejects.toThrow(NotFoundException);
   });
+
+  it('deve lançar erro se inscrição pertencer a outro usuário', async () => {
+    inscricaoRepo.findById.mockResolvedValue({
+      usuario: { id: 2 },
+      curso: { modulos: [] },
+    } as any);
+    await expect(useCase.execute(1, 1)).rejects.toThrow(NotFoundException);
+  });
+
+  it.each([
+    { curso: {}, totalAulas: 0 },
+    { curso: { modulos: [{}, { aulas: [] }] }, totalAulas: 0 },
+  ])(
+    'deve retornar progresso zero sem aulas',
+    async ({ curso, totalAulas }) => {
+      inscricaoRepo.findById.mockResolvedValue({
+        usuario: { id: 1 },
+        curso,
+      } as any);
+      progressoRepo.countConcluidasByInscricao.mockResolvedValue(0);
+      await expect(useCase.execute(1, 1)).resolves.toEqual({
+        progresso: 0,
+        aulasConcluidas: 0,
+        totalAulas,
+      });
+    },
+  );
 });
