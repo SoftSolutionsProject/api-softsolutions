@@ -8,6 +8,11 @@ import { VerProgressoUseCase } from '../../../application/use-cases/inscricao/ve
 import { DesmarcarAulaConcluidaUseCase } from '../../../application/use-cases/inscricao/desmarcar-aula-concluida.use-case';
 import { InscricaoRepository } from '../../../infrastructure/database/repositories/inscricao.repository';
 import { CursoRepository } from '../../../infrastructure/database/repositories/curso.repository';
+import {
+  BadRequestException,
+  ForbiddenException,
+  NotFoundException,
+} from '@nestjs/common';
 
 describe('InscricaoController', () => {
   let controller: InscricaoController;
@@ -146,5 +151,65 @@ describe('InscricaoController', () => {
     inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue(inscricaoMock);
     const result = await controller.getModulosEAulas('1', 1);
     expect(Array.isArray(result)).toBe(true);
+  });
+
+  it('deve preservar NotFound ao falhar inscrição', async () => {
+    inscreverUsuario.execute.mockRejectedValue(
+      new NotFoundException('Curso não encontrado'),
+    );
+    await expect(controller.inscrever(1, 1)).rejects.toBeInstanceOf(
+      NotFoundException,
+    );
+  });
+
+  it('deve converter outros erros de inscrição em BadRequest', async () => {
+    inscreverUsuario.execute.mockRejectedValue(new Error('duplicada'));
+    await expect(controller.inscrever(1, 1)).rejects.toBeInstanceOf(
+      BadRequestException,
+    );
+  });
+
+  it('deve cancelar inscrição como aluno', async () => {
+    cancelarInscricao.execute.mockResolvedValue({ message: 'OK' });
+    await controller.cancelar(9, 1, 'aluno');
+    expect(cancelarInscricao.execute).toHaveBeenCalledWith(1, 9, false);
+  });
+
+  it.each([
+    {
+      setup: () => undefined,
+      error: ForbiddenException,
+      id: 'abc',
+    },
+    {
+      setup: () =>
+        cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(null),
+      error: NotFoundException,
+      id: '1',
+    },
+    {
+      setup: () => {
+        cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(cursoMock);
+        inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue(null);
+      },
+      error: ForbiddenException,
+      id: '1',
+    },
+    {
+      setup: () => {
+        cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(cursoMock);
+        inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue({
+          ...inscricaoMock,
+          status: 'cancelado',
+        });
+      },
+      error: ForbiddenException,
+      id: '1',
+    },
+  ])('deve validar acesso aos módulos', async ({ setup, error, id }) => {
+    setup();
+    await expect(controller.getModulosEAulas(id, 1)).rejects.toBeInstanceOf(
+      error,
+    );
   });
 });

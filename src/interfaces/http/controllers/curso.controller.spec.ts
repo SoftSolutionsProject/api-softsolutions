@@ -7,7 +7,7 @@ import { UpdateCursoUseCase } from '../../../application/use-cases/curso/update-
 import { DeleteCursoUseCase } from '../../../application/use-cases/curso/delete-curso.use-case';
 import { CursoRepository } from '../../../infrastructure/database/repositories/curso.repository';
 import { InscricaoRepository } from '../../../infrastructure/database/repositories/inscricao.repository';
-import { ForbiddenException } from '@nestjs/common';
+import { ForbiddenException, NotFoundException } from '@nestjs/common';
 import { CursoModel } from '../../../domain/models/curso.model';
 
 const cursoMock: CursoModel = {
@@ -40,8 +40,14 @@ describe('CursoController', () => {
     listCurso = { execute: jest.fn() } as any;
     updateCurso = { execute: jest.fn() } as any;
     deleteCurso = { execute: jest.fn() } as any;
-    cursoRepo = { findByIdWithModulosAndAulas: jest.fn() } as any;
-    inscricaoRepo = { findByUsuarioAndCurso: jest.fn() } as any;
+    cursoRepo = {
+      findByIdWithModulosAndAulas: jest.fn(),
+      findById: jest.fn(),
+    } as any;
+    inscricaoRepo = {
+      findByUsuarioAndCurso: jest.fn(),
+      countByCurso: jest.fn(),
+    } as any;
 
     const module: TestingModule = await Test.createTestingModule({
       controllers: [CursoController],
@@ -123,6 +129,48 @@ describe('CursoController', () => {
 
     await expect(controller.getModulosEAulas('1', 1)).rejects.toThrow(
       ForbiddenException,
+    );
+  });
+
+  it.each([
+    () => controller.getById('abc'),
+    () => controller.update('abc', {} as any, 'administrador'),
+    () => controller.delete('abc', 'administrador'),
+    () => controller.getModulosEAulas('abc', 1),
+    () => controller.getQuantidadeInscritos('abc'),
+  ])('deve rejeitar ID inválido', async (action) => {
+    await expect(action()).rejects.toThrow('ID inválido');
+  });
+
+  it('deve rejeitar curso inexistente ao buscar módulos', async () => {
+    cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(null);
+    await expect(controller.getModulosEAulas('1', 1)).rejects.toBeInstanceOf(
+      NotFoundException,
+    );
+  });
+
+  it('deve rejeitar inscrição inativa', async () => {
+    cursoRepo.findByIdWithModulosAndAulas.mockResolvedValue(cursoMock);
+    inscricaoRepo.findByUsuarioAndCurso.mockResolvedValue({
+      status: 'cancelado',
+    } as any);
+    await expect(controller.getModulosEAulas('1', 1)).rejects.toBeInstanceOf(
+      ForbiddenException,
+    );
+  });
+
+  it('deve retornar quantidade de inscritos', async () => {
+    cursoRepo.findById.mockResolvedValue(cursoMock);
+    inscricaoRepo.countByCurso.mockResolvedValue(12);
+    await expect(controller.getQuantidadeInscritos('1')).resolves.toEqual({
+      quantidadeInscritos: 12,
+    });
+  });
+
+  it('deve rejeitar contagem para curso inexistente', async () => {
+    cursoRepo.findById.mockResolvedValue(null);
+    await expect(controller.getQuantidadeInscritos('1')).rejects.toBeInstanceOf(
+      NotFoundException,
     );
   });
 });
