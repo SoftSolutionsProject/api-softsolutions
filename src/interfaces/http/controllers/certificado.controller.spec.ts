@@ -1,4 +1,5 @@
 import { CertificadoController } from './certificado.controller';
+import { NotFoundException } from '@nestjs/common';
 
 describe('CertificadoController', () => {
   let controller: CertificadoController;
@@ -38,5 +39,12 @@ describe('CertificadoController', () => {
 
     expect(result.numeroSerie).toBe(certMock.numeroSerie);
     expect(result.aluno).toBe(certMock.usuario.nomeUsuario);
+  });
+
+  it('deve rejeitar certificado público inexistente', async () => {
+    certificadoRepo.findByNumeroSerie.mockResolvedValue(null);
+    await expect(controller.validar('inexistente')).rejects.toBeInstanceOf(
+      NotFoundException,
+    );
   });
 });

@@ -2,15 +2,19 @@
 
 > Backend utilizando NestJS com Clean Architecture e TypeORM.
 
-## 🗂️ Modelo DER
+## 📚 Links e documentação
 
-![Modelo DER](https://raw.githubusercontent.com/SoftSolutionsProject/img/refs/heads/main/Soft.png)
+> 📘 **Documentação completa do projeto:**  
+> [Acesse a documentação oficial do SoftSolutions](https://github.com/SoftSolutionsProject/Documentacao/blob/main/README.md)
 
-## 📚 Documentação
+### Links úteis
 
-- [📘 Swagger API Docs](http://localhost:4000/api) – Documentação interativa da API
-- [🚀 API em Produção](https://api-softsolutions.onrender.com) — Endpoint público da API
-- [🌐 Frontend em Produção](https://solutionssoft.vercel.app) — Interface web conectada à API
+- [📘 Swagger local](http://localhost:4000/api) - Documentação interativa da API em ambiente local
+- [☁️ API em produção na Azure](https://softsolutions-api-prod-brs-fycdfxh4b2g7evgn.canadacentral-01.azurewebsites.net)
+- [📘 Swagger em produção na Azure](https://softsolutions-api-prod-brs-fycdfxh4b2g7evgn.canadacentral-01.azurewebsites.net/api)
+- [🌐 Frontend em produção na Azure](https://softsolutions-front-prod-brs-ewgbctepdgggewde.canadacentral-01.azurewebsites.net)
+- [🚀 API em produção no Render](https://api-softsolutions.onrender.com)
+- [🌐 Frontend em produção na Vercel](https://solutionssoft.vercel.app)
 
 
 ### ⚙️ Pré-requisitos.
@@ -27,7 +31,7 @@
 1. **Clone o repositório**
    ```bash
    git clone https://github.com/SoftSolutionsProject/api-softsolutions
-   cd api-softsolutions-develop
+   cd api-softsolutions
    ```
 
 2. **Instale as dependências**
@@ -38,9 +42,10 @@
 3. **Configure o ambiente**
    ```bash
    cp .env.example .env
-   # Edite com as variáveis locais de banco e porta
+   # Edite com as variáveis locais de banco, porta, JWT e serviços externos
    # Windows (CMD): copy .env.example .env
    ```
+
 
 4. **Execute as migrações**
    ```bash
@@ -98,6 +103,7 @@ npm run format            # Formatar código com Prettier
 - **Banco de Dados**: PostgreSQL
 - **ORM**: TypeORM
 - **Autenticação**: JWT
+- **Busca semântica**: pgvector
 - **Validação**: class-validator
 - **Documentação**: Swagger/OpenAPI
 - **Containerização**: Docker & Docker Compose
@@ -113,30 +119,19 @@ src/
 ├── main.ts               # Ponto de entrada da aplicação
 ├── app.module.ts         # Módulo raiz do NestJS
 ├── application/          # Casos de uso e regras de negócio
-├── domain/               # Entidades, enums e interfaces 
-├── infra/                # Implementações de repositórios, controllers, banco, serviços externos
-│   ├── controllers/      # Controllers HTTP
-│   ├── database/         # Configuração e entidades do banco de dados
+├── domain/               # Entidades, enums e contratos do domínio
+├── infrastructure/       # Banco de dados, repositórios, busca, email e serviços externos
+│   ├── database/         # Entidades TypeORM, migrations e seeders
 │   ├── repositories/     # Implementações dos repositórios
-│   └── ...               # Outros módulos de infraestrutura
-└── config/               # Configurações globais do projeto 
-
+│   ├── search/           # Implementação da busca semântica
+│   └── ...
+├── interfaces/           # Controllers HTTP, DTOs, middlewares, guards e filtros
+├── modules/              # Módulos NestJS da aplicação
+├── common/               # Utilitários e configurações compartilhadas
+├── config/               # Configurações globais
+├── artifacts/            # Recursos manipulados pela aplicação
+└── seeds/                # Scripts de carga inicial
 ```
-
-## ☁️ Deploy AWS – Infraestrutura
-
-### Arquitetura / Fluxograma
-![Fluxograma AWS](src/assets/FluxogramaAWS.png)
-
-### 🌐 Endpoints em Produção (AWS EC2)
-
-- **Backend (NestJS + Nginx + Docker)**
-  - http://ec2-54-164-244-60.compute-1.amazonaws.com
-
-- **Frontend (Angular + Nginx + Docker)**
-  - http://ec2-3-212-230-198.compute-1.amazonaws.com
-
-> ⚠️ **Observação:** A infraestrutura AWS utilizada neste projeto está hospedada em um ambiente de laboratório acadêmico. Por isso, as instâncias podem ser desligadas periodicamente e os endpoints podem não estar sempre disponíveis.
 
 
 

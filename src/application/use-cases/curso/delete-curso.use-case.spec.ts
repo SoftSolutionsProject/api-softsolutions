@@ -30,4 +30,10 @@ describe('DeleteCursoUseCase', () => {
     expect(repo.findById).toHaveBeenCalledWith(1);
     expect(repo.delete).toHaveBeenCalledWith(1);
   });
+
+  it('deve lançar erro se curso não existir', async () => {
+    repo.findById.mockResolvedValue(null);
+    await expect(useCase.execute(1)).rejects.toBeInstanceOf(NotFoundException);
+    expect(repo.delete).not.toHaveBeenCalled();
+  });
 });

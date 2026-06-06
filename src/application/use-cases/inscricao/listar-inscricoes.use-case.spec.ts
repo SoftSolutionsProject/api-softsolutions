@@ -1,6 +1,7 @@
 import { ListarInscricoesUseCase } from './listar-inscricoes.use-case';
 import { InscricaoRepository } from '../../../infrastructure/database/repositories/inscricao.repository';
 import { UsuarioRepository } from '../../../infrastructure/database/repositories/usuario.repository';
+import { NotFoundException } from '@nestjs/common';
 
 describe('ListarInscricoesUseCase', () => {
   let useCase: ListarInscricoesUseCase;
@@ -66,5 +67,11 @@ describe('ListarInscricoesUseCase', () => {
     expect(result).toEqual([]);
     expect(usuarioRepo.findById).toHaveBeenCalledWith(1);
     expect(inscricaoRepo.findByUsuario).toHaveBeenCalledWith(1);
+  });
+
+  it('deve lançar erro se usuário não existir', async () => {
+    usuarioRepo.findById.mockResolvedValue(null);
+    await expect(useCase.execute(1)).rejects.toBeInstanceOf(NotFoundException);
+    expect(inscricaoRepo.findByUsuario).not.toHaveBeenCalled();
   });
 });

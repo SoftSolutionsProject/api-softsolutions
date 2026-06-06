@@ -1,6 +1,5 @@
 import { CreateUsuarioUseCase } from './create-usuario.use-case';
 import { UsuarioRepository } from '../../../infrastructure/database/repositories/usuario.repository';
-import * as bcrypt from 'bcrypt';
 
 describe('CreateUsuarioUseCase', () => {
   let useCase: CreateUsuarioUseCase;
@@ -44,6 +43,45 @@ describe('CreateUsuarioUseCase', () => {
     expect(result).toHaveProperty('id');
     expect(result).not.toHaveProperty('senha');
   });
+
+  it.each([
+    ['11999999999', '(11) 99999-9999'],
+    ['1133334444', '(11) 3333-4444'],
+  ])('deve formatar telefone %s', async (telefone, formatado) => {
+    usuarioRepo.findByEmail.mockResolvedValue(null);
+    usuarioRepo.findByCpf.mockResolvedValue(null);
+    usuarioRepo.create.mockImplementation(
+      async (data) =>
+        ({
+          id: 1,
+          ...data,
+        }) as any,
+    );
+
+    const result = await useCase.execute({
+      nomeUsuario: 'Lucas',
+      cpfUsuario: '04852227012',
+      email: 'lucas@email.com',
+      senha: '123456',
+      telefone,
+    });
+
+    expect(result.telefone).toBe(formatado);
+  });
+
+  it.each(['123', '12345678901', '04852227013'])(
+    'deve rejeitar CPF inválido %s',
+    async (cpfUsuario) => {
+      await expect(
+        useCase.execute({
+          nomeUsuario: 'Lucas',
+          cpfUsuario,
+          email: 'lucas@email.com',
+          senha: '123456',
+        }),
+      ).rejects.toThrow('CPF inválido');
+    },
+  );
 
   it('deve lançar erro se CPF inválido', async () => {
     const input = {
